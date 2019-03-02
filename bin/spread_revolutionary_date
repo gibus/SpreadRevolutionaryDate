@@ -1,0 +1,143 @@
+#!/usr/bin/perl
+use strict;
+use warnings;
+use utf8;
+use open qw(:std :utf8);
+
+# Configuration: please edit!
+our $conf = {
+  twitter => {
+    # Get these values from https://apps.twitter.com/
+    access_token_secret => '<replace by actual value>',
+    consumer_secret     => '<replace by actual value>',
+    access_token        => '<replace by actual value>',
+    consumer_key        => '<replace by actual value>',
+  },
+  mastodon => {
+    # Get these values from https://<your mastodon instance>/settings/applications
+    instance        => '<replace by actual value>',
+    client_id       => '<replace by actual value>',
+    client_secret   => '<replace by actual value>',
+    access_token    => '<replace by actual value>',
+  },
+  freenode => {
+    nickname      => '<replace by actual value>',
+    password      => '<replace by actual value>',
+    test_channels => ['#<replace by actual first test channel>', '#<replace by actual second test channel>'],
+    channels      => ['#<replace by first chanel>', '#<replace by second chanel>', '#<replace by third chanel>'],
+  }
+};
+
+# Subclass Bot::BasicBot to provide event-handling methods.
+package RevolutionaryCalendarBot;
+use base qw(Bot::BasicBot);
+
+use File::Spec;
+open STDERR, '>', File::Spec->devnull;
+ 
+my $said = 0;
+
+sub connected {
+  my $self = shift;
+  $self->say({who => 'NickServ', channel => 'msg', body => 'IDENTIFY ' . $conf->{freenode}->{nickname} . ' ' . $conf->{freenode}->{password}});
+}
+
+sub said {
+  my $self = shift;
+  my $message = shift;
+  $said=1 if ($message->{who} eq 'NickServ' && $message->{body} =~ /^You are now identified for/);
+}
+
+sub tick {
+  my $self = shift;
+  if ($said) {
+    if ($said > scalar($self->channels)) {
+      exit;
+    }
+    foreach my $channel ($self->channels) {
+      $self->say({channel => $channel, body => $self->{msg}});
+      $said++;
+    }
+  }
+  return 5;
+}
+ 
+# Main
+package main;
+
+use Getopt::Long;
+use Net::Twitter::Lite::WithAPIv1_1;
+use Mastodon::Client;
+use DateTime::Calendar::FrenchRevolutionary;
+use FindBin qw($Bin);
+
+# Short text (< 280 chars) to send
+my $msg;
+
+# Default values
+my $test       = undef;
+
+# Parse command line options
+Getopt::Long::Configure("bundling");
+GetOptions(
+  'test|t'         => \$test,
+  'help|h'         =>
+    sub {
+      print STDERR <<USAGE;
+Usage: $0 [-tph] [--test] [--help]
+Options can be:
+  --test,       -t: do not send tweets
+  --help,       -h: print this message
+USAGE
+      exit 0;
+    }
+);
+
+# Initialize twitter account
+my $twitter = Net::Twitter::Lite::WithAPIv1_1->new(
+  access_token_secret => $conf->{twitter}->{access_token_secret},
+  consumer_secret     => $conf->{twitter}->{consumer_secret},
+  access_token        => $conf->{twitter}->{access_token},
+  consumer_key        => $conf->{twitter}->{consumer_key},
+  user_agent          => 'RevolutionaryDate',
+  ssl => 1,
+);
+
+# Initialize mastodon account
+my $mastodon = Mastodon::Client->new(
+  instance        => $conf->{mastodon}->{instance},
+  client_id       => $conf->{mastodon}->{client_id},
+  client_secret   => $conf->{mastodon}->{client_secret},
+  access_token    => $conf->{mastodon}->{access_token},
+  coerce_entities => 1,
+  name            => 'RevolutionaryDate',
+);
+
+# Compute today's revolutionnary date
+my $now = DateTime->today->set(hour => 3, minute => 8, second => 56);
+$msg = DateTime::Calendar::FrenchRevolutionary->from_object(object => $now)->strftime("Nous sommes le %A, %d %B de l'An %EY (%Y) de la Révolution, %Ej, il est %T!");
+
+# Send to twitter
+$twitter->update($msg) unless $test;
+
+# Send to mastodon
+$mastodon->post_status($msg) unless $test;
+
+print "OK text (" . length($msg) . ") sent: $msg\n" if $test;
+
+# Send to freenode
+my $channels = $test ? $conf->{freenode}->{test_channels} : $conf->{freenode}->{channels};
+my $bot = RevolutionaryCalendarBot->new(
+    server    => 'irc.freenode.net',
+    port      => '6667',
+    channels  => $channels,
+    nick      => 'RevolutionaryDate',
+    alt_nicks => ['RevolutionaryCalendar', 'RevolutionarybBot'],
+    name      => 'Revolutionary Calendar bot',
+    flood     => 1,
+    useipv6   => 1,
+    ssl       => 1,
+    charset   => 'utf-8',
+    msg       => $msg,
+);
+$bot->run();
