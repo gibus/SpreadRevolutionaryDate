@@ -1,0 +1,3 @@
+* Cpanify (with Dist::Zilla)
+* Add configuration (with AppConfig)
+* Add command line options (with AppConfig)
