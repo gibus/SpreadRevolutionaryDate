@@ -26,8 +26,8 @@ Spreading to Twitter requires you to register this application on [https://apps.
 
 ### Mastodon
 
-Spreading to Mastodon requires you to register this application on [https://<your mastodon instance>/settings/applications](https://mstdn.fr/settings/applications) and replace values for `instance`, `client_id`, `client_secret` and `access_token`.
+Spreading to Mastodon requires you to register this application on [https://\<your mastodon instance\>/settings/applications](https://mstdn.fr/settings/applications) and replace values for `instance`, `client_id`, `client_secret` and `access_token`.
 
 ### Freenode
 
-Spreading to Freenode channels requires you to register a nickname, as specified on [https://freenode.net/kb/answer/registration](https://freenode.net/kb/answer/registration), replace values for `nickname`, `password`, `test_channels` and `channels`.
+Spreading to Freenode channels requires you to register a nickname, as specified on [https://freenode.net/kb/answer/registration](https://freenode.net/kb/answer/registration) and replace values for `nickname`, `password`, `test_channels` and `channels`.
