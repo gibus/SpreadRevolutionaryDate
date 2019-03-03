@@ -4,6 +4,8 @@ use utf8;
 use open qw(:std :utf8);
 package App::SpreadRevolutionaryDate::Mastodon;
 
+# ABSTRACT: Subclass of L<App::SpreadRevolutionaryDate> to handle spreading on Mastodon.
+
 use Mastodon::Client;
 
 =method new
