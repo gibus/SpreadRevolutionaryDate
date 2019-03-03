@@ -1,6 +1,6 @@
 #!perl
 
-use Test::More tests => 18;
+use Test::More tests => 22;
 use Test::NoWarnings;
 
 use App::SpreadRevolutionaryDate;
@@ -26,6 +26,11 @@ is($spread_revolutionary_date->{config}->mastodon_instance, 'Instance', 'Mastodo
 is($spread_revolutionary_date->{config}->mastodon_client_id, 'ClientId', 'Mastodon client_id value');
 is($spread_revolutionary_date->{config}->mastodon_client_secret, 'ClientSecret', 'Mastodon client_secret value');
 is($spread_revolutionary_date->{config}->mastodon_access_token, 'AccessToken', 'Mastodon access_token value');
+
+is($spread_revolutionary_date->{config}->freenode_nickname, 'NickName', 'Freenode nickname value');
+is($spread_revolutionary_date->{config}->freenode_password, 'Password', 'Freenode password value');
+is_deeply($spread_revolutionary_date->{config}->freenode_test_channels, ['#TestChannel1', '#TestChannel2'], 'Freenode test_channels values');
+is_deeply($spread_revolutionary_date->{config}->freenode_channels, ['#Channel1', '#Channel2', '#Channel3'], 'Freenode channels values');
 
 push @ARGV, '--twitter';
 my $spread_only_to_twitter = App::SpreadRevolutionaryDate->new(\*DATA);
