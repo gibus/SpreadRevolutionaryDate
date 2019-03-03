@@ -6,6 +6,12 @@ package App::SpreadRevolutionaryDate::Mastodon;
 
 use Mastodon::Client;
 
+=method new
+
+Constructor class method. Takes one mandatory argument: C<$config> which should be an C<App::SpreadRevolutionaryDate::Config> object. Authentifies to Mastodon and returns an C<App::SpreadRevolutionaryDate::Mastodon> object.
+
+=cut
+
 sub new {
   my $class = shift;
   my $config = shift;
@@ -18,6 +24,12 @@ sub new {
                   name            => 'RevolutionaryDate');
   bless {config => $config, obj => $mastodon}, $class;
 }
+
+=method spread
+
+Spreads a message to Mastodon. Takes one mandatory argument: C<$msg> which should be the message to spread as a characters string. If C<test> option is set the message is printed on standard output and not spread on Mastodon.
+
+=cut
 
 sub spread {
   my $self = shift;

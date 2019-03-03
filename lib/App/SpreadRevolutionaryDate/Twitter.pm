@@ -6,6 +6,12 @@ package App::SpreadRevolutionaryDate::Twitter;
 
 use Net::Twitter::Lite::WithAPIv1_1;
 
+=method new
+
+Constructor class method. Takes one mandatory argument: C<$config> which should be an C<App::SpreadRevolutionaryDate::Config> object. Authentifies to Twitter and returns an C<App::SpreadRevolutionaryDate::Twitter> object.
+
+=cut
+
 sub new {
   my $class = shift;
   my $config = shift;
@@ -18,6 +24,12 @@ sub new {
                   ssl                 => 1);
   bless {config => $config, obj => $twitter}, $class;
 }
+
+=method spread
+
+Spreads a message to Twitter. Takes one mandatory argument: C<$msg> which should be the message to spread as a characters string. If C<test> option is set the message is printed on standard output and not spread on Twitter.
+
+=cut
 
 sub spread {
   my $self = shift;

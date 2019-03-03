@@ -36,6 +36,12 @@ sub tick {
   return 5;
 }
 
+=method new
+
+Constructor class method, subclassing C<Bot::BasicBot>. Takes one mandatory argument: C<$config> which should be an C<App::SpreadRevolutionaryDate::Config> object. Authentifies to Freenode and returns an C<App::SpreadRevolutionaryDate::Freenode> object.
+
+=cut
+
 sub new {
   my $class = shift;
   my $config = shift;
@@ -53,6 +59,12 @@ sub new {
   my $freenode = Bot::BasicBot->new(%opts);
   bless {obj => $freenode, config => $config}, $class;
 }
+
+=method spread
+
+Spreads a message to Freenode channels configured with the multivalued option C<channels>. Takes one mandatory argument: C<$msg> which should be the message to spread as a characters string. If C<test> option is set the message is spreaded on channels configured with the multivalued option C<test_channels>.
+
+=cut
 
 sub spread {
   my $self = shift;

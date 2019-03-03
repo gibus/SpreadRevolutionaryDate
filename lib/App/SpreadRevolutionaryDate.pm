@@ -12,6 +12,12 @@ use App::SpreadRevolutionaryDate::Mastodon;
 use App::SpreadRevolutionaryDate::Freenode;
 use DateTime::Calendar::FrenchRevolutionary;
 
+=method new
+
+Constructor class method. Takes one optional argument: C<$filename> which should be the file path or an opened file handle of your configuration path, defaults to C<~/.config/spread-revolutionary-date/spread-revolutionary-date.conf> or C<~/.spread-revolutionary-date.conf>. Returns an C<App::SpreadRevolutionaryDate> object.
+
+=cut
+
 sub new {
   my $class = shift;
   my $filename = shift;
@@ -49,6 +55,12 @@ sub new {
   bless $self, $class;
   return $self;
 }
+
+=method spread
+
+Spreads calendar date to configured targets. Takes no argument.
+
+=cut
 
 sub spread {
   my $self = shift;

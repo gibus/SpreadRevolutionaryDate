@@ -7,6 +7,12 @@ package App::SpreadRevolutionaryDate::Config;
 use AppConfig qw(:argcount);
 use parent 'AppConfig';
 
+=method new
+
+Constructor class method, subclassing C<AppConfig>. Takes no argument. Returns an C<App::SpreadRevolutionaryDate::Config> object.
+
+=cut
+
 sub new {
   my $class = shift;
   return AppConfig::new($class,
@@ -29,6 +35,12 @@ sub new {
   );
 }
 
+=method parse_file
+
+Parses configuration file. Takes one optional argument: C<$filename> which should be the file path or an opened file handle of your configuration path, defaults to C<~/.config/spread-revolutionary-date/spread-revolutionary-date.conf> or C<~/.spread-revolutionary-date.conf>.
+
+=cut
+
 sub parse_file {
   my $self = shift;
   my $filename = shift;
@@ -40,10 +52,22 @@ sub parse_file {
   $self->file($filename);
 }
 
+=method parse_command_line
+
+Parses command line options. Takes no argument.
+
+=cut
+
 sub parse_command_line {
   my $self = shift;
   $self->args; 
 }
+
+=method check_twitter
+
+Checks whether Twitter configuration options are set to authenticate on Twitter. Takes no argument.
+
+=cut
 
 sub check_twitter {
   my $self = shift;
@@ -53,6 +77,12 @@ sub check_twitter {
         && $self->twitter_access_token_secret;
 }
 
+=method check_mastodon
+
+Checks whether Mastodon configuration options are set to authenticate on Mastodon. Takes no argument.
+
+=cut
+
 sub check_mastodon {
   my $self = shift;
   return   $self->mastodon_instance
@@ -60,6 +90,12 @@ sub check_mastodon {
         && $self->mastodon_client_secret
         && $self->mastodon_access_token;
 }
+
+=method check_freenode
+
+Checks whether Freenode configuration options are set to authenticate on Freenode. Takes no argument.
+
+=cut
 
 sub check_freenode {
   my $self = shift;
