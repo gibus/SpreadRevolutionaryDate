@@ -1,6 +1,6 @@
 #!perl
 
-use Test::More tests => 11;
+use Test::More tests => 14;
 use Test::NoWarnings;
 
 use App::SpreadRevolutionaryDate;
@@ -11,9 +11,9 @@ my $spread_revolutionary_date = App::SpreadRevolutionaryDate->new(\*DATA);
 isa_ok($spread_revolutionary_date, 'App::SpreadRevolutionaryDate', 'Base class constructor');
 isa_ok($spread_revolutionary_date->{config}, 'App::SpreadRevolutionaryDate::Config', 'Config class constructor');
 
-is($spread_revolutionary_date->{config}->twitter, 1, 'Twitter option set by default');
-is($spread_revolutionary_date->{config}->mastodon, 1, 'Mastodon option set by default');
-is($spread_revolutionary_date->{config}->freenode, 1, 'Freenode option set by default');
+ok($spread_revolutionary_date->{config}->twitter, 'Twitter option set by default');
+ok($spread_revolutionary_date->{config}->mastodon, 'Mastodon option set by default');
+ok($spread_revolutionary_date->{config}->freenode, 'Freenode option set by default');
 
 is($spread_revolutionary_date->{config}->test, 1, 'Test option set');
 
@@ -21,6 +21,12 @@ is($spread_revolutionary_date->{config}->twitter_consumer_key, 'ConsumerKey', 'T
 is($spread_revolutionary_date->{config}->twitter_consumer_secret, 'ConsumerSecret', 'Twitter consumer_secret value');
 is($spread_revolutionary_date->{config}->twitter_access_token, 'AccessToken', 'Twitter access_token value');
 is($spread_revolutionary_date->{config}->twitter_access_token_secret, 'AccessTokenSecret', 'Twitter access_token_secret value');
+
+push @ARGV, '--twitter';
+my $spread_only_to_twitter = App::SpreadRevolutionaryDate->new(\*DATA);
+ok($spread_only_to_twitter->{config}->twitter, 'Twitter option explicitely set');
+ok(!$spread_only_to_twitter->{config}->mastodon, 'Mastodon option not explicitely set');
+ok(!$spread_only_to_twitter->{config}->freenode, 'Freenode option not explicitely set');
 
 __DATA__
 
