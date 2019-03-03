@@ -6,7 +6,7 @@ unless(   -f $ENV{HOME} . '/.config/spread-revolutionary-date/spread-revolutiona
        || -f $ENV{HOME} . '/.spread-revolutionary-date.conf') {
   plan skip_all => 'No user config file found';
 } else {
-  plan tests => 7;
+  plan tests => 8;
 }
 
 use App::SpreadRevolutionaryDate;
@@ -22,3 +22,6 @@ isa_ok($spread_revolutionary_date->{freenode}->{obj}, 'Bot::BasicBot', 'Freenode
 
 eval { $spread_revolutionary_date->{twitter}->{obj}->verify_credentials };
 ok(!$@, 'Twitter connection with actual credentials in user conf');
+
+eval { $spread_revolutionary_date->{mastodon}->{obj}->get_account };
+ok(!$@, 'Mastodon connection with actual credentials in user conf');
