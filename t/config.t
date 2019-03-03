@@ -1,6 +1,6 @@
 #!perl
 
-use Test::More tests => 14;
+use Test::More tests => 18;
 use Test::NoWarnings;
 
 use App::SpreadRevolutionaryDate;
@@ -21,6 +21,11 @@ is($spread_revolutionary_date->{config}->twitter_consumer_key, 'ConsumerKey', 'T
 is($spread_revolutionary_date->{config}->twitter_consumer_secret, 'ConsumerSecret', 'Twitter consumer_secret value');
 is($spread_revolutionary_date->{config}->twitter_access_token, 'AccessToken', 'Twitter access_token value');
 is($spread_revolutionary_date->{config}->twitter_access_token_secret, 'AccessTokenSecret', 'Twitter access_token_secret value');
+
+is($spread_revolutionary_date->{config}->mastodon_instance, 'Instance', 'Mastodon instance value');
+is($spread_revolutionary_date->{config}->mastodon_client_id, 'ClientId', 'Mastodon client_id value');
+is($spread_revolutionary_date->{config}->mastodon_client_secret, 'ClientSecret', 'Mastodon client_secret value');
+is($spread_revolutionary_date->{config}->mastodon_access_token, 'AccessToken', 'Mastodon access_token value');
 
 push @ARGV, '--twitter';
 my $spread_only_to_twitter = App::SpreadRevolutionaryDate->new(\*DATA);
