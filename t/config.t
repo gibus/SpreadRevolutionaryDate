@@ -5,6 +5,7 @@ use Test::NoWarnings;
 
 use App::SpreadRevolutionaryDate;
 
+@ARGV = ('--test');
 my $spread_revolutionary_date = App::SpreadRevolutionaryDate->new(\*DATA);
 
 isa_ok($spread_revolutionary_date, 'App::SpreadRevolutionaryDate', 'Base class constructor');
@@ -22,8 +23,6 @@ is($spread_revolutionary_date->{config}->twitter_access_token, 'AccessToken', 'T
 is($spread_revolutionary_date->{config}->twitter_access_token_secret, 'AccessTokenSecret', 'Twitter access_token_secret value');
 
 __DATA__
-
-test
 
 [twitter]
 # Get these values from https://apps.twitter.com/
