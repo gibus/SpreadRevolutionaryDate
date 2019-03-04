@@ -47,15 +47,21 @@ Constructor class method, subclassing C<Bot::BasicBot>. Takes one mandatory argu
 sub new {
   my $class = shift;
   my $config = shift;
+  my $port = 6667;
+  my $ssl = 0;
+  if (eval { require POE::Component::SSLify; 1 }) {
+    $port = 6697;
+    $ssl = 1;
+  }
   my %opts = (
     server    => 'irc.freenode.net',
-    port      => '6667',
+    port      => $port,
     nick      => 'RevolutionaryDate',
     alt_nicks => ['RevolutionaryCalendar', 'RevolutionarybBot'],
     name      => 'Revolutionary Calendar bot',
     flood     => 1,
     useipv6   => 1,
-    ssl       => 1,
+    ssl       => $ssl,
     charset   => 'utf-8',
   );
   my $freenode = Bot::BasicBot->new(%opts);
