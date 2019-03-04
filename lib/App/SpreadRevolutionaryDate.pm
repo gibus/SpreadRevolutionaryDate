@@ -37,18 +37,24 @@ sub new {
   if ($self->{config}->twitter) {
     if ($self->{config}->check_twitter) {
       $self->{twitter} = App::SpreadRevolutionaryDate::Twitter->new($self->{config});
+    } else {
+      die "Cannot spread on Twitter, configuraton parameters missing\n";
     }
   }
 
   if ($self->{config}->mastodon) {
     if ($self->{config}->check_mastodon) {
       $self->{mastodon} = App::SpreadRevolutionaryDate::Mastodon->new($self->{config});
+    } else {
+      die "Cannot spread on Mastodon, configuraton parameters missing\n";
     }
   }
 
   if ($self->{config}->freenode) {
     if ($self->{config}->check_freenode) {
       $self->{freenode} = App::SpreadRevolutionaryDate::Freenode->new($self->{config});
+    } else {
+      die "Cannot spread on Freenode, configuraton parameters missing\n";
     }
   }
 
