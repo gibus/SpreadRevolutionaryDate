@@ -22,7 +22,7 @@ sub new {
                   client_id       => $config->mastodon_client_id,
                   client_secret   => $config->mastodon_client_secret,
                   access_token    => $config->mastodon_access_token,
-                  coerce_entities => 1,
+                  #coerce_entities => 1,
                   name            => 'RevolutionaryDate');
   bless {config => $config, obj => $mastodon}, $class;
 }
