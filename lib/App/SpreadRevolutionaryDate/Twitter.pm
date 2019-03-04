@@ -39,7 +39,7 @@ sub spread {
   if ($self->{config}->test) {
     print "Spread to Twitter: $msg\n";
   } else {
-    $self->{twitter}->update($msg);
+    $self->{obj}->update($msg);
   }
 }
 
