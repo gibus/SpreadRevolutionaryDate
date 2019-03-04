@@ -6,6 +6,7 @@ use Test::NoWarnings;
 use App::SpreadRevolutionaryDate;
 
 @ARGV = ('--test');
+my $data_start = tell DATA;
 my $spread_revolutionary_date = App::SpreadRevolutionaryDate->new(\*DATA);
 
 isa_ok($spread_revolutionary_date, 'App::SpreadRevolutionaryDate', 'Base class constructor');
@@ -33,6 +34,7 @@ is_deeply($spread_revolutionary_date->{config}->freenode_test_channels, ['#TestC
 is_deeply($spread_revolutionary_date->{config}->freenode_channels, ['#Channel1', '#Channel2', '#Channel3'], 'Freenode channels values');
 
 push @ARGV, '--twitter';
+seek DATA, $data_start, 0;
 my $spread_only_to_twitter = App::SpreadRevolutionaryDate->new(\*DATA);
 ok($spread_only_to_twitter->{config}->twitter, 'Twitter option explicitely set');
 ok(!$spread_only_to_twitter->{config}->mastodon, 'Mastodon option not explicitely set');
