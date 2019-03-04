@@ -11,49 +11,52 @@ unless(   -f $ENV{HOME} . '/.config/spread-revolutionary-date/spread-revolutiona
 
 use App::SpreadRevolutionaryDate;
 
-package TestWatcherBot;
-use parent 'Bot::BasicBot';
-use Test::More;
+{
+  package TestWatcherBot;
+  use parent 'Bot::BasicBot';
+  use Test::More;
 
-use File::Spec;
-open STDERR, '>', File::Spec->devnull;
+  my %channels_said;
+  my $nb_ticks = 0;
 
-my %channels_said;
-my $nb_ticks = 0;
-
-sub connected {
-  my $self = shift;
-  foreach my $channel ($self->channels) {
-    $channels_said{$channel} = 0;
-  }
-}
-
-sub said {
-  my $self = shift;
-  my $message = shift;
-  return if $message->{who} eq 'freenode-connect';
-
-  if ($message->{who} eq 'RevolutionaryDat') {
-    like($message->{body}, qr/^Nous sommes le.*, il est/, 'Spread to Freenode for channel ' . $message->{channel});
-    $channels_said{$message->{channel}}++;
+  sub log {
+    # do nothing!
   }
 
-  if (scalar(grep { $channels_said{$_} } keys %channels_said) == scalar($self->channels)) {
-    ok(1, "Spread to all Freenode channels");
-    $self->shutdown;
+  sub connected {
+    my $self = shift;
+    foreach my $channel ($self->channels) {
+      $channels_said{$channel} = 0;
+    }
   }
 
-  return;
-}
+  sub said {
+    my $self = shift;
+    my $message = shift;
+    return if $message->{who} eq 'freenode-connect';
 
-sub tick {
-  my $self = shift;
-  $nb_ticks++;
-  if ($nb_ticks > 5) {
-    ok(0, "Spread only to " . scalar(grep { $channels_said{$_} } keys %channels_said) . "/" . scalar($self->channels) . " Freenode channels");
-    $self->shutdown if ($nb_ticks > 3);
+    if ($message->{who} eq 'RevolutionaryDat') {
+      like($message->{body}, qr/^Nous sommes le.*, il est/, 'Spread to Freenode for channel ' . $message->{channel});
+      $channels_said{$message->{channel}}++;
+    }
+
+    if (scalar(grep { $channels_said{$_} } keys %channels_said) == scalar($self->channels)) {
+      ok(1, "Spread to all Freenode channels");
+      $self->shutdown;
+    }
+
+    return;
   }
-  return 5;
+
+  sub tick {
+    my $self = shift;
+    $nb_ticks++;
+    if ($nb_ticks > 5) {
+      ok(0, "Spread only to " . scalar(grep { $channels_said{$_} } keys %channels_said) . "/" . scalar($self->channels) . " Freenode channels");
+      $self->shutdown if ($nb_ticks > 3);
+    }
+    return 5;
+  }
 }
 
 package main;

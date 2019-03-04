@@ -8,10 +8,6 @@ package App::SpreadRevolutionaryDate::Freenode::Bot;
 
 use parent 'Bot::BasicBot';
 
-use File::Spec;
-local *STDERR;
-open STDERR, '>', File::Spec->devnull;
- 
 our $said = 0;
 our $nb_ticks = 0;
 
@@ -43,6 +39,10 @@ sub tick {
   $self->shutdown if ($nb_ticks > 10);
 
   return 5;
+}
+
+sub log {
+  # do nothing!
 }
 
 1;
