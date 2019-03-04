@@ -16,6 +16,9 @@ isa_ok($spread_revolutionary_date->{freenode}, 'App::SpreadRevolutionaryDate::Fr
 eval { $spread_revolutionary_date->{twitter}->{obj}->verify_credentials };
 is($@, '401: Authorization Required', 'Twitter no connection with fake credentials');
 
+eval { $spread_revolutionary_date->{mastodon}->{obj}->get_account };
+like($@, qr/^Could not complete request: 500 Can't connect to Instance/, 'Mastodon no connection with fake credentials');
+
 __DATA__
 
 test
