@@ -58,19 +58,21 @@ sub new {
 
 =method spread
 
-Spreads calendar date to configured targets. Takes no argument.
+Spreads calendar date to configured targets. Takes one optional boolean argument, if true (default) authentication and spreading to Freenode is performed, otherwise, you've got to run C<use POE; POE::Kernel->run();> to do so. This is only used for testing, when multiple bots are needed. You can safely leave this optional argument unset.
 
 =cut
 
 sub spread {
   my $self = shift;
+  my $no_run = shift || 1;
+  $no_run = !$no_run;
 
   my $now = DateTime->today->set(hour => 3, minute => 8, second => 56);
   my $msg = DateTime::Calendar::FrenchRevolutionary->from_object(object => $now)->strftime("Nous sommes le %A, %d %B de l'An %EY (%Y) de la Révolution, %Ej, il est %T!");
 
   $self->{twitter}->spread($msg) if $self->{twitter};
   $self->{mastodon}->spread($msg) if $self->{mastodon};
-  $self->{freenode}->spread($msg) if $self->{freenode};
+  $self->{freenode}->spread($msg, $no_run) if $self->{freenode};
 }
 
 1;

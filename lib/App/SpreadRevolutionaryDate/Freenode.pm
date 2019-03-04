@@ -22,13 +22,14 @@ sub new {
 
 =method spread
 
-Spreads a message to Freenode channels configured with the multivalued option C<channels>. Takes one mandatory argument: C<$msg> which should be the message to spread as a characters string. If C<test> option is set the message is spreaded on channels configured with the multivalued option C<test_channels>.
+Spreads a message to Freenode channels configured with the multivalued option C<channels>. Takes one mandatory argument: C<$msg> which should be the message to spread as a characters string. If C<test> option is set the message is spreaded on channels configured with the multivalued option C<test_channels>. Takes also one optional boolean argument, if true (default) authentication and spreading to Freenode is performed, otherwise, you've got to run C<use POE; POE::Kernel->run();> to do so. This is only used for testing, when multiple bots are needed. You can safely leave this optional argument unset.
 
 =cut
 
 sub spread {
   my $self = shift;
   my $msg = shift;
+  my $no_run = shift || 0;
 
   my $port = 6667;
   my $ssl = 0;
@@ -55,6 +56,7 @@ sub spread {
     freenode_nickname => $self->{config}->freenode_nickname,
     freenode_password => $self->{config}->freenode_password,
     msg               => $msg,
+    no_run            => $no_run,
   )->run();
 }
 
