@@ -71,9 +71,9 @@ Spreads a message to Freenode channels configured with the multivalued option C<
 sub spread {
   my $self = shift;
   my $msg = shift;
-  $self->channels($self->{config}->test ? $self->{config}->freenode_test_channels : $self->{config}->freenode_channels);
-  $self->msg($msg);
-  $self->run();
+  $self->{obj}->channels($self->{config}->test ? $self->{config}->freenode_test_channels : $self->{config}->freenode_channels);
+  $self->{obj}->msg($msg);
+  $self->{obj}->run();
 }
 
 1;
