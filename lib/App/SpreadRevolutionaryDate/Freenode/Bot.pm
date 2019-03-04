@@ -9,6 +9,7 @@ package App::SpreadRevolutionaryDate::Freenode::Bot;
 use parent 'Bot::BasicBot';
 
 use File::Spec;
+local *STDERR;
 open STDERR, '>', File::Spec->devnull;
  
 our $said = 0;
