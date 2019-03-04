@@ -39,7 +39,7 @@ sub spread {
   if ($self->{config}->test) {
     print "Spread to Mastodon $msg\n";
   } else {
-    $self->{obj}->update($msg);
+    $self->{obj}->post_status($msg);
   }
 }
 
