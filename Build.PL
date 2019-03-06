@@ -28,7 +28,7 @@ my %module_build_args = (
     "G\x{e9}rald S\x{e9}drati-Dinet <gibus\@cpan.org>"
   ],
   "dist_name" => "App-SpreadRevolutionaryDate",
-  "dist_version" => "0.03",
+  "dist_version" => "0.04",
   "license" => "gpl",
   "module_name" => "App::SpreadRevolutionaryDate",
   "recursive_test_files" => 1,
@@ -37,9 +37,11 @@ my %module_build_args = (
     "Bot::BasicBot" => 0,
     "DateTime::Calendar::FrenchRevolutionary" => 0,
     "Mastodon::Client" => 0,
+    "Net::OAuth" => "0.25",
     "Net::Twitter::Lite::WithAPIv1_1" => 0,
     "open" => 0,
     "parent" => 0,
+    "perl" => "5.008",
     "strict" => 0,
     "utf8" => 0,
     "warnings" => 0

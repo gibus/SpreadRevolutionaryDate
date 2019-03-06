@@ -1,6 +1,13 @@
 Changelog for App-SpreadRevolutionaryDate
 
-0.03 2019-03-06T18:49:53
+0.04 2019-03-06T22:24:19
+ - Add clean-namespace and unused-vars tests in MANIFEST
+ - #128733 Add Net::OAuth 0.25 dependency
+ - Add Test::UnusedVars
+ - Add Test::CleanNamespaces
+ - Auto generate minimum perl version using plugin [MinimumPerlFast].
+
+0.03 2019-03-06T18:49:53Z
  - Allow Git::Check to by files changed by bumping version
  - Allow to edit Change log before releasing
  - Fix auto generated Changes

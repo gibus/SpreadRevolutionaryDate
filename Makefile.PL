@@ -11,7 +11,7 @@
 use strict;
 use warnings;
 
-
+use 5.008;
 
 use ExtUtils::MakeMaker;
 
@@ -30,12 +30,14 @@ my %WriteMakefileArgs = (
     "bin/spread-revolutionary-date"
   ],
   "LICENSE" => "gpl",
+  "MIN_PERL_VERSION" => "5.008",
   "NAME" => "App::SpreadRevolutionaryDate",
   "PREREQ_PM" => {
     "AppConfig" => 0,
     "Bot::BasicBot" => 0,
     "DateTime::Calendar::FrenchRevolutionary" => 0,
     "Mastodon::Client" => 0,
+    "Net::OAuth" => "0.25",
     "Net::Twitter::Lite::WithAPIv1_1" => 0,
     "open" => 0,
     "parent" => 0,
@@ -49,7 +51,7 @@ my %WriteMakefileArgs = (
     "Test::More" => 0,
     "Test::NoWarnings" => 0
   },
-  "VERSION" => "0.03",
+  "VERSION" => "0.04",
   "test" => {
     "TESTS" => "t/*.t"
   }
@@ -64,6 +66,7 @@ my %FallbackPrereqs = (
   "File::Temp" => 0,
   "Mastodon::Client" => 0,
   "Module::Build" => "0.28",
+  "Net::OAuth" => "0.25",
   "Net::Twitter::Lite::WithAPIv1_1" => 0,
   "Test::More" => 0,
   "Test::NoWarnings" => 0,
