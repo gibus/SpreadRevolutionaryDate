@@ -25,7 +25,7 @@ sub new {
 
   $config->parse_file($filename);
   $config->parse_command_line;
-  
+
   my $self = {config => $config};
 
   if (!$self->{config}->twitter && !$self->{config}->mastodon && !$self->{config}->freenode) {

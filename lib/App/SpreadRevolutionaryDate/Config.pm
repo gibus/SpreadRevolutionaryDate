@@ -63,7 +63,7 @@ Parses command line options. Takes no argument.
 
 sub parse_command_line {
   my $self = shift;
-  $self->args; 
+  $self->args;
 }
 
 =method check_twitter
