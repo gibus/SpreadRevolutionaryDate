@@ -1,3 +1,2 @@
-* Cpanify (with Dist::Zilla)
-* Add configuration (with AppConfig)
-* Add command line options (with AppConfig)
+* Give abbreviated aliases for command line parameters
+* Localize message

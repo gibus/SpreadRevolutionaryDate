@@ -1,0 +1,67 @@
+Changelog for App-SpreadRevolutionaryDate
+
+0.02 2019-03-06T17:35:22
+ - Add sample confiuration file
+ - Add acab option for fixed 01:31:20 decimal time, otherwise current time
+ - Remove LICENCE file that can be generate by Dist::Zilla
+ - Fix typo in doc
+ - Fix test reading DATA pseudofile twice
+ - Override log method to silence bots instead of redirecting STDERR to
+   /dev/null
+ - Force boolean context in App::SpreadRevolutionaryDate::Config:check_*
+   methods
+ - Use App::SpreadRevolutionaryDate in script
+ - Fix attribute name of Twitter object for spreading
+ - Fix spreading method name with Mastodon::Client (post_status, not
+   update)
+ - Redirect STDERR to /dev/null *only* inside Freenode bot
+ - Die if configuration parameter are missing for desired targets
+ - Add tests for spreading to Freenode
+ - Shutdown Freenode bot after some timeout
+ - Add optional argument to App::SpreadRevolutionaryDate::spread for
+   testing multiple Freenode bots
+ - Add documentation about optional argument to
+   App::SpreadRevolutionaryDate constructor
+ - Add tests for spreading to Mastodon
+ - Add tests for spreading to Twitter
+ - Test authentication to Freenode with actual credentials in user config
+ - Test no authentication on Freenode with fake credentials
+ - Test no authentication on Mastodon with fake credentials
+ - Move authentication to Freenode to spread method
+ - Move subclass of Bot::BasicBot outside of
+   App::SpreadRevolutionaryDate::Freenode
+ - Disable coerce_entities since Mastodon::Client has trouble coercing
+   Account
+ - Using ssl on Freenode requires POE::Component::SSLify
+ - Fix Bot::BasicBot methods calls
+ - Add abstract for subclasses
+ - Test Freenode configuration options
+ - Test Mastodon configuration options
+ - Test setting explicit target as command line argument
+ - Rename authentication test with actual credentials in user config
+ - Test authentication to Mastodon with actual credentials in user config
+ - Test setting option as command line argument
+ - Add pod documentation for methods
+ - Disable pod coverage tests for now
+ - Add tests for spreading objects with actual credentials in user config
+ - Test no authentication on Twitter with fake credentials
+ - Add fake configuration for tests
+ - Rename test file
+ - Switch to ExtUtils::MakeMaker instead of Module::Build::Tiny
+ - Add no warnings test for spreading objects
+ - Add tests for spreading objects
+ - Add tests for config
+ - Add submodule to handle config
+ - Add submodule to spread on Freenode
+ - Add submodule to spread on Mastodon
+ - Add submodule to spread on Twitter
+ - Add base module
+ - Add basic Dist::Zilla base config
+ - Ignore dist directory with git
+
+0.01 2019-03-02T22:45:20Z
+ - Fix url in README
+ - Initial TODO
+ - Initial minimal documentation
+ - Initial script with replaceable options
+ - Initial commit
