@@ -1,5 +1,5 @@
 use strict;
-no warnings;
+use warnings;
 use utf8;
 use open qw(:std :utf8);
 package App::SpreadRevolutionaryDate::Config;
