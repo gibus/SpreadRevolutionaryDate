@@ -28,7 +28,7 @@ my %module_build_args = (
     "G\x{e9}rald S\x{e9}drati-Dinet <gibus\@cpan.org>"
   ],
   "dist_name" => "App-SpreadRevolutionaryDate",
-  "dist_version" => "0.02",
+  "dist_version" => "0.03",
   "license" => "gpl",
   "module_name" => "App::SpreadRevolutionaryDate",
   "recursive_test_files" => 1,
