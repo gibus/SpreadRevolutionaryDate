@@ -7,6 +7,7 @@ package App::SpreadRevolutionaryDate::Twitter;
 # ABSTRACT: Subclass of L<App::SpreadRevolutionaryDate> to handle spreading on Twitter.
 
 use Net::Twitter::Lite::WithAPIv1_1;
+use Net::OAuth 0.25;
 
 =method new
 
