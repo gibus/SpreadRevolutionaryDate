@@ -22,6 +22,7 @@ t/00-compile.t
 t/config.t
 t/objects.t
 xt/authentication.t
+xt/author/clean-namespaces.t
 xt/author/critic.t
 xt/author/eol.t
 xt/author/no-tabs.t
@@ -32,4 +33,5 @@ xt/freenode.t
 xt/mastodon.t
 xt/release/distmeta.t
 xt/release/kwalitee.t
+xt/release/unused-vars.t
 xt/twitter.t
