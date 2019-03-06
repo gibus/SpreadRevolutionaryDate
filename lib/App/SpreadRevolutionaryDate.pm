@@ -73,7 +73,9 @@ sub spread {
   my $no_run = shift || 1;
   $no_run = !$no_run;
 
-  my $now = DateTime->today->set(hour => 3, minute => 8, second => 56);
+  my $now = $self->{config}->acab ?
+      DateTime->today->set(hour => 3, minute => 8, second => 56)
+    : DateTime->now;
   my $msg = DateTime::Calendar::FrenchRevolutionary->from_object(object => $now)->strftime("Nous sommes le %A, %d %B de l'An %EY (%Y) de la Révolution, %Ej, il est %T!");
 
   $self->{twitter}->spread($msg) if $self->{twitter};

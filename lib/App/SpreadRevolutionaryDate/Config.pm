@@ -18,6 +18,7 @@ Constructor class method, subclassing C<AppConfig>. Takes no argument. Returns a
 sub new {
   my $class = shift;
   return AppConfig::new($class,
+    'acab' => {ARGCOUNT => ARGCOUNT_NONE},
     'test' => {ARGCOUNT => ARGCOUNT_NONE},
     'twitter' => {ARGCOUNT => ARGCOUNT_NONE},
     'mastodon' => {ARGCOUNT => ARGCOUNT_NONE},
