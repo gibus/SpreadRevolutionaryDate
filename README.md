@@ -29,6 +29,9 @@ The revolutionary date and time is computed thanks to the [DateTime::Calendar::F
     # Test spreading to Mastodon only:
     $ spread-revolutionary-date --mastodon --test
 
+    # Test spreading to Twitter only in English:
+    $ spread-revolutionary-date --twitter --test --locale=en
+
     # Spread to Twitter and Freenode explicit channels
     $ spread-revolutionary-date --twitter --freenode \
         --freenode-channels='#revolution' --freenode-channels='#acab'
@@ -56,6 +59,10 @@ Spread on Mastodon explicitely. If none of the `twitter`, `mastodon`, `freenode`
 ### freenode
 
 Spread on Freenode explicitely. If none of the `twitter`, `mastodon`, `freenode` option is set, the revolutionary date is spread on all of these three targets.
+
+### locale
+
+Spread with chosen language. As of [DateTime::Calendar::FrenchRevolutionary](https://metacpan.org/pod/DateTime::Calendar::FrenchRevolutionary) 0.14, locale is limited to 'en' or 'fr', defaults to 'fr'.
 
 ### test
 
@@ -131,23 +138,27 @@ Any command line parameter takes precedence on the corresponding option specifie
 
 ## General parameters
 
-### --twitter
+### --twitter | -t
 
 Same as ["twitter"](#twitter) configuration option below.
 
-### --mastodon
+### --mastodon | -m
 
 Same as ["mastodon"](#mastodon) configuration option below.
 
-### --freenode
+### --freenode | -f
 
 Same as ["freenode"](#freenode) configuration option below.
 
-### --test
+### --locale | -l
+
+Same as ["locale"](#locale) configuration option below.
+
+### --test | --no | -n
 
 Same as ["test"](#test) configuration option below.
 
-### --acab
+### --acab | -a
 
 Same as ["acab"](#acab) configuration option below.
 
@@ -155,19 +166,19 @@ Same as ["acab"](#acab) configuration option below.
 
 Theses parameters specify credentials for `spread-revolutionary-date` to spread on a Twitter account. You have to get them from your [Twitter API account](https://apps.twitter.com/) with `write` access level.
 
-### --twitter-consumer\_key
+### --twitter-consumer\_key | -tck
 
 Same as ["consumer-key"](#consumer-key) configuration option below.
 
-### --twitter-consumer\_secret
+### --twitter-consumer\_secret | -tcs
 
 Same as ["consumer-secret"](#consumer-secret) configuration option below.
 
-### --twitter-access\_token
+### --twitter-access\_token | -tat
 
 Same as ["access\_token"](#access_token) configuration option below.
 
-### --twitter-access\_token\_secret
+### --twitter-access\_token\_secret | -tats
 
 Same as ["access\_token\_secret"](#access_token_secret) configuration option below.
 
@@ -175,19 +186,19 @@ Same as ["access\_token\_secret"](#access_token_secret) configuration option bel
 
 Theses parameters specify credentials for `spread-revolutionary-date` to spread on a Mastodon account. You have to get them from your [Mastodon instance API account](https://mstdn.fr/settings/applications) with `write` scope. Note that Mastodon is a decentralized network with multiple instances, the previous link is for [mstdn.fr](https://mstdn.fr) instance, please replace url with your preferred instance.
 
-### --mastodon-instance
+### --mastodon-instance | -mi
 
 Same as ["instance"](#instance) configuration option below.
 
-### --mastodon-client\_id
+### --mastodon-client\_id | -mci
 
 Same as ["client\_id"](#client_id) configuration option below.
 
-### --mastodon-client\_secret
+### --mastodon-client\_secret | -mcs
 
 Same as ["client\_secret"](#client_secret) configuration option below.
 
-### --mastodon-access\_token
+### --mastodon-access\_token | -mat
 
 Same as ["access\_token"](#access_token) configuration option below.
 
@@ -195,19 +206,19 @@ Same as ["access\_token"](#access_token) configuration option below.
 
 The first two parameters are credentials for `spread-revolutionary-date` to spread on a Freenode account. See [https://freenode.net/kb/answer/registration](https://freenode.net/kb/answer/registration) to find out how to register an account on Freenode.
 
-### --freenode-nickname
+### --freenode-nickname | -fn
 
 Same as ["nickname"](#nickname) configuration option below.
 
-### --freenode-password
+### --freenode-password | -fp
 
 Same as ["password"](#password) configuration option below.
 
-### --freenode-channels
+### --freenode-channels | -fc
 
 Same as ["channels"](#channels) configuration option below.
 
-### --freenode-test\_channels
+### --freenode-test\_channels | -tc
 
 Same as ["test\_channels"](#test_channels) configuration option below.
 
