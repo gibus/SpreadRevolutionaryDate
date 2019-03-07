@@ -38,6 +38,7 @@ my %module_build_args = (
     "DateTime::Calendar::FrenchRevolutionary" => 0,
     "File::HomeDir" => 0,
     "Mastodon::Client" => 0,
+    "Net::Async::HTTP" => "0.43",
     "Net::OAuth" => "0.25",
     "Net::Twitter::Lite::WithAPIv1_1" => 0,
     "namespace::clean" => 0,
