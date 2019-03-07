@@ -8,6 +8,7 @@ META.json
 META.yml
 Makefile.PL
 README
+SIGNATURE
 TODO
 bin/spread-revolutionary-date
 dist.ini
