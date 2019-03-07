@@ -83,4 +83,24 @@ sub spread {
   $self->{freenode}->spread($msg, $no_run) if $self->{freenode};
 }
 
+=head1 SEE ALSO
+
+=over
+
+=item L<spread-revolutionary-date|https://metacpan.org/pod/distribution/App-SpreadRevolutionaryDate/bin/spread-revolutionary-date>
+
+=item L<App::SpreadRevolutionaryDate::Config>
+
+=item L<App::SpreadRevolutionaryDate::Twitter>
+
+=item L<App::SpreadRevolutionaryDate::Mastodon>
+
+=item L<App::SpreadRevolutionaryDate::Freenode>
+
+=item L<App::SpreadRevolutionaryDate::Freenode::Bot>
+
+=back
+
+=cut
+
 1;
