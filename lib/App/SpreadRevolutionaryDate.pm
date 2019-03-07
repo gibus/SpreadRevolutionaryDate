@@ -64,7 +64,7 @@ sub new {
 
 =method spread
 
-Spreads calendar date to configured targets. Takes one optional boolean argument, if true (default) authentication and spreading to Freenode is performed, otherwise, you've got to run C<use POE; POE::Kernel->run();> to do so. This is only used for testing, when multiple bots are needed. You can safely leave this optional argument unset.
+Spreads calendar date to configured targets. Takes one optional boolean argument, if true (default) authentication and spreading to Freenode is performed, otherwise, you've got to run C<use POE; POE::Kernel-E<gt>run();> to do so. This is only used for testing, when multiple bots are needed. You can safely leave this optional argument unset.
 
 =cut
 
