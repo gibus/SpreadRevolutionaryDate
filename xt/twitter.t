@@ -2,9 +2,10 @@
 
 use Test::More;
 use Test::Output;
+use File::HomeDir;
 
-unless(   -f $ENV{HOME} . '/.config/spread-revolutionary-date/spread-revolutionary-date.conf'
-       || -f $ENV{HOME} . '/.spread-revolutionary-date.conf') {
+unless(   -f File::HomeDir->my_home . '/.config/spread-revolutionary-date/spread-revolutionary-date.conf'
+       || -f File::HomeDir->my_home . '/.spread-revolutionary-date.conf') {
   plan skip_all => 'No user config file found';
 } else {
   plan tests => 1;

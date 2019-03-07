@@ -7,6 +7,8 @@ package App::SpreadRevolutionaryDate::Config;
 # ABSTRACT: Subclass of L<App::SpreadRevolutionaryDate> to handle configuration file and command line arguments.
 
 use AppConfig qw(:argcount);
+use File::HomeDir;
+use namespace::clean;
 use parent 'AppConfig';
 
 =method new
@@ -49,8 +51,8 @@ sub parse_file {
   my $self = shift;
   my $filename = shift;
   foreach my $default_path (
-                $ENV{HOME} . '/.config/spread-revolutionary-date/spread-revolutionary-date.conf',
-                $ENV{HOME} . '/.spread-revolutionary-date.conf') {
+                File::HomeDir->my_home . '/.config/spread-revolutionary-date/spread-revolutionary-date.conf',
+                File::HomeDir->my_home . '/.spread-revolutionary-date.conf') {
     $filename = $default_path if (!$filename && -f $default_path)
   }
   $self->file($filename);
