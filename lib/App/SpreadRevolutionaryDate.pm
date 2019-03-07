@@ -78,9 +78,9 @@ sub spread {
     : DateTime->now;
   my $msg = DateTime::Calendar::FrenchRevolutionary->from_object(object => $now)->strftime("Nous sommes le %A, %d %B de l'An %EY (%Y) de la Révolution, %Ej, il est %T!");
 
-  $self->{twitter}->spread($msg) if $self->{twitter};
-  $self->{mastodon}->spread($msg) if $self->{mastodon};
-  $self->{freenode}->spread($msg, $no_run) if $self->{freenode};
+  $self->{twitter}->spread($msg) if $self->{config}->twitter;
+  $self->{mastodon}->spread($msg) if $self->{config}->mastodon;
+  $self->{freenode}->spread($msg, $no_run) if $self->{config}->freenode;
 }
 
 =head1 SEE ALSO
