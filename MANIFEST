@@ -30,6 +30,7 @@ xt/author/pod-coverage.t
 xt/author/pod-syntax.t
 xt/author/portability.t
 xt/freenode.t
+xt/freenode_fake_credentials.t
 xt/mastodon.t
 xt/release/distmeta.t
 xt/release/kwalitee.t

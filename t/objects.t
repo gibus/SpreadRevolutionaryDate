@@ -1,24 +1,9 @@
 #!perl
 
-use Test::More tests => 9;
+use Test::More tests => 8;
 use Test::NoWarnings;
 
 use App::SpreadRevolutionaryDate;
-
-{
-    no strict 'refs';
-    no warnings 'redefine';
-
-    *App::SpreadRevolutionaryDate::Freenode::Bot::tick = undef;
-    *App::SpreadRevolutionaryDate::Freenode::Bot::said = sub {
-        my $self = shift;
-        my $message = shift;
-        return if $message->{who} eq 'freenode-connect';
-        return if $message->{who} eq 'ChanServ';
-        ok($message->{who} eq 'NickServ' && ($message->{body} =~ /is not a registered nickname/ || $message->{body} =~ /^Invalid password/), 'Freenode no connection with fake credentials');
-        $self->shutdown('Shutdown overridden said');
-    };
-}
 
 my $spread_revolutionary_date = App::SpreadRevolutionaryDate->new(\*DATA);
 
@@ -33,8 +18,6 @@ is($@, '401: Authorization Required', 'Twitter no connection with fake credentia
 
 eval { $spread_revolutionary_date->{mastodon}->{obj}->get_account };
 like($@, qr/^Could not complete request: 500 Can't connect to Instance/, 'Mastodon no connection with fake credentials');
-
-$spread_revolutionary_date->{freenode}->spread('test');
 
 __DATA__
 
