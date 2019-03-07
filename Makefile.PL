@@ -49,7 +49,8 @@ my %WriteMakefileArgs = (
     "File::Find" => 0,
     "File::Temp" => 0,
     "Test::More" => 0,
-    "Test::NoWarnings" => 0
+    "Test::NoWarnings" => 0,
+    "Test::Output" => 0
   },
   "VERSION" => "0.05",
   "test" => {
@@ -70,6 +71,7 @@ my %FallbackPrereqs = (
   "Net::Twitter::Lite::WithAPIv1_1" => 0,
   "Test::More" => 0,
   "Test::NoWarnings" => 0,
+  "Test::Output" => 0,
   "open" => 0,
   "parent" => 0,
   "strict" => 0,

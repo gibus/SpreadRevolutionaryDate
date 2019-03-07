@@ -20,6 +20,7 @@ lib/App/SpreadRevolutionaryDate/Mastodon.pm
 lib/App/SpreadRevolutionaryDate/Twitter.pm
 t/00-compile.t
 t/config.t
+t/locale.t
 t/objects.t
 xt/authentication.t
 xt/author/clean-namespaces.t

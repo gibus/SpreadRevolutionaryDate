@@ -53,7 +53,8 @@ my %module_build_args = (
     "File::Find" => 0,
     "File::Temp" => 0,
     "Test::More" => 0,
-    "Test::NoWarnings" => 0
+    "Test::NoWarnings" => 0,
+    "Test::Output" => 0
   }
 );
 
@@ -63,7 +64,8 @@ my %fallback_build_requires = (
   "File::Temp" => 0,
   "Module::Build" => "0.28",
   "Test::More" => 0,
-  "Test::NoWarnings" => 0
+  "Test::NoWarnings" => 0,
+  "Test::Output" => 0
 );
 
 

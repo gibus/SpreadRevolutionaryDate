@@ -26,6 +26,9 @@ __END__
   # Test spreading to Mastodon only:
   $ spread-revolutionary-date --mastodon --test
 
+  # Test spreading to Twitter only in English:
+  $ spread-revolutionary-date --twitter --test --locale=en
+
   # Spread to Twitter and Freenode explicit channels
   $ spread-revolutionary-date --twitter --freenode \
       --freenode-channels='#revolution' --freenode-channels='#acab'
@@ -63,6 +66,10 @@ Spread on Mastodon explicitely. If none of the C<twitter>, C<mastodon>, C<freeno
 =head3 freenode
 
 Spread on Freenode explicitely. If none of the C<twitter>, C<mastodon>, C<freenode> option is set, the revolutionary date is spread on all of these three targets.
+
+=head3 locale
+
+Spread with chosen language. As of L<DateTime::Calendar::FrenchRevolutionary> 0.14, locale is limited to 'en' or 'fr', defaults to 'fr'.
 
 =head3 test
 
@@ -138,23 +145,27 @@ Any command line parameter takes precedence on the corresponding option specifie
 
 =head2 General parameters
 
-=head3 --twitter
+=head3 --twitter | -t
 
 Same as L</twitter> configuration option below.
 
-=head3 --mastodon
+=head3 --mastodon | -m
 
 Same as L</mastodon> configuration option below.
 
-=head3 --freenode
+=head3 --freenode | -f
 
 Same as L</freenode> configuration option below.
 
-=head3 --test
+=head3 --locale | -l
+
+Same as L</locale> configuration option below.
+
+=head3 --test | --no | -n
 
 Same as L</test> configuration option below.
 
-=head3 --acab
+=head3 --acab | -a
 
 Same as L</acab> configuration option below.
 
@@ -162,19 +173,19 @@ Same as L</acab> configuration option below.
 
 Theses parameters specify credentials for C<spread-revolutionary-date> to spread on a Twitter account. You have to get them from your L<Twitter API account|https://apps.twitter.com/> with C<write> access level.
 
-=head3 --twitter-consumer_key
+=head3 --twitter-consumer_key | -tck
 
 Same as L</consumer-key> configuration option below.
 
-=head3 --twitter-consumer_secret
+=head3 --twitter-consumer_secret | -tcs
 
 Same as L</consumer-secret> configuration option below.
 
-=head3 --twitter-access_token
+=head3 --twitter-access_token | -tat
 
 Same as L</access_token> configuration option below.
 
-=head3 --twitter-access_token_secret
+=head3 --twitter-access_token_secret | -tats
 
 Same as L</access_token_secret> configuration option below.
 
@@ -182,19 +193,19 @@ Same as L</access_token_secret> configuration option below.
 
 Theses parameters specify credentials for C<spread-revolutionary-date> to spread on a Mastodon account. You have to get them from your L<Mastodon instance API account|https://mstdn.fr/settings/applications> with C<write> scope. Note that Mastodon is a decentralized network with multiple instances, the previous link is for L<mstdn.fr|https://mstdn.fr> instance, please replace url with your preferred instance.
 
-=head3 --mastodon-instance
+=head3 --mastodon-instance | -mi
 
 Same as L</instance> configuration option below.
 
-=head3 --mastodon-client_id
+=head3 --mastodon-client_id | -mci
 
 Same as L</client_id> configuration option below.
 
-=head3 --mastodon-client_secret
+=head3 --mastodon-client_secret | -mcs
 
 Same as L</client_secret> configuration option below.
 
-=head3 --mastodon-access_token
+=head3 --mastodon-access_token | -mat
 
 Same as L</access_token> configuration option below.
 
@@ -202,19 +213,19 @@ Same as L</access_token> configuration option below.
 
 The first two parameters are credentials for C<spread-revolutionary-date> to spread on a Freenode account. See L<https://freenode.net/kb/answer/registration> to find out how to register an account on Freenode.
 
-=head3 --freenode-nickname
+=head3 --freenode-nickname | -fn
 
 Same as L</nickname> configuration option below.
 
-=head3 --freenode-password
+=head3 --freenode-password | -fp
 
 Same as L</password> configuration option below.
 
-=head3 --freenode-channels
+=head3 --freenode-channels | -fc
 
 Same as L</channels> configuration option below.
 
-=head3 --freenode-test_channels
+=head3 --freenode-test_channels | -tc
 
 Same as L</test_channels> configuration option below.
 

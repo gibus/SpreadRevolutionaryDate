@@ -73,10 +73,16 @@ sub spread {
   my $no_run = shift || 1;
   $no_run = !$no_run;
 
+  # As of DateTime::Calendar::FrenchRevolutionary 0.14
+  # locale is limited to 'en' or 'fr', defaults to 'fr'
+  my $locale = $self->{config}->locale || 'fr';
+  $locale = 'fr' unless $locale eq 'en';
+
   my $now = $self->{config}->acab ?
       DateTime->today->set(hour => 3, minute => 8, second => 56)
     : DateTime->now;
-  my $msg = DateTime::Calendar::FrenchRevolutionary->from_object(object => $now)->strftime("Nous sommes le %A, %d %B de l'An %EY (%Y) de la Révolution, %Ej, il est %T!");
+  my $revolutionary = DateTime::Calendar::FrenchRevolutionary->from_object(object => $now, locale => $locale);
+  my $msg = $locale eq 'fr' ? $revolutionary->strftime("Nous sommes le %A, %d %B de l'An %EY (%Y) de la Révolution, %Ej, il est %T!") : $revolutionary->strftime("We are %A, %d %B of Revolution Year %EY (%Y), %Ej, it is %T!");
 
   $self->{twitter}->spread($msg) if $self->{config}->twitter;
   $self->{mastodon}->spread($msg) if $self->{config}->mastodon;
