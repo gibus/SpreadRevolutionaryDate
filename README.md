@@ -38,7 +38,7 @@ The revolutionary date and time is computed thanks to the [DateTime::Calendar::F
 
 # CONFIGURATION
 
-Once again: you **have to** configure `spread-revolutionary-date` with credentials for registered account on each of the desired targets, so it can spread the revolutionary date on behalf of theses accounts.
+Once again: you **have to** configure `spread-revolutionary-date` with credentials for registered account on each of the desired targets, so it can spread the revolutionary date on behalf of these accounts.
 
 Configuration options may also be specified as command line parameters, see ["COMMAND LINE PARAMETERS"](#command-line-parameters) below, which take precedence on options of the configuration file.
 
@@ -50,15 +50,15 @@ These options should appear outside of any section of the cofiguration file.
 
 ### twitter
 
-Spread on Twitter explicitely. If none of the `twitter`, `mastodon`, `freenode` option is set, the revolutionary date is spread on all of these three targets.
+Spread on Twitter explicitly. If none of the `twitter`, `mastodon`, `freenode` option is set, the revolutionary date is spread on all of these three targets.
 
 ### mastodon
 
-Spread on Mastodon explicitely. If none of the `twitter`, `mastodon`, `freenode` option is set, the revolutionary date is spread on all of these three targets.
+Spread on Mastodon explicitly. If none of the `twitter`, `mastodon`, `freenode` option is set, the revolutionary date is spread on all of these three targets.
 
 ### freenode
 
-Spread on Freenode explicitely. If none of the `twitter`, `mastodon`, `freenode` option is set, the revolutionary date is spread on all of these three targets.
+Spread on Freenode explicitly. If none of the `twitter`, `mastodon`, `freenode` option is set, the revolutionary date is spread on all of these three targets.
 
 ### locale
 
@@ -66,7 +66,7 @@ Spread with chosen language. As of [DateTime::Calendar::FrenchRevolutionary](htt
 
 ### test
 
-Do no not actually spread the revolutionary date, just print it on standard output for Twitter and Mastodon, and send it on configured test channels for Freenode (see <L/"test channels> below).
+Do no not actually spread the revolutionary date, just print it on standard output for Twitter and Mastodon, and send it on configured test channels for Freenode (see <L/"test\_channels"> below).
 
 ### acab
 
@@ -74,7 +74,7 @@ Instead of spreading the current date and time, pretend that decimal time is 1:3
 
 ## Twitter options
 
-Theses options are credentials for `spread-revolutionary-date` to spread on a Twitter account. You have to get them from your [Twitter API account](https://apps.twitter.com/) with `write` access level.
+These options are credentials for `spread-revolutionary-date` to spread on a Twitter account. You have to get them from your [Twitter API account](https://apps.twitter.com/) with `write` access level.
 
 ### consumer\_key
 
@@ -94,7 +94,7 @@ Your Twitter Access token secret for this application.
 
 ## Mastodon options
 
-Theses options are credentials for `spread-revolutionary-date` to spread on a Mastodon account. You have to get them from your [Mastodon instance API account](https://mstdn.fr/settings/applications) with `write` scope. Note that Mastodon is a decentralized network with multiple instances, the previous link is for [mstdn.fr](https://mstdn.fr) instance, please replace url with your preferred instance.
+These options are credentials for `spread-revolutionary-date` to spread on a Mastodon account. You have to get them from your [Mastodon instance API account](https://mstdn.fr/settings/applications) with `write` scope. Note that Mastodon is a decentralized network with multiple instances, the previous link is for [mstdn.fr](https://mstdn.fr) instance, please replace url with your preferred instance.
 
 ### instance
 
@@ -164,15 +164,15 @@ Same as ["acab"](#acab) configuration option below.
 
 ## Twitter parameters
 
-Theses parameters specify credentials for `spread-revolutionary-date` to spread on a Twitter account. You have to get them from your [Twitter API account](https://apps.twitter.com/) with `write` access level.
+These parameters specify credentials for `spread-revolutionary-date` to spread on a Twitter account. You have to get them from your [Twitter API account](https://apps.twitter.com/) with `write` access level.
 
 ### --twitter-consumer\_key | -tck
 
-Same as ["consumer-key"](#consumer-key) configuration option below.
+Same as ["consumer\_key"](#consumer_key) configuration option below.
 
 ### --twitter-consumer\_secret | -tcs
 
-Same as ["consumer-secret"](#consumer-secret) configuration option below.
+Same as ["consumer\_secret"](#consumer_secret) configuration option below.
 
 ### --twitter-access\_token | -tat
 
@@ -184,7 +184,7 @@ Same as ["access\_token\_secret"](#access_token_secret) configuration option bel
 
 ## Mastodon parameters
 
-Theses parameters specify credentials for `spread-revolutionary-date` to spread on a Mastodon account. You have to get them from your [Mastodon instance API account](https://mstdn.fr/settings/applications) with `write` scope. Note that Mastodon is a decentralized network with multiple instances, the previous link is for [mstdn.fr](https://mstdn.fr) instance, please replace url with your preferred instance.
+These parameters specify credentials for `spread-revolutionary-date` to spread on a Mastodon account. You have to get them from your [Mastodon instance API account](https://mstdn.fr/settings/applications) with `write` scope. Note that Mastodon is a decentralized network with multiple instances, the previous link is for [mstdn.fr](https://mstdn.fr) instance, please replace url with your preferred instance.
 
 ### --mastodon-instance | -mi
 
