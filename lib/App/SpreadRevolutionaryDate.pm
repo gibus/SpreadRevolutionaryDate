@@ -1,3 +1,4 @@
+use 5.010;
 use strict;
 use warnings;
 use utf8;
@@ -70,7 +71,7 @@ Spreads calendar date to configured targets. Takes one optional boolean argument
 
 sub spread {
   my $self = shift;
-  my $no_run = shift || 1;
+  my $no_run = shift // 1;
   $no_run = !$no_run;
 
   # As of DateTime::Calendar::FrenchRevolutionary 0.14
