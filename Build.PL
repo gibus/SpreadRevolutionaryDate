@@ -53,9 +53,8 @@ my %module_build_args = (
     "bin/spread-revolutionary-date"
   ],
   "test_requires" => {
-    "File::Spec" => 0,
-    "IO::Handle" => 0,
-    "IPC::Open3" => 0,
+    "File::Find" => 0,
+    "File::Temp" => 0,
     "Test::More" => 0,
     "Test::NoWarnings" => 0,
     "Test::Output" => 0
@@ -64,9 +63,8 @@ my %module_build_args = (
 
 
 my %fallback_build_requires = (
-  "File::Spec" => 0,
-  "IO::Handle" => 0,
-  "IPC::Open3" => 0,
+  "File::Find" => 0,
+  "File::Temp" => 0,
   "Module::Build" => "0.28",
   "Test::More" => 0,
   "Test::NoWarnings" => 0,
