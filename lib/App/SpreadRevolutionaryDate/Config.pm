@@ -6,10 +6,12 @@ package App::SpreadRevolutionaryDate::Config;
 
 # ABSTRACT: Subclass of L<App::SpreadRevolutionaryDate> to handle configuration file and command line arguments.
 
+use Moose;
+use MooseX::NonMoose;
+extends 'AppConfig';
 use AppConfig qw(:argcount);
 use File::HomeDir;
 use namespace::clean;
-use parent 'AppConfig';
 
 =method new
 
@@ -131,4 +133,5 @@ sub check_freenode {
 
 =cut
 
-1;
+no Moose;
+__PACKAGE__->meta->make_immutable(inline_constructor => 0);

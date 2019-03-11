@@ -6,7 +6,15 @@ package App::SpreadRevolutionaryDate::Freenode;
 
 # ABSTRACT: Subclass of L<App::SpreadRevolutionaryDate> to handle spreading on Freenode.
 
+use Moose;
+use namespace::autoclean;
 use App::SpreadRevolutionaryDate::Freenode::Bot;
+
+has 'config' => (
+    is  => 'ro',
+    isa => 'App::SpreadRevolutionaryDate::Config',
+    required => 1,
+);
 
 =method new
 
@@ -14,11 +22,12 @@ Constructor class method, subclassing C<Bot::BasicBot>. Takes one mandatory argu
 
 =cut
 
-sub new {
+around BUILDARGS => sub {
+  my $orig = shift;
   my $class = shift;
   my $config = shift;
-  bless {config => $config}, $class;
-}
+  return $class->$orig(config => $config);
+};
 
 =method spread
 
@@ -41,7 +50,7 @@ sub spread {
     $ssl = 1;
   }
 
-  my $channels = $self->{config}->test ? $self->{config}->freenode_test_channels : $self->{config}->freenode_channels;
+  my $channels = $self->config->test ? $self->config->freenode_test_channels : $self->config->freenode_channels;
 
   my $freenode = App::SpreadRevolutionaryDate::Freenode::Bot->new(
     server            => 'irc.freenode.net',
@@ -54,8 +63,8 @@ sub spread {
     ssl               => $ssl,
     charset           => 'utf-8',
     channels          => $channels,
-    freenode_nickname => $self->{config}->freenode_nickname,
-    freenode_password => $self->{config}->freenode_password,
+    freenode_nickname => $self->config->freenode_nickname,
+    freenode_password => $self->config->freenode_password,
     msg               => $msg,
     no_run            => $no_run,
   )->run();

@@ -6,7 +6,21 @@ package App::SpreadRevolutionaryDate::Mastodon;
 
 # ABSTRACT: Subclass of L<App::SpreadRevolutionaryDate> to handle spreading on Mastodon.
 
+use Moose;
+use namespace::autoclean;
 use Mastodon::Client;
+
+has 'config' => (
+    is  => 'ro',
+    isa => 'App::SpreadRevolutionaryDate::Config',
+    required => 1,
+);
+
+has 'obj' => (
+    is  => 'ro',
+    isa => 'Mastodon::Client',
+    required => 1,
+);
 
 =method new
 
@@ -14,18 +28,21 @@ Constructor class method. Takes one mandatory argument: C<$config> which should 
 
 =cut
 
-sub new {
+around BUILDARGS => sub {
+  my $orig = shift;
   my $class = shift;
   my $config = shift;
-  my $mastodon = Mastodon::Client->new(
+  my $args = $class->$orig(config => $config);
+
+  $args->{obj} = Mastodon::Client->new(
                   instance        => $config->mastodon_instance,
                   client_id       => $config->mastodon_client_id,
                   client_secret   => $config->mastodon_client_secret,
                   access_token    => $config->mastodon_access_token,
                   #coerce_entities => 1,
                   name            => 'RevolutionaryDate');
-  bless {config => $config, obj => $mastodon}, $class;
-}
+  return $args;
+};
 
 =method spread
 
@@ -36,10 +53,10 @@ Spreads a message to Mastodon. Takes one mandatory argument: C<$msg> which shoul
 sub spread {
   my $self = shift;
   my $msg = shift;
-  if ($self->{config}->test) {
+  if ($self->config->test) {
     print "Spread to Mastodon $msg\n";
   } else {
-    $self->{obj}->post_status($msg);
+    $self->obj->post_status($msg);
   }
 }
 
@@ -63,4 +80,5 @@ sub spread {
 
 =cut
 
-1;
+no Moose;
+__PACKAGE__->meta->make_immutable;

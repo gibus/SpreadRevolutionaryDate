@@ -6,8 +6,22 @@ package App::SpreadRevolutionaryDate::Twitter;
 
 # ABSTRACT: Subclass of L<App::SpreadRevolutionaryDate> to handle spreading on Twitter.
 
+use Moose;
+use namespace::autoclean;
 use Net::Twitter::Lite::WithAPIv1_1;
 use Net::OAuth 0.25;
+
+has 'config' => (
+    is  => 'ro',
+    isa => 'App::SpreadRevolutionaryDate::Config',
+    required => 1,
+);
+
+has 'obj' => (
+    is  => 'ro',
+    isa => 'Net::Twitter::Lite::WithAPIv1_1',
+    required => 1,
+);
 
 =method new
 
@@ -15,18 +29,21 @@ Constructor class method. Takes one mandatory argument: C<$config> which should 
 
 =cut
 
-sub new {
+around BUILDARGS => sub {
+  my $orig = shift;
   my $class = shift;
   my $config = shift;
-  my $twitter = Net::Twitter::Lite::WithAPIv1_1->new(
+  my $args = $class->$orig(config => $config);
+
+  $args->{obj} = Net::Twitter::Lite::WithAPIv1_1->new(
                   consumer_key        => $config->twitter_consumer_key,
                   consumer_secret     => $config->twitter_consumer_secret,
                   access_token        => $config->twitter_access_token,
                   access_token_secret => $config->twitter_access_token_secret,
                   user_agent          => 'RevolutionaryDate',
                   ssl                 => 1);
-  bless {config => $config, obj => $twitter}, $class;
-}
+  return $args;
+};
 
 =method spread
 
@@ -37,10 +54,10 @@ Spreads a message to Twitter. Takes one mandatory argument: C<$msg> which should
 sub spread {
   my $self = shift;
   my $msg = shift;
-  if ($self->{config}->test) {
+  if ($self->config->test) {
     print "Spread to Twitter: $msg\n";
   } else {
-    $self->{obj}->update($msg);
+    $self->obj->update($msg);
   }
 }
 
@@ -64,4 +81,5 @@ sub spread {
 
 =cut
 
-1;
+no Moose;
+__PACKAGE__->meta->make_immutable;

@@ -7,11 +7,34 @@ package App::SpreadRevolutionaryDate;
 
 # ABSTRACT: Spread date and time from Revolutionary (Republican) Calendar on Twitter, Mastodon and Freenode.
 
+use Moose;
+use namespace::autoclean;
 use App::SpreadRevolutionaryDate::Config;
 use App::SpreadRevolutionaryDate::Twitter;
 use App::SpreadRevolutionaryDate::Mastodon;
 use App::SpreadRevolutionaryDate::Freenode;
 use DateTime::Calendar::FrenchRevolutionary;
+
+has 'config' => (
+    is  => 'ro',
+    isa => 'App::SpreadRevolutionaryDate::Config',
+    required => 1,
+);
+
+has 'twitter' => (
+    is  => 'ro',
+    isa => 'App::SpreadRevolutionaryDate::Twitter',
+);
+
+has 'mastodon' => (
+    is  => 'ro',
+    isa => 'App::SpreadRevolutionaryDate::Mastodon',
+);
+
+has 'freenode' => (
+    is  => 'ro',
+    isa => 'App::SpreadRevolutionaryDate::Freenode',
+);
 
 =method new
 
@@ -19,7 +42,8 @@ Constructor class method. Takes one optional argument: C<$filename> which should
 
 =cut
 
-sub new {
+around BUILDARGS => sub {
+  my $orig = shift;
   my $class = shift;
   my $filename = shift;
   my $config = App::SpreadRevolutionaryDate::Config->new;
@@ -27,41 +51,40 @@ sub new {
   $config->parse_file($filename);
   $config->parse_command_line;
 
-  my $self = {config => $config};
+  my $args = $class->$orig(config => $config);
 
-  if (!$self->{config}->twitter && !$self->{config}->mastodon && !$self->{config}->freenode) {
-    $self->{config}->twitter(1);
-    $self->{config}->mastodon(1);
-    $self->{config}->freenode(1);
+  if (!$args->{config}->twitter && !$args->{config}->mastodon && !$args->{config}->freenode) {
+    $args->{config}->twitter(1);
+    $args->{config}->mastodon(1);
+    $args->{config}->freenode(1);
   }
 
-  if ($self->{config}->twitter) {
-    if ($self->{config}->check_twitter) {
-      $self->{twitter} = App::SpreadRevolutionaryDate::Twitter->new($self->{config});
+  if ($args->{config}->twitter) {
+    if ($args->{config}->check_twitter) {
+      $args->{twitter} = App::SpreadRevolutionaryDate::Twitter->new($args->{config});
     } else {
       die "Cannot spread on Twitter, configuraton parameters missing\n";
     }
   }
 
-  if ($self->{config}->mastodon) {
-    if ($self->{config}->check_mastodon) {
-      $self->{mastodon} = App::SpreadRevolutionaryDate::Mastodon->new($self->{config});
+  if ($args->{config}->mastodon) {
+    if ($args->{config}->check_mastodon) {
+      $args->{mastodon} = App::SpreadRevolutionaryDate::Mastodon->new($args->{config});
     } else {
       die "Cannot spread on Mastodon, configuraton parameters missing\n";
     }
   }
 
-  if ($self->{config}->freenode) {
-    if ($self->{config}->check_freenode) {
-      $self->{freenode} = App::SpreadRevolutionaryDate::Freenode->new($self->{config});
+  if ($args->{config}->freenode) {
+    if ($args->{config}->check_freenode) {
+      $args->{freenode} = App::SpreadRevolutionaryDate::Freenode->new($args->{config});
     } else {
       die "Cannot spread on Freenode, configuraton parameters missing\n";
     }
   }
 
-  bless $self, $class;
-  return $self;
-}
+  return $args;
+};
 
 =method spread
 
@@ -76,18 +99,18 @@ sub spread {
 
   # As of DateTime::Calendar::FrenchRevolutionary 0.14
   # locale is limited to 'en' or 'fr', defaults to 'fr'
-  my $locale = $self->{config}->locale || 'fr';
+  my $locale = $self->config->locale || 'fr';
   $locale = 'fr' unless $locale eq 'en';
 
-  my $now = $self->{config}->acab ?
+  my $now = $self->config->acab ?
       DateTime->today->set(hour => 3, minute => 8, second => 56)
     : DateTime->now;
   my $revolutionary = DateTime::Calendar::FrenchRevolutionary->from_object(object => $now, locale => $locale);
   my $msg = $locale eq 'fr' ? $revolutionary->strftime("Nous sommes le %A, %d %B de l'An %EY (%Y) de la Révolution, %Ej, il est %T!") : $revolutionary->strftime("We are %A, %d %B of Revolution Year %EY (%Y), %Ej, it is %T!");
 
-  $self->{twitter}->spread($msg) if $self->{config}->twitter;
-  $self->{mastodon}->spread($msg) if $self->{config}->mastodon;
-  $self->{freenode}->spread($msg, $no_run) if $self->{config}->freenode;
+  $self->twitter->spread($msg) if $self->config->twitter;
+  $self->mastodon->spread($msg) if $self->config->mastodon;
+  $self->freenode->spread($msg, $no_run) if $self->config->freenode;
 }
 
 =head1 SEE ALSO
@@ -110,4 +133,5 @@ sub spread {
 
 =cut
 
-1;
+no Moose;
+__PACKAGE__->meta->make_immutable;

@@ -6,10 +6,29 @@ package App::SpreadRevolutionaryDate::Freenode::Bot;
 
 # ABSTRACT: Subclass overriding L<Bot::BasicBit> to post a message on some Freenode channels
 
-use parent 'Bot::BasicBot';
+use Moose;
+use MooseX::NonMoose;
+extends 'Bot::BasicBot';
 
-our $said = 0;
-our $nb_ticks = 0;
+has 'nb_said' => (
+    traits  => ['Counter'],
+    is  => 'rw',
+    isa => 'Num',
+    default => 0,
+    handles => {
+        inc_said   => 'inc',
+    },
+);
+
+has 'nb_ticks' => (
+    traits  => ['Counter'],
+    is  => 'rw',
+    isa => 'Num',
+    default => 0,
+    handles => {
+        inc_ticks   => 'inc',
+    },
+);
 
 sub connected {
   my $self = shift;
@@ -19,24 +38,24 @@ sub connected {
 sub said {
   my $self = shift;
   my $message = shift;
-  $said=1 if ($message->{who} eq 'NickServ' && $message->{body} =~ /^You are now identified for/);
+  $self->nb_said(1) if ($message->{who} eq 'NickServ' && $message->{body} =~ /^You are now identified for/);
   return;
 }
 
 sub tick {
   my $self = shift;
-  if ($said) {
-    if ($said > scalar($self->channels)) {
+  if ($self->nb_said) {
+    if ($self->nb_said > scalar($self->channels)) {
       $self->shutdown;
     }
     foreach my $channel ($self->channels) {
       $self->say({channel => $channel, body => $self->{msg}});
-      $said++;
+      $self->inc_said;
     }
   }
 
-  $nb_ticks++;
-  $self->shutdown if ($nb_ticks > 10);
+  $self->inc_ticks;
+  $self->shutdown if ($self->nb_ticks > 10);
 
   return 5;
 }
@@ -65,4 +84,5 @@ sub log {
 
 =cut
 
-1;
+no Moose;
+__PACKAGE__->meta->make_immutable;
