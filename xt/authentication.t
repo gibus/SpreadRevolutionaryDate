@@ -29,10 +29,10 @@ use App::SpreadRevolutionaryDate;
 @ARGV = ('--test');
 my $spread_revolutionary_date = App::SpreadRevolutionaryDate->new;
 
-eval { $spread_revolutionary_date->{twitter}->{obj}->verify_credentials };
+eval { $spread_revolutionary_date->twitter->obj->verify_credentials };
 ok(!$@, 'Twitter connection with actual credentials in user conf');
 
-eval { $spread_revolutionary_date->{mastodon}->{obj}->get_account };
+eval { $spread_revolutionary_date->mastodon->obj->get_account };
 ok(!$@, 'Mastodon connection with actual credentials in user conf');
 
-$spread_revolutionary_date->{freenode}->spread('test');
+$spread_revolutionary_date->freenode->spread('test');

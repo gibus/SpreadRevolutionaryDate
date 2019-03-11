@@ -34,10 +34,10 @@ SHA1 2df7ff04b65410f4c9509f7276684cc68e96578c lib/App/SpreadRevolutionaryDate/Fr
 SHA1 c8860b713c2f90a7db0898f35e3ee2484dabc7f4 lib/App/SpreadRevolutionaryDate/Mastodon.pm
 SHA1 9f58311d539632ba1e265c74912042efe0f3b22a lib/App/SpreadRevolutionaryDate/Twitter.pm
 SHA1 8f5227d4330933f1e2a1c0199f51ba498fefba00 t/00-compile.t
-SHA1 d21b1831883c78db56c90cd0e25a726669bc7f67 t/config.t
+SHA1 ddb0f9bfbe49d6f82a745272a6ea3e775d7b3db2 t/config.t
 SHA1 17eca6798ae33e95edb14ace96dc29c7cbeee5cd t/locale.t
-SHA1 024f4243ebd02f76a4b64e581298c4130395dd1b t/objects.t
-SHA1 b66ef70a1e50de4159e6114a15d3ae1410b50794 xt/authentication.t
+SHA1 e4ce880a92a58875110569cdc680b7a8c04caa37 t/objects.t
+SHA1 4ef8439cb2d7ef0699aa1846d4766b37ddfedc14 xt/authentication.t
 SHA1 d2915cfa82130b512ac495c396272507289c71b1 xt/author/clean-namespaces.t
 SHA1 e5c139a6f9a43e3a3ea96f4cdeaf6652905b8275 xt/author/critic.t
 SHA1 bdc1041d38d1adea231c283ff64f682b5cc592a5 xt/author/eol.t
@@ -45,8 +45,8 @@ SHA1 b713112c18e85966b8aecb804273878e56dce881 xt/author/no-tabs.t
 SHA1 1639baff80158ad8856d743e70a74cfa50718b8d xt/author/pod-coverage.t
 SHA1 cf0de85aa819a1efdcf04e7ae78ff7ecdb90e138 xt/author/pod-syntax.t
 SHA1 645cec4fa63cb59f7f59665ed2cf02d48db5c11c xt/author/portability.t
-SHA1 1517da2877e118cd0286aceaa759448bdf599e42 xt/freenode.t
-SHA1 a87120145ca814ee9b45c5bbb63f0b344a0fa5a8 xt/freenode_fake_credentials.t
+SHA1 b232a6e17bf2836d79383d69c12104789d10a391 xt/freenode.t
+SHA1 6a36553a1ab44e863c01f4147dfdcf5a279448e5 xt/freenode_fake_credentials.t
 SHA1 3f76162dc81a350840914dfdbb83180a234dd07d xt/mastodon.t
 SHA1 68c2b0b456d6446eaf37b343aa47ea5918b9a66c xt/release/distmeta.t
 SHA1 cfc7fc13aea54c0abc8829c8aa2ff68113f5f2c9 xt/release/kwalitee.t
@@ -54,7 +54,7 @@ SHA1 0edfc8d4cd249829ad3aa1298ccbdc69dffea45f xt/release/unused-vars.t
 SHA1 4c6ad0d353cbf9b7406eb3f87a6b96ca1d4f75b7 xt/twitter.t
 -----BEGIN PGP SIGNATURE-----
 
-iF0EARECAB0WIQRR24FY+Z56D/YyPs7z3XhnulP5PwUCXIZgYQAKCRDz3XhnulP5
-PzI6AJ4y6azArppctbti0m5vMc8deN2XXQCgpB5Is7vK3FTUvX7AlH0dC6vhbZo=
-=iaHd
+iF0EARECAB0WIQRR24FY+Z56D/YyPs7z3XhnulP5PwUCXIaQ9wAKCRDz3XhnulP5
+P16hAKC2PI6gIdEY8s1uMuksxR2ODNTSAgCfTYsKQhup4kMp9c/52XaRjGhDE7A=
+=5ADI
 -----END PGP SIGNATURE-----

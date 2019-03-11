@@ -71,7 +71,7 @@ if (eval { require POE::Component::SSLify; 1 }) {
   $port = 6697;
   $ssl = 1;
 }
-my $channels = $spread_revolutionary_date->{config}->freenode_test_channels;
+my $channels = $spread_revolutionary_date->config->freenode_test_channels;
 my $watcher_bot = TestWatcherBot->new(
   server   => 'irc.freenode.net',
   port     => $port,

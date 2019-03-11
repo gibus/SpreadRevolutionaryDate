@@ -29,7 +29,7 @@ use App::SpreadRevolutionaryDate;
 
 my $spread_revolutionary_date = App::SpreadRevolutionaryDate->new(\*DATA);
 
-$spread_revolutionary_date->{freenode}->spread('test');
+$spread_revolutionary_date->freenode->spread('test');
 
 __DATA__
 
