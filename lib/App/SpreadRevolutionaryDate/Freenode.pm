@@ -29,7 +29,8 @@ Spreads a message to Freenode channels configured with the multivalued option C<
 sub spread {
   my $self = shift;
   my $msg = shift;
-  my $no_run = shift || 0;
+  my $no_run = shift // 1;
+  $no_run = !$no_run;
 
   my $port = 6667;
   my $ssl = 0;
