@@ -102,10 +102,9 @@ sub spread {
   my $locale = $self->config->locale || 'fr';
   $locale = 'fr' unless $locale eq 'en';
 
-  my $now = $self->config->acab ?
-      DateTime->today->set(hour => 3, minute => 8, second => 56)
-    : DateTime->now;
-  my $revolutionary = DateTime::Calendar::FrenchRevolutionary->from_object(object => $now, locale => $locale);
+  my $revolutionary = $self->config->acab ?
+      DateTime::Calendar::FrenchRevolutionary->now->set(hour => 1, minute => 31, second => 20, locale => $locale)
+    : DateTime::Calendar::FrenchRevolutionary->now;
   my $msg = $locale eq 'fr' ? $revolutionary->strftime("Nous sommes le %A, %d %B de l'An %EY (%Y) de la Révolution, %Ej, il est %T!") : $revolutionary->strftime("We are %A, %d %B of Revolution Year %EY (%Y), %Ej, it is %T!");
 
   $self->twitter->spread($msg) if $self->config->twitter;
