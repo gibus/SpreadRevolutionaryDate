@@ -46,7 +46,7 @@ The configuration file should lie on `~/.config/spread-revolutionary-date/spread
 
 ## General options
 
-These options should appear outside of any section of the cofiguration file.
+These options should appear outside of any section of the configuration file.
 
 ### twitter
 

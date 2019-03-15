@@ -53,7 +53,7 @@ The configuration file should lie on C<~/.config/spread-revolutionary-date/sprea
 
 =head2 General options
 
-These options should appear outside of any section of the cofiguration file.
+These options should appear outside of any section of the configuration file.
 
 =head3 twitter
 
