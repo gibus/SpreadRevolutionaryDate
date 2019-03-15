@@ -66,7 +66,7 @@ Spread with chosen language. As of [DateTime::Calendar::FrenchRevolutionary](htt
 
 ### test
 
-Do no not actually spread the revolutionary date, just print it on standard output for Twitter and Mastodon, and send it on configured test channels for Freenode (see <L/"test\_channels"> below).
+Do no not actually spread the revolutionary date, just print it on standard output for Twitter and Mastodon, and send it on configured test channels for Freenode (see ["test\_channels"](#test_channels) below).
 
 ### acab
 

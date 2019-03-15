@@ -73,7 +73,7 @@ Spread with chosen language. As of L<DateTime::Calendar::FrenchRevolutionary> 0.
 
 =head3 test
 
-Do no not actually spread the revolutionary date, just print it on standard output for Twitter and Mastodon, and send it on configured test channels for Freenode (see <L/"test_channels"> below).
+Do no not actually spread the revolutionary date, just print it on standard output for Twitter and Mastodon, and send it on configured test channels for Freenode (see L</"test_channels"> below).
 
 =head3 acab
 
