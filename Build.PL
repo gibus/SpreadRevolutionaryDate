@@ -43,6 +43,7 @@ my %module_build_args = (
     "Net::Async::HTTP" => "0.43",
     "Net::OAuth" => "0.25",
     "Net::Twitter::Lite::WithAPIv1_1" => 0,
+    "URI::Escape" => 0,
     "namespace::autoclean" => 0,
     "namespace::clean" => 0,
     "open" => 0,
