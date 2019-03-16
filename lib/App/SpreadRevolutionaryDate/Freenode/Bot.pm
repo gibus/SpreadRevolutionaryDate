@@ -30,6 +30,12 @@ has 'nb_ticks' => (
     },
 );
 
+has 'msg' => (
+  is => 'rw',
+  isa => 'Str',
+  default => '',
+);
+
 sub connected {
   my $self = shift;
   $self->say({who => 'NickServ', channel => 'msg', body => 'IDENTIFY ' . $self->{freenode_nickname} . ' ' . $self->{freenode_password}});

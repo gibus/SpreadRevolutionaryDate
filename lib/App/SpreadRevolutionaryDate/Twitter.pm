@@ -11,35 +11,52 @@ use namespace::autoclean;
 use Net::Twitter::Lite::WithAPIv1_1;
 use Net::OAuth 0.25;
 
-has 'config' => (
-    is  => 'ro',
-    isa => 'App::SpreadRevolutionaryDate::Config',
-    required => 1,
-);
-
 has 'obj' => (
     is  => 'ro',
     isa => 'Net::Twitter::Lite::WithAPIv1_1',
     required => 1,
 );
 
+has 'consumer_key' => (
+    is  => 'ro',
+    isa => 'Str',
+    required => 1,
+);
+
+has 'consumer_secret' => (
+    is  => 'ro',
+    isa => 'Str',
+    required => 1,
+);
+
+has 'access_token' => (
+    is  => 'ro',
+    isa => 'Str',
+    required => 1,
+);
+
+has 'access_token_secret' => (
+    is  => 'ro',
+    isa => 'Str',
+    required => 1,
+);
+
 =method new
 
-Constructor class method. Takes one mandatory argument: C<$config> which should be an C<App::SpreadRevolutionaryDate::Config> object. Authentifies to Twitter and returns an C<App::SpreadRevolutionaryDate::Twitter> object.
+Constructor class method. Takes a hash argument with the following mandatory keys: C<consumer_key>, C<consumer_secret>, C<access_token>, and C<access_token_secret>, with all values being strings. Authentifies to Twitter and returns an C<App::SpreadRevolutionaryDate::Twitter> object.
 
 =cut
 
 around BUILDARGS => sub {
   my $orig = shift;
   my $class = shift;
-  my $config = shift;
-  my $args = $class->$orig(config => $config);
+  my $args = $class->$orig(@_);
 
   $args->{obj} = Net::Twitter::Lite::WithAPIv1_1->new(
-                  consumer_key        => $config->twitter_consumer_key,
-                  consumer_secret     => $config->twitter_consumer_secret,
-                  access_token        => $config->twitter_access_token,
-                  access_token_secret => $config->twitter_access_token_secret,
+                  consumer_key        => $args->{consumer_key},
+                  consumer_secret     => $args->{consumer_secret},
+                  access_token        => $args->{access_token},
+                  access_token_secret => $args->{access_token_secret},
                   user_agent          => 'RevolutionaryDate',
                   ssl                 => 1);
   return $args;
@@ -47,14 +64,15 @@ around BUILDARGS => sub {
 
 =method spread
 
-Spreads a message to Twitter. Takes one mandatory argument: C<$msg> which should be the message to spread as a characters string. If C<test> option is set the message is printed on standard output and not spread on Twitter.
+Spreads a message to Twitter. Takes one mandatory argument: C<$msg> which should be the message to spread as a characters string; and one optional argument: C<test>, which defaults to C<false>, and if C<true> prints the message on standard output instead of spreading on Twitter.
 
 =cut
 
 sub spread {
   my $self = shift;
   my $msg = shift;
-  if ($self->config->test) {
+  my $test = shift // 0;
+  if ($test) {
     print "Spread to Twitter: $msg\n";
   } else {
     $self->obj->update($msg);

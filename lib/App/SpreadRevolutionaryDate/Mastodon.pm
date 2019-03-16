@@ -10,50 +10,67 @@ use Moose;
 use namespace::autoclean;
 use Mastodon::Client;
 
-has 'config' => (
-    is  => 'ro',
-    isa => 'App::SpreadRevolutionaryDate::Config',
-    required => 1,
-);
-
 has 'obj' => (
     is  => 'ro',
     isa => 'Mastodon::Client',
     required => 1,
 );
 
+has 'instance' => (
+    is  => 'ro',
+    isa => 'Str',
+    required => 1,
+);
+
+has 'client_id' => (
+    is  => 'ro',
+    isa => 'Str',
+    required => 1,
+);
+
+has 'client_secret' => (
+    is  => 'ro',
+    isa => 'Str',
+    required => 1,
+);
+
+has 'access_token' => (
+    is  => 'ro',
+    isa => 'Str',
+    required => 1,
+);
+
 =method new
 
-Constructor class method. Takes one mandatory argument: C<$config> which should be an C<App::SpreadRevolutionaryDate::Config> object. Authentifies to Mastodon and returns an C<App::SpreadRevolutionaryDate::Mastodon> object.
+Constructor class method. Takes a hash argument with the following mandatory keys: C<instance>, C<client_id>, C<client_secret>, and C<access_token>, with all values being strings. Authentifies to Mastodon and returns an C<App::SpreadRevolutionaryDate::Mastodon> object.
 
 =cut
 
 around BUILDARGS => sub {
   my $orig = shift;
   my $class = shift;
-  my $config = shift;
-  my $args = $class->$orig(config => $config);
+  my $args = $class->$orig(@_);
 
   $args->{obj} = Mastodon::Client->new(
-                  instance        => $config->mastodon_instance,
-                  client_id       => $config->mastodon_client_id,
-                  client_secret   => $config->mastodon_client_secret,
-                  access_token    => $config->mastodon_access_token,
-                  #coerce_entities => 1,
+                  instance        => $args->{instance},
+                  client_id       => $args->{client_id},
+                  client_secret   => $args->{client_secret},
+                  access_token    => $args->{access_token},
                   name            => 'RevolutionaryDate');
   return $args;
 };
 
 =method spread
 
-Spreads a message to Mastodon. Takes one mandatory argument: C<$msg> which should be the message to spread as a characters string. If C<test> option is set the message is printed on standard output and not spread on Mastodon.
+Spreads a message to Mastodon. Takes one mandatory argument: C<$msg> which should be the message to spread as a characters string; and one optional argument: C<test>, which defaults to C<false>, and if C<true> prints the message on standard output instead of spreading on Mastodon.
 
 =cut
 
 sub spread {
   my $self = shift;
   my $msg = shift;
-  if ($self->config->test) {
+  my $test = shift // 0;
+  if ($test) {
     print "Spread to Mastodon $msg\n";
   } else {
     $self->obj->post_status($msg);

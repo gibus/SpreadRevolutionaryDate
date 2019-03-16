@@ -1,4 +1,4 @@
-use 5.010;
+use 5.014;
 use strict;
 use warnings;
 use utf8;
@@ -62,7 +62,9 @@ around BUILDARGS => sub {
 
   if ($args->{config}->twitter) {
     if ($args->{config}->check_twitter) {
-      $args->{twitter} = App::SpreadRevolutionaryDate::Twitter->new($args->{config});
+      my %twitter_args = $args->{config}->varlist('^twitter_');
+      %twitter_args = map { s/^twitter_//r => $twitter_args{$_} } keys(%twitter_args);
+      $args->{twitter} = App::SpreadRevolutionaryDate::Twitter->new(%twitter_args);
     } else {
       die "Cannot spread on Twitter, configuraton parameters missing\n";
     }
@@ -70,7 +72,9 @@ around BUILDARGS => sub {
 
   if ($args->{config}->mastodon) {
     if ($args->{config}->check_mastodon) {
-      $args->{mastodon} = App::SpreadRevolutionaryDate::Mastodon->new($args->{config});
+      my %mastodon_args = $args->{config}->varlist('^mastodon_');
+      %mastodon_args = map { s/^mastodon_//r => $mastodon_args{$_} } keys(%mastodon_args);
+      $args->{mastodon} = App::SpreadRevolutionaryDate::Mastodon->new(%mastodon_args);
     } else {
       die "Cannot spread on Mastodon, configuraton parameters missing\n";
     }
@@ -78,7 +82,10 @@ around BUILDARGS => sub {
 
   if ($args->{config}->freenode) {
     if ($args->{config}->check_freenode) {
-      $args->{freenode} = App::SpreadRevolutionaryDate::Freenode->new($args->{config});
+      my %freenode_args = $args->{config}->varlist('^freenode_');
+      %freenode_args = map { s/^freenode_//r => $freenode_args{$_} } keys(%freenode_args);
+      $freenode_args{channels} = delete $freenode_args{test_channels} if $args->{config}->test;
+      $args->{freenode} = App::SpreadRevolutionaryDate::Freenode->new(%freenode_args);
     } else {
       die "Cannot spread on Freenode, configuraton parameters missing\n";
     }
@@ -89,14 +96,12 @@ around BUILDARGS => sub {
 
 =method spread
 
-Spreads calendar date to configured targets. Takes one optional boolean argument, if true (default) authentication and spreading to Freenode is performed, otherwise, you've got to run C<use POE; POE::Kernel-E<gt>run();> to do so. This is only used for testing, when multiple bots are needed. You can safely leave this optional argument unset.
+Spreads calendar date to configured targets.
 
 =cut
 
 sub spread {
   my $self = shift;
-  my $no_run = shift // 1;
-  $no_run = !$no_run;
 
   # As of DateTime::Calendar::FrenchRevolutionary 0.14
   # locale is limited to 'en' or 'fr', defaults to 'fr'
@@ -109,9 +114,9 @@ sub spread {
   my $msg = $locale eq 'fr' ? $revolutionary->strftime("Nous sommes le %A, %d %B de l'An %EY (%Y) de la Révolution, %Ej, il est %T! https://$locale.wikipedia.org/wiki/!!%Oj!!") : $revolutionary->strftime("We are %A, %d %B of Revolution Year %EY (%Y), %Ej, it is %T! https://$locale.wikipedia.org/wiki/!!%Oj!!");
   $msg =~ s/!!([^!]+)!!/uri_escape($1)/e;
 
-  $self->twitter->spread($msg) if $self->config->twitter;
-  $self->mastodon->spread($msg) if $self->config->mastodon;
-  $self->freenode->spread($msg, $no_run) if $self->config->freenode;
+  $self->twitter->spread($msg, $self->config->test) if $self->config->twitter;
+  $self->mastodon->spread($msg, $self->config->test) if $self->config->mastodon;
+  $self->freenode->spread($msg) if $self->config->freenode;
 }
 
 =head1 SEE ALSO
