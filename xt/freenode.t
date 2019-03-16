@@ -84,6 +84,4 @@ my $watcher_bot = TestWatcherBot->new(
   no_run   => 1,
 )->run();
 
-$spread_revolutionary_date->spread(0);
-use POE;
-POE::Kernel->run();
+$spread_revolutionary_date->spread();
