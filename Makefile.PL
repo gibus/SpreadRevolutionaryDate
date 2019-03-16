@@ -11,7 +11,7 @@
 use strict;
 use warnings;
 
-use 5.010;
+use 5.014;
 
 use ExtUtils::MakeMaker;
 
@@ -30,7 +30,7 @@ my %WriteMakefileArgs = (
     "bin/spread-revolutionary-date"
   ],
   "LICENSE" => "gpl",
-  "MIN_PERL_VERSION" => "5.010",
+  "MIN_PERL_VERSION" => "5.014",
   "NAME" => "App::SpreadRevolutionaryDate",
   "PREREQ_PM" => {
     "AppConfig" => 0,
@@ -43,6 +43,7 @@ my %WriteMakefileArgs = (
     "Net::Async::HTTP" => "0.43",
     "Net::OAuth" => "0.25",
     "Net::Twitter::Lite::WithAPIv1_1" => 0,
+    "POE" => 0,
     "URI::Escape" => 0,
     "namespace::autoclean" => 0,
     "namespace::clean" => 0,
@@ -79,6 +80,7 @@ my %FallbackPrereqs = (
   "Net::Async::HTTP" => "0.43",
   "Net::OAuth" => "0.25",
   "Net::Twitter::Lite::WithAPIv1_1" => 0,
+  "POE" => 0,
   "Test::More" => 0,
   "Test::NoWarnings" => 0,
   "Test::Output" => 0,
