@@ -92,11 +92,26 @@ around BUILDARGS => sub {
 
 =method spread
 
-Spreads calendar date to configured targets.
+Spreads calendar date to configured targets. Takes no argument.
 
 =cut
 
 sub spread {
+  my $self = shift;
+
+  my $msg = $self->compute();
+  $self->twitter->spread($msg, $self->config->test) if $self->config->twitter;
+  $self->mastodon->spread($msg, $self->config->test) if $self->config->mastodon;
+  $self->freenode->spread($msg) if $self->config->freenode;
+}
+
+=method compute
+
+Computes revolutionary date. Takes no argument. Returns message as string, ready to be spread.
+
+=cut
+
+sub compute {
   my $self = shift;
 
   # As of DateTime::Calendar::FrenchRevolutionary 0.14
@@ -110,9 +125,7 @@ sub spread {
   my $msg = $locale eq 'fr' ? $revolutionary->strftime("Nous sommes le %A, %d %B de l'An %EY (%Y) de la Révolution, %Ej, il est %T! https://$locale.wikipedia.org/wiki/!!%Oj!!") : $revolutionary->strftime("We are %A, %d %B of Revolution Year %EY (%Y), %Ej, it is %T! https://$locale.wikipedia.org/wiki/!!%Oj!!");
   $msg =~ s/!!([^!]+)!!/uri_escape($1)/e;
 
-  $self->twitter->spread($msg, $self->config->test) if $self->config->twitter;
-  $self->mastodon->spread($msg, $self->config->test) if $self->config->mastodon;
-  $self->freenode->spread($msg) if $self->config->freenode;
+  return $msg
 }
 
 =head1 SEE ALSO
