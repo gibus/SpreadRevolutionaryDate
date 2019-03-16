@@ -62,8 +62,7 @@ around BUILDARGS => sub {
 
   if ($args->{config}->twitter) {
     if ($args->{config}->check_twitter) {
-      my %twitter_args = $args->{config}->varlist('^twitter_');
-      %twitter_args = map { s/^twitter_//r => $twitter_args{$_} } keys(%twitter_args);
+      my %twitter_args = $args->{config}->get_target_arguments('twitter');
       $args->{twitter} = App::SpreadRevolutionaryDate::Twitter->new(%twitter_args);
     } else {
       die "Cannot spread on Twitter, configuraton parameters missing\n";
@@ -72,8 +71,7 @@ around BUILDARGS => sub {
 
   if ($args->{config}->mastodon) {
     if ($args->{config}->check_mastodon) {
-      my %mastodon_args = $args->{config}->varlist('^mastodon_');
-      %mastodon_args = map { s/^mastodon_//r => $mastodon_args{$_} } keys(%mastodon_args);
+      my %mastodon_args = $args->{config}->get_target_arguments('mastodon');
       $args->{mastodon} = App::SpreadRevolutionaryDate::Mastodon->new(%mastodon_args);
     } else {
       die "Cannot spread on Mastodon, configuraton parameters missing\n";
@@ -82,9 +80,7 @@ around BUILDARGS => sub {
 
   if ($args->{config}->freenode) {
     if ($args->{config}->check_freenode) {
-      my %freenode_args = $args->{config}->varlist('^freenode_');
-      %freenode_args = map { s/^freenode_//r => $freenode_args{$_} } keys(%freenode_args);
-      $freenode_args{channels} = delete $freenode_args{test_channels} if $args->{config}->test;
+      my %freenode_args = $args->{config}->get_target_arguments('freenode');
       $args->{freenode} = App::SpreadRevolutionaryDate::Freenode->new(%freenode_args);
     } else {
       die "Cannot spread on Freenode, configuraton parameters missing\n";

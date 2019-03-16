@@ -113,6 +113,23 @@ sub check_freenode {
               || !!$self->freenode_channels);
 }
 
+=method get_target_arguments
+
+Takes one mandatory argument: C<target> which should be either C<'twitter'>, C<'mastodon'> or C<'freenode'>. Returns a hash with configuration options relative to the passed C<target> argument.
+
+=cut
+
+sub get_target_arguments {
+  my $self = shift;
+  my $target = lc(shift);
+  die "Argument to get_target_arguments should be either 'twitter', 'mastodon' or 'freenode': target $target unknown" unless $target =~ /^(?:twitter|mastodon|freenode)$/;
+
+  my %target_args = $self->varlist("^${target}_");
+  %target_args = map { s/^${target}_//r => $target_args{$_} } keys(%target_args);
+  $target_args{channels} = delete $target_args{test_channels} if $target eq 'freenode' && $self->test;
+  return %target_args;
+}
+
 =head1 SEE ALSO
 
 =over
