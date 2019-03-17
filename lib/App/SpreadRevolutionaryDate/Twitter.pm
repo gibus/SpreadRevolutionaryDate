@@ -4,7 +4,7 @@ use utf8;
 use open qw(:std :utf8);
 package App::SpreadRevolutionaryDate::Twitter;
 
-# ABSTRACT: Subclass of L<App::SpreadRevolutionaryDate> to handle spreading on Twitter.
+# ABSTRACT: Companion class of L<App::SpreadRevolutionaryDate> to handle spreading on Twitter.
 
 use Moose;
 use namespace::autoclean;

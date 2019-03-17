@@ -4,7 +4,7 @@ use utf8;
 use open qw(:std :utf8);
 package App::SpreadRevolutionaryDate::Freenode::Bot;
 
-# ABSTRACT: Subclass overriding L<Bot::BasicBit> to post a message on some Freenode channels
+# ABSTRACT: Subclass overriding L<Bot::BasicBot> to post a message on some Freenode channels
 
 use Moose;
 use MooseX::NonMoose;

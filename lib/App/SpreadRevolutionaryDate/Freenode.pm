@@ -4,7 +4,7 @@ use utf8;
 use open qw(:std :utf8);
 package App::SpreadRevolutionaryDate::Freenode;
 
-# ABSTRACT: Subclass of L<App::SpreadRevolutionaryDate> to handle spreading on Freenode.
+# ABSTRACT: Companion class of L<App::SpreadRevolutionaryDate> to handle spreading on Freenode.
 
 use Moose;
 use namespace::autoclean;

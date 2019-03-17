@@ -4,7 +4,7 @@ use utf8;
 use open qw(:std :utf8);
 package App::SpreadRevolutionaryDate::Config;
 
-# ABSTRACT: Subclass of L<App::SpreadRevolutionaryDate> to handle configuration file and command line arguments.
+# ABSTRACT: Companion class of L<App::SpreadRevolutionaryDate>, to handle configuration file and command line arguments, subclass of L<AppConfig>.
 
 use Moose;
 use MooseX::NonMoose;
