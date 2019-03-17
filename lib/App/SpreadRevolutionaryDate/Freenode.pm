@@ -87,7 +87,7 @@ sub spread {
   my $msg = shift;
 
   $self->obj->msg($msg);
-  $self->obj->run();
+  $self->obj->run;
   POE::Kernel->run();
 }
 

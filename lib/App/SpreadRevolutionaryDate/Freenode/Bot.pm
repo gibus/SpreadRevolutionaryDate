@@ -50,18 +50,18 @@ sub said {
 
 sub tick {
   my $self = shift;
-  if ($self->nb_said()) {
-    if ($self->nb_said() > scalar($self->channels())) {
-      $self->shutdown();
+  if ($self->nb_said) {
+    if ($self->nb_said > scalar($self->channels)) {
+      $self->shutdown;
     }
-    foreach my $channel ($self->channels()) {
+    foreach my $channel ($self->channels) {
       $self->say({channel => $channel, body => $self->{msg}});
-      $self->inc_said();
+      $self->inc_said;
     }
   }
 
-  $self->inc_ticks();
-  $self->shutdown() if ($self->nb_ticks() > 10);
+  $self->inc_ticks;
+  $self->shutdown if ($self->nb_ticks > 10);
 
   return 5;
 }

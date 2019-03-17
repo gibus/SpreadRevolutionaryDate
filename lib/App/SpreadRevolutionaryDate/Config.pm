@@ -68,7 +68,7 @@ Parses command line options. Takes no argument.
 
 sub parse_command_line {
   my $self = shift;
-  $self->args();
+  $self->args;
 }
 
 =method check_twitter
@@ -79,10 +79,10 @@ Checks whether Twitter configuration options are set to authenticate on Twitter.
 
 sub check_twitter {
   my $self = shift;
-  return   !!$self->twitter_consumer_key()
-        && !!$self->twitter_consumer_secret()
-        && !!$self->twitter_access_token()
-        && !!$self->twitter_access_token_secret();
+  return   !!$self->twitter_consumer_key
+        && !!$self->twitter_consumer_secret
+        && !!$self->twitter_access_token
+        && !!$self->twitter_access_token_secret;
 }
 
 =method check_mastodon
@@ -93,10 +93,10 @@ Checks whether Mastodon configuration options are set to authenticate on Mastodo
 
 sub check_mastodon {
   my $self = shift;
-  return   !!$self->mastodon_instance()
-        && !!$self->mastodon_client_id()
-        && !!$self->mastodon_client_secret()
-        && !!$self->mastodon_access_token();
+  return   !!$self->mastodon_instance
+        && !!$self->mastodon_client_id
+        && !!$self->mastodon_client_secret
+        && !!$self->mastodon_access_token;
 }
 
 =method check_freenode
@@ -107,10 +107,10 @@ Checks whether Freenode configuration options are set to authenticate on Freenod
 
 sub check_freenode {
   my $self = shift;
-  return   !!$self->freenode_nickname()
-        && !!$self->freenode_password()
-        && (  (  !!$self->freenode_test_channels() && !!$self->test())
-              || !!$self->freenode_channels());
+  return   !!$self->freenode_nickname
+        && !!$self->freenode_password
+        && (  (  !!$self->freenode_test_channels && !!$self->test)
+              || !!$self->freenode_channels);
 }
 
 =method get_target_arguments
@@ -126,7 +126,7 @@ sub get_target_arguments {
 
   my %target_args = $self->varlist("^${target}_");
   %target_args = map { s/^${target}_//r => $target_args{$_} } keys(%target_args);
-  $target_args{channels} = delete $target_args{test_channels} if $target eq 'freenode' && $self->test();
+  $target_args{channels} = delete $target_args{test_channels} if $target eq 'freenode' && $self->test;
   return %target_args;
 }
 

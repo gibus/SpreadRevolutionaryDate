@@ -47,21 +47,21 @@ around BUILDARGS => sub {
   my $orig = shift;
   my $class = shift;
   my $filename = shift;
-  my $config = App::SpreadRevolutionaryDate::Config->new();
+  my $config = App::SpreadRevolutionaryDate::Config->new;
 
   $config->parse_file($filename);
   $config->parse_command_line;
 
   my $args = $class->$orig(config => $config);
 
-  if (!$args->{config}->twitter() && !$args->{config}->mastodon() && !$args->{config}->freenode()) {
+  if (!$args->{config}->twitter && !$args->{config}->mastodon && !$args->{config}->freenode) {
     $args->{config}->twitter(1);
     $args->{config}->mastodon(1);
     $args->{config}->freenode(1);
   }
 
-  if ($args->{config}->twitter()) {
-    if ($args->{config}->check_twitter()) {
+  if ($args->{config}->twitter) {
+    if ($args->{config}->check_twitter) {
       my %twitter_args = $args->{config}->get_target_arguments('twitter');
       $args->{twitter} = App::SpreadRevolutionaryDate::Twitter->new(%twitter_args);
     } else {
@@ -69,8 +69,8 @@ around BUILDARGS => sub {
     }
   }
 
-  if ($args->{config}->mastodon()) {
-    if ($args->{config}->check_mastodon()) {
+  if ($args->{config}->mastodon) {
+    if ($args->{config}->check_mastodon) {
       my %mastodon_args = $args->{config}->get_target_arguments('mastodon');
       $args->{mastodon} = App::SpreadRevolutionaryDate::Mastodon->new(%mastodon_args);
     } else {
@@ -78,8 +78,8 @@ around BUILDARGS => sub {
     }
   }
 
-  if ($args->{config}->freenode()) {
-    if ($args->{config}->check_freenode()) {
+  if ($args->{config}->freenode) {
+    if ($args->{config}->check_freenode) {
       my %freenode_args = $args->{config}->get_target_arguments('freenode');
       $args->{freenode} = App::SpreadRevolutionaryDate::Freenode->new(%freenode_args);
     } else {
@@ -100,9 +100,9 @@ sub spread {
   my $self = shift;
 
   my $msg = $self->compute();
-  $self->twitter->spread($msg, $self->config->test()) if $self->config->twitter();
-  $self->mastodon->spread($msg, $self->config->test()) if $self->config->mastodon();
-  $self->freenode->spread($msg) if $self->config->freenode();
+  $self->twitter->spread($msg, $self->config->test) if $self->config->twitter;
+  $self->mastodon->spread($msg, $self->config->test) if $self->config->mastodon;
+  $self->freenode->spread($msg) if $self->config->freenode;
 }
 
 =method compute
@@ -116,10 +116,10 @@ sub compute {
 
   # As of DateTime::Calendar::FrenchRevolutionary 0.14
   # locale is limited to 'en' or 'fr', defaults to 'fr'
-  my $locale = $self->config->locale() || 'fr';
+  my $locale = $self->config->locale || 'fr';
   $locale = 'fr' unless $locale eq 'en';
 
-  my $revolutionary = $self->config->acab() ?
+  my $revolutionary = $self->config->acab ?
       DateTime::Calendar::FrenchRevolutionary->now->set(hour => 1, minute => 31, second => 20, locale => $locale)
     : DateTime::Calendar::FrenchRevolutionary->now;
   my $msg = $locale eq 'fr' ? $revolutionary->strftime("Nous sommes le %A, %d %B de l'An %EY (%Y) de la Révolution, %Ej, il est %T! https://$locale.wikipedia.org/wiki/!!%Oj!!") : $revolutionary->strftime("We are %A, %d %B of Revolution Year %EY (%Y), %Ej, it is %T! https://$locale.wikipedia.org/wiki/!!%Oj!!");

@@ -7,7 +7,7 @@ use utf8;
 # ABSTRACT: Spread date and time from Revolutionary (Republican) Calendar
 
 use App::SpreadRevolutionaryDate;
-App::SpreadRevolutionaryDate->new()->spread();
+App::SpreadRevolutionaryDate->new->spread;
 
 __END__
 
