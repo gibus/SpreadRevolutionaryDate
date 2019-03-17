@@ -18,12 +18,8 @@ use ExtUtils::MakeMaker;
 my %WriteMakefileArgs = (
   "ABSTRACT" => "Spread date and time from Revolutionary (Republican) Calendar on Twitter, Mastodon and Freenode.",
   "AUTHOR" => "G\x{e9}rald S\x{e9}drati-Dinet <gibus\@cpan.org>",
-  "BUILD_REQUIRES" => {
-    "Module::Build" => "0.28"
-  },
   "CONFIGURE_REQUIRES" => {
-    "ExtUtils::MakeMaker" => 0,
-    "Module::Build" => "0.28"
+    "ExtUtils::MakeMaker" => 0
   },
   "DISTNAME" => "App-SpreadRevolutionaryDate",
   "EXE_FILES" => [
@@ -74,7 +70,6 @@ my %FallbackPrereqs = (
   "File::HomeDir" => 0,
   "File::Temp" => 0,
   "Mastodon::Client" => 0,
-  "Module::Build" => "0.28",
   "Moose" => 0,
   "MooseX::NonMoose" => 0,
   "Net::Async::HTTP" => "0.43",
