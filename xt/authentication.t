@@ -16,8 +16,8 @@ use App::SpreadRevolutionaryDate;
     no strict 'refs';
     no warnings 'redefine';
 
-    *App::SpreadRevolutionaryDate::Freenode::Bot::tick = undef;
-    *App::SpreadRevolutionaryDate::Freenode::Bot::said = sub {
+    *App::SpreadRevolutionaryDate::Target::Freenode::Bot::tick = undef;
+    *App::SpreadRevolutionaryDate::Target::Freenode::Bot::said = sub {
         my $self = shift;
         my $message = shift;
         return if $message->{who} eq 'freenode-connect';

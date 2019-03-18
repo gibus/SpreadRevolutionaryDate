@@ -10,9 +10,9 @@ package App::SpreadRevolutionaryDate;
 use Moose;
 use namespace::autoclean;
 use App::SpreadRevolutionaryDate::Config;
-use App::SpreadRevolutionaryDate::Twitter;
-use App::SpreadRevolutionaryDate::Mastodon;
-use App::SpreadRevolutionaryDate::Freenode;
+use App::SpreadRevolutionaryDate::Target::Twitter;
+use App::SpreadRevolutionaryDate::Target::Mastodon;
+use App::SpreadRevolutionaryDate::Target::Freenode;
 use DateTime::Calendar::FrenchRevolutionary;
 use URI::Escape;
 
@@ -24,17 +24,17 @@ has 'config' => (
 
 has 'twitter' => (
     is  => 'ro',
-    isa => 'App::SpreadRevolutionaryDate::Twitter',
+    isa => 'App::SpreadRevolutionaryDate::Target::Twitter',
 );
 
 has 'mastodon' => (
     is  => 'ro',
-    isa => 'App::SpreadRevolutionaryDate::Mastodon',
+    isa => 'App::SpreadRevolutionaryDate::Target::Mastodon',
 );
 
 has 'freenode' => (
     is  => 'ro',
-    isa => 'App::SpreadRevolutionaryDate::Freenode',
+    isa => 'App::SpreadRevolutionaryDate::Target::Freenode',
 );
 
 =method new
@@ -63,7 +63,7 @@ around BUILDARGS => sub {
   if ($args->{config}->twitter) {
     if ($args->{config}->check_twitter) {
       my %twitter_args = $args->{config}->get_target_arguments('twitter');
-      $args->{twitter} = App::SpreadRevolutionaryDate::Twitter->new(%twitter_args);
+      $args->{twitter} = App::SpreadRevolutionaryDate::Target::Twitter->new(%twitter_args);
     } else {
       die "Cannot spread on Twitter, configuraton parameters missing\n";
     }
@@ -72,7 +72,7 @@ around BUILDARGS => sub {
   if ($args->{config}->mastodon) {
     if ($args->{config}->check_mastodon) {
       my %mastodon_args = $args->{config}->get_target_arguments('mastodon');
-      $args->{mastodon} = App::SpreadRevolutionaryDate::Mastodon->new(%mastodon_args);
+      $args->{mastodon} = App::SpreadRevolutionaryDate::Target::Mastodon->new(%mastodon_args);
     } else {
       die "Cannot spread on Mastodon, configuraton parameters missing\n";
     }
@@ -81,7 +81,7 @@ around BUILDARGS => sub {
   if ($args->{config}->freenode) {
     if ($args->{config}->check_freenode) {
       my %freenode_args = $args->{config}->get_target_arguments('freenode');
-      $args->{freenode} = App::SpreadRevolutionaryDate::Freenode->new(%freenode_args);
+      $args->{freenode} = App::SpreadRevolutionaryDate::Target::Freenode->new(%freenode_args);
     } else {
       die "Cannot spread on Freenode, configuraton parameters missing\n";
     }
@@ -136,13 +136,13 @@ sub compute {
 
 =item L<App::SpreadRevolutionaryDate::Config>
 
-=item L<App::SpreadRevolutionaryDate::Twitter>
+=item L<App::SpreadRevolutionaryDate::Target::Twitter>
 
-=item L<App::SpreadRevolutionaryDate::Mastodon>
+=item L<App::SpreadRevolutionaryDate::Target::Mastodon>
 
-=item L<App::SpreadRevolutionaryDate::Freenode>
+=item L<App::SpreadRevolutionaryDate::Target::Freenode>
 
-=item L<App::SpreadRevolutionaryDate::Freenode::Bot>
+=item L<App::SpreadRevolutionaryDate::Target::Freenode::Bot>
 
 =back
 

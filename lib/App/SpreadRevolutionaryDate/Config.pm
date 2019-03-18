@@ -138,13 +138,13 @@ sub get_target_arguments {
 
 =item L<App::SpreadRevolutionaryDate>
 
-=item L<App::SpreadRevolutionaryDate::Twitter>
+=item L<App::SpreadRevolutionaryDate::Target::Twitter>
 
-=item L<App::SpreadRevolutionaryDate::Mastodon>
+=item L<App::SpreadRevolutionaryDate::Target::Mastodon>
 
-=item L<App::SpreadRevolutionaryDate::Freenode>
+=item L<App::SpreadRevolutionaryDate::Target::Freenode>
 
-=item L<App::SpreadRevolutionaryDate::Freenode::Bot>
+=item L<App::SpreadRevolutionaryDate::Target::Freenode::Bot>
 
 =back
 

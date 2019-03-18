@@ -2,7 +2,7 @@ use strict;
 use warnings;
 use utf8;
 use open qw(:std :utf8);
-package App::SpreadRevolutionaryDate::Freenode::Bot;
+package App::SpreadRevolutionaryDate::Target::Freenode::Bot;
 
 # ABSTRACT: Subclass overriding L<Bot::BasicBot> to post a message on some Freenode channels
 
@@ -78,13 +78,13 @@ sub log {
 
 =item L<App::SpreadRevolutionaryDate>
 
-=item L<App::SpreadRevolutionaryDate::Config>
+=item L<App::SpreadRevolutionaryDate::Target::Config>
 
-=item L<App::SpreadRevolutionaryDate::Twitter>
+=item L<App::SpreadRevolutionaryDate::Target::Twitter>
 
-=item L<App::SpreadRevolutionaryDate::Mastodon>
+=item L<App::SpreadRevolutionaryDate::Target::Mastodon>
 
-=item L<App::SpreadRevolutionaryDate::Freenode>
+=item L<App::SpreadRevolutionaryDate::Target::Freenode>
 
 =back
 

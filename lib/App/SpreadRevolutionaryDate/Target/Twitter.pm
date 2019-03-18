@@ -2,7 +2,7 @@ use strict;
 use warnings;
 use utf8;
 use open qw(:std :utf8);
-package App::SpreadRevolutionaryDate::Twitter;
+package App::SpreadRevolutionaryDate::Target::Twitter;
 
 # ABSTRACT: Companion class of L<App::SpreadRevolutionaryDate> to handle spreading on Twitter.
 
@@ -43,7 +43,7 @@ has 'access_token_secret' => (
 
 =method new
 
-Constructor class method. Takes a hash argument with the following mandatory keys: C<consumer_key>, C<consumer_secret>, C<access_token>, and C<access_token_secret>, with all values being strings. Authentifies to Twitter and returns an C<App::SpreadRevolutionaryDate::Twitter> object.
+Constructor class method. Takes a hash argument with the following mandatory keys: C<consumer_key>, C<consumer_secret>, C<access_token>, and C<access_token_secret>, with all values being strings. Authentifies to Twitter and returns an C<App::SpreadRevolutionaryDate::Target::Twitter> object.
 
 =cut
 
@@ -89,11 +89,11 @@ sub spread {
 
 =item L<App::SpreadRevolutionaryDate::Config>
 
-=item L<App::SpreadRevolutionaryDate::Mastodon>
+=item L<App::SpreadRevolutionaryDate::Target::Mastodon>
 
-=item L<App::SpreadRevolutionaryDate::Freenode>
+=item L<App::SpreadRevolutionaryDate::Target::Freenode>
 
-=item L<App::SpreadRevolutionaryDate::Freenode::Bot>
+=item L<App::SpreadRevolutionaryDate::Target::Freenode::Bot>
 
 =back
 

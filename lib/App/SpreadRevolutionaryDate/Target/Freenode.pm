@@ -2,18 +2,18 @@ use strict;
 use warnings;
 use utf8;
 use open qw(:std :utf8);
-package App::SpreadRevolutionaryDate::Freenode;
+package App::SpreadRevolutionaryDate::Target::Freenode;
 
 # ABSTRACT: Companion class of L<App::SpreadRevolutionaryDate> to handle spreading on Freenode.
 
 use Moose;
 use namespace::autoclean;
-use App::SpreadRevolutionaryDate::Freenode::Bot;
+use App::SpreadRevolutionaryDate::Target::Freenode::Bot;
 use POE;
 
 has 'obj' => (
     is  => 'ro',
-    isa => 'App::SpreadRevolutionaryDate::Freenode::Bot',
+    isa => 'App::SpreadRevolutionaryDate::Target::Freenode::Bot',
     required => 1,
 );
 
@@ -37,7 +37,7 @@ has 'channels' => (
 
 =method new
 
-Constructor class method, subclassing C<Bot::BasicBot>. Takes a hash argument with the following mandatory keys: C<nickname>, C<password>, and C<channels>, with all values being strings. Returns an C<App::SpreadRevolutionaryDate::Freenode> object.
+Constructor class method, subclassing C<Bot::BasicBot>. Takes a hash argument with the following mandatory keys: C<nickname>, C<password>, and C<channels>, with all values being strings. Returns an C<App::SpreadRevolutionaryDate::Target::Freenode> object.
 
 =cut
 
@@ -56,7 +56,7 @@ around BUILDARGS => sub {
 
   my $args = $class->$orig(@_);
 
-  $args->{obj} = App::SpreadRevolutionaryDate::Freenode::Bot->new(
+  $args->{obj} = App::SpreadRevolutionaryDate::Target::Freenode::Bot->new(
     server            => 'irc.freenode.net',
     port              => $port,
     nick              => 'RevolutionaryDate',
@@ -101,11 +101,11 @@ sub spread {
 
 =item L<App::SpreadRevolutionaryDate::Config>
 
-=item L<App::SpreadRevolutionaryDate::Twitter>
+=item L<App::SpreadRevolutionaryDate::Target::Twitter>
 
-=item L<App::SpreadRevolutionaryDate::Mastodon>
+=item L<App::SpreadRevolutionaryDate::Target::Mastodon>
 
-=item L<App::SpreadRevolutionaryDate::Freenode::Bot>
+=item L<App::SpreadRevolutionaryDate::Target::Freenode::Bot>
 
 =back
 

@@ -9,7 +9,7 @@ use App::SpreadRevolutionaryDate;
     no strict 'refs';
     no warnings 'redefine';
 
-    *App::SpreadRevolutionaryDate::Freenode::Bot::tick = sub {
+    *App::SpreadRevolutionaryDate::Target::Freenode::Bot::tick = sub {
       my $self = shift;
       $self->{nb_ticks} = 1 unless $self->{nb_ticks};
       if ($nb_ticks == 2) {
@@ -18,7 +18,7 @@ use App::SpreadRevolutionaryDate;
       };
       return 1;
     };
-    *App::SpreadRevolutionaryDate::Freenode::Bot::said = sub {
+    *App::SpreadRevolutionaryDate::Target::Freenode::Bot::said = sub {
         my $self = shift;
         my $message = shift;
         return if $message->{who} ne 'NickServ';
