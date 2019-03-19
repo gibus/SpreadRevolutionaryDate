@@ -10,9 +10,6 @@ package App::SpreadRevolutionaryDate;
 use Moose;
 use namespace::autoclean;
 use App::SpreadRevolutionaryDate::Config;
-use App::SpreadRevolutionaryDate::Target::Twitter;
-use App::SpreadRevolutionaryDate::Target::Mastodon;
-use App::SpreadRevolutionaryDate::Target::Freenode;
 use DateTime::Calendar::FrenchRevolutionary;
 use URI::Escape;
 
@@ -81,16 +78,19 @@ sub BUILD {
   my $self = shift;
 
   if ($self->config->twitter) {
+    require App::SpreadRevolutionaryDate::Target::Twitter;
     my %twitter_args = $self->config->get_target_arguments('twitter');
     $self->targets->{twitter} = App::SpreadRevolutionaryDate::Target::Twitter->new(%twitter_args);
   }
 
   if ($self->config->mastodon) {
+    require App::SpreadRevolutionaryDate::Target::Mastodon;
     my %mastodon_args = $self->config->get_target_arguments('mastodon');
     $self->targets->{mastodon} = App::SpreadRevolutionaryDate::Target::Mastodon->new(%mastodon_args);
   }
 
   if ($self->config->freenode) {
+    require App::SpreadRevolutionaryDate::Target::Freenode;
     my %freenode_args = $self->config->get_target_arguments('freenode');
     $self->targets->{freenode} = App::SpreadRevolutionaryDate::Target::Freenode->new(%freenode_args);
   }

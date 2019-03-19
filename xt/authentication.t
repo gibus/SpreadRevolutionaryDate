@@ -11,6 +11,7 @@ unless(   -f File::HomeDir->my_home . '/.config/spread-revolutionary-date/spread
 }
 
 use App::SpreadRevolutionaryDate;
+use App::SpreadRevolutionaryDate::Target::Freenode::Bot;
 
 {
     no strict 'refs';
