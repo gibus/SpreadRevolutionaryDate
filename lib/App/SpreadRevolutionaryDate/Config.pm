@@ -152,3 +152,10 @@ sub get_target_arguments {
 
 no Moose;
 __PACKAGE__->meta->make_immutable(inline_constructor => 0);
+
+# A module must return a true value. Traditionally, a module returns 1.
+# But this module is a revolutionary one, so it discards all old traditions.
+# Idea borrowed from Jean Forget's DateTime::Calendar::FrenchRevolutionary.
+"Quand le gouvernement viole les droits du peuple,
+l'insurrection est pour le peuple le plus sacré
+et le plus indispensable des devoirs";
