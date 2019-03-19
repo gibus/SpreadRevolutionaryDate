@@ -13,13 +13,13 @@ use AppConfig qw(:argcount);
 use File::HomeDir;
 use namespace::clean;
 
-=method new
+=method new_from_AppConfig
 
 Constructor class method, subclassing C<AppConfig>. Takes no argument. Returns an C<App::SpreadRevolutionaryDate::Config> object.
 
 =cut
 
-sub new {
+sub new_from_AppConfig {
   my $class = shift;
   return AppConfig::new($class,
     'acab' => {ARGCOUNT => ARGCOUNT_NONE, ALIAS => 'a'},

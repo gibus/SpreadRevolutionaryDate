@@ -34,7 +34,7 @@ around BUILDARGS => sub {
   my $orig = shift;
   my $class = shift;
   my $filename = shift;
-  my $config = App::SpreadRevolutionaryDate::Config->new;
+  my $config = App::SpreadRevolutionaryDate::Config->new_from_AppConfig;
 
   $config->parse_file($filename);
   $config->parse_command_line;
