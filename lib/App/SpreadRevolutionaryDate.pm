@@ -22,19 +22,9 @@ has 'config' => (
     required => 1,
 );
 
-has 'twitter' => (
-    is  => 'ro',
-    isa => 'App::SpreadRevolutionaryDate::Target::Twitter',
-);
-
-has 'mastodon' => (
-    is  => 'ro',
-    isa => 'App::SpreadRevolutionaryDate::Target::Mastodon',
-);
-
-has 'freenode' => (
-    is  => 'ro',
-    isa => 'App::SpreadRevolutionaryDate::Target::Freenode',
+has 'targets' => (
+    is  => 'rw',
+    isa => 'HashRef[Object]',
 );
 
 =method new
@@ -52,7 +42,7 @@ around BUILDARGS => sub {
   $config->parse_file($filename);
   $config->parse_command_line;
 
-  my $args = $class->$orig(config => $config);
+  my $args = $class->$orig(config => $config, targets => {});
 
   if (!$args->{config}->twitter && !$args->{config}->mastodon && !$args->{config}->freenode) {
     $args->{config}->twitter(1);
@@ -61,34 +51,50 @@ around BUILDARGS => sub {
   }
 
   if ($args->{config}->twitter) {
-    if ($args->{config}->check_twitter) {
-      my %twitter_args = $args->{config}->get_target_arguments('twitter');
-      $args->{twitter} = App::SpreadRevolutionaryDate::Target::Twitter->new(%twitter_args);
-    } else {
+    unless ($args->{config}->check_twitter) {
       die "Cannot spread on Twitter, configuraton parameters missing\n";
     }
   }
 
   if ($args->{config}->mastodon) {
-    if ($args->{config}->check_mastodon) {
-      my %mastodon_args = $args->{config}->get_target_arguments('mastodon');
-      $args->{mastodon} = App::SpreadRevolutionaryDate::Target::Mastodon->new(%mastodon_args);
-    } else {
+    unless ($args->{config}->check_mastodon) {
       die "Cannot spread on Mastodon, configuraton parameters missing\n";
     }
   }
 
   if ($args->{config}->freenode) {
-    if ($args->{config}->check_freenode) {
-      my %freenode_args = $args->{config}->get_target_arguments('freenode');
-      $args->{freenode} = App::SpreadRevolutionaryDate::Target::Freenode->new(%freenode_args);
-    } else {
+    unless ($args->{config}->check_freenode) {
       die "Cannot spread on Freenode, configuraton parameters missing\n";
     }
   }
 
   return $args;
 };
+
+=method BUILD
+
+Initialises the internal C<App::SpreadRevolutionaryDate> object. This is where all targets objets are built, and authentication is attempted on each of them.
+
+=cut
+
+sub BUILD {
+  my $self = shift;
+
+  if ($self->config->twitter) {
+    my %twitter_args = $self->config->get_target_arguments('twitter');
+    $self->targets->{twitter} = App::SpreadRevolutionaryDate::Target::Twitter->new(%twitter_args);
+  }
+
+  if ($self->config->mastodon) {
+    my %mastodon_args = $self->config->get_target_arguments('mastodon');
+    $self->targets->{mastodon} = App::SpreadRevolutionaryDate::Target::Mastodon->new(%mastodon_args);
+  }
+
+  if ($self->config->freenode) {
+    my %freenode_args = $self->config->get_target_arguments('freenode');
+    $self->targets->{freenode} = App::SpreadRevolutionaryDate::Target::Freenode->new(%freenode_args);
+  }
+}
 
 =method spread
 
@@ -100,9 +106,9 @@ sub spread {
   my $self = shift;
 
   my $msg = $self->compute();
-  $self->twitter->spread($msg, $self->config->test) if $self->config->twitter;
-  $self->mastodon->spread($msg, $self->config->test) if $self->config->mastodon;
-  $self->freenode->spread($msg) if $self->config->freenode;
+  $self->targets->{twitter}->spread($msg, $self->config->test) if $self->config->twitter;
+  $self->targets->{mastodon}->spread($msg, $self->config->test) if $self->config->mastodon;
+  $self->targets->{freenode}->spread($msg) if $self->config->freenode;
 }
 
 =method compute
