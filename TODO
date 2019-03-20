@@ -1,1 +1,4 @@
-* Add some targets to spread to as needed
+* Add a Moose::Role as interface for defining new targets
+* Add xtest for spreading to a new target
+* Add documentation for extending pre-defined targets
+* Add some new targets to spread to as needed
