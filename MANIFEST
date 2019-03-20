@@ -23,6 +23,7 @@ lib/App/SpreadRevolutionaryDate/Target/Twitter.pm
 t/00-compile.t
 t/config.t
 t/locale.t
+t/new_target.t
 t/objects.t
 xt/authentication.t
 xt/author/clean-namespaces.t
