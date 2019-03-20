@@ -20,11 +20,78 @@ Constructor class method, subclassing C<AppConfig>. Takes no argument. Returns a
 =cut
 
 sub new {
-  my $class = shift;
-  return AppConfig::new($class,
+  my ($class, $filename) = @_;
+  # If filename is not a file path but a GLOB or an opend filehandle
+  # we'll need to rewind it to the beginning before reading it twice
+  my $file_start;
+  $file_start = tell $filename if $filename && ref($filename);
+
+  # Backup command line arguments to be consumed twice
+  my @orig_argv = @ARGV;
+
+  # Find targets
+  my $config_targets = AppConfig::new($class, {CREATE => 1},
+                                      'acab' => {ARGCOUNT => ARGCOUNT_NONE, ALIAS => 'a'},
+                                      'test' => {ARGCOUNT => ARGCOUNT_NONE, ALIAS => 'no|n'},
+                                      'locale' => {ARGCOUNT => ARGCOUNT_ONE, ALIAS => 'l'},
+                                      'targets' => {ARGCOUNT => ARGCOUNT_LIST},
+                                      'twitter' => {ARGCOUNT => ARGCOUNT_NONE, ALIAS => 't'},
+                                      'mastodon' => {ARGCOUNT => ARGCOUNT_NONE, ALIAS => 'm'},
+                                      'freenode' => {ARGCOUNT => ARGCOUNT_NONE, ALIAS => 'f'});
+  $config_targets->parse_file($filename);
+  $config_targets->parse_command_line;
+
+  # Add targets defined with targets option
+  my @targets = @{$config_targets->targets};
+
+  # For backward compatibility, add targets defined directly
+  my %potential_targets = $config_targets->varlist(".");
+  foreach my $potential_target (keys %potential_targets) {
+    next unless $potential_targets{$potential_target};
+    next if $potential_target =~ /_/;
+    if ($potential_target !~ /^(?:acab|test|locale|targets)$/) {
+      push @targets, $potential_target;
+    }
+  }
+
+  # Set default targets if no target specified
+  if (!$config_targets->twitter && !$config_targets->mastodon && !$config_targets->freenode && !scalar(@targets)) {
+    push @targets, 'twitter', 'mastodon', 'freenode';
+    $config_targets->targets(@targets);
+    $config_targets->twitter(1);
+    $config_targets->mastodon(1);
+    $config_targets->freenode(1);
+  }
+
+  # Guess attributes for each target associated class
+  my %target_attributes;
+  foreach my $target (@targets) {
+    my $target_class = 'App::SpreadRevolutionaryDate::Target::' . ucfirst(lc($target));
+    my $target_meta;
+    my $target_path = $target_class . ".pm";
+    $target_path =~ s{::}{/}g;
+    eval { require $target_path; };
+    die "Cannot found target class $target_class for target $target: $@\n" if $@;
+    eval { $target_meta = $target_class->meta; };
+    die "Cannot found target meta class $target_class for target $target: $@\n" if $@;
+    foreach my $target_meta_attribute ($target_meta->get_all_attributes) {
+      next if $target_meta_attribute->name eq 'obj';
+      my $target_meta_attribute_type = $target_meta_attribute->type_constraint;
+      my $target_meta_attribute_argcount = $target_meta_attribute_type =~ /ArrayRef/ ? ARGCOUNT_LIST : $target_meta_attribute_type =~ /HashRef/ ? ARGCOUNT_HASH : ARGCOUNT_ONE;
+      $target_attributes{$target . '_' . $target_meta_attribute->name} = { ARGCOUNT => $target_meta_attribute_argcount };
+      $target_attributes{$target} = { ARGCOUNT => ARGCOUNT_NONE };
+    }
+  }
+
+  # Build actual instance
+  my $self = AppConfig::new($class,
+    %target_attributes,
+    'targets' => {ARGCOUNT => ARGCOUNT_LIST},
     'acab' => {ARGCOUNT => ARGCOUNT_NONE, ALIAS => 'a'},
     'test' => {ARGCOUNT => ARGCOUNT_NONE, ALIAS => 'no|n'},
     'locale' => {ARGCOUNT => ARGCOUNT_ONE, ALIAS => 'l'},
+    # Overwrite found attributes for default targets
+    # for backward compatibility with aliases
     'twitter' => {ARGCOUNT => ARGCOUNT_NONE, ALIAS => 't'},
     'mastodon' => {ARGCOUNT => ARGCOUNT_NONE, ALIAS => 'm'},
     'freenode' => {ARGCOUNT => ARGCOUNT_NONE, ALIAS => 'f'},
@@ -41,6 +108,44 @@ sub new {
     'freenode_test_channels' => {ARGCOUNT => ARGCOUNT_LIST, ALIAS => 'ftc'},
     'freenode_channels' => {ARGCOUNT => ARGCOUNT_LIST, ALIAS => 'fc'},
   );
+
+  # Rewind configuration file if needed and read it
+  seek $filename, $file_start, 0 if $file_start;
+  $self->parse_file($filename);
+
+  # Rewind command line arguments and process them
+  @ARGV = @orig_argv;
+  $self->parse_command_line;
+
+  # Add targets defined with targets option
+  @targets = @{$self->targets};
+
+  # For backward compatibility, add targets defined directly
+  %potential_targets = $self->varlist(".");
+  foreach my $potential_target (keys %potential_targets) {
+    next unless $potential_targets{$potential_target};
+    next if $potential_target =~ /_/;
+    if ($potential_target !~ /^(?:acab|test|locale|targets)$/) {
+      push @targets, $potential_target;
+      $self->targets($potential_target);
+    }
+  }
+
+  # Set default targets if no target specified
+  if (!$self->twitter && !$self->mastodon && !$self->freenode && !scalar(@targets)) {
+    push @targets, 'twitter', 'mastodon', 'freenode';
+    map { $self->targets($_); } @targets;
+    $self->twitter(1);
+    $self->mastodon(1);
+    $self->freenode(1);
+  }
+
+  # Check mandatory arguments for each target
+  foreach my $target (@targets) {
+    $self->check_target_mandatory_options($target);
+  }
+
+  return $self;
 }
 
 =method parse_file
@@ -71,62 +176,52 @@ sub parse_command_line {
   $self->args;
 }
 
-=method check_twitter
+=method check_target_mandatory_options
 
-Checks whether Twitter configuration options are set to authenticate on Twitter. Takes no argument.
-
-=cut
-
-sub check_twitter {
-  my $self = shift;
-  return   !!$self->twitter_consumer_key
-        && !!$self->twitter_consumer_secret
-        && !!$self->twitter_access_token
-        && !!$self->twitter_access_token_secret;
-}
-
-=method check_mastodon
-
-Checks whether Mastodon configuration options are set to authenticate on Mastodon. Takes no argument.
+Checks whether target configuration options are set to authenticate on specified target. Takes one mandatory argument: C<target_name> as string. Dies if a mandatory configuration option is missing.
 
 =cut
 
-sub check_mastodon {
+sub check_target_mandatory_options {
   my $self = shift;
-  return   !!$self->mastodon_instance
-        && !!$self->mastodon_client_id
-        && !!$self->mastodon_client_secret
-        && !!$self->mastodon_access_token;
-}
+  my $target = shift;
 
-=method check_freenode
-
-Checks whether Freenode configuration options are set to authenticate on Freenode. Takes no argument.
-
-=cut
-
-sub check_freenode {
-  my $self = shift;
-  return   !!$self->freenode_nickname
-        && !!$self->freenode_password
-        && (  (  !!$self->freenode_test_channels && !!$self->test)
-              || !!$self->freenode_channels);
+  my $target_class = 'App::SpreadRevolutionaryDate::Target::' . ucfirst(lc($target));
+  my $target_meta;
+  my $target_path = $target_class . ".pm";
+  $target_path =~ s{::}{/}g;
+  eval { require $target_path; };
+  die "Cannot found target class $target_class for target $target: $@\n" if $@;
+  eval { $target_meta = $target_class->meta; };
+  die "Cannot found target meta class $target_class for target $target: $@\n" if $@;
+  foreach my $target_meta_attribute ($target_meta->get_all_attributes) {
+    next if $target_meta_attribute->name eq 'obj';
+    next unless $target_meta_attribute->is_required;
+    my $target_mandatory_option = $target . '_' . $target_meta_attribute->name;
+    die "Cannot spread to $target, mandatory configuraton parameter "
+        . $target_meta_attribute->name . " missing\n"
+      unless !!$self->$target_mandatory_option;
+  }
 }
 
 =method get_target_arguments
 
-Takes one mandatory argument: C<target> which should be either C<'twitter'>, C<'mastodon'> or C<'freenode'>. Returns a hash with configuration options relative to the passed C<target> argument.
+Takes one mandatory argument: C<target> as a string in lower case, without any underscore (like C<'twitter'>, C<'mastodon'> or C<'freenode'>). Returns a hash with configuration options relative to the passed C<target> argument. If C<test> option is true, any value for an option starting with C<"test_"> will be set for the option with the same name without C<"test_"> (eg. values of C<test_channels> are set to option C<channels> for C<Freenode> target).
 
 =cut
 
 sub get_target_arguments {
   my $self = shift;
   my $target = lc(shift);
-  die "Argument to get_target_arguments should be either 'twitter', 'mastodon' or 'freenode': target $target unknown" unless $target =~ /^(?:twitter|mastodon|freenode)$/;
 
-  my %target_args = $self->varlist("^${target}_");
-  %target_args = map { s/^${target}_//r => $target_args{$_} } keys(%target_args);
-  $target_args{channels} = delete $target_args{test_channels} if $target eq 'freenode' && $self->test;
+  my %target_args = $self->varlist("^${target}_", 1);
+
+  # Process test options
+  foreach my $arg (keys %target_args) {
+    if ($arg =~ /^test_(.+)$/ && $target_args{$1}) {
+      $target_args{$1} = delete $target_args{$arg} if $self->test;
+    }
+  }
   return %target_args;
 }
 

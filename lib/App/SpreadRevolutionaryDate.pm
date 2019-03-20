@@ -34,38 +34,9 @@ around BUILDARGS => sub {
   my $orig = shift;
   my $class = shift;
   my $filename = shift;
-  my $config = App::SpreadRevolutionaryDate::Config->new;
+  my $config = App::SpreadRevolutionaryDate::Config->new($filename);
 
-  $config->parse_file($filename);
-  $config->parse_command_line;
-
-  my $args = $class->$orig(config => $config, targets => {});
-
-  if (!$args->{config}->twitter && !$args->{config}->mastodon && !$args->{config}->freenode) {
-    $args->{config}->twitter(1);
-    $args->{config}->mastodon(1);
-    $args->{config}->freenode(1);
-  }
-
-  if ($args->{config}->twitter) {
-    unless ($args->{config}->check_twitter) {
-      die "Cannot spread on Twitter, configuraton parameters missing\n";
-    }
-  }
-
-  if ($args->{config}->mastodon) {
-    unless ($args->{config}->check_mastodon) {
-      die "Cannot spread on Mastodon, configuraton parameters missing\n";
-    }
-  }
-
-  if ($args->{config}->freenode) {
-    unless ($args->{config}->check_freenode) {
-      die "Cannot spread on Freenode, configuraton parameters missing\n";
-    }
-  }
-
-  return $args;
+  return $class->$orig(config => $config, targets => {});
 };
 
 =method BUILD
@@ -77,22 +48,14 @@ Initialises the internal C<App::SpreadRevolutionaryDate> object. This is where a
 sub BUILD {
   my $self = shift;
 
-  if ($self->config->twitter) {
-    require App::SpreadRevolutionaryDate::Target::Twitter;
-    my %twitter_args = $self->config->get_target_arguments('twitter');
-    $self->targets->{twitter} = App::SpreadRevolutionaryDate::Target::Twitter->new(%twitter_args);
-  }
-
-  if ($self->config->mastodon) {
-    require App::SpreadRevolutionaryDate::Target::Mastodon;
-    my %mastodon_args = $self->config->get_target_arguments('mastodon');
-    $self->targets->{mastodon} = App::SpreadRevolutionaryDate::Target::Mastodon->new(%mastodon_args);
-  }
-
-  if ($self->config->freenode) {
-    require App::SpreadRevolutionaryDate::Target::Freenode;
-    my %freenode_args = $self->config->get_target_arguments('freenode');
-    $self->targets->{freenode} = App::SpreadRevolutionaryDate::Target::Freenode->new(%freenode_args);
+  foreach my $target (@{$self->config->targets}) {
+    my $target_class = 'App::SpreadRevolutionaryDate::Target::' . ucfirst(lc($target));
+    my $target_path = $target_class . ".pm";
+    $target_path =~ s{::}{/}g;
+    eval { require $target_path; };
+    die "Cannot import target class $target_class for target $target: $@\n" if $@;
+    my %target_args = $self->config->get_target_arguments($target);
+    $self->targets->{$target} = $target_class->new(%target_args);
   }
 }
 
@@ -106,9 +69,9 @@ sub spread {
   my $self = shift;
 
   my $msg = $self->compute();
-  $self->targets->{twitter}->spread($msg, $self->config->test) if $self->config->twitter;
-  $self->targets->{mastodon}->spread($msg, $self->config->test) if $self->config->mastodon;
-  $self->targets->{freenode}->spread($msg) if $self->config->freenode;
+  foreach my $target (@{$self->config->targets}) {
+    $self->targets->{$target}->spread($msg, $self->config->test);
+  }
 }
 
 =method compute
