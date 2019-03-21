@@ -7,15 +7,10 @@ package App::SpreadRevolutionaryDate::Target::Freenode;
 # ABSTRACT: Companion class of L<App::SpreadRevolutionaryDate> to handle spreading on Freenode.
 
 use Moose;
+with 'App::SpreadRevolutionaryDate::Target' => {class_name => 'App::SpreadRevolutionaryDate::Target::Freenode::Bot'};
 use namespace::autoclean;
 use App::SpreadRevolutionaryDate::Target::Freenode::Bot;
 use POE;
-
-has 'obj' => (
-    is  => 'ro',
-    isa => 'App::SpreadRevolutionaryDate::Target::Freenode::Bot',
-    required => 1,
-);
 
 has 'nickname' => (
     is  => 'ro',

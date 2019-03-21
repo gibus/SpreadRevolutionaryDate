@@ -7,14 +7,9 @@ package App::SpreadRevolutionaryDate::Target::Mastodon;
 # ABSTRACT: Companion class of L<App::SpreadRevolutionaryDate> to handle spreading on Mastodon.
 
 use Moose;
+with 'App::SpreadRevolutionaryDate::Target' => {class_name => 'Mastodon::Client'};
 use namespace::autoclean;
 use Mastodon::Client;
-
-has 'obj' => (
-    is  => 'ro',
-    isa => 'Mastodon::Client',
-    required => 1,
-);
 
 has 'instance' => (
     is  => 'ro',

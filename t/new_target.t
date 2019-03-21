@@ -6,10 +6,19 @@ use Test::NoWarnings;
 package App::SpreadRevolutionaryDate::Target::Ezln;
 
 use Moose;
+with 'App::SpreadRevolutionaryDate::Target' => {class_name => 'Any'};
 use namespace::autoclean;
 
 has 'subcomandantes' => (is => 'ro', isa => 'ArrayRef[Str]', required => 1);
 has 'land' => (is => 'ro', isa => 'Str', required => 1);
+
+around BUILDARGS => sub {
+  my $orig = shift;
+  my $class = shift;
+  return $class->$orig(@_, obj => 'Fake useless object');
+};
+
+sub spread { 1; }
 
 package main;
 

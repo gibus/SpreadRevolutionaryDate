@@ -16,6 +16,7 @@ dist.ini
 etc/sample-spread-revolutionary-date.conf
 lib/App/SpreadRevolutionaryDate.pm
 lib/App/SpreadRevolutionaryDate/Config.pm
+lib/App/SpreadRevolutionaryDate/Target.pm
 lib/App/SpreadRevolutionaryDate/Target/Freenode.pm
 lib/App/SpreadRevolutionaryDate/Target/Freenode/Bot.pm
 lib/App/SpreadRevolutionaryDate/Target/Mastodon.pm
