@@ -1,7 +1,5 @@
-use strict;
-use warnings;
+use 5.014;
 use utf8;
-use open qw(:std :utf8);
 package App::SpreadRevolutionaryDate::Target::Freenode::Bot;
 
 # ABSTRACT: Subclass overriding L<Bot::BasicBot> to post a message on some Freenode channels

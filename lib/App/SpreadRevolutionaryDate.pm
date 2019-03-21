@@ -1,8 +1,5 @@
 use 5.014;
-use strict;
-use warnings;
 use utf8;
-use open qw(:std :utf8);
 package App::SpreadRevolutionaryDate;
 
 # ABSTRACT: Spread date and time from Revolutionary (Republican) Calendar on Twitter, Mastodon and Freenode.

@@ -1,7 +1,5 @@
-use strict;
-use warnings;
+use 5.014;
 use utf8;
-use open qw(:std :utf8);
 package App::SpreadRevolutionaryDate::Config;
 
 # ABSTRACT: Companion class of L<App::SpreadRevolutionaryDate>, to handle configuration file and command line arguments, subclass of L<AppConfig>.
@@ -12,6 +10,7 @@ extends 'AppConfig';
 use AppConfig qw(:argcount);
 use File::HomeDir;
 use Class::Load ':all';
+use Encode;
 use namespace::clean;
 
 =method new
@@ -121,9 +120,9 @@ sub new {
   @targets = @{$self->targets};
 
   # For backward compatibility, add targets defined directly
-  %potential_targets = $self->varlist(".");
-  foreach my $potential_target (keys %potential_targets) {
-    next unless $potential_targets{$potential_target};
+  my %confvars = $self->varlist(".");
+  foreach my $potential_target (keys %confvars) {
+    next unless $confvars{$potential_target};
     next if $potential_target =~ /_/;
     if ($potential_target !~ /^(?:acab|test|locale|targets)$/) {
       push @targets, $potential_target;

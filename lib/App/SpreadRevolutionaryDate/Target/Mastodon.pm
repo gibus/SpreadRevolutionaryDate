@@ -1,7 +1,5 @@
-use strict;
-use warnings;
+use 5.014;
 use utf8;
-use open qw(:std :utf8);
 package App::SpreadRevolutionaryDate::Target::Mastodon;
 
 # ABSTRACT: Companion class of L<App::SpreadRevolutionaryDate> to handle spreading on Mastodon.

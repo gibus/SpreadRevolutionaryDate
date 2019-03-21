@@ -1,7 +1,5 @@
-use strict;
-use warnings;
+use 5.014;
 use utf8;
-use open qw(:std :utf8);
 package App::SpreadRevolutionaryDate::Target;
 
 # ABSTRACT: Role providing interface for targets of L<App::SpreadRevolutionaryDate>.
