@@ -12,6 +12,7 @@ use namespace::autoclean;
 use App::SpreadRevolutionaryDate::Config;
 use DateTime::Calendar::FrenchRevolutionary;
 use URI::Escape;
+use Class::Load ':all';
 
 has 'config' => (
     is  => 'ro',
@@ -50,10 +51,9 @@ sub BUILD {
 
   foreach my $target (@{$self->config->targets}) {
     my $target_class = 'App::SpreadRevolutionaryDate::Target::' . ucfirst(lc($target));
-    my $target_path = $target_class . ".pm";
-    $target_path =~ s{::}{/}g;
-    eval { require $target_path; };
-    die "Cannot import target class $target_class for target $target: $@\n" if $@;
+    try_load_class($target_class)
+      or die "Cannot import target class $target_class for target $target\n";
+    load_class($target_class);
     my %target_args = $self->config->get_target_arguments($target);
     $self->targets->{$target} = $target_class->new(%target_args);
   }

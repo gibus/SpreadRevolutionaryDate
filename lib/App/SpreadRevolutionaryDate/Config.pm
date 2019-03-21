@@ -11,6 +11,7 @@ use MooseX::NonMoose;
 extends 'AppConfig';
 use AppConfig qw(:argcount);
 use File::HomeDir;
+use Class::Load ':all';
 use namespace::clean;
 
 =method new
@@ -68,10 +69,9 @@ sub new {
   foreach my $target (@targets) {
     my $target_class = 'App::SpreadRevolutionaryDate::Target::' . ucfirst(lc($target));
     my $target_meta;
-    my $target_path = $target_class . ".pm";
-    $target_path =~ s{::}{/}g;
-    eval { require $target_path; };
-    die "Cannot found target class $target_class for target $target: $@\n" if $@;
+    try_load_class($target_class)
+      or die "Cannot found target class $target_class for target $target\n";
+    load_class($target_class);
     eval { $target_meta = $target_class->meta; };
     die "Cannot found target meta class $target_class for target $target: $@\n" if $@;
     foreach my $target_meta_attribute ($target_meta->get_all_attributes) {
@@ -188,10 +188,9 @@ sub check_target_mandatory_options {
 
   my $target_class = 'App::SpreadRevolutionaryDate::Target::' . ucfirst(lc($target));
   my $target_meta;
-  my $target_path = $target_class . ".pm";
-  $target_path =~ s{::}{/}g;
-  eval { require $target_path; };
-  die "Cannot found target class $target_class for target $target: $@\n" if $@;
+  try_load_class($target_class)
+    or die "Cannot found target class $target_class for target $target\n";
+  load_class($target_class);
   eval { $target_meta = $target_class->meta; };
   die "Cannot found target meta class $target_class for target $target: $@\n" if $@;
   foreach my $target_meta_attribute ($target_meta->get_all_attributes) {
