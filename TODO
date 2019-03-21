@@ -1,3 +1,2 @@
-* Add xtest for spreading to a new target
 * Add documentation for extending pre-defined targets (in Target role)
 * Add some new targets to spread to as needed
