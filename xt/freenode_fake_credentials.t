@@ -1,4 +1,4 @@
-#!perl
+#!/usr/bin/perl
 
 use Test::More tests => 2;
 use Test::NoWarnings;
