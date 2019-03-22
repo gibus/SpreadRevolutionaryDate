@@ -231,6 +231,8 @@ sub get_target_arguments {
 
 =item L<App::SpreadRevolutionaryDate>
 
+=item L<App::SpreadRevolutionaryDate::Target>
+
 =item L<App::SpreadRevolutionaryDate::Target::Twitter>
 
 =item L<App::SpreadRevolutionaryDate::Target::Mastodon>

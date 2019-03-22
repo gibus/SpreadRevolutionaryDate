@@ -76,7 +76,9 @@ sub log {
 
 =item L<App::SpreadRevolutionaryDate>
 
-=item L<App::SpreadRevolutionaryDate::Target::Config>
+=item L<App::SpreadRevolutionaryDate::Config>
+
+=item L<App::SpreadRevolutionaryDate::Target>
 
 =item L<App::SpreadRevolutionaryDate::Target::Twitter>
 

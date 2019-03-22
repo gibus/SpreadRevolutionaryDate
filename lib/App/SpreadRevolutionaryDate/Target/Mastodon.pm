@@ -80,6 +80,8 @@ sub spread {
 
 =item L<App::SpreadRevolutionaryDate::Config>
 
+=item L<App::SpreadRevolutionaryDate::Target>
+
 =item L<App::SpreadRevolutionaryDate::Target::Twitter>
 
 =item L<App::SpreadRevolutionaryDate::Target::Freenode>
