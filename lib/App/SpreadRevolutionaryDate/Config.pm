@@ -10,7 +10,6 @@ extends 'AppConfig';
 use AppConfig qw(:argcount);
 use File::HomeDir;
 use Class::Load ':all';
-use Encode;
 use namespace::clean;
 
 =method new

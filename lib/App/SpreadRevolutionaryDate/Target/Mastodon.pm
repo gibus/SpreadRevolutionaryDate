@@ -10,6 +10,7 @@ with 'App::SpreadRevolutionaryDate::Target'
 
 use namespace::autoclean;
 use Mastodon::Client;
+use Encode qw(encode);
 
 has 'instance' => (
     is  => 'ro',
@@ -66,7 +67,8 @@ sub spread {
   my $msg = shift;
   my $test = shift // 0;
   if ($test) {
-    print "Spread to Mastodon $msg\n";
+    my $utf8_msg = encode('UTF-8', $msg);
+    print "Spread to Mastodon $utf8_msg\n";
   } else {
     $self->obj->post_status($msg);
   }
