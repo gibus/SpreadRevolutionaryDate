@@ -27,14 +27,16 @@ The revolutionary date and time is computed thanks to the [DateTime::Calendar::F
     $ perl -MApp::SpreadRevolutionaryDate -e 'App::SpreadRevolutionaryDate->new->spread;'
 
     # Test spreading to Mastodon only:
-    $ spread-revolutionary-date --mastodon --test
+    $ spread-revolutionary-date --targets=mastodon --test
 
     # Test spreading to Twitter only in English:
-    $ spread-revolutionary-date --twitter --test --locale=en
+    $ spread-revolutionary-date --targets=twitter --test --locale=en
 
     # Spread to Twitter and Freenode explicit channels
-    $ spread-revolutionary-date --twitter --freenode \
-        --freenode-channels='#revolution' --freenode-channels='#acab'
+    $ spread-revolutionary-date --targets=twitter \
+        --targets=freenode \
+        --freenode-channels='#revolution' \
+        --freenode-channels='#acab'
 
 # CONFIGURATION
 
