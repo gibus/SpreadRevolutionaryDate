@@ -2,7 +2,7 @@ use 5.014;
 use utf8;
 package App::SpreadRevolutionaryDate::Target::Freenode;
 
-# ABSTRACT: Companion class of L<App::SpreadRevolutionaryDate> to handle spreading on Freenode.
+# ABSTRACT: Target class for L<App::SpreadRevolutionaryDate> to handle spreading on Freenode.
 
 use Moose;
 with 'App::SpreadRevolutionaryDate::Target'
