@@ -31,10 +31,10 @@ sub new {
 
   # Find targets
   my $config_targets = AppConfig::new($class, {CREATE => 1},
+                                      'targets' => {ARGCOUNT => ARGCOUNT_LIST, ALIAS => 'tg'},
                                       'acab' => {ARGCOUNT => ARGCOUNT_NONE, ALIAS => 'a'},
                                       'test' => {ARGCOUNT => ARGCOUNT_NONE, ALIAS => 'no|n'},
                                       'locale' => {ARGCOUNT => ARGCOUNT_ONE, ALIAS => 'l'},
-                                      'targets' => {ARGCOUNT => ARGCOUNT_LIST},
                                       'twitter' => {ARGCOUNT => ARGCOUNT_NONE, ALIAS => 't'},
                                       'mastodon' => {ARGCOUNT => ARGCOUNT_NONE, ALIAS => 'm'},
                                       'freenode' => {ARGCOUNT => ARGCOUNT_NONE, ALIAS => 'f'});
@@ -85,7 +85,7 @@ sub new {
   # Build actual instance
   my $self = AppConfig::new($class,
     %target_attributes,
-    'targets' => {ARGCOUNT => ARGCOUNT_LIST},
+    'targets' => {ARGCOUNT => ARGCOUNT_LIST, ALIAS => 'tg'},
     'acab' => {ARGCOUNT => ARGCOUNT_NONE, ALIAS => 'a'},
     'test' => {ARGCOUNT => ARGCOUNT_NONE, ALIAS => 'no|n'},
     'locale' => {ARGCOUNT => ARGCOUNT_ONE, ALIAS => 'l'},

@@ -5,7 +5,9 @@ package App::SpreadRevolutionaryDate::Target::Twitter;
 # ABSTRACT: Companion class of L<App::SpreadRevolutionaryDate> to handle spreading on Twitter.
 
 use Moose;
-with 'App::SpreadRevolutionaryDate::Target' => {class_name => 'Net::Twitter::Lite::WithAPIv1_1'};
+with 'App::SpreadRevolutionaryDate::Target'
+  => {worker => 'Net::Twitter::Lite::WithAPIv1_1'};
+
 use namespace::autoclean;
 use Net::Twitter::Lite::WithAPIv1_1;
 use Net::OAuth 0.25;
@@ -81,6 +83,8 @@ sub spread {
 =item L<App::SpreadRevolutionaryDate>
 
 =item L<App::SpreadRevolutionaryDate::Config>
+
+=item L<App::SpreadRevolutionaryDate::Target>
 
 =item L<App::SpreadRevolutionaryDate::Target::Mastodon>
 

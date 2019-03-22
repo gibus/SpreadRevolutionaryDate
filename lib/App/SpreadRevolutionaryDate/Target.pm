@@ -7,7 +7,7 @@ package App::SpreadRevolutionaryDate::Target;
 use MooseX::Role::Parameterized;
 use namespace::autoclean;
 
-parameter class_name => (
+parameter worker => (
     isa     => 'Str',
     default => 'Any',
 );
@@ -17,7 +17,7 @@ role {
 
     has obj => (
         is => 'ro',
-        isa => $p->class_name,
+        isa => $p->worker,
         required => 1,
     );
 

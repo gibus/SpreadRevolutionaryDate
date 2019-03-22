@@ -7,7 +7,7 @@ use Test::NoWarnings;
 
 package App::SpreadRevolutionaryDate::Target::Ezln;
 use Moose;
-with 'App::SpreadRevolutionaryDate::Target' => {class_name => 'IO::Handle'};
+with 'App::SpreadRevolutionaryDate::Target' => {worker => 'IO::Handle'};
 use namespace::autoclean;
 use IO::Handle;
 
