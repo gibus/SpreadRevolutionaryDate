@@ -64,7 +64,7 @@ Do no not actually spread the revolutionary date, just print it on standard outp
 
 ### acab
 
-Instead of spreading the current date and time, pretend that decimal time is 1:31:20 (which corresponds to 03:08:56 Paris time, in sexagesimal scale used by common Anglo-Babylonian Time).
+Instead of spreading the current date and time, pretend that decimal time is 1:31:20 (which corresponds to 03:08:56 UTC, 04:08:56 Paris winter time, or 05:08:56 Paris summer time, in sexagesimal scale used by common Anglo-Babylonian Time).
 
 ### twitter _DEPRECATED_
 
