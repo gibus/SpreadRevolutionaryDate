@@ -39,7 +39,6 @@ __END__
 
 C<spread-revolutionary-date> is a L<Free Software|https://www.gnu.org/philosophy/free-sw.html> that spreads the current date, expressed in L<French Revolutionary calendar|https://en.wikipedia.org/wiki/French_Republican_calendar>, to various social networks: L<Twitter|https://twitter.com/>, L<Mastodon|https://mastodon.social/>, and the L<Freenode|https://freenode.net/> Internet Relay Chat network. And you can easily extend these defaults targets with any desired one, see L</"EXTENDING TO NEW TARGETS">.
 
-
 The French Revolutionary calendar, also called Republican calendar, was introduced during the L<French Revolution|https://en.wikipedia.org/wiki/French_Revolution>, and used from late 1793 to 1805, and also during the L<Paris Commune|https://en.wikipedia.org/wiki/Paris_Commune> in 1871. This was an attempt to get rid of religious and royalist references found in Gregorian calendar when naming measures of Time. Months were given new names based on nature, each day of the year, instead of being named after an associated saint, had a unique name associated with the rural economy: agricultural tools, common animals, grains, pastures, trees, roots, flowers, fruits, plants, and minerals. But this was also an attempt to give more rational in measuring Time, basing measures on decimal system. Instead of weeks, each month was divided into exactly 3 I<décades>, that is ten days; days were divided into ten hours; hours into 100 minutes; and minutes into 100 seconds.
 
 You B<must> have a registered account on each of the targets you want to spread the revolutionary date. And you must get credentials for C<spread-revolutionary-date> to post on Twitter and Mastodon. Finally, you have to configure C<spread-revolutionary-date> to use these credentials, see L</CONFIGURATION> and L</"COMMAND LINE PARAMETERS"> below.
@@ -184,19 +183,19 @@ Same as L</freenode> configuration option below.
 
 These parameters specify credentials for C<spread-revolutionary-date> to spread on a Twitter account. You have to get them from your L<Twitter API account|https://apps.twitter.com/> with C<write> access level.
 
-=head3 --twitter-consumer_key | -tck
+=head3 --twitter_consumer_key | -tck
 
 Same as L</consumer_key> configuration option below.
 
-=head3 --twitter-consumer_secret | -tcs
+=head3 --twitter_consumer_secret | -tcs
 
 Same as L</consumer_secret> configuration option below.
 
-=head3 --twitter-access_token | -tat
+=head3 --twitter_access_token | -tat
 
 Same as L</access_token> configuration option below.
 
-=head3 --twitter-access_token_secret | -tats
+=head3 --twitter_access_token_secret | -tats
 
 Same as L</access_token_secret> configuration option below.
 
@@ -204,19 +203,19 @@ Same as L</access_token_secret> configuration option below.
 
 These parameters specify credentials for C<spread-revolutionary-date> to spread on a Mastodon account. You have to get them from your L<Mastodon instance API account|https://mstdn.fr/settings/applications> with C<write> scope. Note that Mastodon is a decentralized network with multiple instances, the previous link is for L<mstdn.fr|https://mstdn.fr> instance, please replace url with your preferred instance.
 
-=head3 --mastodon-instance | -mi
+=head3 --mastodon_instance | -mi
 
 Same as L</instance> configuration option below.
 
-=head3 --mastodon-client_id | -mci
+=head3 --mastodon_client_id | -mci
 
 Same as L</client_id> configuration option below.
 
-=head3 --mastodon-client_secret | -mcs
+=head3 --mastodon_client_secret | -mcs
 
 Same as L</client_secret> configuration option below.
 
-=head3 --mastodon-access_token | -mat
+=head3 --mastodon_access_token | -mat
 
 Same as L</access_token> configuration option below.
 
@@ -224,19 +223,19 @@ Same as L</access_token> configuration option below.
 
 The first two parameters are credentials for C<spread-revolutionary-date> to spread on a Freenode account. See L<https://freenode.net/kb/answer/registration> to find out how to register an account on Freenode.
 
-=head3 --freenode-nickname | -fn
+=head3 --freenode_nickname | -fn
 
 Same as L</nickname> configuration option below.
 
-=head3 --freenode-password | -fp
+=head3 --freenode_password | -fp
 
 Same as L</password> configuration option below.
 
-=head3 --freenode-channels | -fc
+=head3 --freenode_channels | -fc
 
 Same as L</channels> configuration option below.
 
-=head3 --freenode-test_channels | -tc
+=head3 --freenode_test_channels | -tc
 
 Same as L</test_channels> configuration option below.
 
@@ -246,9 +245,11 @@ Version 0.07 of this distribution is a complete redesign of the API, taking adva
 
 To add a new target, you should write a new class in the C<App::SpreadRevolutionaryDate::Target::> namespace (that is: the class should be C<App::SpreadRevolutionaryDate::Target::Mytarget> for a new C<Mytarget> target), that consumes the L<App::SpreadRevolutionaryDate::Target> role. See L<App::SpreadRevolutionaryDate::Target/DESCRIPTION> for a comprehensive description of this role.
 
+The name of the target should be added as a value of the C</targets> option in lower case.
+
 Such a target class is actually just a wrapper. Usually a target has to use an existing specific module (which can be a C<Moose> class or not) to perform the actual work of posting a message according the specific target protocol, after having complied with any potential required authentication. Such authentication and posting should be carried on by the constructor or the required C<spread> method of the target class.
 
-To perform authentication and to post a message, there is a strong likelihood that the new target requires specific parameters (for eg. tokens, keys, account name, password, channels, etc.). These parameters should be defined as required attributes of the target class. Values for such attributes should be set in the L<configuration file|/CONFIGURATION>, inside a section named after the target (C<[mytarget]>), or as L<command line parameters|/"COMMAND LINE PARAMETERS"> prefixed with the name of the target followed by a dash (C<--mytarget-myparam>).
+To perform authentication and to post a message, there is a strong likelihood that the new target requires specific parameters (for eg. tokens, keys, account name, password, channels, etc.). These parameters should be defined as required attributes of the target class. Values for such attributes should be set in the L<configuration file|/CONFIGURATION>, inside a section named after the target in lower case (C<[mytarget]>), or as L<command line parameters|/"COMMAND LINE PARAMETERS"> prefixed with the name of the target in lower case, followed by an underscore (C<--mytarget_myparam>).
 
 Should you extend C<spread-revolutionary-date> to a new target, we advise you to have a look on how default targets are implemented: L<App::SpreadRevolutionaryDate::Target::Twitter> with L<Net::Twitter::Lite::WithAPIv1_1> C<worker>, L<App::SpreadRevolutionaryDate::Target::Mastodon> with L<Mastodon::Client> C<worker>. Both are using L<OAuth2 protocol|https://oauth.net/2/> to perform authentication. The third default target, C<App::SpreadRevolutionaryDate::Target::Freenode>, uses a L<chatbot|https://en.wikipedia.org/wiki/Chatbot>: L<App::SpreadRevolutionaryDate::Target::Freenode::Bot> subclassing L<Bot::BasicBot>. You can also see a very simple example with a test file provided in this distribution at C<t/new_target.t>, which just prints out the revolutionary date on the standard output using core module L<IO::Handle>.
 

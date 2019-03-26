@@ -176,19 +176,19 @@ Same as ["freenode"](#freenode) configuration option below.
 
 These parameters specify credentials for `spread-revolutionary-date` to spread on a Twitter account. You have to get them from your [Twitter API account](https://apps.twitter.com/) with `write` access level.
 
-### --twitter-consumer\_key | -tck
+### --twitter\_consumer\_key | -tck
 
 Same as ["consumer\_key"](#consumer_key) configuration option below.
 
-### --twitter-consumer\_secret | -tcs
+### --twitter\_consumer\_secret | -tcs
 
 Same as ["consumer\_secret"](#consumer_secret) configuration option below.
 
-### --twitter-access\_token | -tat
+### --twitter\_access\_token | -tat
 
 Same as ["access\_token"](#access_token) configuration option below.
 
-### --twitter-access\_token\_secret | -tats
+### --twitter\_access\_token\_secret | -tats
 
 Same as ["access\_token\_secret"](#access_token_secret) configuration option below.
 
@@ -196,19 +196,19 @@ Same as ["access\_token\_secret"](#access_token_secret) configuration option bel
 
 These parameters specify credentials for `spread-revolutionary-date` to spread on a Mastodon account. You have to get them from your [Mastodon instance API account](https://mstdn.fr/settings/applications) with `write` scope. Note that Mastodon is a decentralized network with multiple instances, the previous link is for [mstdn.fr](https://mstdn.fr) instance, please replace url with your preferred instance.
 
-### --mastodon-instance | -mi
+### --mastodon\_instance | -mi
 
 Same as ["instance"](#instance) configuration option below.
 
-### --mastodon-client\_id | -mci
+### --mastodon\_client\_id | -mci
 
 Same as ["client\_id"](#client_id) configuration option below.
 
-### --mastodon-client\_secret | -mcs
+### --mastodon\_client\_secret | -mcs
 
 Same as ["client\_secret"](#client_secret) configuration option below.
 
-### --mastodon-access\_token | -mat
+### --mastodon\_access\_token | -mat
 
 Same as ["access\_token"](#access_token) configuration option below.
 
@@ -216,19 +216,19 @@ Same as ["access\_token"](#access_token) configuration option below.
 
 The first two parameters are credentials for `spread-revolutionary-date` to spread on a Freenode account. See [https://freenode.net/kb/answer/registration](https://freenode.net/kb/answer/registration) to find out how to register an account on Freenode.
 
-### --freenode-nickname | -fn
+### --freenode\_nickname | -fn
 
 Same as ["nickname"](#nickname) configuration option below.
 
-### --freenode-password | -fp
+### --freenode\_password | -fp
 
 Same as ["password"](#password) configuration option below.
 
-### --freenode-channels | -fc
+### --freenode\_channels | -fc
 
 Same as ["channels"](#channels) configuration option below.
 
-### --freenode-test\_channels | -tc
+### --freenode\_test\_channels | -tc
 
 Same as ["test\_channels"](#test_channels) configuration option below.
 
@@ -238,9 +238,11 @@ Version 0.07 of this distribution is a complete redesign of the API, taking adva
 
 To add a new target, you should write a new class in the `App::SpreadRevolutionaryDate::Target::` namespace (that is: the class should be `App::SpreadRevolutionaryDate::Target::Mytarget` for a new `Mytarget` target), that consumes the [App::SpreadRevolutionaryDate::Target](https://metacpan.org/pod/App::SpreadRevolutionaryDate::Target) role. See ["DESCRIPTION" in App::SpreadRevolutionaryDate::Target](https://metacpan.org/pod/App::SpreadRevolutionaryDate::Target#DESCRIPTION) for a comprehensive description of this role.
 
+The name of the target should be added as a value of the `/targets` option in lower case.
+
 Such a target class is actually just a wrapper. Usually a target has to use an existing specific module (which can be a `Moose` class or not) to perform the actual work of posting a message according the specific target protocol, after having complied with any potential required authentication. Such authentication and posting should be carried on by the constructor or the required `spread` method of the target class.
 
-To perform authentication and to post a message, there is a strong likelihood that the new target requires specific parameters (for eg. tokens, keys, account name, password, channels, etc.). These parameters should be defined as required attributes of the target class. Values for such attributes should be set in the [configuration file](#configuration), inside a section named after the target (`[mytarget]`), or as [command line parameters](#command-line-parameters) prefixed with the name of the target followed by a dash (`--mytarget-myparam`).
+To perform authentication and to post a message, there is a strong likelihood that the new target requires specific parameters (for eg. tokens, keys, account name, password, channels, etc.). These parameters should be defined as required attributes of the target class. Values for such attributes should be set in the [configuration file](#configuration), inside a section named after the target in lower case (`[mytarget]`), or as [command line parameters](#command-line-parameters) prefixed with the name of the target in lower case, followed by an underscore (`--mytarget_myparam`).
 
 Should you extend `spread-revolutionary-date` to a new target, we advise you to have a look on how default targets are implemented: [App::SpreadRevolutionaryDate::Target::Twitter](https://metacpan.org/pod/App::SpreadRevolutionaryDate::Target::Twitter) with [Net::Twitter::Lite::WithAPIv1\_1](https://metacpan.org/pod/Net::Twitter::Lite::WithAPIv1_1) `worker`, [App::SpreadRevolutionaryDate::Target::Mastodon](https://metacpan.org/pod/App::SpreadRevolutionaryDate::Target::Mastodon) with [Mastodon::Client](https://metacpan.org/pod/Mastodon::Client) `worker`. Both are using [OAuth2 protocol](https://oauth.net/2/) to perform authentication. The third default target, `App::SpreadRevolutionaryDate::Target::Freenode`, uses a [chatbot](https://en.wikipedia.org/wiki/Chatbot): [App::SpreadRevolutionaryDate::Target::Freenode::Bot](https://metacpan.org/pod/App::SpreadRevolutionaryDate::Target::Freenode::Bot) subclassing [Bot::BasicBot](https://metacpan.org/pod/Bot::BasicBot). You can also see a very simple example with a test file provided in this distribution at `t/new_target.t`, which just prints out the revolutionary date on the standard output using core module [IO::Handle](https://metacpan.org/pod/IO::Handle).
 
