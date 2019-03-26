@@ -36,18 +36,20 @@ has 'msg' => (
 
 sub connected {
   my $self = shift;
+
   $self->say({who => 'NickServ', channel => 'msg', body => 'IDENTIFY ' . $self->{freenode_nickname} . ' ' . $self->{freenode_password}});
 }
 
 sub said {
-  my $self = shift;
-  my $message = shift;
+  my ($self, $message) = @_;
+
   $self->nb_said(1) if ($message->{who} eq 'NickServ' && $message->{body} =~ /^You are now identified for/);
   return;
 }
 
 sub tick {
   my $self = shift;
+
   if ($self->nb_said) {
     if ($self->nb_said > scalar($self->channels)) {
       $self->shutdown;

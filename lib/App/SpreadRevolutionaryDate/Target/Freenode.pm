@@ -37,8 +37,7 @@ Constructor class method, subclassing C<Bot::BasicBot>. Takes a hash argument wi
 =cut
 
 around BUILDARGS => sub {
-  my $orig = shift;
-  my $class = shift;
+  my ($orig, $class) = @_;
 
   my $port = 6667;
   my $ssl = 0;
@@ -78,8 +77,7 @@ Spreads a message to Freenode channels configured with the multivalued option C<
 =cut
 
 sub spread {
-  my $self = shift;
-  my $msg = shift;
+  my ($self, $msg) = @_;
 
   $self->obj->msg($msg);
   $self->obj->run;

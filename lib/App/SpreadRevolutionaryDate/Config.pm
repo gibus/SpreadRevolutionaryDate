@@ -20,6 +20,7 @@ Constructor class method, subclassing C<AppConfig>. Takes no argument. Returns a
 
 sub new {
   my ($class, $filename) = @_;
+
   # If filename is not a file path but a GLOB or an opend filehandle
   # we'll need to rewind it to the beginning before reading it twice
   my $file_start;
@@ -153,8 +154,8 @@ Parses configuration file. Takes one optional argument: C<$filename> which shoul
 =cut
 
 sub parse_file {
-  my $self = shift;
-  my $filename = shift;
+  my ($self, $filename) = @_;
+
   foreach my $default_path (
                 File::HomeDir->my_home . '/.config/spread-revolutionary-date/spread-revolutionary-date.conf',
                 File::HomeDir->my_home . '/.spread-revolutionary-date.conf') {
@@ -171,6 +172,7 @@ Parses command line options. Takes no argument.
 
 sub parse_command_line {
   my $self = shift;
+
   $self->args;
 }
 
@@ -181,8 +183,7 @@ Checks whether target configuration options are set to authenticate on specified
 =cut
 
 sub check_target_mandatory_options {
-  my $self = shift;
-  my $target = shift;
+  my ($self, $target) = @_;
 
   my $target_class = 'App::SpreadRevolutionaryDate::Target::' . ucfirst(lc($target));
   my $target_meta;
@@ -208,8 +209,8 @@ Takes one mandatory argument: C<target> as a string in lower case, without any u
 =cut
 
 sub get_target_arguments {
-  my $self = shift;
-  my $target = lc(shift);
+  my ($self, $target) = @_;
+  $target = lc($target);
 
   my %target_args = $self->varlist("^${target}_", 1);
 

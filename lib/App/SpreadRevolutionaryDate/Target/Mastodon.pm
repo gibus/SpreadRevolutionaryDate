@@ -43,8 +43,8 @@ Constructor class method. Takes a hash argument with the following mandatory key
 =cut
 
 around BUILDARGS => sub {
-  my $orig = shift;
-  my $class = shift;
+  my ($orig, $class) = @_;
+
   my $args = $class->$orig(@_);
 
   $args->{obj} = Mastodon::Client->new(
@@ -63,9 +63,9 @@ Spreads a message to Mastodon. Takes one mandatory argument: C<$msg> which shoul
 =cut
 
 sub spread {
-  my $self = shift;
-  my $msg = shift;
-  my $test = shift // 0;
+  my ($self, $msg, $test) = @_;
+  $test //= 0;
+
   if ($test) {
     my $utf8_msg = encode('UTF-8', $msg);
     print "Spread to Mastodon $utf8_msg\n";

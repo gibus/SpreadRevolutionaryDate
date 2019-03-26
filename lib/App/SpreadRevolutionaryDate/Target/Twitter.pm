@@ -44,8 +44,8 @@ Constructor class method. Takes a hash argument with the following mandatory key
 =cut
 
 around BUILDARGS => sub {
-  my $orig = shift;
-  my $class = shift;
+  my ($orig, $class) = @_;
+
   my $args = $class->$orig(@_);
 
   $args->{obj} = Net::Twitter::Lite::WithAPIv1_1->new(
@@ -65,9 +65,9 @@ Spreads a message to Twitter. Takes one mandatory argument: C<$msg> which should
 =cut
 
 sub spread {
-  my $self = shift;
-  my $msg = shift;
-  my $test = shift // 0;
+  my ($self, $msg, $test) = @_;
+  $test //= 0;
+
   if ($test) {
     my $utf8_msg = encode('UTF-8', $msg);
     print "Spread to Twitter: $utf8_msg\n";

@@ -29,9 +29,8 @@ Constructor class method. Takes one optional argument: C<$filename> which should
 =cut
 
 around BUILDARGS => sub {
-  my $orig = shift;
-  my $class = shift;
-  my $filename = shift;
+  my ($orig, $class, $filename) = @_;
+
   my $config = App::SpreadRevolutionaryDate::Config->new($filename);
 
   return $class->$orig(config => $config, targets => {});
