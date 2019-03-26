@@ -53,6 +53,12 @@ If the target needs authentication, it can be carried out in the constructor (wi
 
 =item L<App::SpreadRevolutionaryDate::Target::Freenode::Bot>
 
+=item L<App::SpreadRevolutionaryDate::Target::MsgMaker>
+
+=item L<App::SpreadRevolutionaryDate::Target::MsgMaker::RevolutionaryDate>
+
+=item L<App::SpreadRevolutionaryDate::Target::MsgMaker::PromptUser>
+
 =back
 
 =cut

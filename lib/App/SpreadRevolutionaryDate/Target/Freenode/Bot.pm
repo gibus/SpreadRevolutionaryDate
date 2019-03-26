@@ -88,6 +88,12 @@ sub log {
 
 =item L<App::SpreadRevolutionaryDate::Target::Freenode>
 
+=item L<App::SpreadRevolutionaryDate::Target::MsgMaker>
+
+=item L<App::SpreadRevolutionaryDate::Target::MsgMaker::RevolutionaryDate>
+
+=item L<App::SpreadRevolutionaryDate::Target::MsgMaker::PromptUser>
+
 =back
 
 =cut

@@ -8,7 +8,6 @@ use Moose;
 use namespace::autoclean;
 use App::SpreadRevolutionaryDate::Config;
 use DateTime::Calendar::FrenchRevolutionary;
-use URI::Escape;
 use Class::Load ':all';
 
 has 'config' => (
@@ -20,6 +19,13 @@ has 'config' => (
 has 'targets' => (
     is  => 'rw',
     isa => 'HashRef[Object]',
+    required => 1,
+);
+
+has 'msgmaker' => (
+    is  => 'rw',
+    isa => 'Object',
+    required => 1,
 );
 
 =method new
@@ -33,7 +39,14 @@ around BUILDARGS => sub {
 
   my $config = App::SpreadRevolutionaryDate::Config->new($filename);
 
-  return $class->$orig(config => $config, targets => {});
+  my $msgmaker_class = 'App::SpreadRevolutionaryDate::MsgMaker::' . $config->msgmaker;
+  try_load_class($msgmaker_class)
+    or die "Cannot import msgmaker class $msgmaker_class\n";
+  load_class($msgmaker_class);
+  my %msgmaker_args = $config->get_msgmaker_arguments($config->msgmaker);
+  my $msgmaker = $msgmaker_class->new(locale => $config->locale, %msgmaker_args);
+
+  return $class->$orig(config => $config, targets => {}, msgmaker => $msgmaker);
 };
 
 =method BUILD
@@ -64,37 +77,10 @@ Spreads calendar date to configured targets. Takes no argument.
 sub spread {
   my $self = shift;
 
-  my $msg = $self->compute();
+  my $msg = $self->msgmaker->compute();
   foreach my $target (@{$self->config->targets}) {
     $self->targets->{$target}->spread($msg, $self->config->test);
   }
-}
-
-=method compute
-
-Computes revolutionary date. Takes no argument. Returns message as string, ready to be spread.
-
-=cut
-
-sub compute {
-  my $self = shift;
-
-  # As of DateTime::Calendar::FrenchRevolutionary 0.14
-  # locale is limited to 'en' or 'fr', defaults to 'fr'
-  my $locale = $self->config->locale || 'fr';
-  $locale = 'fr' unless $locale eq 'en';
-
-  my $revolutionary = $self->config->acab ?
-      DateTime::Calendar::FrenchRevolutionary->now->set(hour => 1, minute => 31, second => 20, locale => $locale)
-    : DateTime::Calendar::FrenchRevolutionary->now->set(locale => $locale);
-
-  my $msg = $locale eq 'fr' ?
-      $revolutionary->strftime("Nous sommes le %A, %d %B de l'An %EY (%Y) de la Révolution, %Ej, il est %T! https://$locale.wikipedia.org/wiki/!!%Oj!!")
-    : $revolutionary->strftime("We are %A, %d %B of Revolution Year %EY (%Y), %Ej, it is %T! https://$locale.wikipedia.org/wiki/!!%Oj!!");
-
-  $msg =~ s/!!([^!]+)!!/uri_escape($1)/e;
-
-  return $msg
 }
 
 =head1 SEE ALSO
@@ -114,6 +100,12 @@ sub compute {
 =item L<App::SpreadRevolutionaryDate::Target::Freenode>
 
 =item L<App::SpreadRevolutionaryDate::Target::Freenode::Bot>
+
+=item L<App::SpreadRevolutionaryDate::Target::MsgMaker>
+
+=item L<App::SpreadRevolutionaryDate::Target::MsgMaker::RevolutionaryDate>
+
+=item L<App::SpreadRevolutionaryDate::Target::MsgMaker::PromptUser>
 
 =back
 

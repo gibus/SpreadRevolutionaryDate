@@ -30,11 +30,12 @@ sub new {
   my @orig_argv = @ARGV;
 
   # Find targets
-  my $config_targets = AppConfig::new($class, {CREATE => 1},
+  my $config_targets = AppConfig::new($class, {CREATE => 1, ERROR => sub {}},
                                       'targets' => {ARGCOUNT => ARGCOUNT_LIST, ALIAS => 'tg'},
-                                      'acab' => {ARGCOUNT => ARGCOUNT_NONE, ALIAS => 'a'},
+                                      'msgmaker' => {ARGCOUNT => ARGCOUNT_ONE, ALIAS => 'mm'},
                                       'test' => {ARGCOUNT => ARGCOUNT_NONE, ALIAS => 'no|n'},
                                       'locale' => {ARGCOUNT => ARGCOUNT_ONE, ALIAS => 'l'},
+                                      'acab' => {ARGCOUNT => ARGCOUNT_NONE, ALIAS => 'a'},
                                       'twitter' => {ARGCOUNT => ARGCOUNT_NONE, ALIAS => 't'},
                                       'mastodon' => {ARGCOUNT => ARGCOUNT_NONE, ALIAS => 'm'},
                                       'freenode' => {ARGCOUNT => ARGCOUNT_NONE, ALIAS => 'f'});
@@ -49,7 +50,7 @@ sub new {
   foreach my $potential_target (keys %potential_targets) {
     next unless $potential_targets{$potential_target};
     next if $potential_target =~ /_/;
-    if ($potential_target !~ /^(?:acab|test|locale|targets)$/) {
+    if ($potential_target !~ /^(?:acab|test|locale|targets|msgmaker)$/) {
       push @targets, $potential_target;
     }
   }
@@ -77,18 +78,40 @@ sub new {
       next if $target_meta_attribute->name eq 'obj';
       my $target_meta_attribute_type = $target_meta_attribute->type_constraint;
       my $target_meta_attribute_argcount = $target_meta_attribute_type =~ /ArrayRef/ ? ARGCOUNT_LIST : $target_meta_attribute_type =~ /HashRef/ ? ARGCOUNT_HASH : ARGCOUNT_ONE;
-      $target_attributes{$target . '_' . $target_meta_attribute->name} = { ARGCOUNT => $target_meta_attribute_argcount };
-      $target_attributes{$target} = { ARGCOUNT => ARGCOUNT_NONE };
+      $target_attributes{lc($target) . '_' . $target_meta_attribute->name} = { ARGCOUNT => $target_meta_attribute_argcount };
+      $target_attributes{lc($target)} = { ARGCOUNT => ARGCOUNT_NONE };
+    }
+  }
+
+  # Guess attributes for MsgMaker
+  my %msgmaker_attributes;
+  if ($config_targets->msgmaker) {
+    my $msgmaker = $config_targets->msgmaker;
+    my $msgmaker_class = 'App::SpreadRevolutionaryDate::MsgMaker::' . $msgmaker;
+    my $msgmaker_meta;
+    try_load_class($msgmaker_class)
+      or die "Cannot found msgmaker class $msgmaker_class for msgmaker $msgmaker\n";
+    load_class($msgmaker_class);
+    eval { $msgmaker_meta = $msgmaker_class->meta; };
+    die "Cannot found msgmaker meta class $msgmaker_class for msgmaker $msgmaker: $@\n" if $@;
+    foreach my $msgmaker_meta_attribute ($msgmaker_meta->get_all_attributes) {
+      next if $msgmaker_meta_attribute->name eq 'locale';
+      my $msgmaker_meta_attribute_type = $msgmaker_meta_attribute->type_constraint;
+      my $msgmaker_meta_attribute_argcount = $msgmaker_meta_attribute_type =~ /ArrayRef/ ? ARGCOUNT_LIST : $msgmaker_meta_attribute_type =~ /HashRef/ ? ARGCOUNT_HASH : ARGCOUNT_ONE;
+      $msgmaker_attributes{lc($msgmaker) . '_' . $msgmaker_meta_attribute->name} = { ARGCOUNT => $msgmaker_meta_attribute_argcount };
+      $msgmaker_attributes{lc($msgmaker)} = { ARGCOUNT => ARGCOUNT_NONE };
     }
   }
 
   # Build actual instance
   my $self = AppConfig::new($class,
     %target_attributes,
+    %msgmaker_attributes,
     'targets' => {ARGCOUNT => ARGCOUNT_LIST, ALIAS => 'tg'},
-    'acab' => {ARGCOUNT => ARGCOUNT_NONE, ALIAS => 'a'},
+    'msgmaker' => {ARGCOUNT => ARGCOUNT_ONE, ALIAS => 'mm', default => 'RevolutionaryDate'},
     'test' => {ARGCOUNT => ARGCOUNT_NONE, ALIAS => 'no|n'},
-    'locale' => {ARGCOUNT => ARGCOUNT_ONE, ALIAS => 'l'},
+    'locale' => {ARGCOUNT => ARGCOUNT_ONE, ALIAS => 'l', default => 'fr'},
+    'acab' => {ARGCOUNT => ARGCOUNT_NONE, ALIAS => 'a'},
     # Overwrite found attributes for default targets
     # for backward compatibility with aliases
     'twitter' => {ARGCOUNT => ARGCOUNT_NONE, ALIAS => 't'},
@@ -124,7 +147,7 @@ sub new {
   foreach my $potential_target (keys %confvars) {
     next unless $confvars{$potential_target};
     next if $potential_target =~ /_/;
-    if ($potential_target !~ /^(?:acab|test|locale|targets)$/) {
+    if ($potential_target !~ /^(?:acab|test|locale|targets|msgmaker)$/) {
       push @targets, $potential_target;
       $self->targets($potential_target);
     }
@@ -223,6 +246,27 @@ sub get_target_arguments {
   return %target_args;
 }
 
+=method get_msgmaker_arguments
+
+Takes one mandatory argument: C<msgmaker> as a string. Returns a hash with configuration options relative to the passed C<msgmaker> argument.
+
+=cut
+
+sub get_msgmaker_arguments {
+  my ($self, $msgmaker) = @_;
+  $msgmaker = lc($msgmaker);
+
+  my %msgmaker_args = $self->varlist("^${msgmaker}_", 1);
+
+  # Add acab option for RevolutionaryDate for backward compatibility
+  $msgmaker_args{acab} = $self->acab
+    if  $msgmaker eq 'RevolutionaryDate'
+        && !exists($msgmaker_args{acab})
+        && $self->acab;
+
+  return %msgmaker_args;
+}
+
 =head1 SEE ALSO
 
 =over
@@ -240,6 +284,12 @@ sub get_target_arguments {
 =item L<App::SpreadRevolutionaryDate::Target::Freenode>
 
 =item L<App::SpreadRevolutionaryDate::Target::Freenode::Bot>
+
+=item L<App::SpreadRevolutionaryDate::Target::MsgMaker>
+
+=item L<App::SpreadRevolutionaryDate::Target::MsgMaker::RevolutionaryDate>
+
+=item L<App::SpreadRevolutionaryDate::Target::MsgMaker::PromptUser>
 
 =back
 

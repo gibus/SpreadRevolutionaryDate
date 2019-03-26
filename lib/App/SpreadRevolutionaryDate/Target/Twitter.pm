@@ -97,6 +97,12 @@ sub spread {
 
 =item L<App::SpreadRevolutionaryDate::Target::Freenode::Bot>
 
+=item L<App::SpreadRevolutionaryDate::Target::MsgMaker>
+
+=item L<App::SpreadRevolutionaryDate::Target::MsgMaker::RevolutionaryDate>
+
+=item L<App::SpreadRevolutionaryDate::Target::MsgMaker::PromptUser>
+
 =back
 
 =cut
