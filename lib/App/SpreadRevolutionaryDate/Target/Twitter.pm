@@ -11,7 +11,6 @@ with 'App::SpreadRevolutionaryDate::Target'
 use namespace::autoclean;
 use Net::Twitter::Lite::WithAPIv1_1;
 use Net::OAuth 0.25;
-use Encode qw(encode);
 
 has 'consumer_key' => (
     is  => 'ro',
@@ -69,8 +68,12 @@ sub spread {
   $test //= 0;
 
   if ($test) {
+    use Encode qw(encode);
+    use IO::Handle;
+    my $io = IO::Handle->new;
+    $io->fdopen(fileno(STDOUT), "w");
     my $utf8_msg = encode('UTF-8', $msg);
-    print "Spread to Twitter: $utf8_msg\n";
+    $io->say("Spread to Twitter: $utf8_msg");
   } else {
     $self->obj->update($msg);
   }

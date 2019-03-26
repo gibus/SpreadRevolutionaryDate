@@ -18,7 +18,7 @@ around BUILDARGS => sub {
   my ($orig, $class) = @_;
 
   my $io = IO::Handle->new;
-  $io->fdopen(fileno(STDOUT),"w");
+  $io->fdopen(fileno(STDOUT), "w");
   return $class->$orig(@_, obj => $io);
 };
 

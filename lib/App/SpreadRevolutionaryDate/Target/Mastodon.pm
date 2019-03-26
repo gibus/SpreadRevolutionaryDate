@@ -10,7 +10,6 @@ with 'App::SpreadRevolutionaryDate::Target'
 
 use namespace::autoclean;
 use Mastodon::Client;
-use Encode qw(encode);
 
 has 'instance' => (
     is  => 'ro',
@@ -67,8 +66,12 @@ sub spread {
   $test //= 0;
 
   if ($test) {
+    use Encode qw(encode);
+    use IO::Handle;
+    my $io = IO::Handle->new;
+    $io->fdopen(fileno(STDOUT), "w");
     my $utf8_msg = encode('UTF-8', $msg);
-    print "Spread to Mastodon $utf8_msg\n";
+    $io->say("Spread to Mastodon: $utf8_msg");
   } else {
     $self->obj->post_status($msg);
   }
