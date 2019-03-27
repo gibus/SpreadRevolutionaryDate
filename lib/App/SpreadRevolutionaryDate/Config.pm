@@ -85,22 +85,20 @@ sub new {
 
   # Guess attributes for MsgMaker
   my %msgmaker_attributes;
-  if ($config_targets->msgmaker) {
-    my $msgmaker = $config_targets->msgmaker;
-    my $msgmaker_class = 'App::SpreadRevolutionaryDate::MsgMaker::' . $msgmaker;
-    my $msgmaker_meta;
-    try_load_class($msgmaker_class)
-      or die "Cannot found msgmaker class $msgmaker_class for msgmaker $msgmaker\n";
-    load_class($msgmaker_class);
-    eval { $msgmaker_meta = $msgmaker_class->meta; };
-    die "Cannot found msgmaker meta class $msgmaker_class for msgmaker $msgmaker: $@\n" if $@;
-    foreach my $msgmaker_meta_attribute ($msgmaker_meta->get_all_attributes) {
-      next if $msgmaker_meta_attribute->name eq 'locale';
-      my $msgmaker_meta_attribute_type = $msgmaker_meta_attribute->type_constraint;
-      my $msgmaker_meta_attribute_argcount = $msgmaker_meta_attribute_type =~ /ArrayRef/ ? ARGCOUNT_LIST : $msgmaker_meta_attribute_type =~ /HashRef/ ? ARGCOUNT_HASH : ARGCOUNT_ONE;
-      $msgmaker_attributes{lc($msgmaker) . '_' . $msgmaker_meta_attribute->name} = { ARGCOUNT => $msgmaker_meta_attribute_argcount };
-      $msgmaker_attributes{lc($msgmaker)} = { ARGCOUNT => ARGCOUNT_NONE };
-    }
+  my $msgmaker = $config_targets->msgmaker || 'RevolutionaryDate';
+  my $msgmaker_class = 'App::SpreadRevolutionaryDate::MsgMaker::' . $msgmaker;
+  my $msgmaker_meta;
+  try_load_class($msgmaker_class)
+    or die "Cannot found msgmaker class $msgmaker_class for msgmaker $msgmaker\n";
+  load_class($msgmaker_class);
+  eval { $msgmaker_meta = $msgmaker_class->meta; };
+  die "Cannot found msgmaker meta class $msgmaker_class for msgmaker $msgmaker: $@\n" if $@;
+  foreach my $msgmaker_meta_attribute ($msgmaker_meta->get_all_attributes) {
+    next if $msgmaker_meta_attribute->name eq 'locale';
+    my $msgmaker_meta_attribute_type = $msgmaker_meta_attribute->type_constraint;
+    my $msgmaker_meta_attribute_argcount = $msgmaker_meta_attribute_type =~ /ArrayRef/ ? ARGCOUNT_LIST : $msgmaker_meta_attribute_type =~ /HashRef/ ? ARGCOUNT_HASH : ARGCOUNT_ONE;
+    $msgmaker_attributes{lc($msgmaker) . '_' . $msgmaker_meta_attribute->name} = { ARGCOUNT => $msgmaker_meta_attribute_argcount };
+    $msgmaker_attributes{lc($msgmaker)} = { ARGCOUNT => ARGCOUNT_NONE };
   }
 
   # Build actual instance

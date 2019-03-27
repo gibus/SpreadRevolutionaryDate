@@ -8,7 +8,9 @@ version 0.08
 
 # DESCRIPTION
 
-`spread-revolutionary-date` is a [Free Software](https://www.gnu.org/philosophy/free-sw.html) that spreads the current date, expressed in [French Revolutionary calendar](https://en.wikipedia.org/wiki/French_Republican_calendar), to various social networks: [Twitter](https://twitter.com/), [Mastodon](https://mastodon.social/), and the [Freenode](https://freenode.net/) Internet Relay Chat network. And you can easily extend these defaults targets with any desired one, see ["EXTENDING TO NEW TARGETS"](#extending-to-new-targets).
+`spread-revolutionary-date` is a [Free Software](https://www.gnu.org/philosophy/free-sw.html) that spreads the current date, expressed in [French Revolutionary calendar](https://en.wikipedia.org/wiki/French_Republican_calendar), to various social networks: [Twitter](https://twitter.com/), [Mastodon](https://mastodon.social/), and the [Freenode](https://freenode.net/) Internet Relay Chat network.
+
+Moreover, you can easily extend these defaults targets with any desired one, see ["EXTENDING TO NEW TARGETS"](#extending-to-new-targets), and even spread something else than the revolutionary date, see ["msgmaker"](#msgmaker) option and ["EXTENDING TO NEW MESSAGE MAKERS"](#extending-to-new-message-makers).
 
 The French Revolutionary calendar, also called Republican calendar, was introduced during the [French Revolution](https://en.wikipedia.org/wiki/French_Revolution), and used from late 1793 to 1805, and also during the [Paris Commune](https://en.wikipedia.org/wiki/Paris_Commune) in 1871. This was an attempt to get rid of religious and royalist references found in Gregorian calendar when naming measures of Time. Months were given new names based on nature, each day of the year, instead of being named after an associated saint, had a unique name associated with the rural economy: agricultural tools, common animals, grains, pastures, trees, roots, flowers, fruits, plants, and minerals. But this was also an attempt to give more rational in measuring Time, basing measures on decimal system. Instead of weeks, each month was divided into exactly 3 _décades_, that is ten days; days were divided into ten hours; hours into 100 minutes; and minutes into 100 seconds.
 
@@ -52,19 +54,23 @@ These options should appear outside of any section of the configuration file.
 
 ### targets
 
-This option can be specified multiple time. It explicitly defines targets where the revolutionary date should be spread to. Any value set for this option should be a valid target: any of the three default targets (`twitter`, `mastodon`, or `freenode`) or some new target if you have extended this application (see ["EXTENDING TO NEW TARGETS"](#extending-to-new-targets)). If this option is not defined, the revolutionary date is spread on all of three default targets: `twitter`, `mastodon`, and `freenode`.
+This option can be specified multiple time, with values as strings. It explicitly defines targets where the revolutionary date should be spread to. Any value set for this option should be a valid target: any of the three default targets (`twitter`, `mastodon`, or `freenode`) or some new target if you have extended this application (see ["EXTENDING TO NEW TARGETS"](#extending-to-new-targets)). If this option is not defined, the revolutionary date is spread on all of three default targets: `twitter`, `mastodon`, and `freenode`.
+
+### msgmaker
+
+This option can only be specified once, with a value as string. Spread a message computed by the class defined by the value of this option, defaults to `RevolutionaryDate`. The `Value` (case sensitive) of this option should correspond to an existing `App::SpreadRevolutionaryDate::MsgMaker::Value` class consuming [App::SpreadRevolutionaryDate::MsgMaker](https://metacpan.org/pod/App::SpreadRevolutionaryDate::MsgMaker) role. Message makers values pre-defined in this distribution are `RevolutionaryDate`, which spreads the revolutionary date, and `PromptUser`, which prompts the user for the message to be spread (with confirmation). See [""EXTENDING TO NEW MESSAGE MAKERS"](#extending-to-new-message-makers) for details on using a new value for this option.
 
 ### locale
 
-Spread with chosen language. As of [DateTime::Calendar::FrenchRevolutionary](https://metacpan.org/pod/DateTime::Calendar::FrenchRevolutionary) 0.14, locale is limited to 'en' or 'fr', defaults to 'fr'.
+This option can only be specified once, with a value as string. Spread with chosen language. As of [DateTime::Calendar::FrenchRevolutionary](https://metacpan.org/pod/DateTime::Calendar::FrenchRevolutionary) 0.14, locale is limited to 'en' or 'fr', defaults to 'fr'.
 
 ### test
 
-Do no not actually spread the revolutionary date, just print it on standard output for Twitter and Mastodon, and send it on configured test channels for Freenode (see ["test\_channels"](#test_channels) below).
+This boolean option takes no value, either it is defined or not. Do no not actually spread the revolutionary date, just print it on standard output for Twitter and Mastodon, and send it on configured test channels for Freenode (see ["test\_channels"](#test_channels) below).
 
-### acab
+### acab _DEPRECATED_
 
-Instead of spreading the current date and time, pretend that decimal time is 1:31:20 (which corresponds to 03:08:56 UTC, 04:08:56 Paris winter time, or 05:08:56 Paris summer time, in sexagesimal scale used by common Anglo-Babylonian Time).
+This option is _deprecated_ since version 0.09 of this distribution and may be removed in future release. Please use ["RevolutionaryDate acab option"](#revolutionarydate-acab-option) option below.
 
 ### twitter _DEPRECATED_
 
@@ -80,63 +86,71 @@ This option is _deprecated_ since version 0.07 of this distribution and may be r
 
 ## Twitter options
 
-These options are credentials for `spread-revolutionary-date` to spread on a Twitter account. You have to get them from your [Twitter API account](https://apps.twitter.com/) with `write` access level.
+These options are credentials for `spread-revolutionary-date` to spread on a Twitter account. You have to get them from your [Twitter API account](https://apps.twitter.com/) with `write` access level. They should be defined in the `[twitter]` section of the configuration file.
 
 ### consumer\_key
 
-Your Twitter Consumer API key for this application.
+This option can only be specified once, with a value as string: your Twitter Consumer API key for this application.
 
 ### consumer\_secret
 
-Your Twitter Consumer API secret key for this application.
+This option can only be specified once, with a value as string: your Twitter Consumer API secret key for this application.
 
 ### access\_token
 
-Your Twitter Access token for this application.
+This option can only be specified once, with a value as string: your Twitter Access token for this application.
 
 ### access\_token\_secret
 
-Your Twitter Access token secret for this application.
+This option can only be specified once, with a value as string: your Twitter Access token secret for this application.
 
 ## Mastodon options
 
-These options are credentials for `spread-revolutionary-date` to spread on a Mastodon account. You have to get them from your [Mastodon instance API account](https://mstdn.fr/settings/applications) with `write` scope. Note that Mastodon is a decentralized network with multiple instances, the previous link is for [mstdn.fr](https://mstdn.fr) instance, please replace url with your preferred instance.
+These options are credentials for `spread-revolutionary-date` to spread on a Mastodon account. You have to get them from your [Mastodon instance API account](https://mstdn.fr/settings/applications) with `write` scope. Note that Mastodon is a decentralized network with multiple instances, the previous link is for [mstdn.fr](https://mstdn.fr) instance, please replace url with your preferred instance. They should be defined in the `[mastodon]` section of the configuration file.
 
 ### instance
 
-The domain name of your instance, eg: `mastodon.social`, `mstdn.fr`, etc.
+This option can only be specified once, with a value as string: the domain name of your instance, eg: `mastodon.social`, `mstdn.fr`, etc.
 
 ### client\_id
 
-Your Mastodon Client key for this application.
+This option can only be specified once, with a value as string: your Mastodon Client key for this application.
 
 ### client\_secret
 
-Your Mastodon Client secret for this application.
+This option can only be specified once, with a value as string: your Mastodon Client secret for this application.
 
 ### access\_token
 
-Your Mastodon Access token for this application.
+This option can only be specified once, with a value as string: your Mastodon Access token for this application.
 
 ## Freenode options
 
-The first two options are credentials for `spread-revolutionary-date` to spread on a Freenode account. See [https://freenode.net/kb/answer/registration](https://freenode.net/kb/answer/registration) to find out how to register an account on Freenode.
+The first two options are credentials for `spread-revolutionary-date` to spread on a Freenode account. See [https://freenode.net/kb/answer/registration](https://freenode.net/kb/answer/registration) to find out how to register an account on Freenode. They should be defined in the `[twitter]` section of the configuration file.
 
 ### nickname
 
-Your Freenode nickname.
+This option can only be specified once, with a value as string: your Freenode nickname.
 
 ### password
 
-Your Freenode password.
+This option can only be specified once, with a value as string: your Freenode password.
 
 ### channels
 
-This option can be specified multiple time. `spread-revolutionary-date` will spread on every channel specified with this option. This option should be specified at least one time if ["test"](#test) option is not set. It is ignored if ["test"](#test) option is set.
+This option can be specified multiple time, with values as strings. `spread-revolutionary-date` will spread on every channel specified with this option. This option should be specified at least one time if ["test"](#test) option is not set. It is ignored if ["test"](#test) option is set.
 
 ### test\_channels
 
-This option can be specified multiple time. `spread-revolutionary-date` will spread on every channel specified with this option. This option should be specified at least one time if ["test"](#test) option is set. It is ignored if ["test"](#test) option is not set.
+This option can be specified multiple time, with values as strings. `spread-revolutionary-date` will spread on every channel specified with this option. This option should be specified at least one time if ["test"](#test) option is set. It is ignored if ["test"](#test) option is not set.
+
+## RevolutionaryDate acab option
+
+This boolean option takes no value, either it is defined or not. Instead of spreading the current date and time, pretend that decimal time is 1:31:20 (which corresponds to 03:08:56 UTC, 04:08:56 Paris winter time, or 05:08:56 Paris summer time, in sexagesimal scale used by common Anglo-Babylonian Time). The `acab` option should be defined in the `[revolutionarydate]` section of the configuration file. It is only used if ["msgmaker"](#msgmaker) option is `RevolutionaryDate`.
+
+## PromptUser default option
+
+This option can only be specified once, with a value as string. Instead of spreading the revolutionary date, prompt user (with confirmation) for the message to be spread, with a default value (if user enters nothing when prompted). If `default` option is not defined, the default message is `'Goodbye old world, hello revolutionary worlds'` if the user enters nothing when prompted. The `default` option should be defined in the `[promptuser]` section of the configuration file. It is only used if ["msgmaker"](#msgmaker) option is `PromptUser`.
 
 # COMMAND LINE PARAMETERS
 
@@ -148,6 +162,10 @@ Any command line parameter takes precedence on the corresponding option specifie
 
 Same as ["targets"](#targets) configuration option below.
 
+### --msgmaker | -mm
+
+Same as ["msgmaker"](#msgmaker) configuration option below.
+
 ### --locale | -l
 
 Same as ["locale"](#locale) configuration option below.
@@ -156,7 +174,7 @@ Same as ["locale"](#locale) configuration option below.
 
 Same as ["test"](#test) configuration option below.
 
-### --acab | -a
+### --acab | -a _DEPRECATED_
 
 Same as ["acab"](#acab) configuration option below.
 
@@ -231,6 +249,14 @@ Same as ["channels"](#channels) configuration option below.
 ### --freenode\_test\_channels | -tc
 
 Same as ["test\_channels"](#test_channels) configuration option below.
+
+## --revolutionarydate-acab
+
+Same as ["RevolutionaryDate acab option"](#revolutionarydate-acab-option) configuration option below.
+
+## --promptuser-default
+
+Same as ["PromptUser default option"](#promptuser-default-option) configuration option below.
 
 # EXTENDING TO NEW TARGETS
 
