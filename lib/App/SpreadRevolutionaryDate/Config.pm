@@ -96,7 +96,7 @@ sub new {
   foreach my $msgmaker_meta_attribute ($msgmaker_meta->get_all_attributes) {
     next if $msgmaker_meta_attribute->name eq 'locale';
     my $msgmaker_meta_attribute_type = $msgmaker_meta_attribute->type_constraint;
-    my $msgmaker_meta_attribute_argcount = $msgmaker_meta_attribute_type =~ /ArrayRef/ ? ARGCOUNT_LIST : $msgmaker_meta_attribute_type =~ /HashRef/ ? ARGCOUNT_HASH : ARGCOUNT_ONE;
+    my $msgmaker_meta_attribute_argcount = $msgmaker_meta_attribute_type =~ /ArrayRef/ ? ARGCOUNT_LIST : $msgmaker_meta_attribute_type =~ /HashRef/ ? ARGCOUNT_HASH : $msgmaker_meta_attribute_type =~ /Bool/ ? ARGCOUNT_NONE : ARGCOUNT_ONE;
     $msgmaker_attributes{lc($msgmaker) . '_' . $msgmaker_meta_attribute->name} = { ARGCOUNT => $msgmaker_meta_attribute_argcount };
     $msgmaker_attributes{lc($msgmaker)} = { ARGCOUNT => ARGCOUNT_NONE };
   }
@@ -164,6 +164,13 @@ sub new {
   foreach my $target (@targets) {
     $self->check_target_mandatory_options($target);
   }
+
+  # Add acab option for RevolutionaryDate for backward compatibility
+  $self->revolutionarydate_acab($self->acab)
+    if  $self->msgmaker eq 'RevolutionaryDate'
+        && !$self->revolutionarydate_acab
+        && $self->acab;
+
 
   return $self;
 }
