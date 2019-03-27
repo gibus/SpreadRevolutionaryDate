@@ -4,7 +4,7 @@
 * Add an option to choose whether adding or not wikipedia link to
   RevolutionaryDate message writer.
 
-* Check wikipedia links in rench and ENglish for all days and process
+* Check wikipedia links in French and English for all days and process
   disabiguaous pages.
 
 * Add an i18n framework. It should be *light* (Locale::Maketext is
