@@ -77,7 +77,7 @@ sub new {
     foreach my $target_meta_attribute ($target_meta->get_all_attributes) {
       next if $target_meta_attribute->name eq 'obj';
       my $target_meta_attribute_type = $target_meta_attribute->type_constraint;
-      my $target_meta_attribute_argcount = $target_meta_attribute_type =~ /ArrayRef/ ? ARGCOUNT_LIST : $target_meta_attribute_type =~ /HashRef/ ? ARGCOUNT_HASH : ARGCOUNT_ONE;
+      my $target_meta_attribute_argcount = $target_meta_attribute_type =~ /ArrayRef/ ? ARGCOUNT_LIST : $target_meta_attribute_type =~ /HashRef/ ? ARGCOUNT_HASH : $target_meta_attribute_type =~ /Bool/ ? ARGCOUNT_NONE : ARGCOUNT_ONE;
       $target_attributes{lc($target) . '_' . $target_meta_attribute->name} = { ARGCOUNT => $target_meta_attribute_argcount };
       $target_attributes{lc($target)} = { ARGCOUNT => ARGCOUNT_NONE };
     }

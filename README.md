@@ -34,11 +34,16 @@ The revolutionary date and time is computed thanks to the [DateTime::Calendar::F
     # Test spreading to Twitter only in English:
     $ spread-revolutionary-date --targets=twitter --test --locale=en
 
-    # Spread to Twitter and Freenode explicit channels
+    # Spread acab time to Twitter and Freenode explicit channels
     $ spread-revolutionary-date --targets=twitter \
         --targets=freenode \
-        --freenode-channels='#revolution' \
-        --freenode-channels='#acab'
+        --freenode_channels='#revolution' \
+        --freenode_channels='#acab' \
+        --revolutionarydate_acab
+
+    # Prompt user for a message to spread to mastodon
+    $ spread-revolutionary-date --targets=mastodon \
+        --msgwriter=UserPrompt
 
 # CONFIGURATION
 
@@ -54,19 +59,19 @@ These options should appear outside of any section of the configuration file.
 
 ### targets
 
-This option can be specified multiple time, with values as strings. It explicitly defines targets where the revolutionary date should be spread to. Any value set for this option should be a valid target: any of the three default targets (`twitter`, `mastodon`, or `freenode`) or some new target if you have extended this application (see ["EXTENDING TO NEW TARGETS"](#extending-to-new-targets)). If this option is not defined, the revolutionary date is spread on all of three default targets: `twitter`, `mastodon`, and `freenode`.
+This option can be specified multiple times, with values as strings. It explicitly defines targets where the revolutionary date should be spread to. Any value set for this option should be a valid target: any of the three default targets (`twitter`, `mastodon`, or `freenode`) or some new target if you have extended this application (see ["EXTENDING TO NEW TARGETS"](#extending-to-new-targets)). If this option is not defined, the revolutionary date is spread on all three default targets: `twitter`, `mastodon`, and `freenode`.
 
 ### msgmaker
 
-This option can only be specified once, with a value as string. Spread a message computed by the class defined by the value of this option, defaults to `RevolutionaryDate`. The `Value` (case sensitive) of this option should correspond to an existing `App::SpreadRevolutionaryDate::MsgMaker::Value` class consuming [App::SpreadRevolutionaryDate::MsgMaker](https://metacpan.org/pod/App::SpreadRevolutionaryDate::MsgMaker) role. Message makers values pre-defined in this distribution are `RevolutionaryDate`, which spreads the revolutionary date, and `PromptUser`, which prompts the user for the message to be spread (with confirmation). See [""EXTENDING TO NEW MESSAGE MAKERS"](#extending-to-new-message-makers) for details on using a new value for this option.
+This option can only be specified once, with a value as string. Spread a message computed by the class defined by the value of this option, defaults to `RevolutionaryDate`. The `Value` (case sensitive) of this option should correspond to an existing `App::SpreadRevolutionaryDate::MsgMaker::Value` class consuming [App::SpreadRevolutionaryDate::MsgMaker](https://metacpan.org/pod/App::SpreadRevolutionaryDate::MsgMaker) role. Message makers values pre-defined in this distribution are `RevolutionaryDate`, which spreads the revolutionary date, and `PromptUser`, which prompts the user for the message to be spread (with confirmation). See ["EXTENDING TO NEW MESSAGE MAKERS"](#extending-to-new-message-makers) for details on using a new value for this option.
 
 ### locale
 
-This option can only be specified once, with a value as string. Spread with chosen language. As of [DateTime::Calendar::FrenchRevolutionary](https://metacpan.org/pod/DateTime::Calendar::FrenchRevolutionary) 0.14, locale is limited to 'en' or 'fr', defaults to 'fr'.
+This option can only be specified once, with a value as string. Spread with chosen language. As of [DateTime::Calendar::FrenchRevolutionary](https://metacpan.org/pod/DateTime::Calendar::FrenchRevolutionary) 0.14, locale is limited to `'en'` or `'fr'`, defaults to `'fr'`.
 
 ### test
 
-This boolean option takes no value, either it is defined or not. Do no not actually spread the revolutionary date, just print it on standard output for Twitter and Mastodon, and send it on configured test channels for Freenode (see ["test\_channels"](#test_channels) below).
+This boolean option takes no value, either it is defined or not. If defined, do not actually spread the revolutionary date, just print it on standard output for Twitter and Mastodon, and send it on configured test channels for Freenode (see ["test\_channels"](#test_channels) below).
 
 ### acab _DEPRECATED_
 
@@ -138,15 +143,15 @@ This option can only be specified once, with a value as string: your Freenode pa
 
 ### channels
 
-This option can be specified multiple time, with values as strings. `spread-revolutionary-date` will spread on every channel specified with this option. This option should be specified at least one time if ["test"](#test) option is not set. It is ignored if ["test"](#test) option is set.
+This option can be specified multiple times, with values as strings. `spread-revolutionary-date` will spread on every channel specified with this option. This option should be specified at least one time if ["test"](#test) option is not set. It is ignored if ["test"](#test) option is set.
 
 ### test\_channels
 
-This option can be specified multiple time, with values as strings. `spread-revolutionary-date` will spread on every channel specified with this option. This option should be specified at least one time if ["test"](#test) option is set. It is ignored if ["test"](#test) option is not set.
+This option can be specified multiple times, with values as strings. `spread-revolutionary-date` will spread on every channel specified with this option. This option should be specified at least one time if ["test"](#test) option is set. It is ignored if ["test"](#test) option is not set.
 
 ## RevolutionaryDate acab option
 
-This boolean option takes no value, either it is defined or not. Instead of spreading the current date and time, pretend that decimal time is 1:31:20 (which corresponds to 03:08:56 UTC, 04:08:56 Paris winter time, or 05:08:56 Paris summer time, in sexagesimal scale used by common Anglo-Babylonian Time). The `acab` option should be defined in the `[revolutionarydate]` section of the configuration file. It is only used if ["msgmaker"](#msgmaker) option is `RevolutionaryDate`.
+This boolean option takes no value, either it is defined or not. If defined, instead of spreading the current date and time, pretend that decimal time is 1:31:20 (which corresponds to 03:08:56 UTC, 04:08:56 Paris winter time, or 05:08:56 Paris summer time, in sexagesimal scale used by common Anglo-Babylonian Time). The `acab` option should be defined in the `[revolutionarydate]` section of the configuration file. It is only used if ["msgmaker"](#msgmaker) option is `RevolutionaryDate`.
 
 ## PromptUser default option
 
@@ -264,9 +269,9 @@ Version 0.07 of this distribution is a complete redesign of the API, taking adva
 
 To add a new target, you should write a new class in the `App::SpreadRevolutionaryDate::Target::` namespace (that is: the class should be `App::SpreadRevolutionaryDate::Target::Mytarget` for a new `Mytarget` target), that consumes the [App::SpreadRevolutionaryDate::Target](https://metacpan.org/pod/App::SpreadRevolutionaryDate::Target) role. See ["DESCRIPTION" in App::SpreadRevolutionaryDate::Target](https://metacpan.org/pod/App::SpreadRevolutionaryDate::Target#DESCRIPTION) for a comprehensive description of this role.
 
-The name of the target should be added as a value of the `/targets` option in lower case.
+The name of the target should be added as a value of the ["targets"](#targets) option in lower case.
 
-Such a target class is actually just a wrapper. Usually a target has to use an existing specific module (which can be a `Moose` class or not) to perform the actual work of posting a message according the specific target protocol, after having complied with any potential required authentication. Such authentication and posting should be carried on by the constructor or the required `spread` method of the target class.
+Such a target class is actually just a wrapper. Usually a target has to use an existing specific module (which can be a `Moose` class or not) to perform the actual work of posting a message according the specific target protocol, after having complied with any potential required authentication. Such authentication should be carried on by the constructor or, along with posting, by the required `spread` method of the target class.
 
 To perform authentication and to post a message, there is a strong likelihood that the new target requires specific parameters (for eg. tokens, keys, account name, password, channels, etc.). These parameters should be defined as required attributes of the target class. Values for such attributes should be set in the [configuration file](#configuration), inside a section named after the target in lower case (`[mytarget]`), or as [command line parameters](#command-line-parameters) prefixed with the name of the target in lower case, followed by an underscore (`--mytarget_myparam`).
 
@@ -276,9 +281,9 @@ Should you extend `spread-revolutionary-date` to a new target, we advise you to 
 
 It is even easier to spread whatever you want instead of the revolutionary date. You should write a new class in the `App::SpreadRevolutionaryDate::MsgMaker::` namespace (that is: the class should be `App::SpreadRevolutionaryDate::MsgMaker::MyMsgMaker` for a new `MyMsgMaker` message maker), that consumes the [App::SpreadRevolutionaryDate::MsgMaker](https://metacpan.org/pod/App::SpreadRevolutionaryDate::MsgMaker) role. See ["DESCRIPTION" in App::SpreadRevolutionaryDate::MsgMaker](https://metacpan.org/pod/App::SpreadRevolutionaryDate::MsgMaker#DESCRIPTION) for a comprehensive description of this role.
 
-The name of the message maker should be set as a value of the `/msgmaker` option in lower case.
+The name of the message maker should be set as a value of the ["msgmaker"](#msgmaker) option in lower case.
 
-Such a message maker class is actually just a wrapper. Usually a message maker has to use an existing specific module (which can be a `Moose` class or not) to craft the message. [App::SpreadRevolutionaryDate::Target::MsgMaker::RevolutionaryDate](https://metacpan.org/pod/App::SpreadRevolutionaryDate::Target::MsgMaker::RevolutionaryDate) uses [DateTime::Calendar::FrenchRevolutionary](https://metacpan.org/pod/DateTime::Calendar::FrenchRevolutionary), while [App::SpreadRevolutionaryDate::Target::MsgMaker::PromptUser](https://metacpan.org/pod/App::SpreadRevolutionaryDate::Target::MsgMaker::PromptUser) is based on [IO::Prompt::Hooked](https://metacpan.org/pod/IO::Prompt::Hooked). You may need for example [LWP](https://metacpan.org/pod/LWP) to extract the message from a fetched web page or service, or [XML::Feed](https://metacpan.org/pod/XML::Feed) to build it from a [RSS](https://en.wikipedia.org/wiki/RSS) feed, or [DBI](https://metacpan.org/pod/DBI) to retrieve it from a database, etc.
+Such a message maker class is actually just a wrapper. Usually a message maker has to use an existing specific module (which can be a `Moose` class or not) to craft the message. [App::SpreadRevolutionaryDate::Target::MsgMaker::RevolutionaryDate](https://metacpan.org/pod/App::SpreadRevolutionaryDate::Target::MsgMaker::RevolutionaryDate) uses [DateTime::Calendar::FrenchRevolutionary](https://metacpan.org/pod/DateTime::Calendar::FrenchRevolutionary), while [App::SpreadRevolutionaryDate::Target::MsgMaker::PromptUser](https://metacpan.org/pod/App::SpreadRevolutionaryDate::Target::MsgMaker::PromptUser) is based on [IO::Prompt::Hooked](https://metacpan.org/pod/IO::Prompt::Hooked). You may need for example [LWP](https://metacpan.org/pod/LWP) to extract the message from a fetched web page or service, or [XML::Feed](https://metacpan.org/pod/XML::Feed) to build it from a [RSS](https://en.wikipedia.org/wiki/RSS) feed, or [DBI](https://metacpan.org/pod/DBI) to retrieve it from a database, or nothing at all to spread a fixed message, etc.
 
 If your new message maker class needs specific parameters (other than `locale`, which comes with  [App::SpreadRevolutionaryDate::MsgMaker](https://metacpan.org/pod/App::SpreadRevolutionaryDate::MsgMaker) role), they should be defined as attributes of this class. Values for such attributes should be set in the [configuration file](#configuration), inside a section named after the message maker in lower case (`[mymsgmaker]`), or as [command line parameters](#command-line-parameters) prefixed with the name of the message maker in lower case, followed by an underscore (`--mytarget_myparam`).
 
