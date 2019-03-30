@@ -5,10 +5,19 @@ package App::SpreadRevolutionaryDate;
 # ABSTRACT: Spread date and time from Revolutionary (Republican) Calendar on Twitter, Mastodon and Freenode.
 
 use Moose;
-use namespace::autoclean;
 use App::SpreadRevolutionaryDate::Config;
 use DateTime::Calendar::FrenchRevolutionary;
 use Class::Load ':all';
+
+use Locale::TextDomain 'App-SpreadRevolutionaryDate';
+use Locale::Messages qw(bind_textdomain_filter);
+use Encode;
+BEGIN {
+  $ENV{PERL_UNICODE} = 'AS';
+  $ENV{OUTPUT_CHARSET} = 'UTF-8';
+  bind_textdomain_filter 'App-SpreadRevolutionaryDate' => \&Encode::decode_utf8, Encode::FB_DEFAULT;
+}
+use namespace::autoclean;
 
 has 'config' => (
     is  => 'ro',

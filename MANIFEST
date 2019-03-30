@@ -5,6 +5,7 @@ Changes
 INSTALL
 LICENSE
 MANIFEST
+MANIFEST.SKIP
 META.json
 META.yml
 Makefile.PL
@@ -24,6 +25,8 @@ lib/App/SpreadRevolutionaryDate/Target/Freenode.pm
 lib/App/SpreadRevolutionaryDate/Target/Freenode/Bot.pm
 lib/App/SpreadRevolutionaryDate/Target/Mastodon.pm
 lib/App/SpreadRevolutionaryDate/Target/Twitter.pm
+lib/LocaleData/en/LC_MESSAGES/App-SpreadRevolutionaryDate.mo
+lib/LocaleData/fr/LC_MESSAGES/App-SpreadRevolutionaryDate.mo
 t/00-compile.t
 t/command_line.t
 t/config.t

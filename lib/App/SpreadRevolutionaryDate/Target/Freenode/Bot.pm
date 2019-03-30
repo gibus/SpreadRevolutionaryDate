@@ -8,6 +8,9 @@ use Moose;
 use MooseX::NonMoose;
 extends 'Bot::BasicBot';
 
+use Locale::TextDomain 'App-SpreadRevolutionaryDate';
+use namespace::autoclean;
+
 has 'nb_said' => (
     traits  => ['Counter'],
     is  => 'rw',

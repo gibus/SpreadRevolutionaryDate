@@ -8,8 +8,10 @@ use Moose;
 with 'App::SpreadRevolutionaryDate::Target'
   => {worker => 'Mastodon::Client'};
 
-use namespace::autoclean;
 use Mastodon::Client;
+
+use Locale::TextDomain 'App-SpreadRevolutionaryDate';
+use namespace::autoclean;
 
 has 'instance' => (
     is  => 'ro',
@@ -66,12 +68,17 @@ sub spread {
   $test //= 0;
 
   if ($test) {
-    use Encode qw(encode);
+    $msg = __("Spread to Mastodon: ") . $msg;
+
+    use open qw(:std :utf8);
     use IO::Handle;
     my $io = IO::Handle->new;
     $io->fdopen(fileno(STDOUT), "w");
-    my $utf8_msg = encode('UTF-8', $msg);
-    $io->say("Spread to Mastodon: $utf8_msg");
+
+    use Encode qw(encode decode is_utf8);
+    $msg = encode('UTF-8', $msg) if is_utf8($msg);
+
+    $io->say($msg);
   } else {
     $self->obj->post_status($msg);
   }

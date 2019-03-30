@@ -8,9 +8,11 @@ use Moose;
 with 'App::SpreadRevolutionaryDate::Target'
   => {worker => 'App::SpreadRevolutionaryDate::Target::Freenode::Bot'};
 
-use namespace::autoclean;
 use App::SpreadRevolutionaryDate::Target::Freenode::Bot;
 use POE;
+
+use Locale::TextDomain 'App-SpreadRevolutionaryDate';
+use namespace::autoclean;
 
 has 'nickname' => (
     is  => 'ro',

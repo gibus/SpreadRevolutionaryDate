@@ -13,7 +13,9 @@ use Getopt::Long;
 use AppConfig qw(:argcount);
 use File::HomeDir;
 use Class::Load ':all';
-use namespace::clean;
+
+use Locale::TextDomain 'App-SpreadRevolutionaryDate';
+use namespace::autoclean;
 
 =method new
 
@@ -338,8 +340,8 @@ Usage: $0 <OPTIONS>
     --freenode_password|-fp <passwd>: define Freenode password
     --freenode_test_channels|-ftc <channel_1>  [--freenode_test_channels|-ftc <channel_2> […--freenode_test_channels|-ftc <channel_n>]]: define Freenode channels
     --freenode_channels|-fc <channel_1>  [--freenode_channels|-fc <channel_2> […--freenode_channels|-fc <channel_n>]]: define Freenode test channels
-    --revolutionarydate-acab: pretend it is 01:31:20
-    --promptuser-default: define default message when --msgmaker=PromptUser
+    --revolutionarydate-acab: pretend it is 01:31:20 (default: false)
+    --promptuser-default <msg>: define default message when --msgmaker=PromptUser (default: 'Goodbye old world, hello revolutionary worlds')
 USAGE
  exit 0;
 }

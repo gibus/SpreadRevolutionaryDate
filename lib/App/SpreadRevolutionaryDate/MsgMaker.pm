@@ -5,13 +5,24 @@ package App::SpreadRevolutionaryDate::MsgMaker;
 # ABSTRACT: Role providing interface for crafting a message to be spread by L<App::SpreadRevolutionaryDate>.
 
 use Moose::Role;
+use Locale::Util qw(set_locale);
+use Locale::Messages qw(LC_ALL nl_putenv);
+
+use Locale::TextDomain 'App-SpreadRevolutionaryDate';
 use namespace::autoclean;
 
 has locale => (
   is => 'ro',
   isa => 'Str',
   required => 1,
-  default => 'fr'
+  default => 'fr',
+  trigger => sub {
+    my ( $self, $val, $old_val ) = @_;
+    set_locale(LC_ALL, $val, undef, 'utf-8');
+    nl_putenv("LANGUAGE=$val");
+    nl_putenv("LANG=$val");
+    nl_putenv("OUTPUT_CHARSET=utf-8");
+  },
 );
 
 requires 'compute';

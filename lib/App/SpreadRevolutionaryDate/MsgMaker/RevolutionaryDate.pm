@@ -7,6 +7,8 @@ package App::SpreadRevolutionaryDate::MsgMaker::RevolutionaryDate;
 use Moose;
 with 'App::SpreadRevolutionaryDate::MsgMaker';
 
+
+use Locale::TextDomain 'App-SpreadRevolutionaryDate';
 use namespace::autoclean;
 
 has 'acab' => (
@@ -484,26 +486,29 @@ sub compute {
       DateTime::Calendar::FrenchRevolutionary->now->set(hour => 1, minute => 31, second => 20, locale => $self->locale)
     : DateTime::Calendar::FrenchRevolutionary->now->set(locale => $self->locale);
 
-  my $msg;
+  my $msg = __x("We are {day_name}, {day} {month} of Revolution year {roman_year} ({year}), {feast_long}, it is {time}!",
+      day_name   => $revolutionary->day_name,
+      day        => $revolutionary->day,
+      month      => $revolutionary->month_name,
+      roman_year => $revolutionary->strftime("%EY"),
+      year       => $revolutionary->year,
+      feast_long => encode('UTF-8', $revolutionary->feast_long),
+      time       => $revolutionary->hms,
+  );
 
   if ($self->wikipedia_link) {
     use URI::Escape;
-    $msg = $self->locale eq 'fr' ?
-        $revolutionary->strftime("Nous sommes le %A, %d %B de l'An %EY (%Y) de la Révolution, %Ej, il est %T! https://" . $self->locale . ".wikipedia.org/wiki/!!%Oj!!")
-      : $revolutionary->strftime("We are %A, %d %B of Revolution Year %EY (%Y), %Ej, it is %T! https://" . $self->locale . ".wikipedia.org/wiki/!!%Oj!!");
-
-    $msg =~ s/!!([^!]+)!!/!!$wikipedia_redirect{$self->locale}->{$revolutionary->month}->{$1}!!/
+    my $entry = $revolutionary->feast;
+    $entry = $wikipedia_redirect{$self->locale}->{$revolutionary->month}->{$entry}
       if    exists $wikipedia_redirect{$self->locale}
          && exists $wikipedia_redirect{$self->locale}->{$revolutionary->month}
-         && exists $wikipedia_redirect{$self->locale}->{$revolutionary->month}->{$revolutionary->strftime("%Oj")};
+         && exists $wikipedia_redirect{$self->locale}->{$revolutionary->month}->{$entry};
 
-    $msg =~ s/!!([^!]+)!!/uri_escape_utf8($1)/e;
-  } else {
-    $msg = $self->locale eq 'fr' ?
-        $revolutionary->strftime("Nous sommes le %A, %d %B de l'An %EY (%Y) de la Révolution, %Ej, il est %T!")
-      : $revolutionary->strftime("We are %A, %d %B of Revolution Year %EY (%Y), %Ej, it is %T!");
+    $msg .= ' https://' . $self->locale . '.wikipedia.org/wiki/' . uri_escape_utf8($entry);
   }
 
+  use Encode qw(encode decode is_utf8);
+  $msg = decode('UTF-8', $msg) if is_utf8($msg);
   return $msg
 }
 

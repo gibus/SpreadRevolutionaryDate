@@ -1,5 +1,10 @@
 #!/usr/bin/perl
 
+BEGIN {
+    $ENV{OUTPUT_CHARSET} = 'UTF-8';
+    $ENV{PERL_UNICODE} = 'AS';
+}
+
 use Test::More tests => 28;
 use Test::NoWarnings;
 

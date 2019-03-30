@@ -73,21 +73,21 @@ This option can only be specified once, with a value as string. Spread with chos
 
 This boolean option takes no value, either it is defined or not. If defined, do not actually spread the revolutionary date, just print it on standard output for Twitter and Mastodon, and send it on configured test channels for Freenode (see ["test\_channels"](#test_channels) below).
 
-### acab _DEPRECATED_
+### _DEPRECATED_ acab
 
 This option is _deprecated_ since version 0.09 of this distribution and may be removed in future release. Please use ["acab"](#acab) option in `[revolutionarydate]` section, as described below.
 
-### twitter _DEPRECATED_
+### _DEPRECATED_ twitter
 
-This option is _deprecated_ since version 0.07 of this distribution and may be removed in future release. Please use ["targets"](#targets) option, as described below. Spread on Twitter explicitly. If none of the `twitter`, `mastodon`, `freenode` option is set, the revolutionary date is spread on all of these three targets.
+This option is _deprecated_ since version 0.07 of this distribution and may be removed in future release. Please use ["targets"](#targets) option, as described above. Spread on Twitter explicitly. If none of the `twitter`, `mastodon`, `freenode` option is set, the revolutionary date is spread on all of these three targets.
 
-### mastodon _DEPRECATED_
+### _DEPRECATED_ mastodon
 
-This option is _deprecated_ since version 0.07 of this distribution and may be removed in future release. Please use ["targets"](#targets) option, as described below. Spread on Mastodon explicitly. If none of the `twitter`, `mastodon`, `freenode` option is set, the revolutionary date is spread on all of these three targets.
+This option is _deprecated_ since version 0.07 of this distribution and may be removed in future release. Please use ["targets"](#targets) option, as described above. Spread on Mastodon explicitly. If none of the `twitter`, `mastodon`, `freenode` option is set, the revolutionary date is spread on all of these three targets.
 
-### freenode _DEPRECATED_
+### _DEPRECATED_ freenode
 
-This option is _deprecated_ since version 0.07 of this distribution and may be removed in future release. Please use ["targets"](#targets) option, as described below. Spread on Freenode explicitly. If none of the `twitter`, `mastodon`, `freenode` option is set, the revolutionary date is spread on all of these three targets.
+This option is _deprecated_ since version 0.07 of this distribution and may be removed in future release. Please use ["targets"](#targets) option, as described above. Spread on Freenode explicitly. If none of the `twitter`, `mastodon`, `freenode` option is set, the revolutionary date is spread on all of these three targets.
 
 ## Twitter options
 
@@ -203,19 +203,19 @@ Same as ["locale"](#locale) configuration option above.
 
 Same as ["test"](#test) configuration option above.
 
-### --acab | -a _DEPRECATED_
+### _DEPRECATED_ --acab | -a
 
 Same as ["acab"](#acab) configuration option above.
 
-### --twitter | -t _DEPRECATED_
+### _DEPRECATED_ --twitter | -t
 
 Same as ["twitter"](#twitter) configuration option above.
 
-### --mastodon | -m _DEPRECATED_
+### _DEPRECATED_ --mastodon | -m
 
 Same as ["mastodon"](#mastodon) configuration option above.
 
-### --freenode | -f _DEPRECATED_
+### _DEPRECATED_ --freenode | -f
 
 Same as ["freenode"](#freenode) configuration option above.
 
@@ -291,7 +291,7 @@ Same as ["wikipedia\_link"](#wikipedia_link) configuration option above.
 
 ## PromptUser parameter
 
-### --promptuser\_default &lt;default message>
+### --promptuser\_default &lt;msg>
 
 Same as ["default"](#default) configuration option above.
 

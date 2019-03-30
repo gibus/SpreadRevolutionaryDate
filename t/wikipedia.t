@@ -1,4 +1,11 @@
 #!/usr/bin/perl
+use utf8;
+
+BEGIN {
+    $ENV{OUTPUT_CHARSET} = 'UTF-8';
+    $ENV{PERL_UNICODE} = 'AS';
+}
+use open qw(:std :utf8);
 
 use Test::More tests => 3;
 use Test::NoWarnings;
@@ -11,12 +18,12 @@ use App::SpreadRevolutionaryDate;
 my $data_start = tell DATA;
 my $spread_revolutionary_date = App::SpreadRevolutionaryDate->new(\*DATA);
 
-stdout_like { $spread_revolutionary_date->spread } qr/Spread to Twitter: Nous sommes le.+! https:\/\/fr.wikipedia.org\/wiki\//, 'Spread to Twitter with wikipedia link';
+stdout_like { $spread_revolutionary_date->spread } qr/Diffusé sur Twitter : Nous sommes le.+! https:\/\/fr.wikipedia.org\/wiki\//, 'Spread to Twitter with wikipedia link';
 
 @ARGV = ('--test', '--twitter', '--revolutionarydate_wikipedia_link', 0);
 seek DATA, $data_start, 0;
 my $spread_no_wikipedia_link = App::SpreadRevolutionaryDate->new(\*DATA);
-stdout_like { $spread_no_wikipedia_link->spread } qr/Spread to Twitter: Nous sommes le.+!/, 'Spread to Twitterwitout wikipedia link';
+stdout_like { $spread_no_wikipedia_link->spread } qr/Diffusé sur Twitter : Nous sommes le.+!/, 'Spread to Twitter witout wikipedia link';
 
 __DATA__
 

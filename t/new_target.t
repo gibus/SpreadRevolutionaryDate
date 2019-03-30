@@ -1,6 +1,11 @@
 #!/usr/bin/perl
 use utf8;
 
+BEGIN {
+    $ENV{OUTPUT_CHARSET} = 'UTF-8';
+    $ENV{PERL_UNICODE} = 'AS';
+}
+
 use Test::More tests => 5;
 use Test::Output;
 use Test::NoWarnings;

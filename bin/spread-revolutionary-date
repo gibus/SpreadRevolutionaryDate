@@ -3,6 +3,11 @@ use strict;
 use warnings;
 use utf8;
 
+BEGIN {
+    $ENV{OUTPUT_CHARSET} = 'UTF-8';
+    $ENV{PERL_UNICODE} = 'AS';
+}
+
 # PODNAME: spread-revolutionary-date
 # ABSTRACT: Spread date and time from Revolutionary (Republican) Calendar
 
@@ -80,21 +85,21 @@ This option can only be specified once, with a value as string. Spread with chos
 
 This boolean option takes no value, either it is defined or not. If defined, do not actually spread the revolutionary date, just print it on standard output for Twitter and Mastodon, and send it on configured test channels for Freenode (see L</"test_channels"> below).
 
-=head3 acab I<DEPRECATED>
+=head3 I<DEPRECATED> acab
 
 This option is I<deprecated> since version 0.09 of this distribution and may be removed in future release. Please use L</acab> option in C<[revolutionarydate]> section, as described below.
 
-=head3 twitter I<DEPRECATED>
+=head3 I<DEPRECATED> twitter
 
-This option is I<deprecated> since version 0.07 of this distribution and may be removed in future release. Please use L</targets> option, as described below. Spread on Twitter explicitly. If none of the C<twitter>, C<mastodon>, C<freenode> option is set, the revolutionary date is spread on all of these three targets.
+This option is I<deprecated> since version 0.07 of this distribution and may be removed in future release. Please use L</targets> option, as described above. Spread on Twitter explicitly. If none of the C<twitter>, C<mastodon>, C<freenode> option is set, the revolutionary date is spread on all of these three targets.
 
-=head3 mastodon I<DEPRECATED>
+=head3 I<DEPRECATED> mastodon
 
-This option is I<deprecated> since version 0.07 of this distribution and may be removed in future release. Please use L</targets> option, as described below. Spread on Mastodon explicitly. If none of the C<twitter>, C<mastodon>, C<freenode> option is set, the revolutionary date is spread on all of these three targets.
+This option is I<deprecated> since version 0.07 of this distribution and may be removed in future release. Please use L</targets> option, as described above. Spread on Mastodon explicitly. If none of the C<twitter>, C<mastodon>, C<freenode> option is set, the revolutionary date is spread on all of these three targets.
 
-=head3 freenode I<DEPRECATED>
+=head3 I<DEPRECATED> freenode
 
-This option is I<deprecated> since version 0.07 of this distribution and may be removed in future release. Please use L</targets> option, as described below. Spread on Freenode explicitly. If none of the C<twitter>, C<mastodon>, C<freenode> option is set, the revolutionary date is spread on all of these three targets.
+This option is I<deprecated> since version 0.07 of this distribution and may be removed in future release. Please use L</targets> option, as described above. Spread on Freenode explicitly. If none of the C<twitter>, C<mastodon>, C<freenode> option is set, the revolutionary date is spread on all of these three targets.
 
 =head2 Twitter options
 
@@ -210,19 +215,19 @@ Same as L</locale> configuration option above.
 
 Same as L</test> configuration option above.
 
-=head3 --acab | -a I<DEPRECATED>
+=head3 I<DEPRECATED> --acab | -a
 
 Same as L</acab> configuration option above.
 
-=head3 --twitter | -t I<DEPRECATED>
+=head3 I<DEPRECATED> --twitter | -t
 
 Same as L</twitter> configuration option above.
 
-=head3 --mastodon | -m I<DEPRECATED>
+=head3 I<DEPRECATED> --mastodon | -m
 
 Same as L</mastodon> configuration option above.
 
-=head3 --freenode | -f I<DEPRECATED>
+=head3 I<DEPRECATED> --freenode | -f
 
 Same as L</freenode> configuration option above.
 
@@ -298,7 +303,7 @@ Same as L</wikipedia_link> configuration option above.
 
 =head2 PromptUser parameter
 
-=head3 --promptuser_default <default message>
+=head3 --promptuser_default <msg>
 
 Same as L</default> configuration option above.
 
