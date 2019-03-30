@@ -176,7 +176,21 @@ This option can only be specified once, with a value as string. Instead of sprea
 
 =head1 COMMAND LINE PARAMETERS
 
-Any command line parameter takes precedence on the corresponding option specified on the confiuration file, see L</"CONFIGURATION> below.
+Any command line parameter, other than the first three ones below, takes precedence on the corresponding option specified on the confiuration file, see L</CONFIGURATION> above.
+
+=head2 Command line only parameters
+
+=head3 --conf | -c <file>
+
+Use C<E<lt>fileE<gt>> path as configuration file, instead of the default ones, see L</CONFIGURATION> above.
+
+=head3 --version | -v
+
+Prints out the version of C<spread-revolutionary-date>.
+
+=head3 --help | -h | -?
+
+Prints out help with command line parameters.
 
 =head2 General parameters
 

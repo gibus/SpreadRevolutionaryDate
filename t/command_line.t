@@ -1,17 +1,18 @@
 #!/usr/bin/perl
 
-use Test::More tests => 28;
+use Test::More tests => 27;
 use Test::NoWarnings;
+use Test::Trap;
 
 use App::SpreadRevolutionaryDate;
+use FindBin;
 
-@ARGV = ('--test');
-my $data_start = tell DATA;
-my $spread_revolutionary_date = App::SpreadRevolutionaryDate->new(\*DATA);
+my $conf_file = $FindBin::Bin . '/../etc/sample-spread-revolutionary-date.conf';
 
-isa_ok($spread_revolutionary_date, 'App::SpreadRevolutionaryDate', 'Base class constructor');
-isa_ok($spread_revolutionary_date->config, 'App::SpreadRevolutionaryDate::Config', 'Config class constructor');
+@ARGV = ('--locale', 'fr', '-c', $conf_file);
+my $spread_revolutionary_date = App::SpreadRevolutionaryDate->new();
 
+is($spread_revolutionary_date->config->conf, $conf_file, 'Conf option value');
 is($spread_revolutionary_date->config->test, 1, 'Test option set');
 is($spread_revolutionary_date->config->locale, 'fr', 'Locale option value');
 
@@ -40,36 +41,12 @@ is($spread_revolutionary_date->config->msgmaker, 'RevolutionaryDate', 'MsgMaker 
 is($spread_revolutionary_date->config->locale, 'fr', 'MsgMaker locale option value');
 ok(!$spread_revolutionary_date->config->acab, 'MsgMaker acab option value');
 
-push @ARGV, '--twitter', '--test';
-seek DATA, $data_start, 0;
-my $spread_only_to_twitter = App::SpreadRevolutionaryDate->new(\*DATA);
-is_deeply($spread_only_to_twitter->config->targets, ['twitter'], 'Targets options set');
-ok($spread_only_to_twitter->config->twitter, 'Twitter option explicitely set');
-ok(!$spread_only_to_twitter->config->mastodon, 'Mastodon option not explicitely set');
-ok(!$spread_only_to_twitter->config->freenode, 'Freenode option not explicitely set');
+@ARGV = ('--version', '--test');
+trap { App::SpreadRevolutionaryDate->new };
+is($trap->exit, 0, 'Version exit code' );
+is($trap->stdout, $App::SpreadRevolutionaryDate::VERSION . "\n", 'Version value' );
 
-__DATA__
-
-[twitter]
-# Get these values from https://apps.twitter.com/
-consumer_key        = 'ConsumerKey'
-consumer_secret     = 'ConsumerSecret'
-access_token        = 'AccessToken'
-access_token_secret = 'AccessTokenSecret'
-
-[mastodon]
-# Get these values from https://<your mastodon instance>/settings/applications
-instance        = 'Instance'
-client_id       = 'ClientId'
-client_secret   = 'ClientSecret'
-access_token    = 'AccessToken'
-
-[freenode]
-# See https://freenode.net/kb/answer/registration to register
-nickname      = 'NickName'
-password      = 'Password'
-test_channels = '#TestChannel1'
-test_channels = '#TestChannel2'
-channels      = '#Channel1'
-channels      = '#Channel2'
-channels      = '#Channel3'
+@ARGV = ('-?', '-n');
+trap { App::SpreadRevolutionaryDate->new };
+is($trap->exit, 0, 'Help exit code' );
+like($trap->stdout, qr{^Usage:.+<OPTIONS>\n}, 'Help value' );

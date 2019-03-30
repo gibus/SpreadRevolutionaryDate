@@ -6,7 +6,10 @@ package App::SpreadRevolutionaryDate::Config;
 
 use Moose;
 use MooseX::NonMoose;
+
 extends 'AppConfig';
+
+use Getopt::Long;
 use AppConfig qw(:argcount);
 use File::HomeDir;
 use Class::Load ':all';
@@ -21,16 +24,32 @@ Constructor class method, subclassing C<AppConfig>. Takes no argument. Returns a
 sub new {
   my ($class, $filename) = @_;
 
+  # Backup command line arguments to be consumed twice
+  my @orig_argv = @ARGV;
+
+  # Parse command line only parameters
+  my $config_first = Getopt::Long::Parser->new;
+  $config_first->configure('pass_through');
+
+  if ($filename) {
+    $config_first->getoptions("version|v" => sub { say $App::SpreadRevolutionaryDate::Config::VERSION; exit 0; },
+                              "help|h|?" => \&usage);
+  } else {
+    $config_first->getoptions("version|v" => sub { say $App::SpreadRevolutionaryDate::Config::VERSION; exit 0; },
+                              "help|h|?" => \&usage,
+                              "conf|c=s" => \$filename);
+  }
+
   # If filename is not a file path but a GLOB or an opend filehandle
   # we'll need to rewind it to the beginning before reading it twice
   my $file_start;
   $file_start = tell $filename if $filename && ref($filename);
 
-  # Backup command line arguments to be consumed twice
-  my @orig_argv = @ARGV;
-
   # Find targets
   my $config_targets = AppConfig::new($class, {CREATE => 1, ERROR => sub {}},
+                                      'conf' => {ARGCOUNT => ARGCOUNT_ONE, ALIAS => 'c'},
+                                      'version' => {ARGCOUNT => ARGCOUNT_NONE, ALIAS => 'v'},
+                                      'help' => {ARGCOUNT => ARGCOUNT_NONE, ALIAS => 'h|?'},
                                       'targets' => {ARGCOUNT => ARGCOUNT_LIST, ALIAS => 'tg'},
                                       'msgmaker' => {ARGCOUNT => ARGCOUNT_ONE, ALIAS => 'mm'},
                                       'test' => {ARGCOUNT => ARGCOUNT_NONE, ALIAS => 'no|n'},
@@ -40,6 +59,8 @@ sub new {
                                       'mastodon' => {ARGCOUNT => ARGCOUNT_NONE, ALIAS => 'm'},
                                       'freenode' => {ARGCOUNT => ARGCOUNT_NONE, ALIAS => 'f'});
   $config_targets->parse_file($filename);
+  # Rewind command line arguments and process them
+  @ARGV = @orig_argv;
   $config_targets->parse_command_line;
 
   # Add targets defined with targets option
@@ -50,7 +71,7 @@ sub new {
   foreach my $potential_target (keys %potential_targets) {
     next unless $potential_targets{$potential_target};
     next if $potential_target =~ /_/;
-    if ($potential_target !~ /^(?:acab|test|locale|targets|msgmaker)$/) {
+    if ($potential_target !~ /^(?:acab|test|locale|targets|msgmaker|conf|version|help)$/) {
       push @targets, $potential_target;
     }
   }
@@ -114,6 +135,9 @@ sub new {
   my $self = AppConfig::new($class,
     %target_attributes,
     %msgmaker_attributes,
+    'conf' => {ARGCOUNT => ARGCOUNT_ONE, ALIAS => 'c'},
+    'version' => {ARGCOUNT => ARGCOUNT_NONE, ALIAS => 'v'},
+    'help' => {ARGCOUNT => ARGCOUNT_NONE, ALIAS => 'h|?'},
     'targets' => {ARGCOUNT => ARGCOUNT_LIST, ALIAS => 'tg'},
     'msgmaker' => {ARGCOUNT => ARGCOUNT_ONE, ALIAS => 'mm', default => 'RevolutionaryDate'},
     'test' => {ARGCOUNT => ARGCOUNT_NONE, ALIAS => 'no|n'},
@@ -154,7 +178,7 @@ sub new {
   foreach my $potential_target (keys %confvars) {
     next unless $confvars{$potential_target};
     next if $potential_target =~ /_/;
-    if ($potential_target !~ /^(?:acab|test|locale|targets|msgmaker)$/) {
+    if ($potential_target !~ /^(?:acab|test|locale|targets|msgmaker|conf|version|help)$/) {
       push @targets, $potential_target;
       $self->targets($potential_target);
     }
@@ -279,6 +303,45 @@ sub get_msgmaker_arguments {
         && $self->acab;
 
   return %msgmaker_args;
+}
+
+=method usage
+
+Prints usage with command line parameters and exits.
+
+=cut
+
+sub usage {
+ print << "USAGE";
+Usage: $0 <OPTIONS>
+  with <OPTIONS>:
+    --conf|-c <file>: path to configuration file (default: ~/.config/spread-revolutionary-date/spread-revolutionary-date.conf or ~/.spread-revolutionary-date.conf)'
+    --version|-v': print out version
+    --help|-h|-?': print out this help
+    --targets|-tg <target_1> [--targets|-tg <target_2> […--targets|-tg <target_n>]]': define targets (default: twitter, mastodon, freenode)
+    --msgmaker|-mm <MsgMakerClass>: define message maker (default: RevolutionaryDate)
+    --locale|-l <en|fr>: define locale (default: fr)
+    --test|--no|-n: do not spread, just print out message or spread to test channels for Freenode
+    --acab|-a: DEPRECATED, use --revolutionarydate-acab
+    --twitter|-t: DEPRECATED, use --targets=twitter
+    --mastodon|-m: DEPRECATED, use --targets=mastodon
+    --freenode|-f: DEPRECATED, use --targets=freenode
+    --twitter_consumer_key|-tck <key>: define Twitter consumer key
+    --twitter_consumer_secret|-tcs <secret>: define Twitter consumer secret
+    --twitter_access_token|-tat <token>: define Twitter access token
+    --twitter_access_token_secret|tats <token_secret>: define Twitter access token secret
+    --mastodon_instance|-mi <instance>: define Mastodon instance
+    --mastodon_client_id|-mci <id>: define Mastodon client id
+    --mastodon_client_secret|-mcs <secret>: define Mastodon client secret
+    --mastodon_access_token|-mat <token>: define Mastodon access token
+    --freenode_nickname|-fn <nick>: define Freenode nickname
+    --freenode_password|-fp <passwd>: define Freenode password
+    --freenode_test_channels|-ftc <channel_1>  [--freenode_test_channels|-ftc <channel_2> […--freenode_test_channels|-ftc <channel_n>]]: define Freenode channels
+    --freenode_channels|-fc <channel_1>  [--freenode_channels|-fc <channel_2> […--freenode_channels|-fc <channel_n>]]: define Freenode test channels
+    --revolutionarydate-acab: pretend it is 01:31:20
+    --promptuser-default: define default message when --msgmaker=PromptUser
+USAGE
+ exit 0;
 }
 
 =head1 SEE ALSO

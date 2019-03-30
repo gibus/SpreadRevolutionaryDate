@@ -169,7 +169,21 @@ This option can only be specified once, with a value as string. Instead of sprea
 
 # COMMAND LINE PARAMETERS
 
-Any command line parameter takes precedence on the corresponding option specified on the confiuration file, see [""CONFIGURATION"](#configuration) below.
+Any command line parameter, other than the first three ones below, takes precedence on the corresponding option specified on the confiuration file, see ["CONFIGURATION"](#configuration) above.
+
+## Command line only parameters
+
+### --conf | -c &lt;file>
+
+Use `<file>` path as configuration file, instead of the default ones, see ["CONFIGURATION"](#configuration) above.
+
+### --version | -v
+
+Prints out the version of `spread-revolutionary-date`.
+
+### --help | -h | -?
+
+Prints out help with command line parameters.
 
 ## General parameters
 

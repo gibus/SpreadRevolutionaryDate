@@ -1,6 +1,3 @@
-* Add an option for configuration file, such an option should obviously
-  been processed before AppConfig processing.
-
 * Add an i18n framework. It should be *light* (Locale::Maketext is
   surely overkill for our needs). When spreading date, we have only two
   locales (fr and en) due to DateTime::Calendar::FrenchRevolutionary,

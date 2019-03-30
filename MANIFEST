@@ -25,6 +25,7 @@ lib/App/SpreadRevolutionaryDate/Target/Freenode/Bot.pm
 lib/App/SpreadRevolutionaryDate/Target/Mastodon.pm
 lib/App/SpreadRevolutionaryDate/Target/Twitter.pm
 t/00-compile.t
+t/command_line.t
 t/config.t
 t/locale.t
 t/mastodon.t
