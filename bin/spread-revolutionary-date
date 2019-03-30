@@ -82,7 +82,7 @@ This boolean option takes no value, either it is defined or not. If defined, do 
 
 =head3 acab I<DEPRECATED>
 
-This option is I<deprecated> since version 0.09 of this distribution and may be removed in future release. Please use L</"RevolutionaryDate acab option"> option below.
+This option is I<deprecated> since version 0.09 of this distribution and may be removed in future release. Please use L</acab> option in C<[revolutionarydate]> section below.
 
 =head3 twitter I<DEPRECATED>
 
@@ -156,9 +156,17 @@ This option can be specified multiple times, with values as strings. C<spread-re
 
 This option can be specified multiple times, with values as strings. C<spread-revolutionary-date> will spread on every channel specified with this option. This option should be specified at least one time if L</test> option is set. It is ignored if L</test> option is not set.
 
-=head2 RevolutionaryDate acab option
+=head2 RevolutionaryDate options
 
-This boolean option takes no value, either it is defined or not. If defined, instead of spreading the current date and time, pretend that decimal time is 1:31:20 (which corresponds to 03:08:56 UTC, 04:08:56 Paris winter time, or 05:08:56 Paris summer time, in sexagesimal scale used by common Anglo-Babylonian Time). The C<acab> option should be defined in the C<[revolutionarydate]> section of the configuration file. It is only used if L</msgmaker> option is C<RevolutionaryDate>.
+These options change the way revolutionary date is computed when  L</msgmaker> option is C<RevolutionaryDate>. They should be defined in the C<[revolutionarydate]> section of the configuration file.
+
+=head3 acab
+
+This boolean option takes no value, either it is defined or not, defaults to C<false>. If defined, instead of spreading the current date and time, pretend that decimal time is 1:31:20 (which corresponds to 03:08:56 UTC, 04:08:56 Paris winter time, or 05:08:56 Paris summer time, in sexagesimal scale used by common Anglo-Babylonian Time).
+
+=head3 wikipedia_link
+
+This boolean option takes no value, either it is defined or not, defaults to C<true>. If defined, a link to the wikipedia page, in language defined by the L<locale> option, corresponding to the feast of the day, is added to the date to be spread.
 
 =head2 PromptUser default option
 

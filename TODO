@@ -1,12 +1,6 @@
 * Add an option for configuration file, such an option should obviously
   been processed before AppConfig processing.
 
-* Add an option to choose whether adding or not wikipedia link to
-  RevolutionaryDate message writer.
-
-* Check wikipedia links in French and English for all days and process
-  disabiguaous pages.
-
 * Add an i18n framework. It should be *light* (Locale::Maketext is
   surely overkill for our needs). When spreading date, we have only two
   locales (fr and en) due to DateTime::Calendar::FrenchRevolutionary,

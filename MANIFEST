@@ -32,6 +32,7 @@ t/new_target.t
 t/objects.t
 t/promptuser.t
 t/twitter.t
+t/wikipedia.t
 xt/authentication.t
 xt/author/clean-namespaces.t
 xt/author/critic.t

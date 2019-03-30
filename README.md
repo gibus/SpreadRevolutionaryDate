@@ -75,7 +75,7 @@ This boolean option takes no value, either it is defined or not. If defined, do 
 
 ### acab _DEPRECATED_
 
-This option is _deprecated_ since version 0.09 of this distribution and may be removed in future release. Please use ["RevolutionaryDate acab option"](#revolutionarydate-acab-option) option below.
+This option is _deprecated_ since version 0.09 of this distribution and may be removed in future release. Please use ["acab"](#acab) option in `[revolutionarydate]` section below.
 
 ### twitter _DEPRECATED_
 
@@ -149,9 +149,17 @@ This option can be specified multiple times, with values as strings. `spread-rev
 
 This option can be specified multiple times, with values as strings. `spread-revolutionary-date` will spread on every channel specified with this option. This option should be specified at least one time if ["test"](#test) option is set. It is ignored if ["test"](#test) option is not set.
 
-## RevolutionaryDate acab option
+## RevolutionaryDate options
 
-This boolean option takes no value, either it is defined or not. If defined, instead of spreading the current date and time, pretend that decimal time is 1:31:20 (which corresponds to 03:08:56 UTC, 04:08:56 Paris winter time, or 05:08:56 Paris summer time, in sexagesimal scale used by common Anglo-Babylonian Time). The `acab` option should be defined in the `[revolutionarydate]` section of the configuration file. It is only used if ["msgmaker"](#msgmaker) option is `RevolutionaryDate`.
+These options change the way revolutionary date is computed when  ["msgmaker"](#msgmaker) option is `RevolutionaryDate`. They should be defined in the `[revolutionarydate]` section of the configuration file.
+
+### acab
+
+This boolean option takes no value, either it is defined or not, defaults to `false`. If defined, instead of spreading the current date and time, pretend that decimal time is 1:31:20 (which corresponds to 03:08:56 UTC, 04:08:56 Paris winter time, or 05:08:56 Paris summer time, in sexagesimal scale used by common Anglo-Babylonian Time).
+
+### wikipedia\_link
+
+This boolean option takes no value, either it is defined or not, defaults to `true`. If defined, a link to the wikipedia page, in language defined by the [locale](https://metacpan.org/pod/locale) option, corresponding to the feast of the day, is added to the date to be spread.
 
 ## PromptUser default option
 
