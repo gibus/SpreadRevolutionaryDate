@@ -82,19 +82,19 @@ This boolean option takes no value, either it is defined or not. If defined, do 
 
 =head3 acab I<DEPRECATED>
 
-This option is I<deprecated> since version 0.09 of this distribution and may be removed in future release. Please use L</acab> option in C<[revolutionarydate]> section below.
+This option is I<deprecated> since version 0.09 of this distribution and may be removed in future release. Please use L</acab> option in C<[revolutionarydate]> section, as described below.
 
 =head3 twitter I<DEPRECATED>
 
-This option is I<deprecated> since version 0.07 of this distribution and may be removed in future release. Please use L</targets> option below. Spread on Twitter explicitly. If none of the C<twitter>, C<mastodon>, C<freenode> option is set, the revolutionary date is spread on all of these three targets.
+This option is I<deprecated> since version 0.07 of this distribution and may be removed in future release. Please use L</targets> option, as described below. Spread on Twitter explicitly. If none of the C<twitter>, C<mastodon>, C<freenode> option is set, the revolutionary date is spread on all of these three targets.
 
 =head3 mastodon I<DEPRECATED>
 
-This option is I<deprecated> since version 0.07 of this distribution and may be removed in future release. Please use L</targets> option below. Spread on Mastodon explicitly. If none of the C<twitter>, C<mastodon>, C<freenode> option is set, the revolutionary date is spread on all of these three targets.
+This option is I<deprecated> since version 0.07 of this distribution and may be removed in future release. Please use L</targets> option, as described below. Spread on Mastodon explicitly. If none of the C<twitter>, C<mastodon>, C<freenode> option is set, the revolutionary date is spread on all of these three targets.
 
 =head3 freenode I<DEPRECATED>
 
-This option is I<deprecated> since version 0.07 of this distribution and may be removed in future release. Please use L</targets> option below. Spread on Freenode explicitly. If none of the C<twitter>, C<mastodon>, C<freenode> option is set, the revolutionary date is spread on all of these three targets.
+This option is I<deprecated> since version 0.07 of this distribution and may be removed in future release. Please use L</targets> option, as described below. Spread on Freenode explicitly. If none of the C<twitter>, C<mastodon>, C<freenode> option is set, the revolutionary date is spread on all of these three targets.
 
 =head2 Twitter options
 
@@ -168,7 +168,9 @@ This boolean option takes no value, either it is defined or not, defaults to C<f
 
 This boolean option takes no value, either it is defined or not, defaults to C<true>. If defined, a link to the wikipedia page, in language defined by the L<locale> option, corresponding to the feast of the day, is added to the date to be spread.
 
-=head2 PromptUser default option
+=head2 PromptUser option
+
+=head3 default
 
 This option can only be specified once, with a value as string. Instead of spreading the revolutionary date, prompt user (with confirmation) for the message to be spread, with a default value (if user enters nothing when prompted). If C<default> option is not defined, the default message is C<'Goodbye old world, hello revolutionary worlds'> if the user enters nothing when prompted. The C<default> option should be defined in the C<[promptuser]> section of the configuration file. It is only used if L</msgmaker> option is C<PromptUser>.
 
@@ -178,105 +180,113 @@ Any command line parameter takes precedence on the corresponding option specifie
 
 =head2 General parameters
 
-=head3 --targets | -tg
+=head3 --targets | -tg <target>
 
-Same as L</targets> configuration option below.
+Same as L</targets> configuration option above.
 
-=head3 --msgmaker | -mm
+=head3 --msgmaker | -mm <MsgMakerClass>
 
-Same as L</msgmaker> configuration option below.
+Same as L</msgmaker> configuration option above.
 
-=head3 --locale | -l
+=head3 --locale | -l <fr|en>
 
-Same as L</locale> configuration option below.
+Same as L</locale> configuration option above.
 
 =head3 --test | --no | -n
 
-Same as L</test> configuration option below.
+Same as L</test> configuration option above.
 
 =head3 --acab | -a I<DEPRECATED>
 
-Same as L</acab> configuration option below.
+Same as L</acab> configuration option above.
 
 =head3 --twitter | -t I<DEPRECATED>
 
-Same as L</twitter> configuration option below.
+Same as L</twitter> configuration option above.
 
 =head3 --mastodon | -m I<DEPRECATED>
 
-Same as L</mastodon> configuration option below.
+Same as L</mastodon> configuration option above.
 
 =head3 --freenode | -f I<DEPRECATED>
 
-Same as L</freenode> configuration option below.
+Same as L</freenode> configuration option above.
 
 =head2 Twitter parameters
 
 These parameters specify credentials for C<spread-revolutionary-date> to spread on a Twitter account. You have to get them from your L<Twitter API account|https://apps.twitter.com/> with C<write> access level.
 
-=head3 --twitter_consumer_key | -tck
+=head3 --twitter_consumer_key | -tck <key>
 
-Same as L</consumer_key> configuration option below.
+Same as L</consumer_key> configuration option above.
 
-=head3 --twitter_consumer_secret | -tcs
+=head3 --twitter_consumer_secret | -tcs <secret>
 
-Same as L</consumer_secret> configuration option below.
+Same as L</consumer_secret> configuration option above.
 
-=head3 --twitter_access_token | -tat
+=head3 --twitter_access_token | -tat <token>
 
-Same as L</access_token> configuration option below.
+Same as L</access_token> configuration option above.
 
-=head3 --twitter_access_token_secret | -tats
+=head3 --twitter_access_token_secret | -tats <token secret>
 
-Same as L</access_token_secret> configuration option below.
+Same as L</access_token_secret> configuration option above.
 
 =head2 Mastodon parameters
 
 These parameters specify credentials for C<spread-revolutionary-date> to spread on a Mastodon account. You have to get them from your L<Mastodon instance API account|https://mstdn.fr/settings/applications> with C<write> scope. Note that Mastodon is a decentralized network with multiple instances, the previous link is for L<mstdn.fr|https://mstdn.fr> instance, please replace url with your preferred instance.
 
-=head3 --mastodon_instance | -mi
+=head3 --mastodon_instance | -mi <instance>
 
-Same as L</instance> configuration option below.
+Same as L</instance> configuration option above.
 
-=head3 --mastodon_client_id | -mci
+=head3 --mastodon_client_id | -mci <id>
 
-Same as L</client_id> configuration option below.
+Same as L</client_id> configuration option above.
 
-=head3 --mastodon_client_secret | -mcs
+=head3 --mastodon_client_secret | -mcs <secret>
 
-Same as L</client_secret> configuration option below.
+Same as L</client_secret> configuration option above.
 
-=head3 --mastodon_access_token | -mat
+=head3 --mastodon_access_token | -mat <token>
 
-Same as L</access_token> configuration option below.
+Same as L</access_token> configuration option above.
 
 =head2 Freenode parameters
 
 The first two parameters are credentials for C<spread-revolutionary-date> to spread on a Freenode account. See L<https://freenode.net/kb/answer/registration> to find out how to register an account on Freenode.
 
-=head3 --freenode_nickname | -fn
+=head3 --freenode_nickname | -fn <nick>
 
-Same as L</nickname> configuration option below.
+Same as L</nickname> configuration option above.
 
-=head3 --freenode_password | -fp
+=head3 --freenode_password | -fp <passwd>
 
-Same as L</password> configuration option below.
+Same as L</password> configuration option above.
 
-=head3 --freenode_channels | -fc
+=head3 --freenode_channels | -fc <channel>
 
-Same as L</channels> configuration option below.
+Same as L</channels> configuration option above.
 
-=head3 --freenode_test_channels | -tc
+=head3 --freenode_test_channels | -tc <channel>
 
-Same as L</test_channels> configuration option below.
+Same as L</test_channels> configuration option above.
 
-=head2 --revolutionarydate-acab
+=head2 RevolutionaryDate parameters
 
-Same as L</"RevolutionaryDate acab option"> configuration option below.
+=head3 --revolutionarydate_acab
 
-=head2 --promptuser-default
+Same as L</acab> configuration option above.
 
-Same as L</"PromptUser default option"> configuration option below.
+=head3 --revolutionarydate_wikipedia_link
+
+Same as L</wikipedia_link> configuration option above.
+
+=head2 PromptUser parameter
+
+=head3 --promptuser_default <default message>
+
+Same as L</default> configuration option above.
 
 =head1 EXTENDING TO NEW TARGETS
 

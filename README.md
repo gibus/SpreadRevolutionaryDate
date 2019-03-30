@@ -75,19 +75,19 @@ This boolean option takes no value, either it is defined or not. If defined, do 
 
 ### acab _DEPRECATED_
 
-This option is _deprecated_ since version 0.09 of this distribution and may be removed in future release. Please use ["acab"](#acab) option in `[revolutionarydate]` section below.
+This option is _deprecated_ since version 0.09 of this distribution and may be removed in future release. Please use ["acab"](#acab) option in `[revolutionarydate]` section, as described below.
 
 ### twitter _DEPRECATED_
 
-This option is _deprecated_ since version 0.07 of this distribution and may be removed in future release. Please use ["targets"](#targets) option below. Spread on Twitter explicitly. If none of the `twitter`, `mastodon`, `freenode` option is set, the revolutionary date is spread on all of these three targets.
+This option is _deprecated_ since version 0.07 of this distribution and may be removed in future release. Please use ["targets"](#targets) option, as described below. Spread on Twitter explicitly. If none of the `twitter`, `mastodon`, `freenode` option is set, the revolutionary date is spread on all of these three targets.
 
 ### mastodon _DEPRECATED_
 
-This option is _deprecated_ since version 0.07 of this distribution and may be removed in future release. Please use ["targets"](#targets) option below. Spread on Mastodon explicitly. If none of the `twitter`, `mastodon`, `freenode` option is set, the revolutionary date is spread on all of these three targets.
+This option is _deprecated_ since version 0.07 of this distribution and may be removed in future release. Please use ["targets"](#targets) option, as described below. Spread on Mastodon explicitly. If none of the `twitter`, `mastodon`, `freenode` option is set, the revolutionary date is spread on all of these three targets.
 
 ### freenode _DEPRECATED_
 
-This option is _deprecated_ since version 0.07 of this distribution and may be removed in future release. Please use ["targets"](#targets) option below. Spread on Freenode explicitly. If none of the `twitter`, `mastodon`, `freenode` option is set, the revolutionary date is spread on all of these three targets.
+This option is _deprecated_ since version 0.07 of this distribution and may be removed in future release. Please use ["targets"](#targets) option, as described below. Spread on Freenode explicitly. If none of the `twitter`, `mastodon`, `freenode` option is set, the revolutionary date is spread on all of these three targets.
 
 ## Twitter options
 
@@ -161,7 +161,9 @@ This boolean option takes no value, either it is defined or not, defaults to `fa
 
 This boolean option takes no value, either it is defined or not, defaults to `true`. If defined, a link to the wikipedia page, in language defined by the [locale](https://metacpan.org/pod/locale) option, corresponding to the feast of the day, is added to the date to be spread.
 
-## PromptUser default option
+## PromptUser option
+
+### default
 
 This option can only be specified once, with a value as string. Instead of spreading the revolutionary date, prompt user (with confirmation) for the message to be spread, with a default value (if user enters nothing when prompted). If `default` option is not defined, the default message is `'Goodbye old world, hello revolutionary worlds'` if the user enters nothing when prompted. The `default` option should be defined in the `[promptuser]` section of the configuration file. It is only used if ["msgmaker"](#msgmaker) option is `PromptUser`.
 
@@ -171,105 +173,113 @@ Any command line parameter takes precedence on the corresponding option specifie
 
 ## General parameters
 
-### --targets | -tg
+### --targets | -tg &lt;target>
 
-Same as ["targets"](#targets) configuration option below.
+Same as ["targets"](#targets) configuration option above.
 
-### --msgmaker | -mm
+### --msgmaker | -mm <MsgMakerClass>
 
-Same as ["msgmaker"](#msgmaker) configuration option below.
+Same as ["msgmaker"](#msgmaker) configuration option above.
 
-### --locale | -l
+### --locale | -l &lt;fr|en>
 
-Same as ["locale"](#locale) configuration option below.
+Same as ["locale"](#locale) configuration option above.
 
 ### --test | --no | -n
 
-Same as ["test"](#test) configuration option below.
+Same as ["test"](#test) configuration option above.
 
 ### --acab | -a _DEPRECATED_
 
-Same as ["acab"](#acab) configuration option below.
+Same as ["acab"](#acab) configuration option above.
 
 ### --twitter | -t _DEPRECATED_
 
-Same as ["twitter"](#twitter) configuration option below.
+Same as ["twitter"](#twitter) configuration option above.
 
 ### --mastodon | -m _DEPRECATED_
 
-Same as ["mastodon"](#mastodon) configuration option below.
+Same as ["mastodon"](#mastodon) configuration option above.
 
 ### --freenode | -f _DEPRECATED_
 
-Same as ["freenode"](#freenode) configuration option below.
+Same as ["freenode"](#freenode) configuration option above.
 
 ## Twitter parameters
 
 These parameters specify credentials for `spread-revolutionary-date` to spread on a Twitter account. You have to get them from your [Twitter API account](https://apps.twitter.com/) with `write` access level.
 
-### --twitter\_consumer\_key | -tck
+### --twitter\_consumer\_key | -tck &lt;key>
 
-Same as ["consumer\_key"](#consumer_key) configuration option below.
+Same as ["consumer\_key"](#consumer_key) configuration option above.
 
-### --twitter\_consumer\_secret | -tcs
+### --twitter\_consumer\_secret | -tcs &lt;secret>
 
-Same as ["consumer\_secret"](#consumer_secret) configuration option below.
+Same as ["consumer\_secret"](#consumer_secret) configuration option above.
 
-### --twitter\_access\_token | -tat
+### --twitter\_access\_token | -tat &lt;token>
 
-Same as ["access\_token"](#access_token) configuration option below.
+Same as ["access\_token"](#access_token) configuration option above.
 
-### --twitter\_access\_token\_secret | -tats
+### --twitter\_access\_token\_secret | -tats &lt;token secret>
 
-Same as ["access\_token\_secret"](#access_token_secret) configuration option below.
+Same as ["access\_token\_secret"](#access_token_secret) configuration option above.
 
 ## Mastodon parameters
 
 These parameters specify credentials for `spread-revolutionary-date` to spread on a Mastodon account. You have to get them from your [Mastodon instance API account](https://mstdn.fr/settings/applications) with `write` scope. Note that Mastodon is a decentralized network with multiple instances, the previous link is for [mstdn.fr](https://mstdn.fr) instance, please replace url with your preferred instance.
 
-### --mastodon\_instance | -mi
+### --mastodon\_instance | -mi &lt;instance>
 
-Same as ["instance"](#instance) configuration option below.
+Same as ["instance"](#instance) configuration option above.
 
-### --mastodon\_client\_id | -mci
+### --mastodon\_client\_id | -mci &lt;id>
 
-Same as ["client\_id"](#client_id) configuration option below.
+Same as ["client\_id"](#client_id) configuration option above.
 
-### --mastodon\_client\_secret | -mcs
+### --mastodon\_client\_secret | -mcs &lt;secret>
 
-Same as ["client\_secret"](#client_secret) configuration option below.
+Same as ["client\_secret"](#client_secret) configuration option above.
 
-### --mastodon\_access\_token | -mat
+### --mastodon\_access\_token | -mat &lt;token>
 
-Same as ["access\_token"](#access_token) configuration option below.
+Same as ["access\_token"](#access_token) configuration option above.
 
 ## Freenode parameters
 
 The first two parameters are credentials for `spread-revolutionary-date` to spread on a Freenode account. See [https://freenode.net/kb/answer/registration](https://freenode.net/kb/answer/registration) to find out how to register an account on Freenode.
 
-### --freenode\_nickname | -fn
+### --freenode\_nickname | -fn &lt;nick>
 
-Same as ["nickname"](#nickname) configuration option below.
+Same as ["nickname"](#nickname) configuration option above.
 
-### --freenode\_password | -fp
+### --freenode\_password | -fp &lt;passwd>
 
-Same as ["password"](#password) configuration option below.
+Same as ["password"](#password) configuration option above.
 
-### --freenode\_channels | -fc
+### --freenode\_channels | -fc &lt;channel>
 
-Same as ["channels"](#channels) configuration option below.
+Same as ["channels"](#channels) configuration option above.
 
-### --freenode\_test\_channels | -tc
+### --freenode\_test\_channels | -tc &lt;channel>
 
-Same as ["test\_channels"](#test_channels) configuration option below.
+Same as ["test\_channels"](#test_channels) configuration option above.
 
-## --revolutionarydate-acab
+## RevolutionaryDate parameters
 
-Same as ["RevolutionaryDate acab option"](#revolutionarydate-acab-option) configuration option below.
+### --revolutionarydate\_acab
 
-## --promptuser-default
+Same as ["acab"](#acab) configuration option above.
 
-Same as ["PromptUser default option"](#promptuser-default-option) configuration option below.
+### --revolutionarydate\_wikipedia\_link
+
+Same as ["wikipedia\_link"](#wikipedia_link) configuration option above.
+
+## PromptUser parameter
+
+### --promptuser\_default &lt;default message>
+
+Same as ["default"](#default) configuration option above.
 
 # EXTENDING TO NEW TARGETS
 
