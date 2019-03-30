@@ -1,6 +1,16 @@
 Changelog for App-SpreadRevolutionaryDate
 
-0.09 2019-03-27T18:52:18
+0.10 2019-03-30T20:59:56
+ - Add --conf, --version and --help command line parameters
+ - Fix and improve doc
+ - Add default value when defined for options guessed from Target and
+   MsgWriter consuming classes
+ - Add wikipedia_link option to revolutionarydate msgmaker
+ - Process wikipedia ambiguous links
+ - Fix another typo in TODO
+ - Fix typo in TODO
+
+0.09 2019-03-27T18:52:18Z
  - Fix introspection of boolean targets attributes
  - Fix backward compatibility for acab option for RevolutionaryDate
    MsgMaker
