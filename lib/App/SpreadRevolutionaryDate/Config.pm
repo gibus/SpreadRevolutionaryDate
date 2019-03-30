@@ -80,6 +80,10 @@ sub new {
       my $target_meta_attribute_argcount = $target_meta_attribute_type =~ /ArrayRef/ ? ARGCOUNT_LIST : $target_meta_attribute_type =~ /HashRef/ ? ARGCOUNT_HASH : $target_meta_attribute_type =~ /Bool/ ? ARGCOUNT_NONE : ARGCOUNT_ONE;
       $target_attributes{lc($target) . '_' . $target_meta_attribute->name} = { ARGCOUNT => $target_meta_attribute_argcount };
       $target_attributes{lc($target)} = { ARGCOUNT => ARGCOUNT_NONE };
+
+      if ($target_meta_attribute->has_default) {
+        $target_attributes{lc($target) . '_' . $target_meta_attribute->name}{DEFAULT} = $target_meta_attribute->default;
+      }
     }
   }
 
@@ -95,10 +99,15 @@ sub new {
   die "Cannot found msgmaker meta class $msgmaker_class for msgmaker $msgmaker: $@\n" if $@;
   foreach my $msgmaker_meta_attribute ($msgmaker_meta->get_all_attributes) {
     next if $msgmaker_meta_attribute->name eq 'locale';
+
     my $msgmaker_meta_attribute_type = $msgmaker_meta_attribute->type_constraint;
     my $msgmaker_meta_attribute_argcount = $msgmaker_meta_attribute_type =~ /ArrayRef/ ? ARGCOUNT_LIST : $msgmaker_meta_attribute_type =~ /HashRef/ ? ARGCOUNT_HASH : $msgmaker_meta_attribute_type =~ /Bool/ ? ARGCOUNT_NONE : ARGCOUNT_ONE;
     $msgmaker_attributes{lc($msgmaker) . '_' . $msgmaker_meta_attribute->name} = { ARGCOUNT => $msgmaker_meta_attribute_argcount };
     $msgmaker_attributes{lc($msgmaker)} = { ARGCOUNT => ARGCOUNT_NONE };
+
+    if ($msgmaker_meta_attribute->has_default) {
+      $msgmaker_attributes{lc($msgmaker) . '_' . $msgmaker_meta_attribute->name}{DEFAULT} = $msgmaker_meta_attribute->default;
+    }
   }
 
   # Build actual instance
