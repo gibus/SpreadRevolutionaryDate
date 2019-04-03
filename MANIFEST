@@ -20,6 +20,9 @@ lib/App/SpreadRevolutionaryDate/Config.pm
 lib/App/SpreadRevolutionaryDate/MsgMaker.pm
 lib/App/SpreadRevolutionaryDate/MsgMaker/PromptUser.pm
 lib/App/SpreadRevolutionaryDate/MsgMaker/RevolutionaryDate.pm
+lib/App/SpreadRevolutionaryDate/MsgMaker/RevolutionaryDate/Calendar.pm
+lib/App/SpreadRevolutionaryDate/MsgMaker/RevolutionaryDate/Locale/en.pm
+lib/App/SpreadRevolutionaryDate/MsgMaker/RevolutionaryDate/Locale/fr.pm
 lib/App/SpreadRevolutionaryDate/Target.pm
 lib/App/SpreadRevolutionaryDate/Target/Freenode.pm
 lib/App/SpreadRevolutionaryDate/Target/Freenode/Bot.pm

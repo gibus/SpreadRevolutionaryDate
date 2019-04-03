@@ -2,7 +2,7 @@ use 5.014;
 use utf8;
 package App::SpreadRevolutionaryDate::Target::Freenode::Bot;
 
-# ABSTRACT: Subclass overriding L<Bot::BasicBot> to post a message on some Freenode channels
+# ABSTRACT: Subclass overloading L<Bot::BasicBot> to post a message on some Freenode channels
 
 use Moose;
 use MooseX::NonMoose;

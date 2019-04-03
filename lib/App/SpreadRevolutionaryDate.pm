@@ -6,7 +6,6 @@ package App::SpreadRevolutionaryDate;
 
 use Moose;
 use App::SpreadRevolutionaryDate::Config;
-use DateTime::Calendar::FrenchRevolutionary;
 use Class::Load ':all';
 
 use Locale::TextDomain 'App-SpreadRevolutionaryDate';
