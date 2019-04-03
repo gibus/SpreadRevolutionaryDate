@@ -6,7 +6,8 @@ BEGIN {
     $ENV{OUTPUT_CHARSET} = 'UTF-8';
     $ENV{PERL_UNICODE} = 'AS';
 }
-use open qw(:std :utf8);
+use open qw(:std :encoding(UTF-8));
+binmode(DATA, ":encoding(UTF-8)");
 
 use Test::More tests => 3;
 use Test::NoWarnings;
@@ -21,13 +22,13 @@ my $data_start = tell DATA;
 my $spread_revolutionary_date = App::SpreadRevolutionaryDate->new(\*DATA);
 
 # Default message
-stdout_like { $spread_revolutionary_date->spread } qr/Spread to Twitter: Goodbye old world, hello revolutionary worlds$/, 'Spread default to Twitter';
+stdout_like { $spread_revolutionary_date->spread } qr/Spread on Twitter: Goodbye old world, hello revolutionary worlds$/, 'Spread default on Twitter';
 
 # Set message
 @ARGV = ('--test', '--twitter', '--promptuser_default', 'Thinking, attacking, building – such is our fabulous agenda.');
 seek DATA, $data_start, 0;
 $spread_revolutionary_date = App::SpreadRevolutionaryDate->new(\*DATA);
-stdout_like { $spread_revolutionary_date->spread } qr/Diffusé sur Twitter : Thinking, attacking, building – such is our fabulous agenda\.$/, 'Spread message to Twitter';
+stdout_like { $spread_revolutionary_date->spread } qr/Diffusé sur Twitter : Thinking, attacking, building – such is our fabulous agenda\.$/, 'Spread message on Twitter';
 
 
 __DATA__

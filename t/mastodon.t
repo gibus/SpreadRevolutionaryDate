@@ -5,7 +5,8 @@ BEGIN {
     $ENV{OUTPUT_CHARSET} = 'UTF-8';
     $ENV{PERL_UNICODE} = 'AS';
 }
-use open qw(:std :utf8);
+use open qw(:std :encoding(UTF-8));
+binmode(DATA, ":encoding(UTF-8)");
 
 use Test::More tests => 2;
 use Test::NoWarnings;
@@ -17,7 +18,7 @@ use App::SpreadRevolutionaryDate;
 @ARGV = ('--test', '--mastodon');
 my $spread_revolutionary_date = App::SpreadRevolutionaryDate->new(\*DATA);
 
-stdout_like { $spread_revolutionary_date->spread } qr/Diffusé sur Mastodon : Nous sommes le/, 'Spread to Mastodon';
+stdout_like { $spread_revolutionary_date->spread } qr/Diffusé sur Mastodon : Nous sommes le/, 'Spread on Mastodon';
 
 __DATA__
 

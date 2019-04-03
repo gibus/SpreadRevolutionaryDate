@@ -68,9 +68,9 @@ sub spread {
   $test //= 0;
 
   if ($test) {
-    $msg = __("Spread to Mastodon: ") . $msg;
+    $msg = __("Spread on Mastodon: ") . $msg;
 
-    use open qw(:std :utf8);
+    use open qw(:std :encoding(UTF-8));
     use IO::Handle;
     my $io = IO::Handle->new;
     $io->fdopen(fileno(STDOUT), "w");

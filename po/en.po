@@ -66,9 +66,9 @@ msgstr ""
 "{feast_long}, it is {time}!"
 
 #: lib/App/SpreadRevolutionaryDate/Target/Mastodon.pm:75
-msgid "Spread to Mastodon: "
-msgstr "Spread to Mastodon: "
+msgid "Spread on Mastodon: "
+msgstr "Spread on Mastodon: "
 
 #: lib/App/SpreadRevolutionaryDate/Target/Twitter.pm:77
-msgid "Spread to Twitter: "
-msgstr "Spread to Twitter: "
+msgid "Spread on Twitter: "
+msgstr "Spread on Twitter: "

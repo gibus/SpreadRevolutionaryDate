@@ -4,6 +4,7 @@ BEGIN {
     $ENV{OUTPUT_CHARSET} = 'UTF-8';
     $ENV{PERL_UNICODE} = 'AS';
 }
+binmode(DATA, ":encoding(UTF-8)");
 
 use Test::More tests => 9;
 use Test::NoWarnings;

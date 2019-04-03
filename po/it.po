@@ -1,4 +1,4 @@
-# French translations for App-SpreadRevolutionaryDate package.
+# Italian translations for App-SpreadRevolutionaryDate package.
 # Copyright (C) 2019 Gérald Sédrati-Dinet
 # This file is distributed under the same license as the App-SpreadRevolutionaryDate package.
 # Automatically generated, 2019.
@@ -7,23 +7,23 @@ msgid ""
 msgstr ""
 "Project-Id-Version: App-SpreadRevolutionaryDate 0.10\n"
 "Report-Msgid-Bugs-To: gibus@cpan.org\n"
-"POT-Creation-Date: 2019-04-01 16:21+0200\n"
-"PO-Revision-Date: 2019-03-31 22:25+0200\n"
+"POT-Creation-Date: 2019-04-02 15:46+0200\n"
+"PO-Revision-Date: 2019-04-02 15:46+0200\n"
 "Last-Translator: Automatically generated\n"
 "Language-Team: none\n"
-"Language: fr\n"
+"Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: lib/App/SpreadRevolutionaryDate/MsgMaker/PromptUser.pm:42
 msgid "Please, enter message to spread"
-msgstr "Entrez un message à diffuser"
+msgstr "Per favore, inserisci un messaggio da diffondere"
 
 #: lib/App/SpreadRevolutionaryDate/MsgMaker/PromptUser.pm:43
 msgid "y"
-msgstr "o"
+msgstr "s"
 
 #: lib/App/SpreadRevolutionaryDate/MsgMaker/PromptUser.pm:44
 msgid "n"
@@ -31,44 +31,44 @@ msgstr "n"
 
 #: lib/App/SpreadRevolutionaryDate/MsgMaker/PromptUser.pm:45
 msgid "A"
-msgstr "A"
+msgstr "I"
 
 #: lib/App/SpreadRevolutionaryDate/MsgMaker/PromptUser.pm:46
 #, perl-brace-format
 msgid "or {abort} to abort"
-msgstr "ou {abort} pour abandonner"
+msgstr "o {abort} per interrompere"
 
 #: lib/App/SpreadRevolutionaryDate/MsgMaker/PromptUser.pm:47
 msgid "Spread"
-msgstr "Diffuser"
+msgstr "Diffondere"
 
 #: lib/App/SpreadRevolutionaryDate/MsgMaker/PromptUser.pm:48
 #, perl-brace-format
 msgid "confirm ({confirm_ok}/{confirm_nok} {confirm_abort_text})?"
-msgstr "confirmez-vous ({confirm_ok}/{confirm_nok} {confirm_abort_text}) ?"
+msgstr "confermare ({confirm_ok}/{confirm_nok} {confirm_abort_text}) ?"
 
 #: lib/App/SpreadRevolutionaryDate/MsgMaker/PromptUser.pm:49
 #, perl-brace-format
 msgid "Input must be \"{confirm_ok}\" or \"{confirm_nok}\"\n"
-msgstr "Vous devez entrer \"{confirm_ok}\" ou \"{confirm_nok}\"\n"
+msgstr "Devi inserire \"{confirm_ok}\" o \"{confirm_nok}\"\n"
 
 #: lib/App/SpreadRevolutionaryDate/MsgMaker/PromptUser.pm:50
 msgid "OK not spreading"
-msgstr "OK diffusion annulée"
+msgstr "OK, non si sta diffondendo"
 
-#: lib/App/SpreadRevolutionaryDate/MsgMaker/RevolutionaryDate.pm:490
+#: lib/App/SpreadRevolutionaryDate/MsgMaker/RevolutionaryDate.pm:493
 #, perl-brace-format
 msgid ""
 "We are {day_name}, {day} {month} of Revolution year {roman_year} ({year}), "
 "{feast_long}, it is {time}!"
 msgstr ""
-"Nous sommes le {day_name}, {day} {month} de l'An {roman_year} ({year}) de la "
-"Révolution, {feast_long}, il est {time}!"
+"È {day_name}, {day} {month} dell'Anno {roman_year} ({year}) della Rivoluzione, "
+"{feast_long}, sono {time} !"
 
-#: lib/App/SpreadRevolutionaryDate/Target/Mastodon.pm:75
+#: lib/App/SpreadRevolutionaryDate/Target/Mastodon.pm:77
 msgid "Spread on Mastodon: "
-msgstr "Diffusé sur Mastodon : "
+msgstr "Diffondi su Mastodon : "
 
-#: lib/App/SpreadRevolutionaryDate/Target/Twitter.pm:77
+#: lib/App/SpreadRevolutionaryDate/Target/Twitter.pm:79
 msgid "Spread on Twitter: "
-msgstr "Diffusé sur Twitter : "
+msgstr "Diffondi su Twitter : "

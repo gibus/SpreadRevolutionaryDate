@@ -7,7 +7,7 @@ package App::SpreadRevolutionaryDate::MsgMaker::PromptUser;
 use Moose;
 with 'App::SpreadRevolutionaryDate::MsgMaker';
 
-use open qw(:std :utf8);
+use open qw(:std :encoding(UTF-8));
 use IO::Prompt::Hooked;
 
 use Locale::TextDomain 'App-SpreadRevolutionaryDate';
