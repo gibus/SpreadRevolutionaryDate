@@ -39,8 +39,11 @@ sub compute {
   my $self = shift;
 
   my $question = __"Please, enter message to spread";
+  #TRANSLATORS: initial of 'yes', case insensitive
   my $confirm_ok = __"y";
+  #TRANSLATORS: initial of 'no', case insensitive
   my $confirm_nok = __"n";
+  #TRANSLATORS: initial of 'Abort', case sensitive
   my $confirm_abort = __"A";
   my $confirm_abort_text = __x("or {abort} to abort", abort => $confirm_abort);
   my $confirm_intro = __"Spread";
@@ -88,6 +91,16 @@ sub compute {
 =item L<App::SpreadRevolutionaryDate::Target::MsgMaker>
 
 =item L<App::SpreadRevolutionaryDate::Target::MsgMaker::RevolutionaryDate>
+
+=item L<App::SpreadRevolutionaryDate::Target::MsgMaker::RevolutionaryDate::Calendar>
+
+=item L<App::SpreadRevolutionaryDate::Target::MsgMaker::RevolutionaryDate::Locale>
+
+=item L<App::SpreadRevolutionaryDate::Target::MsgMaker::RevolutionaryDate::Locale::fr>
+
+=item L<App::SpreadRevolutionaryDate::Target::MsgMaker::RevolutionaryDate::Locale::en>
+
+=item L<App::SpreadRevolutionaryDate::Target::MsgMaker::RevolutionaryDate::Locale::it>
 
 =back
 

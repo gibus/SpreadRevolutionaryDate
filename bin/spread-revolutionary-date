@@ -79,7 +79,7 @@ This option can only be specified once, with a value as string. Spread a message
 
 =head3 locale
 
-This option can only be specified once, with a value as string. Spread with chosen language. As of L<DateTime::Calendar::FrenchRevolutionary> 0.14, locale is limited to C<'en'> or C<'fr'>, defaults to C<'fr'>.
+This option can only be specified once, with a value as string. Spread with chosen language. As of L<App::SpreadRevolutionaryDate> 0.11 locale is limited to C<'fr'>, C<'en'> or C<'it'>, defaults to C<'fr'>.
 
 =head3 test
 
@@ -207,7 +207,7 @@ Same as L</targets> configuration option above.
 
 Same as L</msgmaker> configuration option above.
 
-=head3 --locale | -l <fr|en>
+=head3 --locale | -l <fr|en|it>
 
 Same as L</locale> configuration option above.
 

@@ -168,9 +168,25 @@ sub new {
   seek $filename, $file_start, 0 if $file_start;
   $self->parse_file($filename);
 
+  # Backup multivalued options so command line arguments can override them
+  my %args_list_backup;
+  my %args_list = $config_targets->varlist(".");
+  foreach my $arg_list (keys %args_list) {
+    next unless $self->_argcount($arg_list) == ARGCOUNT_LIST;
+    push @{$args_list_backup{$arg_list}}, @{$self->$arg_list};
+    $self->_default($arg_list);
+  }
+
   # Rewind command line arguments and process them
   @ARGV = @orig_argv;
   $self->parse_command_line;
+
+  # Restore multivalued options if not overridden by command line arguments
+  foreach my $arg_list (keys %args_list_backup) {
+    unless (scalar @{$self->$arg_list}) {
+      $self->$arg_list($_) foreach (@{$args_list_backup{$arg_list}});
+    }
+  }
 
   # Add targets defined with targets option
   @targets = @{$self->targets};
@@ -322,7 +338,7 @@ Usage: $0 <OPTIONS>
     --help|-h|-?': print out this help
     --targets|-tg <target_1> [--targets|-tg <target_2> […--targets|-tg <target_n>]]': define targets (default: twitter, mastodon, freenode)
     --msgmaker|-mm <MsgMakerClass>: define message maker (default: RevolutionaryDate)
-    --locale|-l <en|fr>: define locale (default: fr)
+    --locale|-l <fr|en|it>: define locale (default: fr)
     --test|--no|-n: do not spread, just print out message or spread to test channels for Freenode
     --acab|-a: DEPRECATED, use --revolutionarydate-acab
     --twitter|-t: DEPRECATED, use --targets=twitter
@@ -367,6 +383,16 @@ USAGE
 =item L<App::SpreadRevolutionaryDate::Target::MsgMaker>
 
 =item L<App::SpreadRevolutionaryDate::Target::MsgMaker::RevolutionaryDate>
+
+=item L<App::SpreadRevolutionaryDate::Target::MsgMaker::RevolutionaryDate::Calendar>
+
+=item L<App::SpreadRevolutionaryDate::Target::MsgMaker::RevolutionaryDate::Locale>
+
+=item L<App::SpreadRevolutionaryDate::Target::MsgMaker::RevolutionaryDate::Locale::fr>
+
+=item L<App::SpreadRevolutionaryDate::Target::MsgMaker::RevolutionaryDate::Locale::en>
+
+=item L<App::SpreadRevolutionaryDate::Target::MsgMaker::RevolutionaryDate::Locale::it>
 
 =item L<App::SpreadRevolutionaryDate::Target::MsgMaker::PromptUser>
 

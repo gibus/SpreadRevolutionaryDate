@@ -44,8 +44,9 @@ Computes revolutionary date. Takes no argument. Returns message as string, ready
 sub compute {
   my $self = shift;
 
-  # As of DateTime::Calendar::FrenchRevolutionary 0.14
-  # locale is limited to 'en' or 'fr', defaults to 'fr'
+  # As of App::SpreadRevolutionaryDate 0.11
+  # locale is limited to 'fr', 'en' or 'it', defaults to 'fr'
+  # forced to 'fr' for any other value
   my $revolutionary = $self->acab ?
       App::SpreadRevolutionaryDate::MsgMaker::RevolutionaryDate::Calendar->now->set(hour => 1, minute => 31, second => 20, locale => $self->locale)
     : App::SpreadRevolutionaryDate::MsgMaker::RevolutionaryDate::Calendar->now->set(locale => $self->locale);
@@ -90,6 +91,16 @@ sub compute {
 =item L<App::SpreadRevolutionaryDate::Target::Freenode::Bot>
 
 =item L<App::SpreadRevolutionaryDate::Target::MsgMaker>
+
+=item L<App::SpreadRevolutionaryDate::Target::MsgMaker::RevolutionaryDate::Calendar>
+
+=item L<App::SpreadRevolutionaryDate::Target::MsgMaker::RevolutionaryDate::Locale>
+
+=item L<App::SpreadRevolutionaryDate::Target::MsgMaker::RevolutionaryDate::Locale::fr>
+
+=item L<App::SpreadRevolutionaryDate::Target::MsgMaker::RevolutionaryDate::Locale::en>
+
+=item L<App::SpreadRevolutionaryDate::Target::MsgMaker::RevolutionaryDate::Locale::it>
 
 =item L<App::SpreadRevolutionaryDate::Target::MsgMaker::PromptUser>
 

@@ -13,7 +13,7 @@ use namespace::autoclean;
 
 =method set
 
-Overloads L<DateTime::Calendar::FrenchRevolutionary> to allow setting locale, extending 'fr' and 'en'
+Overloads L<DateTime::Calendar::FrenchRevolutionary> to allow setting locale, extending 'fr' and 'en'.
 
 =cut
 
@@ -64,6 +64,24 @@ sub set {
 =item L<App::SpreadRevolutionaryDate::Target::MsgMaker>
 
 =item L<App::SpreadRevolutionaryDate::Target::MsgMaker::RevolutionaryDate>
+
+=item L<App::SpreadRevolutionaryDate::Target::MsgMaker::RevolutionaryDate::Calendar>
+
+=item L<App::SpreadRevolutionaryDate::Target::MsgMaker::RevolutionaryDate::Locale>
+
+=item L<App::SpreadRevolutionaryDate::Target::MsgMaker::RevolutionaryDate::Locale:fr>
+
+=item L<App::SpreadRevolutionaryDate::Target::MsgMaker::RevolutionaryDate::Locale:en>
+
+=item L<App::SpreadRevolutionaryDate::Target::MsgMaker::RevolutionaryDate::Locale:it>=item L<App::SpreadRevolutionaryDate::Target::MsgMaker::RevolutionaryDate::Calendar>
+
+=item L<App::SpreadRevolutionaryDate::Target::MsgMaker::RevolutionaryDate::Locale>
+
+=item L<App::SpreadRevolutionaryDate::Target::MsgMaker::RevolutionaryDate::Locale::fr>
+
+=item L<App::SpreadRevolutionaryDate::Target::MsgMaker::RevolutionaryDate::Locale::en>
+
+=item L<App::SpreadRevolutionaryDate::Target::MsgMaker::RevolutionaryDate::Locale::it>
 
 =item L<App::SpreadRevolutionaryDate::Target::MsgMaker::PromptUser>
 

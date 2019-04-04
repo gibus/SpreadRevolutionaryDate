@@ -6,7 +6,7 @@ package App::SpreadRevolutionaryDate::MsgMaker::RevolutionaryDate::Locale;
 
 use Moose::Role;
 
-use DateTime;
+use DateTime::Calendar::FrenchRevolutionary;
 
 use Locale::TextDomain 'App-SpreadRevolutionaryDate';
 use namespace::autoclean;
@@ -23,22 +23,24 @@ has decade_days => (
   required => 1,
 );
 
-has prefix => (
+has feast => (
   is => 'ro',
   isa => 'ArrayRef[Str]',
   required => 1,
+);
+
+has prefixes => (
+  is => 'ro',
+  isa => 'ArrayRef[Str]',
+  required => 1,
+  default => sub {['']},
 );
 
 has suffix => (
   is => 'ro',
   isa => 'Str',
   required => 1,
-);
-
-has feast => (
-  is => 'ro',
-  isa => 'ArrayRef[Str]',
-  required => 1,
+  default => '',
 );
 
 has wikipedia_entries => (
@@ -92,13 +94,13 @@ sub feast_long {
   my ($self, $date) = @_;
   my $lb = $self->feast->[$date->day_of_year_0] . $self->suffix;
   $lb =~ s/_/ /g;
-  $lb =~ s/^(\d)/$self->prefix->[$1]/e;
+  $lb =~ s/^(\d)/$self->prefixes->[$1]/e;
   return $lb;
 }
 
 =method wikipedia_redirect
 
-Returns the wikipedia entry (the end of the wikipedia url) corresponding to the feast of the day. Takes two mandatory parameters: the month as integer from 0 to 13 (13 is used for complementary days, or "sansculottides"), and the search entry (which should be the feast of the day as returned by L</feast_short>) as a string.
+Returns the wikipedia entry (the end of the wikipedia url) corresponding to the feast of the day. Takes two mandatory parameters: the month as integer from 1 to 13 (13 is used for complementary days, also called "sans-culottides"), and the search entry (which should be the feast of the day as returned by L</feast_short>) as a string.
 
 =cut
 
@@ -110,13 +112,98 @@ sub wikipedia_redirect {
   return $entry;
 }
 
+=encoding utf8
+
 =head1 DESCRIPTION
 
-This role defines the interface for any class that makes a message to be spread by L<App::SpreadRevolutionaryDate>.
+This role defines the localization interface for L<App::SpreadRevolutionaryDate::MsgMaker::RevolutionDate>.
 
-Any class consuming this role is required to implement a C<compute> method, which is called with no parameters, and should return the message to be spread as a string.
+Any class consuming this role is required to overload every mandatory attribute with a default in the language of that class:
 
-This role provides a C<locale> required attribute (defaults to C<'fr'>), which holds the language, defined in language code of L<ISO 639-1 alpha-2|https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes>. Consuming classes are then free to use this C<locale> attribute to localize the message they compute.
+=over
+
+=item months
+
+Default for this attribute should be a sorted array reference of 13 strings, each of them translating the name of each month (C<'Vendémiaire'>, C<'Brumaire'>,  C<'Frimaire'>, C<'Nivôse'>, C<'Pluviôse'>, C<'Ventôse'>, C<'Germinal'>, C<'Floréal'>, C<'Prairial'>, C<'Messidor'>, C<'Thermidor'>, and C<'Fructidor'> in French), along with a last pseudo-month (C<jour complémentaire> in French) holding the five additional days (or six on leap years), also called "sans-culottides", added after Fructidor. E.g.:
+
+  has '+months' => (
+    default => sub {[
+      'Vendémiaire', 'Brumaire',  'Frimaire',
+      'Nivôse',      'Pluviôse',  'Ventôse',
+      'Germinal',    'Floréal',   'Prairial',
+      'Messidor',    'Thermidor', 'Fructidor',
+      'jour complémentaire',
+    ]},
+  );
+
+=item decade_days
+
+Default for this attribute should be a sorted array reference of 10 strings, each of them translating the name of each day (C<'Primidi'>, C<'Duodi'>,  C<'Tridi'>, C<'Quartidi'>, C<'Quintidi'>, C<'Sextidi'>, C<'Septidi'>, C<'Octidi'>, C<'Nonidi'>, and C<'Décadi'> in French). E.g.:
+
+  has '+decade_days' => (
+    default => sub {[
+      'Primidi',
+      'Duodi',
+      'Tridi',
+      'Quartidi',
+      'Quintidi',
+      'Sextidi',
+      'Septidi',
+      'Octidi',
+      'Nonidi',
+      'Décadi',
+    ]},
+  );
+
+=item feast
+
+Default for this attribute should be a sorted array reference of 366 strings, each of them translating the feast of each day. Any space in the name of the feast of the day should be replaced by an underscore (C<_>).
+
+The feast of the day is used in sentences like "this is I<feast name> day" or "c'est le jour de la I<feast name>". Depending on the language, it could then be prefixed or suffixed: in English it is suffixed by " day", whereas in French it is prefixed by "jour de la ". See L</prefixes> and L</suffix> attributes below.
+
+Moreover, in languages where the feast of the day is prefixed, the prefix often depends on the gender or the number of the noun used for the feast, or whereas this noun starts by a vowel. Therefore, L</prefixes> attribute should be an array of each possible prefix, and each translation of the feast of each day should starts with a digit specifying the index (starting from 0) in the C<prefixes> attribute to use for this word. E.g.: with C<prefixes> defaulting to C<['jour du ', 'jour de la ', "jour de l'", 'jour des ']>, some default values for C<feast> attribute include C<'1carotte', '2amaranthe', '0panais'> (because you say: "jour de la carrote", with prefix nummber 1, "jour de l'amaranthe", with prefix number 2, and "jour du panais", with prefix number 0. If the language does not use any prefix before the feast of the day, each translation for the feast of the day should start with C<0>.
+
+=item prefixes
+
+Default for this attribute should be a sorted array reference of possible prefixes, as strings, to use with the feast of the day, see L</feast> attribute below. E.g.:
+
+  has '+prefixes' => (
+    default => sub {[
+      'jour du ',
+      'jour de la ',
+      "jour de l'",
+      'jour des ',
+    ]},
+  );
+
+If the language does not use any prefix before the feast of the day, you should not overload this attribute with a default.
+
+=item suffix
+
+Default for this attribute should be a string specifying the suffix to use with the feast of the day, see L</feast> attribute below. E.g.:
+
+  has '+suffix' => (
+    default => ' day',
+  );
+
+If the language does not use a suffix after the feast of the day, you should not overload this attribute with a default.
+
+=item wikipedia_entries
+
+Default for this attribute should be a hash reference, keyed by numbers of monthes (starting from 1), valued by an inner hash reference defining the localized wikipedia entry corresponding to each feast of the day. This is useful when the feast of the day corresponds to an ambiguous entry, or a different word, in wikipedia. If the wikipedia entry is the same as the feast of the day, you can omit it in the default hashref for C<wikipedia_entries> attribute. E.g.:
+
+  has '+wikipedia_entries' => (
+    default => sub {{
+      2 => {
+        'water chestnut' => 'Water_caltrop',
+      },
+      8 => {
+        'hoe'            => 'Hoe_(tool)',
+      },
+    }},
+  );
+
+=back
 
 =head1 SEE ALSO
 
@@ -139,6 +226,14 @@ This role provides a C<locale> required attribute (defaults to C<'fr'>), which h
 =item L<App::SpreadRevolutionaryDate::Target::Freenode::Bot>
 
 =item L<App::SpreadRevolutionaryDate::Target::MsgMaker::RevolutionaryDate>
+
+=item L<App::SpreadRevolutionaryDate::Target::MsgMaker::RevolutionaryDate::Calendar>
+
+=item L<App::SpreadRevolutionaryDate::Target::MsgMaker::RevolutionaryDate::Locale::fr>
+
+=item L<App::SpreadRevolutionaryDate::Target::MsgMaker::RevolutionaryDate::Locale::en>
+
+=item L<App::SpreadRevolutionaryDate::Target::MsgMaker::RevolutionaryDate::Locale::it>
 
 =item L<App::SpreadRevolutionaryDate::Target::MsgMaker::PromptUser>
 
