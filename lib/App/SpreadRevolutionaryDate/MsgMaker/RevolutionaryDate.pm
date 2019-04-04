@@ -62,7 +62,7 @@ sub compute {
 
   if ($self->wikipedia_link) {
     use URI::Escape;
-    my $entry = $revolutionary->locale->wikipedia_redirect($revolutionary->month, $revolutionary->feast);
+    my $entry = $revolutionary->locale->wikipedia_redirect($revolutionary->month, $revolutionary->feast_short);
     $msg .= ' https://' . $self->locale . '.wikipedia.org/wiki/' . uri_escape_utf8($entry);
   }
 
