@@ -39,12 +39,12 @@ sub compute {
   my $self = shift;
 
   my $question = __"Please, enter message to spread";
-  #TRANSLATORS: initial of 'yes', case insensitive
-  my $confirm_ok = __"y";
-  #TRANSLATORS: initial of 'no', case insensitive
-  my $confirm_nok = __"n";
-  #TRANSLATORS: initial of 'Abort', case sensitive
-  my $confirm_abort = __"A";
+  #TRANSLATORS: initial used in case insensitive context
+  my $confirm_ok = lc(substr(__("yes"), 0, 1));
+  #TRANSLATORS: initial used  case insensitive context
+  my $confirm_nok = lc(substr(__("no"), 0, 1));
+  #TRANSLATORS: initial used in case sensitive context
+  my $confirm_abort = substr(__("Abort"), 0, 1);
   my $confirm_abort_text = __x("or {abort} to abort", abort => $confirm_abort);
   my $confirm_intro = __"Spread";
   my $confirm_question = __x("confirm ({confirm_ok}/{confirm_nok} {confirm_abort_text})?", confirm_ok => $confirm_ok, confirm_nok => $confirm_nok, confirm_abort_text => $confirm_abort_text);
@@ -72,7 +72,7 @@ sub compute {
 
 =over
 
-=item L<spread-revolutionary-date|https://metacpan.org/pod/distribution/App-SpreadRevolutionaryDate/bin/spread-revolutionary-date>
+=item L<spread-revolutionary-date>
 
 =item L<App::SpreadRevolutionaryDate>
 

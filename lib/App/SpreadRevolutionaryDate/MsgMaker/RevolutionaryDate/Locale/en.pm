@@ -10,7 +10,38 @@ with 'App::SpreadRevolutionaryDate::MsgMaker::RevolutionaryDate::Locale';
 use Locale::TextDomain 'App-SpreadRevolutionaryDate';
 use namespace::autoclean;
 
-# based on Thomas Carlyle's book:
+=encoding utf8
+
+=head1 DESCRIPTION
+
+This modules copies and fixes some of the English translations of L<DateTime::Calendar::FrenchRevolutionary::Locale::en>, which bases its translation on:
+
+=over
+
+=item [Carlyle]
+
+"The French Revolution: A History", Thomas Carlyle, 1837, Ed. K. J. Fielding and David Sorensen, The World’s Classics, Oxford, New York,  Oxford University Press, 1989.
+
+=item [Taylor]
+
+Alan Taylor's web site: L<http://www.kokogiak.com/frc/default.asp>.
+
+=item [Ruby]
+
+Jonathan Badger's French Revolutionary Calendar module written in Ruby
+
+L<https://github.com/jhbadger/FrenchRevCal-ruby>.
+
+=item [Wikipedia]
+
+L<http://en.wikipedia.org/wiki/French_Republican_Calendar>.
+
+=back
+
+When L<DateTime::Calendar::FrenchRevolutionary::Locale::en> leaves some translations as doubtful, they are fixed here based on Wikipedia.
+
+=cut
+
 has '+months' => (
   default => sub {[
     'Vintagearious', 'Fogarious', 'Frostarious',
@@ -420,7 +451,7 @@ __PACKAGE__->meta->make_immutable;
 
 =over
 
-=item L<spread-revolutionary-date|https://metacpan.org/pod/distribution/App-SpreadRevolutionaryDate/bin/spread-revolutionary-date>
+=item L<spread-revolutionary-date>
 
 =item L<App::SpreadRevolutionaryDate>
 

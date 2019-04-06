@@ -2,7 +2,7 @@ use 5.014;
 use utf8;
 package App::SpreadRevolutionaryDate::MsgMaker::RevolutionaryDate::Locale;
 
-# ABSTRACT: Role providing interface for localization of revolutionary date built by <App::SpreadRevolutionaryDate::MsgMaker::RevolutionaryDate>.
+# ABSTRACT: Role providing interface for localization of revolutionary date built by L<App::SpreadRevolutionaryDate::MsgMaker::RevolutionaryDate>.
 
 use Moose::Role;
 
@@ -51,7 +51,7 @@ has wikipedia_entries => (
 
 =method month_name
 
-Returns the name of the month. Takes a DateTime::Calendar::FrenchRevolutionary object as mandatory parameter.
+Returns the name of the month. Takes a L<DateTime::Calendar::FrenchRevolutionary> object as mandatory parameter.
 
 =cut
 
@@ -62,7 +62,7 @@ sub month_name {
 
 =method day_name
 
-Returns the name of the day. Takes a DateTime::Calendar::FrenchRevolutionary object as mandatory parameter.
+Returns the name of the day. Takes a L<DateTime::Calendar::FrenchRevolutionary> object as mandatory parameter.
 
 =cut
 
@@ -73,7 +73,7 @@ sub day_name {
 
 =method feast_short
 
-Returns the feast of the day. Takes a DateTime::Calendar::FrenchRevolutionary object as mandatory parameter.
+Returns the feast of the day. Takes a L<DateTime::Calendar::FrenchRevolutionary> object as mandatory parameter.
 
 =cut
 
@@ -86,7 +86,7 @@ sub feast_short {
 
 =method feast_long
 
-Returns the feast of the day in long format (day of xxx). Takes a DateTime::Calendar::FrenchRevolutionary object as mandatory parameter.
+Returns the feast of the day in long format (I<day of E<lt>xxxE<gt>>). Takes a L<DateTime::Calendar::FrenchRevolutionary object> as mandatory parameter.
 
 =cut
 
@@ -117,6 +117,8 @@ sub wikipedia_redirect {
 =head1 DESCRIPTION
 
 This role defines the localization interface for L<App::SpreadRevolutionaryDate::MsgMaker::RevolutionDate>.
+
+It provides some methods copied from L<DateTime::Calendar::FrenchRevolutionary::Locale::fr>.
 
 Any class consuming this role is required to overload every mandatory attribute with a default in the language of that class:
 
@@ -159,9 +161,9 @@ Default for this attribute should be a sorted array reference of 10 strings, eac
 
 Default for this attribute should be a sorted array reference of 366 strings, each of them translating the feast of each day. Any space in the name of the feast of the day should be replaced by an underscore (C<_>).
 
-The feast of the day is used in sentences like "this is I<feast name> day" or "c'est le jour de la I<feast name>". Depending on the language, it could then be prefixed or suffixed: in English it is suffixed by " day", whereas in French it is prefixed by "jour de la ". See L</prefixes> and L</suffix> attributes below.
+The feast of the day is used in sentences like I<this is C<feast name> day> or I<c'est le jour de la C<feast name>>. Depending on the language, it could then be prefixed or suffixed: in English it is suffixed by C< day>, whereas in French it is prefixed by C<jour de la >. See L</prefixes> and L</suffix> attributes below.
 
-Moreover, in languages where the feast of the day is prefixed, the prefix often depends on the gender or the number of the noun used for the feast, or whereas this noun starts by a vowel. Therefore, L</prefixes> attribute should be an array of each possible prefix, and each translation of the feast of each day should starts with a digit specifying the index (starting from 0) in the C<prefixes> attribute to use for this word. E.g.: with C<prefixes> defaulting to C<['jour du ', 'jour de la ', "jour de l'", 'jour des ']>, some default values for C<feast> attribute include C<'1carotte', '2amaranthe', '0panais'> (because you say: "jour de la carrote", with prefix nummber 1, "jour de l'amaranthe", with prefix number 2, and "jour du panais", with prefix number 0. If the language does not use any prefix before the feast of the day, each translation for the feast of the day should start with C<0>.
+Moreover, in languages where the feast of the day is prefixed, the prefix often depends on the gender or the number of the noun used for the feast, or whereas this noun starts by a vowel. Therefore, L</prefixes> attribute should be an array of each possible prefix, and each translation of the feast of each day should starts with a digit specifying the index (starting from 0) in the C<prefixes> attribute to use for this word. E.g.: with C<prefixes> defaulting to C<['jour du ', 'jour de la ', "jour de l'", 'jour des ']>, some default values for C<feast> attribute include C<'1carotte', '2amaranthe', '0panais'> (because you say: I<jour de la carotte>, with prefix number C<1>, I<jour de l'amaranthe>, with prefix number C<2>, and I<jour du panais>, with prefix number C<0>. If the language does not use any prefix before the feast of the day, each translation for the feast of the day should start with C<0>.
 
 =item prefixes
 
@@ -190,7 +192,7 @@ If the language does not use a suffix after the feast of the day, you should not
 
 =item wikipedia_entries
 
-Default for this attribute should be a hash reference, keyed by numbers of monthes (starting from 1), valued by an inner hash reference defining the localized wikipedia entry corresponding to each feast of the day. This is useful when the feast of the day corresponds to an ambiguous entry, or a different word, in wikipedia. If the wikipedia entry is the same as the feast of the day, you can omit it in the default hashref for C<wikipedia_entries> attribute. E.g.:
+Default for this attribute should be a hash reference, keyed by numbers of months (starting from 1), valued by an inner hash reference defining the localized wikipedia entry corresponding to each localized feast of the day. This is useful when the feast of the day corresponds to an ambiguous entry, or a different word, in wikipedia. If the wikipedia entry is the same as the feast of the day, you can omit it in the default hashref for C<wikipedia_entries> attribute. E.g.:
 
   has '+wikipedia_entries' => (
     default => sub {{
@@ -209,7 +211,7 @@ Default for this attribute should be a hash reference, keyed by numbers of month
 
 =over
 
-=item L<spread-revolutionary-date|https://metacpan.org/pod/distribution/App-SpreadRevolutionaryDate/bin/spread-revolutionary-date>
+=item L<spread-revolutionary-date>
 
 =item L<App::SpreadRevolutionaryDate>
 

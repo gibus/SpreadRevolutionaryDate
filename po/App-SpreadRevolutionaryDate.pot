@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: App-SpreadRevolutionaryDate 0.10\n"
 "Report-Msgid-Bugs-To: gibus@cpan.org\n"
-"POT-Creation-Date: 2019-04-06 21:56+0200\n"
+"POT-Creation-Date: 2019-04-07 10:21+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -21,19 +21,19 @@ msgstr ""
 msgid "Please, enter message to spread"
 msgstr ""
 
-#. TRANSLATORS: initial of 'yes', case insensitive
+#. TRANSLATORS: initial used in case insensitive context
 #: lib/App/SpreadRevolutionaryDate/MsgMaker/PromptUser.pm:43
-msgid "y"
+msgid "yes"
 msgstr ""
 
-#. TRANSLATORS: initial of 'no', case insensitive
+#. TRANSLATORS: initial used  case insensitive context
 #: lib/App/SpreadRevolutionaryDate/MsgMaker/PromptUser.pm:45
-msgid "n"
+msgid "no"
 msgstr ""
 
-#. TRANSLATORS: initial of 'Abort', case sensitive
+#. TRANSLATORS: initial used in case sensitive context
 #: lib/App/SpreadRevolutionaryDate/MsgMaker/PromptUser.pm:47
-msgid "A"
+msgid "Abort"
 msgstr ""
 
 #: lib/App/SpreadRevolutionaryDate/MsgMaker/PromptUser.pm:48

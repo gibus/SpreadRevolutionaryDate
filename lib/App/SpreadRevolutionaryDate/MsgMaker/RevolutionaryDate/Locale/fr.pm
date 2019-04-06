@@ -10,41 +10,37 @@ with 'App::SpreadRevolutionaryDate::MsgMaker::RevolutionaryDate::Locale';
 use Locale::TextDomain 'App-SpreadRevolutionaryDate';
 use namespace::autoclean;
 
-# Sources:
-# * [Décret] "Annuaire ou calendrier pour la seconde année de la
-#   République française, annexe du décret du 4 frimaire, an II
-#   (24 novembre 1793) sur l'ère, le commencement et l'organisation
-#   de l'année et sur les noms des jours et des mois" ; in J. Madival
-#   and E. Laurent, et. al., eds. "Archives parlementaires de 1789 à
-#   1860: recueil complet des débats législatifs & politiques des
-#   Chambres françaises", Librairie administrative de P. Dupont, Paris,
-#   1862
-#   https://purl.stanford.edu/dx068ky1531 _00_0021
-# * [Fabre] "Rapport fait à la Convention nationale dans la séance du
-#   3 du second mois de la seconde année de la République française, au
-#   nom de la Commission chargée de la confection du calendrier",
-#   Philippe-François-Nazaire Fabre d'Églantine, Imprimerie nationale,
-#   Paris, 1793
-#   https://gallica.bnf.fr/ark:/12148/bpt6k48746z
-# * [Annuaire] "Annuaire du cultivateur, pour la troisième année de
-#   la République : présenté le 30 pluviôse de l'an II à la Convention
-#   nationale, qui en a décrété l'impression et l'envoi, pour servir
-#   aux écoles de la République", Gilbert Romme, Imprimerie nationale
-#   des lois, Paris, 1794-1795
-#   https://gallica.bnf.fr/ark:/12148/bpt6k49016b
-# * [Wikipedia] https://fr.wikipedia.org/wiki/Calendrier_républicain
+=encoding utf8
 
-# Sources have slight differences between them. All of them obviously
-# include some typos. [Décret] is chosen as the reference since it is
-# the definitive legislative text that officially defines names of days
-# in the French revolutionary calendar. This text introduces amendments
-# to the original calendar set up by Fabre d'Églantine in [Fabre], and
-# gives in annex the amended calendar. When there is a difference
-# between the amended calendar and [Fabre] with amendments (yes it can
-# happen!), [Fabre] version prevails. Obvious typos in [Décret] (yes
-# it can happen!) are preserved, with the exception of accented letters
-# because they are fuzzy rendered in original prints, or cannot be
-# printed at all at that time on letters in uppercase.
+=head1 DESCRIPTION
+
+This modules copies and fixes some of the French translations of L<DateTime::Calendar::FrenchRevolutionary::Locale::fr>.
+
+Sources:
+
+=over
+
+=item [Décret]
+
+"Annuaire ou calendrier pour la seconde année de la République française, annexe du décret du 4 frimaire, an II (24 novembre 1793) sur l'ère, le commencement et l'organisation de l'année et sur les noms des jours et des mois" ; in J. Madival and E. Laurent, et. al., eds. "Archives parlementaires de 1789 à 1860: recueil complet des débats législatifs & politiques des Chambres françaises", Librairie administrative de P. Dupont, Paris, 1862 L<https://purl.stanford.edu/dx068ky1531 _00_0021>.
+
+=item [Fabre]
+
+"Rapport fait à la Convention nationale dans la séance du 3 du second mois de la seconde année de la République française, au nom de la Commission chargée de la confection du calendrier", Philippe-François-Nazaire Fabre d'Églantine, Imprimerie nationale, Paris, 1793 L<https://gallica.bnf.fr/ark:/12148/bpt6k48746z>.
+
+=item [Annuaire]
+
+"Annuaire du cultivateur, pour la troisième année de la République : présenté le 30 pluviôse de l'an II à la Convention nationale, qui en a décrété l'impression et l'envoi, pour servir aux écoles de la République", Gilbert Romme, Imprimerie nationale des lois, Paris, 1794-1795 L<https://gallica.bnf.fr/ark:/12148/bpt6k49016b>.
+
+=item [Wikipedia]
+
+L<https://fr.wikipedia.org/wiki/Calendrier_républicain>.
+
+=back
+
+Sources have slight differences between them. All of them obviously include some typos. [Décret] is chosen as the reference since it is the definitive legislative text that officially defines names of days in the French revolutionary calendar. This text introduces amendments to the original calendar set up by Fabre d'Églantine in [Fabre], and gives in annex the amended calendar. When there is a difference between the amended calendar and [Fabre] with amendments (yes it can happen!), [Fabre] version prevails. Obvious typos in [Décret] (yes it can happen!) are preserved, with the exception of accented letters because they are fuzzy rendered in original prints, or cannot be printed at all at that time on letters in uppercase.
+
+=cut
 
 has '+months' => (
   default => sub {[
@@ -405,7 +401,7 @@ __PACKAGE__->meta->make_immutable;
 
 =over
 
-=item L<spread-revolutionary-date|https://metacpan.org/pod/distribution/App-SpreadRevolutionaryDate/bin/spread-revolutionary-date>
+=item L<spread-revolutionary-date>
 
 =item L<App::SpreadRevolutionaryDate>
 

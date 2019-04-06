@@ -17,7 +17,9 @@ has locale => (
   required => 1,
   default => 'fr',
   trigger => sub {
+    # Set locale to $val, see https://metacpan.org/pod/Locale::TextDomain::FAQ#How-do-I-switch-languages-or-force-a-certain-language-independently-from-user-settings-read-from-the-environment?
     my ( $self, $val, $old_val ) = @_;
+    Locale::Messages->select_package('gettext_pp');
     set_locale(LC_ALL, $val, undef, 'utf-8');
     nl_putenv("LANGUAGE=$val");
     nl_putenv("LANG=$val");
@@ -39,7 +41,7 @@ This role provides a C<locale> required attribute (defaults to C<'fr'>), which h
 
 =over
 
-=item L<spread-revolutionary-date|https://metacpan.org/pod/distribution/App-SpreadRevolutionaryDate/bin/spread-revolutionary-date>
+=item L<spread-revolutionary-date>
 
 =item L<App::SpreadRevolutionaryDate>
 

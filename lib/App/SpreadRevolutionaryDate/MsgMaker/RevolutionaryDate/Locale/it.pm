@@ -10,7 +10,14 @@ with 'App::SpreadRevolutionaryDate::MsgMaker::RevolutionaryDate::Locale';
 use Locale::TextDomain 'App-SpreadRevolutionaryDate';
 use namespace::autoclean;
 
-# Source: https://it.wikipedia.org/wiki/Calendario_rivoluzionario_francese
+=encoding utf8
+
+=head1 DESCRIPTION
+
+This modules adds Italian translations to L<DateTime::Calendar::FrenchRevolutionary>, based on Wikipedia: L<https://it.wikipedia.org/wiki/Calendario_rivoluzionario_francese>
+
+=cut
+
 has '+months' => (
   default => sub {[
     'Vendemmiaio', 'Brumaio',   'Frimaio',
@@ -480,7 +487,7 @@ __PACKAGE__->meta->make_immutable;
 
 =over
 
-=item L<spread-revolutionary-date|https://metacpan.org/pod/distribution/App-SpreadRevolutionaryDate/bin/spread-revolutionary-date>
+=item L<spread-revolutionary-date>
 
 =item L<App::SpreadRevolutionaryDate>
 

@@ -8,7 +8,7 @@ version 0.10
 
 # DESCRIPTION
 
-`spread-revolutionary-date` is a [Free Software](https://www.gnu.org/philosophy/free-sw.html) that spreads the current date, expressed in [French Revolutionary calendar](https://en.wikipedia.org/wiki/French_Republican_calendar), to various social networks: [Twitter](https://twitter.com/), [Mastodon](https://mastodon.social/), and the [Freenode](https://freenode.net/) Internet Relay Chat network.
+`spread-revolutionary-date` is a [Free Software](https://www.gnu.org/philosophy/free-sw.html) that spreads the current date, expressed in the [French Revolutionary calendar](https://en.wikipedia.org/wiki/French_Republican_calendar), to various social networks: [Twitter](https://twitter.com/), [Mastodon](https://mastodon.social/), and the [Freenode](https://freenode.net/) Internet Relay Chat network.
 
 Moreover, you can easily extend these defaults targets with any desired one, see ["EXTENDING TO NEW TARGETS"](#extending-to-new-targets), and even spread something else than the revolutionary date, see ["msgmaker"](#msgmaker) option and ["EXTENDING TO NEW MESSAGE MAKERS"](#extending-to-new-message-makers).
 
@@ -67,7 +67,7 @@ This option can only be specified once, with a value as string. Spread a message
 
 ### locale
 
-This option can only be specified once, with a value as string. Spread with chosen language. As of [DateTime::Calendar::FrenchRevolutionary](https://metacpan.org/pod/DateTime::Calendar::FrenchRevolutionary) 0.14, locale is limited to `'en'` or `'fr'`, defaults to `'fr'`.
+This option can only be specified once, with a value as string. Spread with chosen language. As of [App::SpreadRevolutionaryDate](https://metacpan.org/pod/App::SpreadRevolutionaryDate) 0.11 locale is limited to `'fr'`, `'en'` or `'it'`, defaults to `'fr'`.
 
 ### test
 
@@ -75,19 +75,19 @@ This boolean option takes no value, either it is defined or not. If defined, do 
 
 ### _DEPRECATED_ acab
 
-This option is _deprecated_ since version 0.09 of this distribution and may be removed in future release. Please use ["acab"](#acab) option in `[revolutionarydate]` section, as described below.
+This option is _deprecated_ starting from version 0.09 of this distribution and may be removed in future release. Please use ["acab"](#acab) option in `[revolutionarydate]` section, as described below.
 
 ### _DEPRECATED_ twitter
 
-This option is _deprecated_ since version 0.07 of this distribution and may be removed in future release. Please use ["targets"](#targets) option, as described above. Spread on Twitter explicitly. If none of the `twitter`, `mastodon`, `freenode` option is set, the revolutionary date is spread on all of these three targets.
+This option is _deprecated_ starting from version 0.07 of this distribution and may be removed in future release. Please use ["targets"](#targets) option, as described above. Spread on Twitter explicitly. If none of the `twitter`, `mastodon`, `freenode` option is set, the revolutionary date is spread on all of these three targets.
 
 ### _DEPRECATED_ mastodon
 
-This option is _deprecated_ since version 0.07 of this distribution and may be removed in future release. Please use ["targets"](#targets) option, as described above. Spread on Mastodon explicitly. If none of the `twitter`, `mastodon`, `freenode` option is set, the revolutionary date is spread on all of these three targets.
+This option is _deprecated_ starting from version 0.07 of this distribution and may be removed in future release. Please use ["targets"](#targets) option, as described above. Spread on Mastodon explicitly. If none of the `twitter`, `mastodon`, `freenode` option is set, the revolutionary date is spread on all of these three targets.
 
 ### _DEPRECATED_ freenode
 
-This option is _deprecated_ since version 0.07 of this distribution and may be removed in future release. Please use ["targets"](#targets) option, as described above. Spread on Freenode explicitly. If none of the `twitter`, `mastodon`, `freenode` option is set, the revolutionary date is spread on all of these three targets.
+This option is _deprecated_ starting from version 0.07 of this distribution and may be removed in future release. Please use ["targets"](#targets) option, as described above. Spread on Freenode explicitly. If none of the `twitter`, `mastodon`, `freenode` option is set, the revolutionary date is spread on all of these three targets.
 
 ## Twitter options
 
@@ -195,7 +195,7 @@ Same as ["targets"](#targets) configuration option above.
 
 Same as ["msgmaker"](#msgmaker) configuration option above.
 
-### --locale | -l &lt;fr|en>
+### --locale | -l &lt;fr|en|it>
 
 Same as ["locale"](#locale) configuration option above.
 
@@ -297,7 +297,7 @@ Same as ["default"](#default) configuration option above.
 
 # EXTENDING TO NEW TARGETS
 
-Version 0.07 of this distribution is a complete redesign of the API, taking advantage of [Moose](https://metacpan.org/pod/Moose), the postmodern object system for Perl 5, allowing to easily extend `spread-revolutionary-date` to other targets than the default ones (`Twitter`, `Mastondon` and `Freenode`.
+Starting from version 0.07, this distribution takes advantage of [Moose](https://metacpan.org/pod/Moose), the postmodern object system for Perl 5, allowing to easily extend `spread-revolutionary-date` to other targets than the default ones (`Twitter`, `Mastondon` and `Freenode`.
 
 To add a new target, you should write a new class in the `App::SpreadRevolutionaryDate::Target::` namespace (that is: the class should be `App::SpreadRevolutionaryDate::Target::Mytarget` for a new `Mytarget` target), that consumes the [App::SpreadRevolutionaryDate::Target](https://metacpan.org/pod/App::SpreadRevolutionaryDate::Target) role. See ["DESCRIPTION" in App::SpreadRevolutionaryDate::Target](https://metacpan.org/pod/App::SpreadRevolutionaryDate::Target#DESCRIPTION) for a comprehensive description of this role.
 
@@ -305,7 +305,7 @@ The name of the target should be added as a value of the ["targets"](#targets) o
 
 Such a target class is actually just a wrapper. Usually a target has to use an existing specific module (which can be a `Moose` class or not) to perform the actual work of posting a message according the specific target protocol, after having complied with any potential required authentication. Such authentication should be carried on by the constructor or, along with posting, by the required `spread` method of the target class.
 
-To perform authentication and to post a message, there is a strong likelihood that the new target requires specific parameters (for eg. tokens, keys, account name, password, channels, etc.). These parameters should be defined as required attributes of the target class. Values for such attributes should be set in the [configuration file](#configuration), inside a section named after the target in lower case (`[mytarget]`), or as [command line parameters](#command-line-parameters) prefixed with the name of the target in lower case, followed by an underscore (`--mytarget_myparam`).
+To perform authentication and to post a message, there is a strong likelihood that the new target requires specific parameters (e.g.: tokens, keys, account name, password, channels, etc.). These parameters should be defined as required attributes of the target class. Values for such attributes should be set in the [configuration file](#configuration), inside a section named after the target in lower case (`[mytarget]`), or as [command line parameters](#command-line-parameters) prefixed with the name of the target in lower case, followed by an underscore (`--mytarget_myparam`).
 
 Should you extend `spread-revolutionary-date` to a new target, we advise you to have a look on how default targets are implemented: [App::SpreadRevolutionaryDate::Target::Twitter](https://metacpan.org/pod/App::SpreadRevolutionaryDate::Target::Twitter) with [Net::Twitter::Lite::WithAPIv1\_1](https://metacpan.org/pod/Net::Twitter::Lite::WithAPIv1_1) `worker`, [App::SpreadRevolutionaryDate::Target::Mastodon](https://metacpan.org/pod/App::SpreadRevolutionaryDate::Target::Mastodon) with [Mastodon::Client](https://metacpan.org/pod/Mastodon::Client) `worker`. Both are using [OAuth2 protocol](https://oauth.net/2/) to perform authentication. The third default target, `App::SpreadRevolutionaryDate::Target::Freenode`, uses a [chatbot](https://en.wikipedia.org/wiki/Chatbot): [App::SpreadRevolutionaryDate::Target::Freenode::Bot](https://metacpan.org/pod/App::SpreadRevolutionaryDate::Target::Freenode::Bot) subclassing [Bot::BasicBot](https://metacpan.org/pod/Bot::BasicBot). You can also see a very simple example with a test file provided in this distribution at `t/new_target.t`, which just prints out the revolutionary date on the standard output using core module [IO::Handle](https://metacpan.org/pod/IO::Handle).
 
@@ -320,6 +320,74 @@ Such a message maker class is actually just a wrapper. Usually a message maker h
 If your new message maker class needs specific parameters (other than `locale`, which comes with  [App::SpreadRevolutionaryDate::MsgMaker](https://metacpan.org/pod/App::SpreadRevolutionaryDate::MsgMaker) role), they should be defined as attributes of this class. Values for such attributes should be set in the [configuration file](#configuration), inside a section named after the message maker in lower case (`[mymsgmaker]`), or as [command line parameters](#command-line-parameters) prefixed with the name of the message maker in lower case, followed by an underscore (`--mytarget_myparam`).
 
 Have a look to the [App::SpreadRevolutionaryDate::Target::MsgMaker::PromptUser](https://metacpan.org/pod/App::SpreadRevolutionaryDate::Target::MsgMaker::PromptUser) class, it shows a simple example on how to extend `spread-revolutionary-date` to a new message maker.
+
+# INTERNATIONALIZATION AND LOCALIZATION
+
+Starting from version 0.11, this distribution uses the widespread internationalization and localization system [gettext](https://en.wikipedia.org/wiki/Gettext), commonly used for writing multilingual programs. See [GNU gettext documentation](https://www.gnu.org/software/gettext/gettext.html) for details. From the point of view of a translator, this is rather simple.
+
+Translators can find a portable object template `po/App-SpreadRevolutionaryDate.pot` which includes all translatable strings used by `spread-revolutionary-date` (but not translations of days, months, feasts used in the French Revolutionary Calendar, see below). They can copy this template to a portable object file of their language and translate strings of this file. For example, a German translator would work on `po/de.po`. All strings to be translated are laid down in lines beginning with `msgid` keyword, and translations should go on the next line beginning with keyword `msgstr`. E.g.:
+
+    msgid "Please, enter message to spread"
+
+A German translator would have to replace the next line:
+
+    msgstr ""
+
+by:
+
+    msgstr "Bitte geben Sie die Nachricht zu verbreiten ein"
+
+When the string to be translated includes some words in curly braces, these words are actually named variables and should be left as is in the translation. E.g.:
+
+    msgid "or {abort} to abort"
+    msgstr "oder {abort}, um abzubrechen"
+
+And that's it! As of version 0.11 of `spread-revolutionary-date`, there is only about a dozen of strings to translate, mainly for `PromptUser` message maker. But with the possibility to extend to other message makers, you may need more and more strings to be translated.
+
+Translating days, months and feasts used in the `RevolutionaryDate` message maker do not use the `gettext` system. Mainly because it uses [DateTime::Calendar::FrenchRevolutionary](https://metacpan.org/pod/DateTime::Calendar::FrenchRevolutionary) which proposes French and English translations in dedicated Perl modules. `spread-revolutionary-date` keeps the same way for translating expressions used in the French revolutionary calendar, but, thanks to [Moose::Role](https://metacpan.org/pod/Moose::Role) [App::SpreadRevolutionaryDate::MsgMaker::RevolutionaryDate::Locale](https://metacpan.org/pod/App::SpreadRevolutionaryDate::MsgMaker::RevolutionaryDate::Locale), translatable nominal groups have been isolated from other Perl code. Their translations lie in a consuming class in the `App::SpreadRevolutionaryDate::MsgMaker::RevolutionaryDate::Locale::` namespace for each translated language. These classes are named after the two-letter ([ISO 639-1](https://en.wikipedia.org/wiki/ISO_639-1)) or three-letter ([ISO 639-2](https://en.wikipedia.org/wiki/ISO_639-2) and [hISO 639-3](ttps://en.wikipedia.org/wiki/ISO_639-3)) lowercase abbreviation of the corresponding language. For example, a German translator would work on `App::SpreadRevolutionaryDate::MsgMaker::RevolutionaryDate::Locale::de` class.
+
+Just copy the French class (from `lib/App/SpreadRevolutionaryDate/MsgMaker/RevolutionaryDate/Locale/fr.pm` file) into the desired language, change the name of the class and replace every French string. E.g.: the names of the months should be replace in:
+
+    has '+months' => (
+      default => sub {[
+        'Vendémiaire', 'Brumaire',  'Frimaire',
+        'Nivôse',      'Pluviôse',  'Ventôse',
+        'Germinal',    'Floréal',   'Prairial',
+        'Messidor',    'Thermidor', 'Fructidor',
+        'jour complémentaire',
+      ]},
+    );
+
+by names in German:
+
+    has '+months' => (
+      default => sub {[
+        'Herbstmonat',    'Nebelmonat',  'Reifmonat',
+        'Schneemonat',    'Regenmonat',  'Windmonat',
+        'Keimmonat',      'Blütenmonat', 'Wiesenmonat',
+        'Erntemonat',     'Hitzemonat',  'Fruchtmonat',
+        'Ergänzungstage',
+      ]},
+    );
+
+Feasts include a special trick, because they can be used in sentences like _this is `feast name` day_ or _c'est le jour de la `feast name`_. Depending on the language, it could then be prefixed or suffixed: in English it is suffixed by ` day`, whereas in French it is prefixed by `jour de la `. Prefixes are translated as an array of strings, while the suffix is translated in a single string. The reason is that in languages where the feast of the day is prefixed, the prefix often depends on the gender or the number of the noun used for the feast, or whereas this noun starts by a vowel, and other factors depending on the language. Therefore, each translation of the feast of each day should starts with a digit specifying the index (starting from 0) in the translated array of prefixes to use for this word. E.g.: with prefixes translated by `['jour du ', 'jour de la ', "jour de l'", 'jour des ']`, some feast can be translated by `'1carotte', '2amaranthe', '0panais'` (because you say: _jour de la carotte_, with prefix number `1`, _jour de l'amaranthe_, with prefix number `2`, and _jour du panais_, with prefix number `0`. If the language does not use any prefix before the feast of the day, each translation for the feast of the day should start with `0`, and the array of prefixes should include an empty string as its single element. If the language does not use a suffix after the feast of the day, the translation of the sufix should be an empty string.
+
+Note also that any space in the name of the feast of the day should be replaced by an underscore (`_`).
+
+Finally, these translation classes include a mapping between the feast of the day and the wikipedia entry for this word. This is useful when the feast of the day corresponds to an ambiguous entry, or a different word, in wikipedia. If the wikipedia entry is the same as the feast of the day, you can omit it. If the wikipedia entry is different from the feast of the day, you should add a line in the appropriate group of mappings for the considered month (groups of mappings are numbered from 1 to 13). In the left part of this new mapping you should use the feast of the day as you have translated it, but without the number indicating the prefix and with spaces, not underscores. And in the right part of this new mapping, you should use the wikipedia entry, i.e. the end of the wikipedia url. E.g.:
+
+    has '+wikipedia_entries' => (
+      default => sub {{
+        2 => {
+          'water chestnut' => 'Water_caltrop',
+        },
+        8 => {
+          'hoe'            => 'Hoe_(tool)',
+        },
+      }},
+    );
+
+Because of the trick on prefix and suffix for feasts and the needed mapping for wikipedia entries, using the `gettext` system would be quite difficult. It wouldn't be an issue for translating names of months or days. But for consistency reasons, I'd rather group all these translations used in the French Revolutionary Calendar in the same translation class. Nevertheless, I'm open to find solutions if you think it would be easier to translate everything with the `gettext` system.
 
 # SEE ALSO
 
