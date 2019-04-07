@@ -29,7 +29,7 @@ The revolutionary date and time is computed thanks to the [DateTime::Calendar::F
     $ perl -MApp::SpreadRevolutionaryDate -e 'App::SpreadRevolutionaryDate->new->spread;'
 
     # Test spreading to Mastodon only:
-    $ spread-revolutionary-date --targets=mastodon --test
+    $ spread-revolutionary-date --targets mastodon --test
 
     # Test spreading to Twitter only in English:
     $ spread-revolutionary-date --targets twitter --test --locale en
