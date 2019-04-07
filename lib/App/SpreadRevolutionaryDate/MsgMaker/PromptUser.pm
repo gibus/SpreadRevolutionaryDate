@@ -88,19 +88,19 @@ sub compute {
 
 =item L<App::SpreadRevolutionaryDate::Target::Freenode::Bot>
 
-=item L<App::SpreadRevolutionaryDate::Target::MsgMaker>
+=item L<App::SpreadRevolutionaryDate::MsgMaker>
 
-=item L<App::SpreadRevolutionaryDate::Target::MsgMaker::RevolutionaryDate>
+=item L<App::SpreadRevolutionaryDate::MsgMaker::RevolutionaryDate>
 
-=item L<App::SpreadRevolutionaryDate::Target::MsgMaker::RevolutionaryDate::Calendar>
+=item L<App::SpreadRevolutionaryDate::MsgMaker::RevolutionaryDate::Calendar>
 
-=item L<App::SpreadRevolutionaryDate::Target::MsgMaker::RevolutionaryDate::Locale>
+=item L<App::SpreadRevolutionaryDate::MsgMaker::RevolutionaryDate::Locale>
 
-=item L<App::SpreadRevolutionaryDate::Target::MsgMaker::RevolutionaryDate::Locale::fr>
+=item L<App::SpreadRevolutionaryDate::MsgMaker::RevolutionaryDate::Locale::fr>
 
-=item L<App::SpreadRevolutionaryDate::Target::MsgMaker::RevolutionaryDate::Locale::en>
+=item L<App::SpreadRevolutionaryDate::MsgMaker::RevolutionaryDate::Locale::en>
 
-=item L<App::SpreadRevolutionaryDate::Target::MsgMaker::RevolutionaryDate::Locale::it>
+=item L<App::SpreadRevolutionaryDate::MsgMaker::RevolutionaryDate::Locale::it>
 
 =back
 

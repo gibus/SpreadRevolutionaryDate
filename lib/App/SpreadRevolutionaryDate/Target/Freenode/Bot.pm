@@ -91,11 +91,11 @@ sub log {
 
 =item L<App::SpreadRevolutionaryDate::Target::Freenode>
 
-=item L<App::SpreadRevolutionaryDate::Target::MsgMaker>
+=item L<App::SpreadRevolutionaryDate::MsgMaker>
 
-=item L<App::SpreadRevolutionaryDate::Target::MsgMaker::RevolutionaryDate>
+=item L<App::SpreadRevolutionaryDate::MsgMaker::RevolutionaryDate>
 
-=item L<App::SpreadRevolutionaryDate::Target::MsgMaker::PromptUser>
+=item L<App::SpreadRevolutionaryDate::MsgMaker::PromptUser>
 
 =back
 

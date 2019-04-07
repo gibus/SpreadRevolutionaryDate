@@ -327,11 +327,11 @@ It is even easier to spread whatever you want instead of the revolutionary date.
 
 The name of the message maker should be set as a value of the L</msgmaker> option in lower case.
 
-Such a message maker class is actually just a wrapper. Usually a message maker has to use an existing specific module (which can be a C<Moose> class or not) to craft the message. L<App::SpreadRevolutionaryDate::Target::MsgMaker::RevolutionaryDate> uses L<DateTime::Calendar::FrenchRevolutionary>, while L<App::SpreadRevolutionaryDate::Target::MsgMaker::PromptUser> is based on L<IO::Prompt::Hooked>. You may need for example L<LWP> to extract the message from a fetched web page or service, or L<XML::Feed> to build it from a L<RSS|https://en.wikipedia.org/wiki/RSS> feed, or L<DBI> to retrieve it from a database, or nothing at all to spread a fixed message, etc.
+Such a message maker class is actually just a wrapper. Usually a message maker has to use an existing specific module (which can be a C<Moose> class or not) to craft the message. L<App::SpreadRevolutionaryDate::MsgMaker::RevolutionaryDate> uses L<DateTime::Calendar::FrenchRevolutionary>, while L<App::SpreadRevolutionaryDate::MsgMaker::PromptUser> is based on L<IO::Prompt::Hooked>. You may need for example L<LWP> to extract the message from a fetched web page or service, or L<XML::Feed> to build it from a L<RSS|https://en.wikipedia.org/wiki/RSS> feed, or L<DBI> to retrieve it from a database, or nothing at all to spread a fixed message, etc.
 
 If your new message maker class needs specific parameters (other than C<locale>, which comes with  L<App::SpreadRevolutionaryDate::MsgMaker> role), they should be defined as attributes of this class. Values for such attributes should be set in the L<configuration file|/CONFIGURATION>, inside a section named after the message maker in lower case (C<[mymsgmaker]>), or as L<command line parameters|/"COMMAND LINE PARAMETERS"> prefixed with the name of the message maker in lower case, followed by an underscore (C<--mytarget_myparam>).
 
-Have a look to the L<App::SpreadRevolutionaryDate::Target::MsgMaker::PromptUser> class, it shows a simple example on how to extend C<spread-revolutionary-date> to a new message maker.
+Have a look to the L<App::SpreadRevolutionaryDate::MsgMaker::PromptUser> class, it shows a simple example on how to extend C<spread-revolutionary-date> to a new message maker.
 
 =head1 INTERNATIONALIZATION AND LOCALIZATION
 

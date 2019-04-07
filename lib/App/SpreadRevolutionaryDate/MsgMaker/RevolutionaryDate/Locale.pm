@@ -227,17 +227,17 @@ Default for this attribute should be a hash reference, keyed by numbers of month
 
 =item L<App::SpreadRevolutionaryDate::Target::Freenode::Bot>
 
-=item L<App::SpreadRevolutionaryDate::Target::MsgMaker::RevolutionaryDate>
+=item L<App::SpreadRevolutionaryDate::MsgMaker::RevolutionaryDate>
 
-=item L<App::SpreadRevolutionaryDate::Target::MsgMaker::RevolutionaryDate::Calendar>
+=item L<App::SpreadRevolutionaryDate::MsgMaker::RevolutionaryDate::Calendar>
 
-=item L<App::SpreadRevolutionaryDate::Target::MsgMaker::RevolutionaryDate::Locale::fr>
+=item L<App::SpreadRevolutionaryDate::MsgMaker::RevolutionaryDate::Locale::fr>
 
-=item L<App::SpreadRevolutionaryDate::Target::MsgMaker::RevolutionaryDate::Locale::en>
+=item L<App::SpreadRevolutionaryDate::MsgMaker::RevolutionaryDate::Locale::en>
 
-=item L<App::SpreadRevolutionaryDate::Target::MsgMaker::RevolutionaryDate::Locale::it>
+=item L<App::SpreadRevolutionaryDate::MsgMaker::RevolutionaryDate::Locale::it>
 
-=item L<App::SpreadRevolutionaryDate::Target::MsgMaker::PromptUser>
+=item L<App::SpreadRevolutionaryDate::MsgMaker::PromptUser>
 
 =back
 
