@@ -1,6 +1,9 @@
 Changelog for App-SpreadRevolutionaryDate
 
-0.13 2019-04-07T20:48:20
+0.14 2019-04-07T21:58:42
+ - Fix errors in USAGE doc
+
+0.13 2019-04-07T20:48:20Z
  - Fix pod links with Dist::Zilla::Plugin::Test::Pod::LinkCheck
  - Fix App::SpreadRevolutionaryDate::MsgMaker namespace in SEE ALSO and
    README
