@@ -32,18 +32,18 @@ The revolutionary date and time is computed thanks to the [DateTime::Calendar::F
     $ spread-revolutionary-date --targets=mastodon --test
 
     # Test spreading to Twitter only in English:
-    $ spread-revolutionary-date --targets=twitter --test --locale=en
+    $ spread-revolutionary-date --targets twitter --test --locale en
 
     # Spread acab time to Twitter and Freenode explicit channels
-    $ spread-revolutionary-date --targets=twitter \
-        --targets=freenode \
-        --freenode_channels='#revolution' \
-        --freenode_channels='#acab' \
+    $ spread-revolutionary-date --targets twitter \
+        --targets freenode \
+        --freenode_channels '#revolution' \
+        --freenode_channels '#acab' \
         --revolutionarydate_acab
 
     # Prompt user for a message to spread to mastodon
-    $ spread-revolutionary-date --targets=mastodon \
-        --msgwriter=UserPrompt
+    $ spread-revolutionary-date --targets mastodon \
+        --msgwriter UserPrompt
 
 # CONFIGURATION
 
