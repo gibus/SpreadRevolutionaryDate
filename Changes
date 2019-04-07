@@ -1,6 +1,10 @@
 Changelog for App-SpreadRevolutionaryDate
 
-0.11 2019-04-07T14:26:45
+0.12 2019-04-07T15:26:49
+ - Update CONTRIBUTING and TODO
+ - Fix errors in USAGE doc
+
+0.11 2019-04-07T14:26:45Z
  - Add German localization of PromptUser msgmaker
  - Add documentation for i18n/l10n
  - Let multivalued options be overridden by command line arguments
