@@ -1,6 +1,18 @@
 Changelog for App-SpreadRevolutionaryDate
 
-0.10 2019-03-30T20:59:56
+0.11 2019-04-07T14:26:45
+ - Add German localization of PromptUser msgmaker
+ - Add documentation for i18n/l10n
+ - Let multivalued options be overridden by command line arguments
+ - Add App::SpreadRevolutionaryDate::MsgMaker::RevolutionaryDate::Locale
+   role and moosify consuming classes
+ - Add localization template
+ - Add Italian localization
+ - Overload DateTime::Calendar::FrenchRevolutionary to extend defaults
+   fr/en locales
+ - Add localization with Locale::TextDomain
+
+0.10 2019-03-30T20:59:56Z
  - Add --conf, --version and --help command line parameters
  - Fix and improve doc
  - Add default value when defined for options guessed from Target and
