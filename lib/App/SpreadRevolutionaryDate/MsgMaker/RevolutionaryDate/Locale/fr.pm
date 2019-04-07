@@ -22,7 +22,7 @@ Sources:
 
 =item [Décret]
 
-"Annuaire ou calendrier pour la seconde année de la République française, annexe du décret du 4 frimaire, an II (24 novembre 1793) sur l'ère, le commencement et l'organisation de l'année et sur les noms des jours et des mois" ; in J. Madival and E. Laurent, et. al., eds. "Archives parlementaires de 1789 à 1860: recueil complet des débats législatifs & politiques des Chambres françaises", Librairie administrative de P. Dupont, Paris, 1862 L<https://purl.stanford.edu/dx068ky1531 _00_0021>.
+"Annuaire ou calendrier pour la seconde année de la République française, annexe du décret du 4 frimaire, an II (24 novembre 1793) sur l'ère, le commencement et l'organisation de l'année et sur les noms des jours et des mois" ; in J. Madival and E. Laurent, et. al., eds. "Archives parlementaires de 1789 à 1860: recueil complet des débats législatifs & politiques des Chambres françaises", Librairie administrative de P. Dupont, Paris, 1862 L<https://purl.stanford.edu/dx068ky1531>.
 
 =item [Fabre]
 

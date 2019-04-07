@@ -86,7 +86,7 @@ sub feast_short {
 
 =method feast_long
 
-Returns the feast of the day in long format (I<day of E<lt>xxxE<gt>>). Takes a L<DateTime::Calendar::FrenchRevolutionary object> as mandatory parameter.
+Returns the feast of the day in long format (I<day of E<lt>xxxE<gt>>). Takes a L<DateTime::Calendar::FrenchRevolutionary> object as mandatory parameter.
 
 =cut
 
@@ -116,7 +116,7 @@ sub wikipedia_redirect {
 
 =head1 DESCRIPTION
 
-This role defines the localization interface for L<App::SpreadRevolutionaryDate::MsgMaker::RevolutionDate>.
+This role defines the localization interface for L<App::SpreadRevolutionaryDate::MsgMaker::RevolutionaryDate>.
 
 It provides some methods copied from L<DateTime::Calendar::FrenchRevolutionary::Locale::fr>.
 

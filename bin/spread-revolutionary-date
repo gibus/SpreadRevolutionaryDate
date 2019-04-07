@@ -221,15 +221,15 @@ Same as L</acab> configuration option above.
 
 =head3 I<DEPRECATED> --twitter | -t
 
-Same as L</twitter> configuration option above.
+Same as L</"DEPRECATED twitter"> configuration option above.
 
 =head3 I<DEPRECATED> --mastodon | -m
 
-Same as L</mastodon> configuration option above.
+Same as L</"DEPRECATED mastodon"> configuration option above.
 
 =head3 I<DEPRECATED> --freenode | -f
 
-Same as L</freenode> configuration option above.
+Same as L</"DEPRECATED freenode"> configuration option above.
 
 =head2 Twitter parameters
 

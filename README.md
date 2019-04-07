@@ -209,15 +209,15 @@ Same as ["acab"](#acab) configuration option above.
 
 ### _DEPRECATED_ --twitter | -t
 
-Same as ["twitter"](#twitter) configuration option above.
+Same as ["DEPRECATED twitter"](#deprecated-twitter) configuration option above.
 
 ### _DEPRECATED_ --mastodon | -m
 
-Same as ["mastodon"](#mastodon) configuration option above.
+Same as ["DEPRECATED mastodon"](#deprecated-mastodon) configuration option above.
 
 ### _DEPRECATED_ --freenode | -f
 
-Same as ["freenode"](#freenode) configuration option above.
+Same as ["DEPRECATED freenode"](#deprecated-freenode) configuration option above.
 
 ## Twitter parameters
 
