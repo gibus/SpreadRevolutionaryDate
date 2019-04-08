@@ -21,28 +21,38 @@ The revolutionary date and time is computed thanks to the [DateTime::Calendar::F
 # USAGE
 
     # Just execute the script in your shell
-    # to spread current date to configured accounts on Twitter, Mastodon and Freenode:
+    # to spread current date to configured accounts
+    # on Twitter, Mastodon and Freenode:
     $ spread-revolutionary-date
 
-    # Or, since this script do nothing but calling the L<App::SpreadRevolutionaryDate> Perl module,
+    # Or, since this script does nothing but calling
+    # the L<App::SpreadRevolutionaryDate> Perl module,
     # use this one-liner:
-    $ perl -MApp::SpreadRevolutionaryDate -e 'App::SpreadRevolutionaryDate->new->spread;'
+    $ perl -MApp::SpreadRevolutionaryDate \
+        -e 'App::SpreadRevolutionaryDate->new->spread;'
 
     # Test spreading to Mastodon only:
-    $ spread-revolutionary-date --targets mastodon --test
+    $ spread-revolutionary-date \
+        --targets mastodon --test
 
     # Test spreading to Twitter only in English:
-    $ spread-revolutionary-date --targets twitter --test --locale en
+    $ spread-revolutionary-date \
+        --targets twitter \
+        --test \
+        --locale en
 
-    # Spread acab time to Twitter and Freenode explicit channels
-    $ spread-revolutionary-date --targets twitter \
+    # Spread acab time to Twitter and Freenode
+    # explicit channels
+    $ spread-revolutionary-date \
+        --targets twitter \
         --targets freenode \
         --freenode_channels '#revolution' \
         --freenode_channels '#acab' \
         --revolutionarydate_acab
 
     # Prompt user for a message to spread to mastodon
-    $ spread-revolutionary-date --targets mastodon \
+    $ spread-revolutionary-date \
+        --targets mastodon \
         --msgwriter UserPrompt
 
 # CONFIGURATION
