@@ -14,7 +14,7 @@ use namespace::autoclean;
 
 =head1 DESCRIPTION
 
-This modules adds Italian translations to L<DateTime::Calendar::FrenchRevolutionary>, based on Wikipedia: L<https://it.wikipedia.org/wiki/Calendario_rivoluzionario_francese>
+This modules adds Italian translations to L<DateTime::Calendar::FrenchRevolutionary>, based on Wikipedia: L<https://it.wikipedia.org/wiki/Calendario_rivoluzionario_francese>.
 
 =cut
 
@@ -512,6 +512,8 @@ __PACKAGE__->meta->make_immutable;
 =item L<App::SpreadRevolutionaryDate::MsgMaker::RevolutionaryDate::Locale::fr>
 
 =item L<App::SpreadRevolutionaryDate::MsgMaker::RevolutionaryDate::Locale::en>
+
+=item L<App::SpreadRevolutionaryDate::MsgMaker::RevolutionaryDate::Locale::es>
 
 =item L<App::SpreadRevolutionaryDate::MsgMaker::PromptUser>
 

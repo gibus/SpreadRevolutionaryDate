@@ -237,6 +237,8 @@ Default for this attribute should be a hash reference, keyed by numbers of month
 
 =item L<App::SpreadRevolutionaryDate::MsgMaker::RevolutionaryDate::Locale::it>
 
+=item L<App::SpreadRevolutionaryDate::MsgMaker::RevolutionaryDate::Locale::es>
+
 =item L<App::SpreadRevolutionaryDate::MsgMaker::PromptUser>
 
 =back

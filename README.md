@@ -77,7 +77,7 @@ This option can only be specified once, with a value as string. Spread a message
 
 ### locale
 
-This option can only be specified once, with a value as string. Spread with chosen language. As of [App::SpreadRevolutionaryDate](https://metacpan.org/pod/App::SpreadRevolutionaryDate) 0.11 locale is limited to `'fr'`, `'en'` or `'it'` for `RevolutionaryDate` and `'fr'`, `'en'`, `'it'` or `'de'`. Defaults to `'fr'`. To add more languages see ["INTERNATIONALIZATION AND LOCALIZATION"](#internationalization-and-localization).
+This option can only be specified once, with a value as string. Spread with chosen language. As of [App::SpreadRevolutionaryDate](https://metacpan.org/pod/App::SpreadRevolutionaryDate) 0.11 locale is limited to `'fr'`, `'en'`, `'it'` or `'es'` for `RevolutionaryDate` and `'fr'`, `'en'`, `'it'`, `'es'` or `'de'`. Defaults to `'fr'`. To add more languages see ["INTERNATIONALIZATION AND LOCALIZATION"](#internationalization-and-localization).
 
 ### test
 
@@ -205,7 +205,7 @@ Same as ["targets"](#targets) configuration option above.
 
 Same as ["msgmaker"](#msgmaker) configuration option above.
 
-### --locale | -l &lt;fr|en|it>
+### --locale | -l &lt;fr|en|it|es>
 
 Same as ["locale"](#locale) configuration option above.
 

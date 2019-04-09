@@ -31,7 +31,7 @@ around BUILDARGS => sub {
 
   $args{locale} = 'fr'
     unless   $args{locale}
-          && grep { $args{locale} eq $_ } ('en', 'it');
+          && grep { $args{locale} eq $_ } ('en', 'it', 'es');
   return $class->$orig(%args);
 };
 
@@ -45,7 +45,7 @@ sub compute {
   my $self = shift;
 
   # As of App::SpreadRevolutionaryDate 0.11
-  # locale is limited to 'fr', 'en' or 'it', defaults to 'fr'
+  # locale is limited to 'fr', 'en', 'it' or 'es', defaults to 'fr'
   # forced to 'fr' for any other value
   my $revolutionary = $self->acab ?
       App::SpreadRevolutionaryDate::MsgMaker::RevolutionaryDate::Calendar->now->set(hour => 1, minute => 31, second => 20, locale => $self->locale)
@@ -101,6 +101,8 @@ sub compute {
 =item L<App::SpreadRevolutionaryDate::MsgMaker::RevolutionaryDate::Locale::en>
 
 =item L<App::SpreadRevolutionaryDate::MsgMaker::RevolutionaryDate::Locale::it>
+
+=item L<App::SpreadRevolutionaryDate::MsgMaker::RevolutionaryDate::Locale::es>
 
 =item L<App::SpreadRevolutionaryDate::MsgMaker::PromptUser>
 

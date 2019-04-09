@@ -53,9 +53,7 @@ my %WriteMakefileArgs = (
     "URI::Escape" => 0,
     "namespace::autoclean" => 0,
     "open" => 0,
-    "strict" => 0,
-    "utf8" => 0,
-    "warnings" => 0
+    "utf8" => 0
   },
   "TEST_REQUIRES" => {
     "File::Find" => 0,
@@ -64,7 +62,9 @@ my %WriteMakefileArgs = (
     "Test::More" => 0,
     "Test::NoWarnings" => 0,
     "Test::Output" => 0,
-    "Test::Trap" => 0
+    "Test::Trap" => 0,
+    "strict" => 0,
+    "warnings" => 0
   },
   "VERSION" => "0.14",
   "test" => {

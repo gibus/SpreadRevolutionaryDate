@@ -25,8 +25,8 @@ sub set {
   my $locale_class;
 
   if ($locale_arg) {
-    die "only 'fr', 'en' and 'it' possible"
-      unless $locale_arg =~ /^(?:en|fr|it)$/;
+    die "only 'fr', 'en', 'it' and 'es' possible"
+      unless $locale_arg =~ /^(?:en|fr|it|es)$/;
 
     $locale_class = 'App::SpreadRevolutionaryDate::MsgMaker::RevolutionaryDate::Locale::' . $locale_arg;
   }
@@ -82,6 +82,8 @@ sub set {
 =item L<App::SpreadRevolutionaryDate::MsgMaker::RevolutionaryDate::Locale::en>
 
 =item L<App::SpreadRevolutionaryDate::MsgMaker::RevolutionaryDate::Locale::it>
+
+=item L<App::SpreadRevolutionaryDate::MsgMaker::RevolutionaryDate::Locale::es>
 
 =item L<App::SpreadRevolutionaryDate::MsgMaker::PromptUser>
 

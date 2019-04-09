@@ -102,6 +102,8 @@ sub compute {
 
 =item L<App::SpreadRevolutionaryDate::MsgMaker::RevolutionaryDate::Locale::it>
 
+=item L<App::SpreadRevolutionaryDate::MsgMaker::RevolutionaryDate::Locale::es>
+
 =back
 
 =cut

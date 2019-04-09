@@ -69,6 +69,8 @@ If the target needs authentication, it can be carried out in the constructor (wi
 
 =item L<App::SpreadRevolutionaryDate::MsgMaker::RevolutionaryDate::Locale::it>
 
+=item L<App::SpreadRevolutionaryDate::MsgMaker::RevolutionaryDate::Locale::es>
+
 =item L<App::SpreadRevolutionaryDate::MsgMaker::PromptUser>
 
 =back

@@ -69,6 +69,8 @@ This role provides a C<locale> required attribute (defaults to C<'fr'>), which h
 
 =item L<App::SpreadRevolutionaryDate::MsgMaker::RevolutionaryDate::Locale::it>
 
+=item L<App::SpreadRevolutionaryDate::MsgMaker::RevolutionaryDate::Locale::es>
+
 =item L<App::SpreadRevolutionaryDate::MsgMaker::PromptUser>
 
 =back
