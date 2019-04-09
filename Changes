@@ -1,6 +1,10 @@
 Changelog for App-SpreadRevolutionaryDate
 
-0.14 2019-04-07T21:58:42
+0.15 2019-04-09T18:09:04
+ - Add Spanish translation of RevolutionaryDate and PromptUser msg makers
+ - Fix typo in USAGE
+
+0.14 2019-04-07T21:58:42Z
  - Fix errors in USAGE doc
 
 0.13 2019-04-07T20:48:20Z

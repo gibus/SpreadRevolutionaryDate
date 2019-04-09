@@ -4,7 +4,7 @@ spread-revolutionary-date - Spread date and time from Revolutionary (Republican)
 
 # VERSION
 
-version 0.14
+version 0.15
 
 # DESCRIPTION
 
