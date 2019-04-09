@@ -9,6 +9,7 @@ with 'App::SpreadRevolutionaryDate::MsgMaker';
 
 use open qw(:std :encoding(UTF-8));
 use IO::Prompt::Hooked;
+use File::Spec;
 
 use Locale::TextDomain 'App-SpreadRevolutionaryDate';
 use namespace::autoclean;
@@ -22,6 +23,13 @@ has 'default' => (
 
 around BUILDARGS => sub {
   my ($orig, $class, %args) = @_;
+
+  # Get sure locale has .mo file
+  if ($args{locale}) {
+    my ($volume, $directory, $file) = File::Spec->splitpath(__FILE__);
+    my $locale_mo = File::Spec->catfile($directory, '..', '..', '..', 'LocaleData', $args{locale}, 'LC_MESSAGES', 'App-SpreadRevolutionaryDate.mo');
+    $args{locale} = '' unless -f $locale_mo;
+  }
 
   # Do not pass default => undef to force default in attribute definition
   delete $args{default}
