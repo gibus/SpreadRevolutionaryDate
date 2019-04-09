@@ -1,6 +1,9 @@
 Changelog for App-SpreadRevolutionaryDate
 
-0.15 2019-04-09T18:09:04
+0.16 2019-04-09T21:27:04
+ - Unset locale for PromptUser if no .mo file
+
+0.15 2019-04-09T18:09:04Z
  - Add Spanish translation of RevolutionaryDate and PromptUser msg makers
  - Fix typo in USAGE
 
