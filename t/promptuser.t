@@ -48,11 +48,11 @@ seek DATA, $data_start, 0;
 $spread_revolutionary_date = App::SpreadRevolutionaryDate->new(\*DATA);
 stdout_like { $spread_revolutionary_date->spread } qr/Überträgt auf Twitter: Goodbye old world, hello revolutionary worlds$/, 'Spread in German';
 
-# Default message in English for untranslated locale
+# Default message in French for untranslated locale
 @ARGV = ('--test', '--twitter', '--locale', 'tlh');
 seek DATA, $data_start, 0;
 $spread_revolutionary_date = App::SpreadRevolutionaryDate->new(\*DATA);
-stdout_like { $spread_revolutionary_date->spread } qr/Spread on Twitter: Goodbye old world, hello revolutionary worlds$/, 'Spread in Klingon';
+stdout_like { $spread_revolutionary_date->spread } qr/Diffusé sur Twitter : Goodbye old world, hello revolutionary worlds$/, 'Spread in Klingon';
 
 __DATA__
 

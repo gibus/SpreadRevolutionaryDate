@@ -24,11 +24,14 @@ has 'default' => (
 around BUILDARGS => sub {
   my ($orig, $class, %args) = @_;
 
-  # Get sure locale has .mo file
   if ($args{locale}) {
+    # Get sure locale has .mo file
     my ($volume, $directory, $file) = File::Spec->splitpath(__FILE__);
     my $locale_mo = File::Spec->catfile($directory, '..', '..', '..', 'LocaleData', $args{locale}, 'LC_MESSAGES', 'App-SpreadRevolutionaryDate.mo');
-    $args{locale} = '' unless -f $locale_mo;
+    $args{locale} = 'fr' unless -f $locale_mo;
+  } else {
+    # Defaults to French
+    $args{locale} = 'fr';
   }
 
   # Do not pass default => undef to force default in attribute definition
