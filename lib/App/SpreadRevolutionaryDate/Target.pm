@@ -10,20 +10,20 @@ use Locale::TextDomain 'App-SpreadRevolutionaryDate';
 use namespace::autoclean;
 
 parameter worker => (
-    isa     => 'Str',
-    default => 'Any',
+  isa     => 'Str',
+  default => 'Any',
 );
 
 role {
-    my $p = shift;
+  my $p = shift;
 
-    has obj => (
-        is => 'ro',
-        isa => $p->worker,
-        required => 1,
-    );
+  has obj => (
+    is => 'ro',
+    isa => $p->worker,
+    required => 1,
+  );
 
-    requires 'spread';
+  requires 'spread';
 };
 
 =head1 DESCRIPTION

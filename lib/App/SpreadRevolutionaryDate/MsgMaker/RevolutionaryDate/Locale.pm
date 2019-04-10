@@ -56,8 +56,8 @@ Returns the name of the month. Takes a L<DateTime::Calendar::FrenchRevolutionary
 =cut
 
 sub month_name {
-    my ($self, $date) = @_;
-    return $self->months->[$date->month_0]
+  my ($self, $date) = @_;
+  return $self->months->[$date->month_0]
 }
 
 =method day_name
@@ -67,8 +67,8 @@ Returns the name of the day. Takes a L<DateTime::Calendar::FrenchRevolutionary> 
 =cut
 
 sub day_name {
-    my ($self, $date) = @_;
-    return $self->decade_days->[$date->day_of_decade_0];
+  my ($self, $date) = @_;
+  return $self->decade_days->[$date->day_of_decade_0];
 }
 
 =method feast_short

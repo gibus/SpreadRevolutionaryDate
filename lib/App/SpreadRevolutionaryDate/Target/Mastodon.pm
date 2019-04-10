@@ -14,27 +14,27 @@ use Locale::TextDomain 'App-SpreadRevolutionaryDate';
 use namespace::autoclean;
 
 has 'instance' => (
-    is  => 'ro',
-    isa => 'Str',
-    required => 1,
+  is  => 'ro',
+  isa => 'Str',
+  required => 1,
 );
 
 has 'client_id' => (
-    is  => 'ro',
-    isa => 'Str',
-    required => 1,
+  is  => 'ro',
+  isa => 'Str',
+  required => 1,
 );
 
 has 'client_secret' => (
-    is  => 'ro',
-    isa => 'Str',
-    required => 1,
+  is  => 'ro',
+  isa => 'Str',
+  required => 1,
 );
 
 has 'access_token' => (
-    is  => 'ro',
-    isa => 'Str',
-    required => 1,
+  is  => 'ro',
+  isa => 'Str',
+  required => 1,
 );
 
 =method new

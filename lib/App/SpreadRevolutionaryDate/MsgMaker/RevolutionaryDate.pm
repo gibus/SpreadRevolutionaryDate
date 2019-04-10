@@ -12,18 +12,22 @@ use App::SpreadRevolutionaryDate::MsgMaker::RevolutionaryDate::Calendar;
 use Locale::TextDomain 'App-SpreadRevolutionaryDate';
 use namespace::autoclean;
 
+has '+locale' => (
+  default => 'fr',
+);
+
 has 'acab' => (
-    is  => 'ro',
-    isa => 'Bool',
-    required => 1,
-    default => 0,
+  is  => 'ro',
+  isa => 'Bool',
+  required => 1,
+  default => 0,
 );
 
 has 'wikipedia_link' => (
-    is  => 'ro',
-    isa => 'Bool',
-    required => 1,
-    default => 1,
+  is  => 'ro',
+  isa => 'Bool',
+  required => 1,
+  default => 1,
 );
 
 around BUILDARGS => sub {

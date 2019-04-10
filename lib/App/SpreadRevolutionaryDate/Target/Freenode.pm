@@ -15,21 +15,21 @@ use Locale::TextDomain 'App-SpreadRevolutionaryDate';
 use namespace::autoclean;
 
 has 'nickname' => (
-    is  => 'ro',
-    isa => 'Str',
-    required => 1,
+  is  => 'ro',
+  isa => 'Str',
+  required => 1,
 );
 
 has 'password' => (
-    is  => 'ro',
-    isa => 'Str',
-    required => 1,
+  is  => 'ro',
+  isa => 'Str',
+  required => 1,
 );
 
 has 'channels' => (
-    is  => 'ro',
-    isa => 'ArrayRef[Str]',
-    required => 1,
+  is  => 'ro',
+  isa => 'ArrayRef[Str]',
+  required => 1,
 );
 
 =method new

@@ -15,10 +15,10 @@ use Locale::TextDomain 'App-SpreadRevolutionaryDate';
 use namespace::autoclean;
 
 has 'default' => (
-    is  => 'ro',
-    isa => 'Str',
-    required => 1,
-    default => 'Goodbye old world, hello revolutionary worlds',
+  is  => 'ro',
+  isa => 'Str',
+  required => 1,
+  default => 'Goodbye old world, hello revolutionary worlds',
 );
 
 around BUILDARGS => sub {
@@ -28,10 +28,7 @@ around BUILDARGS => sub {
     # Get sure locale has .mo file
     my ($volume, $directory, $file) = File::Spec->splitpath(__FILE__);
     my $locale_mo = File::Spec->catfile($directory, '..', '..', '..', 'LocaleData', $args{locale}, 'LC_MESSAGES', 'App-SpreadRevolutionaryDate.mo');
-    $args{locale} = 'fr' unless -f $locale_mo;
-  } else {
-    # Defaults to French
-    $args{locale} = 'fr';
+    $args{locale} = 'en' unless -f $locale_mo;
   }
 
   # Do not pass default => undef to force default in attribute definition

@@ -338,7 +338,7 @@ Usage: $0 <OPTIONS>
     --help|-h|-?': print out this help
     --targets|-tg <target_1> [--targets|-tg <target_2> […--targets|-tg <target_n>]]': define targets (default: twitter, mastodon, freenode)
     --msgmaker|-mm <MsgMakerClass>: define message maker (default: RevolutionaryDate)
-    --locale|-l <fr|en|it|es>: define locale (default: fr)
+    --locale|-l <fr|en|it|es>: define locale (default: fr for msgmaker=RevolutionaryDate, en otherwise)
     --test|--no|-n: do not spread, just print out message or spread to test channels for Freenode
     --acab|-a: DEPRECATED, use --revolutionarydate-acab
     --twitter|-t: DEPRECATED, use --targets=twitter

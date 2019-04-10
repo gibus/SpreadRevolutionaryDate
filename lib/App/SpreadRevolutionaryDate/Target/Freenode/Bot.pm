@@ -12,23 +12,23 @@ use Locale::TextDomain 'App-SpreadRevolutionaryDate';
 use namespace::autoclean;
 
 has 'nb_said' => (
-    traits  => ['Counter'],
-    is  => 'rw',
-    isa => 'Num',
-    default => 0,
-    handles => {
-        inc_said   => 'inc',
-    },
+  traits  => ['Counter'],
+  is  => 'rw',
+  isa => 'Num',
+  default => 0,
+  handles => {
+    inc_said   => 'inc',
+  },
 );
 
 has 'nb_ticks' => (
-    traits  => ['Counter'],
-    is  => 'rw',
-    isa => 'Num',
-    default => 0,
-    handles => {
-        inc_ticks   => 'inc',
-    },
+  traits  => ['Counter'],
+  is  => 'rw',
+  isa => 'Num',
+  default => 0,
+  handles => {
+    inc_ticks   => 'inc',
+  },
 );
 
 has 'msg' => (

@@ -19,21 +19,21 @@ BEGIN {
 use namespace::autoclean;
 
 has 'config' => (
-    is  => 'ro',
-    isa => 'App::SpreadRevolutionaryDate::Config',
-    required => 1,
+  is  => 'ro',
+  isa => 'App::SpreadRevolutionaryDate::Config',
+  required => 1,
 );
 
 has 'targets' => (
-    is  => 'rw',
-    isa => 'HashRef[Object]',
-    required => 1,
+  is  => 'rw',
+  isa => 'HashRef[Object]',
+  required => 1,
 );
 
 has 'msgmaker' => (
-    is  => 'rw',
-    isa => 'Object',
-    required => 1,
+  is  => 'rw',
+  isa => 'Object',
+  required => 1,
 );
 
 =method new
