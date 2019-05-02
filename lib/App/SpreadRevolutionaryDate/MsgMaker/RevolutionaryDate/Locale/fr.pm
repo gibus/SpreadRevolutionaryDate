@@ -83,7 +83,7 @@ has '+feast' => (
       1pomme       0céleri   1poire        1betterave  2oie
       2héliotrope  1figue    1scorsonère   2alisier    1charrue
       0salsifis    1macre    0topinambour  2endive     0dindon
-      0chervi      0cresson  1dentelaire   1grenade    1herse
+      0chervis     0cresson  1dentelaire   1grenade    1herse
       1bacchante   2azerole  1garance      2orange     0faisan
       1pistache    0macjonc  0coing        0cormier    0rouleau
     ),
