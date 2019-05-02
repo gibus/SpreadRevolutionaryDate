@@ -494,6 +494,8 @@ __PACKAGE__->meta->make_immutable;
 
 =item L<App::SpreadRevolutionaryDate::MsgMaker::RevolutionaryDate>
 
+=item L<App::SpreadRevolutionaryDate::MsgMaker::RevolutionaryDate>
+
 =item L<App::SpreadRevolutionaryDate::MsgMaker::RevolutionaryDate::Calendar>
 
 =item L<App::SpreadRevolutionaryDate::MsgMaker::RevolutionaryDate::Locale>

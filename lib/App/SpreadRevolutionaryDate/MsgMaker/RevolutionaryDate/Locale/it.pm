@@ -503,6 +503,8 @@ __PACKAGE__->meta->make_immutable;
 
 =item L<App::SpreadRevolutionaryDate::Target::Freenode::Bot>
 
+=item L<App::SpreadRevolutionaryDate::MsgMaker>
+
 =item L<App::SpreadRevolutionaryDate::MsgMaker::RevolutionaryDate>
 
 =item L<App::SpreadRevolutionaryDate::MsgMaker::RevolutionaryDate::Calendar>
