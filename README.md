@@ -301,7 +301,7 @@ Same as ["wikipedia\_link"](#wikipedia_link) configuration option above.
 
 ## PromptUser parameter
 
-### --promptuser\_default &lt;msg>
+### --promptuser\_default &lt;msg> | -pud &lt;msg>
 
 Same as ["default"](#default) configuration option above.
 

@@ -312,7 +312,7 @@ Same as L</wikipedia_link> configuration option above.
 
 =head2 PromptUser parameter
 
-=head3 --promptuser_default <msg>
+=head3 --promptuser_default <msg> | -pud <msg>
 
 Same as L</default> configuration option above.
 
