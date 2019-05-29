@@ -322,6 +322,9 @@ sub get_msgmaker_arguments {
         && !exists($msgmaker_args{acab})
         && $self->acab;
 
+  # Do not prompt if PromptUser default is set
+  $ENV{PERL_MM_USE_DEFAULT} = 1 if $msgmaker_args{default};
+
   return %msgmaker_args;
 }
 

@@ -173,9 +173,11 @@ This boolean option takes no value, either it is defined or not, defaults to `tr
 
 ## PromptUser option
 
+If ["msgmaker"](#msgmaker) option is `PromptUser`, instead of spreading the revolutionary date, prompts the user (with confirmation) for the message to be spread, with a default value (if user enters nothing when prompted).
+
 ### default
 
-This option can only be specified once, with a value as string. Instead of spreading the revolutionary date, prompt user (with confirmation) for the message to be spread, with a default value (if user enters nothing when prompted). If `default` option is not defined, the default message is `'Goodbye old world, hello revolutionary worlds'` if the user enters nothing when prompted. The `default` option should be defined in the `[promptuser]` section of the configuration file. It is only used if ["msgmaker"](#msgmaker) option is `PromptUser`.
+This option can only be specified once, with a value as string. If `default` option is set, the user is not prompted and this default message is spread. If `default` option is not defined, the default message is `'Goodbye old world, hello revolutionary worlds'` if the user enters nothing when prompted. The `default` option should be defined in the `[promptuser]` section of the configuration file. It is only used if ["msgmaker"](#msgmaker) option is `PromptUser`.
 
 # COMMAND LINE PARAMETERS
 
