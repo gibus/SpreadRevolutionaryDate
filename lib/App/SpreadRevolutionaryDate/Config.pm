@@ -162,6 +162,7 @@ sub new {
     'freenode_password' => {ARGCOUNT => ARGCOUNT_ONE, ALIAS => 'fp'},
     'freenode_test_channels' => {ARGCOUNT => ARGCOUNT_LIST, ALIAS => 'ftc'},
     'freenode_channels' => {ARGCOUNT => ARGCOUNT_LIST, ALIAS => 'fc'},
+    'revolutionarydate_acab' => {ARGCOUNT => ARGCOUNT_NONE, ALIAS => 'ra'},
   );
 
   # Rewind configuration file if needed and read it
@@ -356,8 +357,7 @@ Usage: $0 <OPTIONS>
     --freenode_password|-fp <passwd>: define Freenode password
     --freenode_test_channels|-ftc <channel_1>  [--freenode_test_channels|-ftc <channel_2> […--freenode_test_channels|-ftc <channel_n>]]: define Freenode channels
     --freenode_channels|-fc <channel_1>  [--freenode_channels|-fc <channel_2> […--freenode_channels|-fc <channel_n>]]: define Freenode test channels
-    --revolutionarydate-acab: pretend it is 01:31:20 (default: false)
-    --promptuser-default <msg>: define default message when --msgmaker=PromptUser (default: 'Goodbye old world, hello revolutionary worlds')
+    --revolutionarydate_acab | -ra: pretend it is 01:31:20 (default: false)
 USAGE
  exit 0;
 }

@@ -291,7 +291,7 @@ Same as ["test\_channels"](#test_channels) configuration option above.
 
 ## RevolutionaryDate parameters
 
-### --revolutionarydate\_acab
+### --revolutionarydate\_acab | -ra
 
 Same as ["acab"](#acab) configuration option above.
 
