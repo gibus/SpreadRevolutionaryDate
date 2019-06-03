@@ -12,7 +12,6 @@ use Locale::TextDomain 'App-SpreadRevolutionaryDate';
 use Locale::Messages qw(bind_textdomain_filter);
 use Encode;
 BEGIN {
-  $ENV{PERL_UNICODE} = 'AS';
   $ENV{OUTPUT_CHARSET} = 'UTF-8';
   bind_textdomain_filter 'App-SpreadRevolutionaryDate' => \&Encode::decode_utf8, Encode::FB_DEFAULT;
 }
