@@ -17,6 +17,13 @@ use Class::Load ':all';
 use Locale::TextDomain 'App-SpreadRevolutionaryDate';
 use namespace::autoclean;
 
+BEGIN {
+  unless ($ENV{PERL_UNICODE} && $ENV{PERL_UNICODE} =~ /A/) {
+    use Encode qw(decode_utf8);
+    @ARGV = map { decode_utf8($_, 1) } @ARGV;
+  }
+}
+
 =method new
 
 Constructor class method, subclassing C<AppConfig>. Takes no argument. Returns an C<App::SpreadRevolutionaryDate::Config> object.
