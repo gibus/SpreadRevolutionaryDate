@@ -225,13 +225,6 @@ sub new {
     $self->check_target_mandatory_options($target);
   }
 
-  # Add acab option for RevolutionaryDate for backward compatibility
-  $self->revolutionarydate_acab($self->acab)
-    if  $self->msgmaker eq 'RevolutionaryDate'
-        && !$self->revolutionarydate_acab
-        && $self->acab;
-
-
   return $self;
 }
 
@@ -325,8 +318,8 @@ sub get_msgmaker_arguments {
 
   # Add acab option for RevolutionaryDate for backward compatibility
   $msgmaker_args{acab} = $self->acab
-    if  $msgmaker eq 'RevolutionaryDate'
-        && !exists($msgmaker_args{acab})
+    if  $msgmaker eq 'revolutionarydate'
+        && !$msgmaker_args{acab}
         && $self->acab;
 
   # Do not prompt if PromptUser default is set
