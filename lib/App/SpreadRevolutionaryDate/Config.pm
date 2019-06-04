@@ -330,7 +330,7 @@ sub get_msgmaker_arguments {
         && $self->acab;
 
   # Do not prompt if PromptUser default is set
-  if ($msgmaker eq 'PromptUser') {
+  if ($msgmaker eq 'promptuser') {
     require App::SpreadRevolutionaryDate::MsgMaker::PromptUser;
     if ($msgmaker_args{default} && $msgmaker_args{default} ne App::SpreadRevolutionaryDate::MsgMaker::PromptUser->meta->get_attribute('default')->default) {
       $ENV{PERL_MM_USE_DEFAULT} = 1
