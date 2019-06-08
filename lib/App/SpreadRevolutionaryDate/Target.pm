@@ -5,6 +5,7 @@ package App::SpreadRevolutionaryDate::Target;
 # ABSTRACT: Role providing interface for targets of L<App::SpreadRevolutionaryDate>.
 
 use MooseX::Role::Parameterized;
+use LWP::Protocol::https;
 
 use Locale::TextDomain 'App-SpreadRevolutionaryDate';
 use namespace::autoclean;
