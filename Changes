@@ -1,6 +1,9 @@
 Changelog for App-SpreadRevolutionaryDate
 
-0.25 2019-06-08T10:51:03
+0.26 2019-06-08T15:16:33
+ - Add dependency to LWP::Protocol::https
+
+0.25 2019-06-08T10:51:03Z
  - Remove channels added by Bot::BasicBot::irc_chanjoin_state with
    different case
 
