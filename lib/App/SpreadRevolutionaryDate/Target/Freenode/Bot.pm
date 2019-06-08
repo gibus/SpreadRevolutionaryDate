@@ -73,6 +73,22 @@ sub log {
   # do nothing!
 }
 
+sub chanjoin {
+  my $self = shift;
+
+  # Remove channels added by Bot::BasicBot::irc_chanjoin_state with different case
+  my %uniq_channels;
+  foreach my $channel ($self->channels) {
+    $uniq_channels{lc($channel)} = $channel;
+  }
+
+  if (scalar(keys %uniq_channels) != scalar($self->channels)) {
+    $self->channels(values %uniq_channels);
+  }
+
+  return;
+}
+
 =head1 SEE ALSO
 
 =over
