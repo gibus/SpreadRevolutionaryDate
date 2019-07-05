@@ -22,7 +22,7 @@ The revolutionary date and time is computed thanks to the [DateTime::Calendar::F
 
     # Just execute the script in your shell
     # to spread current date to configured accounts
-    # on Twitter, Mastodon and Freenode:
+    # to Twitter, Mastodon and Freenode:
     $ spread-revolutionary-date
 
     # Or, since this script does nothing but calling
@@ -54,6 +54,13 @@ The revolutionary date and time is computed thanks to the [DateTime::Calendar::F
     $ spread-revolutionary-date \
         --targets mastodon \
         --msgwriter UserPrompt
+
+    # Spread message as command line parameter to
+    # Twitter, Mastodon and Freenode
+    $ spread-revolutionary-date \
+        --msgwriter UserPrompt \
+        --promptuser_default \
+          'This is my message to the world'
 
 # CONFIGURATION
 
