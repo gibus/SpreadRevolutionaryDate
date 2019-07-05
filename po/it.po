@@ -67,7 +67,7 @@ msgid ""
 "{feast_long}, it is {time}!"
 msgstr ""
 "È {day_name}, {day} {month} dell'Anno {roman_year} ({year}) della "
-"Rivoluzione, {feast_long}, sono {time} !"
+"Rivoluzione, {feast_long}, sono le {time} !"
 
 #: lib/App/SpreadRevolutionaryDate/Target/Mastodon.pm:71
 msgid "Spread on Mastodon: "
