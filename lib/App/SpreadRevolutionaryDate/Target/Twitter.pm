@@ -69,6 +69,9 @@ sub spread {
   my ($self, $msg, $test) = @_;
   $test //= 0;
 
+  # Multiline message
+  $msg =~ s/\\n/\n/g;
+
   if ($test) {
     $msg = __("Spread on Twitter: ") . $msg;
 

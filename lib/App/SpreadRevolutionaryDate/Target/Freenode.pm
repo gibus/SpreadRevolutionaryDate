@@ -81,6 +81,9 @@ Spreads a message to Freenode channels configured with the multivalued option C<
 sub spread {
   my ($self, $msg) = @_;
 
+  # Multiline message
+  $msg =~ s/\\n/\n/g;
+
   $self->obj->msg($msg);
   $self->obj->run;
   POE::Kernel->run();
