@@ -20,7 +20,7 @@ isa_ok($spread_revolutionary_date->targets->{freenode}, 'App::SpreadRevolutionar
 isa_ok($spread_revolutionary_date->targets->{freenode}->obj, 'App::SpreadRevolutionaryDate::Target::Freenode::Bot', 'Freenode object');
 
 eval { $spread_revolutionary_date->targets->{twitter}->obj->verify_credentials };
-like($@, '^401: ', 'Twitter no connection with fake credentials');
+like($@, qr/^401: /, 'Twitter no connection with fake credentials');
 
 eval { $spread_revolutionary_date->targets->{mastodon}->obj->get_account };
 like($@, qr/^Could not complete request: (?:500 Can't connect to Instance|599 Internal Exception)/, 'Mastodon no connection with fake credentials');
