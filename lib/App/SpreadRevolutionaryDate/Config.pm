@@ -67,7 +67,7 @@ sub new {
                                       'twitter' => {ARGCOUNT => ARGCOUNT_NONE, ALIAS => 't'},
                                       'mastodon' => {ARGCOUNT => ARGCOUNT_NONE, ALIAS => 'm'},
                                       'freenode' => {ARGCOUNT => ARGCOUNT_NONE, ALIAS => 'f'},
-                                      'liberachat' => {ARGCOUNT => ARGCOUNT_NONE, ALIAS => 'l'});
+                                      'liberachat' => {ARGCOUNT => ARGCOUNT_NONE, ALIAS => 'lt'});
   $config_targets->parse_file($filename);
   # Rewind command line arguments and process them
   @ARGV = @orig_argv;
@@ -159,7 +159,7 @@ sub new {
     'twitter' => {ARGCOUNT => ARGCOUNT_NONE, ALIAS => 't'},
     'mastodon' => {ARGCOUNT => ARGCOUNT_NONE, ALIAS => 'm'},
     'freenode' => {ARGCOUNT => ARGCOUNT_NONE, ALIAS => 'f'},
-    'liberachat' => {ARGCOUNT => ARGCOUNT_NONE, ALIAS => 'l'},
+    'liberachat' => {ARGCOUNT => ARGCOUNT_NONE, ALIAS => 'lt'},
     'twitter_consumer_key' => {ARGCOUNT => ARGCOUNT_ONE, ALIAS => 'tck'},
     'twitter_consumer_secret' => {ARGCOUNT => ARGCOUNT_ONE, ALIAS => 'tcs'},
     'twitter_access_token' => {ARGCOUNT => ARGCOUNT_ONE, ALIAS => 'tat'},
@@ -362,7 +362,7 @@ Usage: $0 <OPTIONS>
     --twitter|-t: DEPRECATED, use --targets=twitter
     --mastodon|-m: DEPRECATED, use --targets=mastodon
     --freenode|-f: DEPRECATED, use --targets=freenode
-    --liberachat|-l: DEPRECATED, use --targets=liberachat
+    --liberachat|-lt: DEPRECATED, use --targets=liberachat
     --twitter_consumer_key|-tck <key>: define Twitter consumer key
     --twitter_consumer_secret|-tcs <secret>: define Twitter consumer secret
     --twitter_access_token|-tat <token>: define Twitter access token
@@ -375,10 +375,10 @@ Usage: $0 <OPTIONS>
     --freenode_password|-fp <passwd>: define Freenode password
     --freenode_test_channels|-ftc <channel_1>  [--freenode_test_channels|-ftc <channel_2> […--freenode_test_channels|-ftc <channel_n>]]: define Freenode channels
     --freenode_channels|-fc <channel_1>  [--freenode_channels|-fc <channel_2> […--freenode_channels|-fc <channel_n>]]: define Freenode test channels
-    --liberachat_nickname|-fn <nick>: define Liberachat nickname
-    --liberachat_password|-fp <passwd>: define Liberachat password
-    --liberachat_test_channels|-ftc <channel_1>  [--liberachat_test_channels|-ftc <channel_2> […--liberachat_test_channels|-ftc <channel_n>]]: define Liberachat channels
-    --liberachat_channels|-fc <channel_1>  [--liberachat_channels|-fc <channel_2> […--liberachat_channels|-fc <channel_n>]]: define Liberachat test channels
+    --liberachat_nickname|-ln <nick>: define Liberachat nickname
+    --liberachat_password|-lp <passwd>: define Liberachat password
+    --liberachat_test_channels|-ltc <channel_1>  [--liberachat_test_channels|-ltc <channel_2> […--liberachat_test_channels|-ltc <channel_n>]]: define Liberachat channels
+    --liberachat_channels|-lc <channel_1>  [--liberachat_channels|-lc <channel_2> […--liberachat_channels|-lc <channel_n>]]: define Liberachat test channels
     --revolutionarydate_acab | -ra: pretend it is 01:31:20 (default: false)
     --promptuser_default|-pud <msg>: define default message when --msgmaker=PromptUser (default: 'Goodbye old world, hello revolutionary worlds')
 USAGE
