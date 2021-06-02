@@ -8,7 +8,7 @@ version 0.29
 
 # DESCRIPTION
 
-`spread-revolutionary-date` is a [Free Software](https://www.gnu.org/philosophy/free-sw.html) that spreads the current date, expressed in the [French Revolutionary calendar](https://en.wikipedia.org/wiki/French_Republican_calendar), to various social networks: [Twitter](https://twitter.com/), [Mastodon](https://mastodon.social/), and the [Freenode](https://freenode.net/) Internet Relay Chat network.
+`spread-revolutionary-date` is a [Free Software](https://www.gnu.org/philosophy/free-sw.html) that spreads the current date, expressed in the [French Revolutionary calendar](https://en.wikipedia.org/wiki/French_Republican_calendar), to various social networks: [Twitter](https://twitter.com/), [Mastodon](https://mastodon.social/), the [Freenode](https://freenode.net/) and [Liberachat](https://libera.chat/) Internet Relay Chat networks.
 
 Moreover, you can easily extend these defaults targets with any desired one, see ["EXTENDING TO NEW TARGETS"](#extending-to-new-targets), and even spread something else than the revolutionary date, see ["msgmaker"](#msgmaker) option and ["EXTENDING TO NEW MESSAGE MAKERS"](#extending-to-new-message-makers).
 
@@ -22,7 +22,7 @@ The revolutionary date and time is computed thanks to the [DateTime::Calendar::F
 
     # Just execute the script in your shell
     # to spread current date to configured accounts
-    # to Twitter, Mastodon and Freenode:
+    # to Twitter, Mastodon, Freenode and Liberachat:
     $ spread-revolutionary-date
 
     # Or, since this script does nothing but calling
@@ -41,13 +41,13 @@ The revolutionary date and time is computed thanks to the [DateTime::Calendar::F
         --test \
         --locale en
 
-    # Spread acab time to Twitter and Freenode
+    # Spread acab time to Twitter and Liberachat
     # explicit channels
     $ spread-revolutionary-date \
         --targets twitter \
-        --targets freenode \
-        --freenode_channels '#revolution' \
-        --freenode_channels '#acab' \
+        --targets liberachat \
+        --liberachat_channels '#revolution' \
+        --liberachat_channels '#acab' \
         --revolutionarydate_acab
 
     # Prompt user for a message to spread to mastodon
@@ -56,7 +56,7 @@ The revolutionary date and time is computed thanks to the [DateTime::Calendar::F
         --msgwriter UserPrompt
 
     # Spread message as command line parameter to
-    # Twitter, Mastodon and Freenode
+    # Twitter, Mastodon, Freenode and Liberachat
     $ spread-revolutionary-date \
         --msgwriter UserPrompt \
         --promptuser_default \
@@ -76,7 +76,7 @@ These options should appear outside of any section of the configuration file.
 
 ### targets
 
-This option can be specified multiple times, with values as strings. It explicitly defines targets where the revolutionary date should be spread to. Any value set for this option should be a valid target: any of the three default targets (`twitter`, `mastodon`, or `freenode`) or some new target if you have extended this application (see ["EXTENDING TO NEW TARGETS"](#extending-to-new-targets)). If this option is not defined, the revolutionary date is spread on all three default targets: `twitter`, `mastodon`, and `freenode`.
+This option can be specified multiple times, with values as strings. It explicitly defines targets where the revolutionary date should be spread to. Any value set for this option should be a valid target: any of the three default targets (`twitter`, `mastodon`, `freenode`, or `liberachat`) or some new target if you have extended this application (see ["EXTENDING TO NEW TARGETS"](#extending-to-new-targets)). If this option is not defined, the revolutionary date is spread on all three default targets: `twitter`, `mastodon`, `freenode` and `liberachat`.
 
 ### msgmaker
 
@@ -88,7 +88,7 @@ This option can only be specified once, with a value as string. Spread with chos
 
 ### test
 
-This boolean option takes no value, either it is defined or not. If defined, do not actually spread the revolutionary date, just print it on standard output for Twitter and Mastodon, and send it on configured test channels for Freenode (see ["test\_channels"](#test_channels) below).
+This boolean option takes no value, either it is defined or not. If defined, do not actually spread the revolutionary date, just print it on standard output for Twitter and Mastodon, and send it on configured test channels for Freenode and Liberachat (see ["test\_channels"](#test_channels) below).
 
 ### _DEPRECATED_ acab
 
@@ -96,15 +96,19 @@ This option is _deprecated_ starting from version 0.09 of this distribution and 
 
 ### _DEPRECATED_ twitter
 
-This option is _deprecated_ starting from version 0.07 of this distribution and may be removed in future release. Please use ["targets"](#targets) option, as described above. Spread on Twitter explicitly. If none of the `twitter`, `mastodon`, `freenode` option is set, the revolutionary date is spread on all of these three targets.
+This option is _deprecated_ starting from version 0.07 of this distribution and may be removed in future release. Please use ["targets"](#targets) option, as described above. Spread on Twitter explicitly. If none of the `twitter`, `mastodon`, `freenode`, `liberachat` option is set, the revolutionary date is spread on all of these three targets.
 
 ### _DEPRECATED_ mastodon
 
-This option is _deprecated_ starting from version 0.07 of this distribution and may be removed in future release. Please use ["targets"](#targets) option, as described above. Spread on Mastodon explicitly. If none of the `twitter`, `mastodon`, `freenode` option is set, the revolutionary date is spread on all of these three targets.
+This option is _deprecated_ starting from version 0.07 of this distribution and may be removed in future release. Please use ["targets"](#targets) option, as described above. Spread on Mastodon explicitly. If none of the `twitter`, `mastodon`, `freenode`, `liberachat` option is set, the revolutionary date is spread on all of these three targets.
 
 ### _DEPRECATED_ freenode
 
-This option is _deprecated_ starting from version 0.07 of this distribution and may be removed in future release. Please use ["targets"](#targets) option, as described above. Spread on Freenode explicitly. If none of the `twitter`, `mastodon`, `freenode` option is set, the revolutionary date is spread on all of these three targets.
+This option is _deprecated_ starting from version 0.07 of this distribution and may be removed in future release. Please use ["targets"](#targets) option, as described above. Spread on Freenode explicitly. If none of the `twitter`, `mastodon`, `freenode`, `liberachat` option is set, the revolutionary date is spread on all of these three targets.
+
+### _DEPRECATED_ liberachat
+
+This option is _deprecated_ starting from version 0.07 of this distribution and may be removed in future release. Please use ["targets"](#targets) option, as described above. Spread on Liberachat explicitly. If none of the `twitter`, `mastodon`, `freenode`, `liberachat` option is set, the revolutionary date is spread on all of these three targets.
 
 ## Twitter options
 
@@ -157,6 +161,26 @@ This option can only be specified once, with a value as string: your Freenode ni
 ### password
 
 This option can only be specified once, with a value as string: your Freenode password.
+
+### channels
+
+This option can be specified multiple times, with values as strings. `spread-revolutionary-date` will spread on every channel specified with this option. This option should be specified at least one time if ["test"](#test) option is not set. It is ignored if ["test"](#test) option is set.
+
+### test\_channels
+
+This option can be specified multiple times, with values as strings. `spread-revolutionary-date` will spread on every channel specified with this option. This option should be specified at least one time if ["test"](#test) option is set. It is ignored if ["test"](#test) option is not set.
+
+## Liberachat options
+
+The first two options are credentials for `spread-revolutionary-date` to spread on a Liberachat account. See [https://libera.chat/guides/registration](https://libera.chat/guides/registration) to find out how to register an account on Liberachat. They should be defined in the `[twitter]` section of the configuration file.
+
+### nickname
+
+This option can only be specified once, with a value as string: your Liberachat nickname.
+
+### password
+
+This option can only be specified once, with a value as string: your Liberachat password.
 
 ### channels
 
@@ -238,6 +262,10 @@ Same as ["DEPRECATED mastodon"](#deprecated-mastodon) configuration option above
 
 Same as ["DEPRECATED freenode"](#deprecated-freenode) configuration option above.
 
+### _DEPRECATED_ --liberachat | -f
+
+Same as ["DEPRECATED liberachat"](#deprecated-liberachat) configuration option above.
+
 ## Twitter parameters
 
 These parameters specify credentials for `spread-revolutionary-date` to spread on a Twitter account. You have to get them from your [Twitter API account](https://apps.twitter.com/) with `write` access level.
@@ -298,6 +326,26 @@ Same as ["channels"](#channels) configuration option above.
 
 Same as ["test\_channels"](#test_channels) configuration option above.
 
+## Liberachat parameters
+
+The first two parameters are credentials for `spread-revolutionary-date` to spread on a Liberachat account. See [https://libera.chat/guides/registration](https://libera.chat/guides/registration) to find out how to register an account on Liberachat.
+
+### --liberachat\_nickname | -fn &lt;nick>
+
+Same as ["nickname"](#nickname) configuration option above.
+
+### --liberachat\_password | -fp &lt;passwd>
+
+Same as ["password"](#password) configuration option above.
+
+### --liberachat\_channels | -fc &lt;channel>
+
+Same as ["channels"](#channels) configuration option above.
+
+### --liberachat\_test\_channels | -tc &lt;channel>
+
+Same as ["test\_channels"](#test_channels) configuration option above.
+
 ## RevolutionaryDate parameters
 
 ### --revolutionarydate\_acab | -ra
@@ -316,7 +364,7 @@ Same as ["default"](#default) configuration option above.
 
 # EXTENDING TO NEW TARGETS
 
-Starting from version 0.07, this distribution takes advantage of [Moose](https://metacpan.org/pod/Moose), the postmodern object system for Perl 5, allowing to easily extend `spread-revolutionary-date` to other targets than the default ones (`Twitter`, `Mastondon` and `Freenode`.
+Starting from version 0.07, this distribution takes advantage of [Moose](https://metacpan.org/pod/Moose), the postmodern object system for Perl 5, allowing to easily extend `spread-revolutionary-date` to other targets than the default ones (`Twitter`, `Mastondon`, `Freenode` and `Liberachat`.
 
 To add a new target, you should write a new class in the `App::SpreadRevolutionaryDate::Target::` namespace (that is: the class should be `App::SpreadRevolutionaryDate::Target::Mytarget` for a new `Mytarget` target), that consumes the [App::SpreadRevolutionaryDate::Target](https://metacpan.org/pod/App::SpreadRevolutionaryDate::Target) role. See ["DESCRIPTION" in App::SpreadRevolutionaryDate::Target](https://metacpan.org/pod/App::SpreadRevolutionaryDate::Target#DESCRIPTION) for a comprehensive description of this role.
 
@@ -326,7 +374,7 @@ Such a target class is actually just a wrapper. Usually a target has to use an e
 
 To perform authentication and to post a message, there is a strong likelihood that the new target requires specific parameters (e.g.: tokens, keys, account name, password, channels, etc.). These parameters should be defined as required attributes of the target class. Values for such attributes should be set in the [configuration file](#configuration), inside a section named after the target in lower case (`[mytarget]`), or as [command line parameters](#command-line-parameters) prefixed with the name of the target in lower case, followed by an underscore (`--mytarget_myparam`).
 
-Should you extend `spread-revolutionary-date` to a new target, we advise you to have a look on how default targets are implemented: [App::SpreadRevolutionaryDate::Target::Twitter](https://metacpan.org/pod/App::SpreadRevolutionaryDate::Target::Twitter) with [Net::Twitter::Lite::WithAPIv1\_1](https://metacpan.org/pod/Net::Twitter::Lite::WithAPIv1_1) `worker`, [App::SpreadRevolutionaryDate::Target::Mastodon](https://metacpan.org/pod/App::SpreadRevolutionaryDate::Target::Mastodon) with [Mastodon::Client](https://metacpan.org/pod/Mastodon::Client) `worker`. Both are using [OAuth2 protocol](https://oauth.net/2/) to perform authentication. The third default target, `App::SpreadRevolutionaryDate::Target::Freenode`, uses a [chatbot](https://en.wikipedia.org/wiki/Chatbot): [App::SpreadRevolutionaryDate::Target::Freenode::Bot](https://metacpan.org/pod/App::SpreadRevolutionaryDate::Target::Freenode::Bot) subclassing [Bot::BasicBot](https://metacpan.org/pod/Bot::BasicBot). You can also see a very simple example with a test file provided in this distribution at `t/new_target.t`, which just prints out the revolutionary date on the standard output using core module [IO::Handle](https://metacpan.org/pod/IO::Handle).
+Should you extend `spread-revolutionary-date` to a new target, we advise you to have a look on how default targets are implemented: [App::SpreadRevolutionaryDate::Target::Twitter](https://metacpan.org/pod/App::SpreadRevolutionaryDate::Target::Twitter) with [Net::Twitter::Lite::WithAPIv1\_1](https://metacpan.org/pod/Net::Twitter::Lite::WithAPIv1_1) `worker`, [App::SpreadRevolutionaryDate::Target::Mastodon](https://metacpan.org/pod/App::SpreadRevolutionaryDate::Target::Mastodon) with [Mastodon::Client](https://metacpan.org/pod/Mastodon::Client) `worker`. Both are using [OAuth2 protocol](https://oauth.net/2/) to perform authentication. The third and fourth default targets, `App::SpreadRevolutionaryDate::Target::Freenode` <App::SpreadRevolutionaryDate::Target::Liberachat>, uses a [chatbot](https://en.wikipedia.org/wiki/Chatbot): [App::SpreadRevolutionaryDate::Target::Freenode::Bot](https://metacpan.org/pod/App::SpreadRevolutionaryDate::Target::Freenode::Bot) [App::SpreadRevolutionaryDate::Target::Liberachat::Bot](https://metacpan.org/pod/App::SpreadRevolutionaryDate::Target::Liberachat::Bot) subclassing [Bot::BasicBot](https://metacpan.org/pod/Bot::BasicBot). You can also see a very simple example with a test file provided in this distribution at `t/new_target.t`, which just prints out the revolutionary date on the standard output using core module [IO::Handle](https://metacpan.org/pod/IO::Handle).
 
 # EXTENDING TO NEW MESSAGE MAKERS
 

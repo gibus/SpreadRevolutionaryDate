@@ -1,8 +1,8 @@
 use 5.014;
 use utf8;
-package App::SpreadRevolutionaryDate::Target::Freenode::Bot;
+package App::SpreadRevolutionaryDate::Target::Liberachat::Bot;
 
-# ABSTRACT: Subclass overloading L<Bot::BasicBot> to post a message on some Freenode channels
+# ABSTRACT: Subclass overloading L<Bot::BasicBot> to post a message on some Liberachat channels
 
 use Moose;
 use MooseX::NonMoose;
@@ -40,7 +40,7 @@ has 'msg' => (
 sub connected {
   my $self = shift;
 
-  $self->say({who => 'NickServ', channel => 'msg', body => 'IDENTIFY ' . $self->{freenode_nickname} . ' ' . $self->{freenode_password}});
+  $self->say({who => 'NickServ', channel => 'msg', body => 'IDENTIFY ' . $self->{liberachat_nickname} . ' ' . $self->{liberachat_password}});
 }
 
 sub said {
@@ -107,9 +107,9 @@ sub chanjoin {
 
 =item L<App::SpreadRevolutionaryDate::Target::Freenode>
 
-=item L<App::SpreadRevolutionaryDate::Target::Liberachat>
+=item L<App::SpreadRevolutionaryDate::Target::Freenode::Bot>
 
-=item L<App::SpreadRevolutionaryDate::Target::Liberachat::Bot>
+=item L<App::SpreadRevolutionaryDate::Target::Liberachat>
 
 =item L<App::SpreadRevolutionaryDate::MsgMaker>
 

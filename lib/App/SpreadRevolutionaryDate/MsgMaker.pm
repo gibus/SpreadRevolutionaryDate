@@ -59,6 +59,10 @@ This role provides a C<locale> required attribute (defaults to C<'fr'>), which h
 
 =item L<App::SpreadRevolutionaryDate::Target::Freenode::Bot>
 
+=item L<App::SpreadRevolutionaryDate::Target::Liberachat>
+
+=item L<App::SpreadRevolutionaryDate::Target::Liberachat::Bot>
+
 =item L<App::SpreadRevolutionaryDate::MsgMaker::RevolutionaryDate>
 
 =item L<App::SpreadRevolutionaryDate::MsgMaker::RevolutionaryDate::Calendar>

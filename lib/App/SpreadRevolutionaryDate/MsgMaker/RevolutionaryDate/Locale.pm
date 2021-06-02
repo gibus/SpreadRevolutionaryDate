@@ -227,6 +227,10 @@ Default for this attribute should be a hash reference, keyed by numbers of month
 
 =item L<App::SpreadRevolutionaryDate::Target::Freenode::Bot>
 
+=item L<App::SpreadRevolutionaryDate::Target::Liberachat>
+
+=item L<App::SpreadRevolutionaryDate::Target::Liberachat::Bot>
+
 =item L<App::SpreadRevolutionaryDate::MsgMaker>
 
 =item L<App::SpreadRevolutionaryDate::MsgMaker::RevolutionaryDate>

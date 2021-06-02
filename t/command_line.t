@@ -4,7 +4,7 @@ BEGIN {
     $ENV{OUTPUT_CHARSET} = 'UTF-8';
 }
 
-use Test::More tests => 27;
+use Test::More tests => 32;
 use Test::NoWarnings;
 use Test::Trap;
 
@@ -20,11 +20,12 @@ is($spread_revolutionary_date->config->conf, $conf_file, 'Conf option value');
 is($spread_revolutionary_date->config->test, 1, 'Test option set');
 is($spread_revolutionary_date->config->locale, 'fr', 'Locale option value');
 
-is_deeply($spread_revolutionary_date->config->targets, ['twitter', 'mastodon', 'freenode'], 'Default targets options set by default');
+is_deeply($spread_revolutionary_date->config->targets, ['twitter', 'mastodon', 'freenode', 'liberachat'], 'Default targets options set by default');
 
 ok($spread_revolutionary_date->config->twitter, 'Twitter option set by default');
 ok($spread_revolutionary_date->config->mastodon, 'Mastodon option set by default');
 ok($spread_revolutionary_date->config->freenode, 'Freenode option set by default');
+ok($spread_revolutionary_date->config->liberachat, 'Liberachat option set by default');
 
 is($spread_revolutionary_date->config->twitter_consumer_key, 'ConsumerKey', 'Twitter consumer_key value');
 is($spread_revolutionary_date->config->twitter_consumer_secret, 'ConsumerSecret', 'Twitter consumer_secret value');
@@ -40,6 +41,11 @@ is($spread_revolutionary_date->config->freenode_nickname, 'NickName', 'Freenode 
 is($spread_revolutionary_date->config->freenode_password, 'Password', 'Freenode password value');
 is_deeply($spread_revolutionary_date->config->freenode_test_channels, ['#TestChannel1', '#TestChannel2'], 'Freenode test_channels values');
 is_deeply($spread_revolutionary_date->config->freenode_channels, ['#Channel1', '#Channel2', '#Channel3'], 'Freenode channels values');
+
+is($spread_revolutionary_date->config->liberachat_nickname, 'NickName', 'Liberachat nickname value');
+is($spread_revolutionary_date->config->liberachat_password, 'Password', 'Liberachat password value');
+is_deeply($spread_revolutionary_date->config->liberachat_test_channels, ['#TestChannel1', '#TestChannel2'], 'Liberachat test_channels values');
+is_deeply($spread_revolutionary_date->config->liberachat_channels, ['#Channel1', '#Channel2', '#Channel3'], 'Liberachat channels values');
 
 is($spread_revolutionary_date->config->msgmaker, 'RevolutionaryDate', 'MsgMaker option default value');
 is($spread_revolutionary_date->config->locale, 'fr', 'MsgMaker locale option value');

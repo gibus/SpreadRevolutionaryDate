@@ -2,7 +2,7 @@ use 5.014;
 use utf8;
 package App::SpreadRevolutionaryDate;
 
-# ABSTRACT: Spread date and time from Revolutionary (Republican) Calendar on Twitter, Mastodon and Freenode.
+# ABSTRACT: Spread date and time from Revolutionary (Republican) Calendar on Twitter, Mastodon, Freenode and Liberachat.
 
 use Moose;
 use App::SpreadRevolutionaryDate::Config;
@@ -107,6 +107,10 @@ sub spread {
 =item L<App::SpreadRevolutionaryDate::Target::Freenode>
 
 =item L<App::SpreadRevolutionaryDate::Target::Freenode::Bot>
+
+=item L<App::SpreadRevolutionaryDate::Target::Liberachat>
+
+=item L<App::SpreadRevolutionaryDate::Target::Liberachat::Bot>
 
 =item L<App::SpreadRevolutionaryDate::MsgMaker>
 

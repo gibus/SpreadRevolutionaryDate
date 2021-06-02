@@ -105,6 +105,10 @@ sub spread {
 
 =item L<App::SpreadRevolutionaryDate::Target::Freenode::Bot>
 
+=item L<App::SpreadRevolutionaryDate::Target::Liberachat>
+
+=item L<App::SpreadRevolutionaryDate::Target::Liberachat::Bot>
+
 =item L<App::SpreadRevolutionaryDate::MsgMaker>
 
 =item L<App::SpreadRevolutionaryDate::MsgMaker::RevolutionaryDate>

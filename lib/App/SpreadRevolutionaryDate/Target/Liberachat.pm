@@ -1,92 +1,92 @@
 use 5.014;
 use utf8;
-package App::SpreadRevolutionaryDate::Target::Twitter;
+package App::SpreadRevolutionaryDate::Target::Liberachat;
 
-# ABSTRACT: Target class for L<App::SpreadRevolutionaryDate> to handle spreading on Twitter.
+# ABSTRACT: Target class for L<App::SpreadRevolutionaryDate> to handle spreading on Liberachat.
 
 use Moose;
 with 'App::SpreadRevolutionaryDate::Target'
-  => {worker => 'Net::Twitter::Lite::WithAPIv1_1'};
+  => {worker => 'App::SpreadRevolutionaryDate::Target::Liberachat::Bot'};
 
-use Net::Twitter::Lite::WithAPIv1_1;
-use Net::OAuth 0.25;
+use App::SpreadRevolutionaryDate::Target::Liberachat::Bot;
+use POE;
 
 use Locale::TextDomain 'App-SpreadRevolutionaryDate';
 use namespace::autoclean;
 
-has 'consumer_key' => (
+has 'nickname' => (
   is  => 'ro',
   isa => 'Str',
   required => 1,
 );
 
-has 'consumer_secret' => (
+has 'password' => (
   is  => 'ro',
   isa => 'Str',
   required => 1,
 );
 
-has 'access_token' => (
+has 'channels' => (
   is  => 'ro',
-  isa => 'Str',
-  required => 1,
-);
-
-has 'access_token_secret' => (
-  is  => 'ro',
-  isa => 'Str',
+  isa => 'ArrayRef[Str]',
   required => 1,
 );
 
 =method new
 
-Constructor class method. Takes a hash argument with the following mandatory keys: C<consumer_key>, C<consumer_secret>, C<access_token>, and C<access_token_secret>, with all values being strings. Authentifies to Twitter and returns an C<App::SpreadRevolutionaryDate::Target::Twitter> object.
+Constructor class method, subclassing C<Bot::BasicBot>. Takes a hash argument with the following mandatory keys: C<nickname>, C<password>, and C<channels>, with all values being strings. Returns an C<App::SpreadRevolutionaryDate::Target::Liberachat> object.
 
 =cut
 
 around BUILDARGS => sub {
   my ($orig, $class) = @_;
 
+  my $port = 6667;
+  my $ssl = 0;
+
+  # Switch to SSL if module POE::Component::SSLify is available
+  if (eval { require POE::Component::SSLify; 1 }) {
+    $port = 6697;
+    $ssl = 1;
+  }
+
   my $args = $class->$orig(@_);
 
-  $args->{obj} = Net::Twitter::Lite::WithAPIv1_1->new(
-                  consumer_key        => $args->{consumer_key},
-                  consumer_secret     => $args->{consumer_secret},
-                  access_token        => $args->{access_token},
-                  access_token_secret => $args->{access_token_secret},
-                  user_agent          => 'RevolutionaryDate',
-                  ssl                 => 1);
+  $args->{obj} = App::SpreadRevolutionaryDate::Target::Liberachat::Bot->new(
+    server            => 'irc.libera.chat',
+    port              => $port,
+    nick              => 'RevolutionaryBot',
+    alt_nicks         => ['RevolutionaryCalendar', 'RevolutionaryDate'],
+    name              => 'Revolutionary Date bot',
+    flood             => 1,
+    useipv6           => 1,
+    ssl               => $ssl,
+    charset           => 'utf-8',
+    channels          => $args->{channels},
+    liberachat_nickname => $args->{nickname},
+    liberachat_password => $args->{password},
+    msg               => '',
+    no_run            => 1,
+  );
+
   return $args;
 };
 
 =method spread
 
-Spreads a message to Twitter. Takes one mandatory argument: C<$msg> which should be the message to spread as a characters string; and one optional argument: C<test>, which defaults to C<false>, and if C<true> prints the message on standard output instead of spreading on Twitter.
+Spreads a message to Liberachat channels configured with the multivalued option C<channels>.
 
 =cut
 
 sub spread {
-  my ($self, $msg, $test) = @_;
-  $test //= 0;
+  my ($self, $msg) = @_;
 
   # Multiline message
   $msg =~ s/\\n/\n/g;
 
-  if ($test) {
-    $msg = __("Spread on Twitter: ") . $msg;
-
-    use open qw(:std :encoding(UTF-8));
-    use IO::Handle;
-    my $io = IO::Handle->new;
-    $io->fdopen(fileno(STDOUT), "w");
-
-    use Encode qw(encode decode is_utf8);
-    $msg = encode('UTF-8', $msg) if is_utf8($msg);
-
-    $io->say($msg);
-  } else {
-    $self->obj->update($msg);
-  }
+  $self->obj->msg($msg);
+  $self->obj->run;
+  POE::Kernel->run();
 }
 
 =head1 SEE ALSO
@@ -101,13 +101,13 @@ sub spread {
 
 =item L<App::SpreadRevolutionaryDate::Target>
 
+=item L<App::SpreadRevolutionaryDate::Target::Twitter>
+
 =item L<App::SpreadRevolutionaryDate::Target::Mastodon>
 
 =item L<App::SpreadRevolutionaryDate::Target::Freenode>
 
 =item L<App::SpreadRevolutionaryDate::Target::Freenode::Bot>
-
-=item L<App::SpreadRevolutionaryDate::Target::Liberachat>
 
 =item L<App::SpreadRevolutionaryDate::Target::Liberachat::Bot>
 
