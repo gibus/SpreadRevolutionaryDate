@@ -262,7 +262,7 @@ Same as ["DEPRECATED mastodon"](#deprecated-mastodon) configuration option above
 
 Same as ["DEPRECATED freenode"](#deprecated-freenode) configuration option above.
 
-### _DEPRECATED_ --liberachat | -f
+### _DEPRECATED_ --liberachat | -lt
 
 Same as ["DEPRECATED liberachat"](#deprecated-liberachat) configuration option above.
 
@@ -322,7 +322,7 @@ Same as ["password"](#password) configuration option above.
 
 Same as ["channels"](#channels) configuration option above.
 
-### --freenode\_test\_channels | -tc &lt;channel>
+### --freenode\_test\_channels | -ftc &lt;channel>
 
 Same as ["test\_channels"](#test_channels) configuration option above.
 
@@ -330,19 +330,19 @@ Same as ["test\_channels"](#test_channels) configuration option above.
 
 The first two parameters are credentials for `spread-revolutionary-date` to spread on a Liberachat account. See [https://libera.chat/guides/registration](https://libera.chat/guides/registration) to find out how to register an account on Liberachat.
 
-### --liberachat\_nickname | -fn &lt;nick>
+### --liberachat\_nickname | -ln &lt;nick>
 
 Same as ["nickname"](#nickname) configuration option above.
 
-### --liberachat\_password | -fp &lt;passwd>
+### --liberachat\_password | -lp &lt;passwd>
 
 Same as ["password"](#password) configuration option above.
 
-### --liberachat\_channels | -fc &lt;channel>
+### --liberachat\_channels | -lc &lt;channel>
 
 Same as ["channels"](#channels) configuration option above.
 
-### --liberachat\_test\_channels | -tc &lt;channel>
+### --liberachat\_test\_channels | -ltc &lt;channel>
 
 Same as ["test\_channels"](#test_channels) configuration option above.
 
