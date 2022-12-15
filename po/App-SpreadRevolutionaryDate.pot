@@ -1,5 +1,5 @@
 # SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR Gérald Sédrati-Dinet
+# Copyright (C) YEAR Gérald Sédrati
 # This file is distributed under the same license as the App-SpreadRevolutionaryDate package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
