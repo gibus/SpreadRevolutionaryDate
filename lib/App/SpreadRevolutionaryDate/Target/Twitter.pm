@@ -6,10 +6,9 @@ package App::SpreadRevolutionaryDate::Target::Twitter;
 
 use Moose;
 with 'App::SpreadRevolutionaryDate::Target'
-  => {worker => 'Net::Twitter::Lite::WithAPIv1_1'};
+  => {worker => 'Twitter::API__WITH__Twitter::API::Trait::ApiMethods'};
 
-use Net::Twitter::Lite::WithAPIv1_1;
-use Net::OAuth 0.25;
+use Twitter::API;
 
 use Locale::TextDomain 'App-SpreadRevolutionaryDate';
 use namespace::autoclean;
@@ -48,14 +47,18 @@ around BUILDARGS => sub {
   my ($orig, $class) = @_;
 
   my $args = $class->$orig(@_);
+  my $api_1 = $args->{api} && $args->{api} eq 1 || 0;
 
-  $args->{obj} = Net::Twitter::Lite::WithAPIv1_1->new(
+  $args->{obj} = Twitter::API->new_with_traits(
+                  traits              => 'ApiMethods',
+                  $api_1 ?
+                    () :
+                    (api_version => '2', api_ext => ''),
                   consumer_key        => $args->{consumer_key},
                   consumer_secret     => $args->{consumer_secret},
                   access_token        => $args->{access_token},
                   access_token_secret => $args->{access_token_secret},
-                  user_agent          => 'RevolutionaryDate',
-                  ssl                 => 1);
+                  agent               => 'RevolutionaryDate');
   return $args;
 };
 
@@ -85,7 +88,7 @@ sub spread {
 
     $io->say($msg);
   } else {
-    $self->obj->update($msg);
+    $self->obj->post('https://api.twitter.com/2/tweets', {'-to_json' => {"text" => $msg}});
   }
 }
 

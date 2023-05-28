@@ -13,7 +13,7 @@ use App::SpreadRevolutionaryDate;
 my $spread_revolutionary_date = App::SpreadRevolutionaryDate->new(\*DATA);
 
 isa_ok($spread_revolutionary_date->targets->{twitter}, 'App::SpreadRevolutionaryDate::Target::Twitter', 'Twitter class constructor');
-isa_ok($spread_revolutionary_date->targets->{twitter}->obj, 'Net::Twitter::Lite::WithAPIv1_1', 'Twitter object');
+isa_ok($spread_revolutionary_date->targets->{twitter}->obj, 'Twitter::API__WITH__Twitter::API::Trait::ApiMethods', 'Twitter object');
 isa_ok($spread_revolutionary_date->targets->{mastodon}, 'App::SpreadRevolutionaryDate::Target::Mastodon', 'Mastodon class constructor');
 isa_ok($spread_revolutionary_date->targets->{mastodon}->obj, 'Mastodon::Client', 'Mastodon object');
 isa_ok($spread_revolutionary_date->targets->{freenode}, 'App::SpreadRevolutionaryDate::Target::Freenode', 'Freenode class constructor');
@@ -21,8 +21,9 @@ isa_ok($spread_revolutionary_date->targets->{freenode}->obj, 'App::SpreadRevolut
 isa_ok($spread_revolutionary_date->targets->{liberachat}, 'App::SpreadRevolutionaryDate::Target::Liberachat', 'Liberachat class constructor');
 isa_ok($spread_revolutionary_date->targets->{liberachat}->obj, 'App::SpreadRevolutionaryDate::Target::Liberachat::Bot', 'Liberachat object');
 
+my $client = $spread_revolutionary_date->targets->{twitter}->obj;
 eval { $spread_revolutionary_date->targets->{twitter}->obj->verify_credentials };
-like($@, qr/^401: /, 'Twitter no connection with fake credentials');
+like($@, qr/^Invalid or expired token./, 'Twitter no connection with fake credentials');
 
 eval { $spread_revolutionary_date->targets->{mastodon}->obj->get_account };
 like($@, qr/^Could not complete request: (?:500 Can't connect to Instance|599 Internal Exception)/, 'Mastodon no connection with fake credentials');
@@ -37,6 +38,7 @@ consumer_key        = 'ConsumerKey'
 consumer_secret     = 'ConsumerSecret'
 access_token        = 'AccessToken'
 access_token_secret = 'AccessTokenSecret'
+api                 = 1
 
 [mastodon]
 # Get these values from https://<your mastodon instance>/settings/applications
