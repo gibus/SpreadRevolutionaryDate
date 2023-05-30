@@ -88,7 +88,7 @@ sub spread {
 
     $io->say($msg);
   } else {
-    $self->obj->post('https://api.twitter.com/2/tweets', {'-to_json' => {"text" => $msg}});
+    $self->obj->post('tweets', {'-to_json' => {"text" => $msg}});
   }
 }
 
