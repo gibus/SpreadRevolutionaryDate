@@ -56,6 +56,7 @@ my %WriteMakefileArgs = (
     "Twitter::API" => 0,
     "URI" => 0,
     "URI::Escape" => 0,
+    "bytes" => 0,
     "namespace::autoclean" => 0,
     "open" => 0,
     "utf8" => 0
@@ -71,7 +72,7 @@ my %WriteMakefileArgs = (
     "strict" => 0,
     "warnings" => 0
   },
-  "VERSION" => "0.34",
+  "VERSION" => "0.35",
   "test" => {
     "TESTS" => "t/*.t"
   }
@@ -113,6 +114,7 @@ my %FallbackPrereqs = (
   "Twitter::API" => 0,
   "URI" => 0,
   "URI::Escape" => 0,
+  "bytes" => 0,
   "namespace::autoclean" => 0,
   "open" => 0,
   "strict" => 0,
