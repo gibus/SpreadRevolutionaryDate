@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: App-SpreadRevolutionaryDate 0.10\n"
 "Report-Msgid-Bugs-To: gibus@cpan.org\n"
-"POT-Creation-Date: 2019-04-07 10:21+0200\n"
+"POT-Creation-Date: 2024-12-08 18:55+0100\n"
 "PO-Revision-Date: 2019-04-07 10:21+0200\n"
 "Last-Translator: Automatically generated\n"
 "Language-Team: none\n"
@@ -17,59 +17,63 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: lib/App/SpreadRevolutionaryDate/MsgMaker/PromptUser.pm:41
+#: lib/App/SpreadRevolutionaryDate/MsgMaker/PromptUser.pm:49
 msgid "Please, enter message to spread"
 msgstr "Bitte geben Sie die Nachricht ein, um sie zu verbreiten"
 
 #. TRANSLATORS: initial used in case insensitive context
-#: lib/App/SpreadRevolutionaryDate/MsgMaker/PromptUser.pm:43
+#: lib/App/SpreadRevolutionaryDate/MsgMaker/PromptUser.pm:51
 msgid "yes"
 msgstr "ja"
 
 #. TRANSLATORS: initial used  case insensitive context
-#: lib/App/SpreadRevolutionaryDate/MsgMaker/PromptUser.pm:45
+#: lib/App/SpreadRevolutionaryDate/MsgMaker/PromptUser.pm:53
 msgid "no"
 msgstr "nein"
 
 #. TRANSLATORS: initial used in case sensitive context
-#: lib/App/SpreadRevolutionaryDate/MsgMaker/PromptUser.pm:47
+#: lib/App/SpreadRevolutionaryDate/MsgMaker/PromptUser.pm:55
 msgid "Abort"
 msgstr "Abbrechen"
 
-#: lib/App/SpreadRevolutionaryDate/MsgMaker/PromptUser.pm:48
+#: lib/App/SpreadRevolutionaryDate/MsgMaker/PromptUser.pm:56
 #, perl-brace-format
 msgid "or {abort} to abort"
 msgstr "oder {abort}, um abzubrechen"
 
-#: lib/App/SpreadRevolutionaryDate/MsgMaker/PromptUser.pm:49
+#: lib/App/SpreadRevolutionaryDate/MsgMaker/PromptUser.pm:57
 msgid "Spread"
 msgstr "Übertragen"
 
-#: lib/App/SpreadRevolutionaryDate/MsgMaker/PromptUser.pm:50
+#: lib/App/SpreadRevolutionaryDate/MsgMaker/PromptUser.pm:58
 #, perl-brace-format
 msgid "confirm ({confirm_ok}/{confirm_nok} {confirm_abort_text})?"
 msgstr "bestätigen ({confirm_ok}/{confirm_nok} {confirm_abort_text})?"
 
-#: lib/App/SpreadRevolutionaryDate/MsgMaker/PromptUser.pm:51
+#: lib/App/SpreadRevolutionaryDate/MsgMaker/PromptUser.pm:59
 #, perl-brace-format
 msgid "Input must be \"{confirm_ok}\" or \"{confirm_nok}\"\n"
 msgstr "Eingabe muß \"{confirm_ok}\" oder \"{confirm_nok}\" sein\n"
 
-#: lib/App/SpreadRevolutionaryDate/MsgMaker/PromptUser.pm:52
+#: lib/App/SpreadRevolutionaryDate/MsgMaker/PromptUser.pm:60
 msgid "OK not spreading"
 msgstr "OK nich übertragen"
 
-#: lib/App/SpreadRevolutionaryDate/MsgMaker/RevolutionaryDate.pm:54
+#: lib/App/SpreadRevolutionaryDate/MsgMaker/RevolutionaryDate.pm:58
 #, perl-brace-format
 msgid ""
 "We are {day_name}, {day} {month} of Revolution year {roman_year} ({year}), "
 "{feast_long}, it is {time}!"
 msgstr ""
 
-#: lib/App/SpreadRevolutionaryDate/Target/Mastodon.pm:71
+#: lib/App/SpreadRevolutionaryDate/Target/Bluesky.pm:60
+msgid "Spread on Bluesky: "
+msgstr "Überträgt auf Bluesky: "
+
+#: lib/App/SpreadRevolutionaryDate/Target/Mastodon.pm:74
 msgid "Spread on Mastodon: "
 msgstr "Überträgt auf Mastodon: "
 
-#: lib/App/SpreadRevolutionaryDate/Target/Twitter.pm:73
+#: lib/App/SpreadRevolutionaryDate/Target/Twitter.pm:79
 msgid "Spread on Twitter: "
 msgstr "Überträgt auf Twitter: "

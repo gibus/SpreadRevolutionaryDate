@@ -1,7 +1,7 @@
 #
 # This file is part of App-SpreadRevolutionaryDate
 #
-# This software is Copyright (c) 2019-2023 by Gérald Sédrati.
+# This software is Copyright (c) 2019-2024 by Gérald Sédrati.
 #
 # This is free software, licensed under:
 #
@@ -16,7 +16,7 @@ use 5.014;
 use ExtUtils::MakeMaker;
 
 my %WriteMakefileArgs = (
-  "ABSTRACT" => "Spread date and time from Revolutionary (Republican) Calendar on Twitter, Mastodon, Freenode and Liberachat.",
+  "ABSTRACT" => "Spread date and time from Revolutionary (Republican) Calendar on Bluesky, Twitter, Mastodon, Freenode and Liberachat.",
   "AUTHOR" => "G\x{e9}rald S\x{e9}drati <gibus\@cpan.org>",
   "CONFIGURE_REQUIRES" => {
     "ExtUtils::MakeMaker" => 0
@@ -32,6 +32,7 @@ my %WriteMakefileArgs = (
     "AppConfig" => 0,
     "Bot::BasicBot" => 0,
     "Class::Load" => 0,
+    "DateTime" => 0,
     "DateTime::Calendar::FrenchRevolutionary" => 0,
     "Encode" => 0,
     "File::HomeDir" => 0,
@@ -39,7 +40,9 @@ my %WriteMakefileArgs = (
     "Getopt::Long" => 0,
     "IO::Handle" => 0,
     "IO::Prompt::Hooked" => 0,
+    "JSON" => 0,
     "LWP::Protocol::https" => 0,
+    "LWP::UserAgent" => 0,
     "Locale::Messages" => 0,
     "Locale::TextDomain" => 0,
     "Locale::Util" => 0,
@@ -51,6 +54,7 @@ my %WriteMakefileArgs = (
     "Net::Async::HTTP" => "0.43",
     "POE" => 0,
     "Twitter::API" => 0,
+    "URI" => 0,
     "URI::Escape" => 0,
     "namespace::autoclean" => 0,
     "open" => 0,
@@ -78,6 +82,7 @@ my %FallbackPrereqs = (
   "AppConfig" => 0,
   "Bot::BasicBot" => 0,
   "Class::Load" => 0,
+  "DateTime" => 0,
   "DateTime::Calendar::FrenchRevolutionary" => 0,
   "Encode" => 0,
   "File::Find" => 0,
@@ -88,7 +93,9 @@ my %FallbackPrereqs = (
   "Getopt::Long" => 0,
   "IO::Handle" => 0,
   "IO::Prompt::Hooked" => 0,
+  "JSON" => 0,
   "LWP::Protocol::https" => 0,
+  "LWP::UserAgent" => 0,
   "Locale::Messages" => 0,
   "Locale::TextDomain" => 0,
   "Locale::Util" => 0,
@@ -104,6 +111,7 @@ my %FallbackPrereqs = (
   "Test::Output" => 0,
   "Test::Trap" => 0,
   "Twitter::API" => 0,
+  "URI" => 0,
   "URI::Escape" => 0,
   "namespace::autoclean" => 0,
   "open" => 0,

@@ -49,7 +49,11 @@ This role provides a C<locale> required attribute (defaults to C<'fr'>), which h
 
 =item L<App::SpreadRevolutionaryDate::Config>
 
+=item L<App::SpreadRevolutionaryDate::BlueskyLite>
+
 =item L<App::SpreadRevolutionaryDate::Target>
+
+=item L<App::SpreadRevolutionaryDate::Target::Bluesky>
 
 =item L<App::SpreadRevolutionaryDate::Target::Twitter>
 

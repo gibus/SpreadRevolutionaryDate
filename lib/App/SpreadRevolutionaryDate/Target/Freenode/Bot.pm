@@ -99,7 +99,11 @@ sub chanjoin {
 
 =item L<App::SpreadRevolutionaryDate::Config>
 
+=item L<App::SpreadRevolutionaryDate::BlueskyLite>
+
 =item L<App::SpreadRevolutionaryDate::Target>
+
+=item L<App::SpreadRevolutionaryDate::Target::Bluesky>
 
 =item L<App::SpreadRevolutionaryDate::Target::Twitter>
 

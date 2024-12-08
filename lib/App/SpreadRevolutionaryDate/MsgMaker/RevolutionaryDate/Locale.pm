@@ -217,7 +217,11 @@ Default for this attribute should be a hash reference, keyed by numbers of month
 
 =item L<App::SpreadRevolutionaryDate::Config>
 
+=item L<App::SpreadRevolutionaryDate::BlueskyLite>
+
 =item L<App::SpreadRevolutionaryDate::Target>
+
+=item L<App::SpreadRevolutionaryDate::Target::Bluesky>
 
 =item L<App::SpreadRevolutionaryDate::Target::Twitter>
 

@@ -8,13 +8,13 @@ version 0.33
 
 # DESCRIPTION
 
-`spread-revolutionary-date` is a [Free Software](https://www.gnu.org/philosophy/free-sw.html) that spreads the current date, expressed in the [French Revolutionary calendar](https://en.wikipedia.org/wiki/French_Republican_calendar), to various social networks: [Twitter](https://twitter.com/), [Mastodon](https://mastodon.social/), the [Freenode](https://freenode.net/) and [Liberachat](https://libera.chat/) Internet Relay Chat networks.
+`spread-revolutionary-date` is a [Free Software](https://www.gnu.org/philosophy/free-sw.html) that spreads the current date, expressed in the [French Revolutionary calendar](https://en.wikipedia.org/wiki/French_Republican_calendar), to various social networks: [Bluesky](https://bsky.app/), [Twitter](https://twitter.com/), [Mastodon](https://mastodon.social/), the [Freenode](https://freenode.net/) and [Liberachat](https://libera.chat/) Internet Relay Chat networks.
 
 Moreover, you can easily extend these defaults targets with any desired one, see ["EXTENDING TO NEW TARGETS"](#extending-to-new-targets), and even spread something else than the revolutionary date, see ["msgmaker"](#msgmaker) option and ["EXTENDING TO NEW MESSAGE MAKERS"](#extending-to-new-message-makers).
 
 The French Revolutionary calendar, also called Republican calendar, was introduced during the [French Revolution](https://en.wikipedia.org/wiki/French_Revolution), and used from late 1793 to 1805, and also during the [Paris Commune](https://en.wikipedia.org/wiki/Paris_Commune) in 1871. This was an attempt to get rid of religious and royalist references found in Gregorian calendar when naming measures of Time. Months were given new names based on nature, each day of the year, instead of being named after an associated saint, had a unique name associated with the rural economy: agricultural tools, common animals, grains, pastures, trees, roots, flowers, fruits, plants, and minerals. But this was also an attempt to give more rational in measuring Time, basing measures on decimal system. Instead of weeks, each month was divided into exactly 3 _décades_, that is ten days; days were divided into ten hours; hours into 100 minutes; and minutes into 100 seconds.
 
-You **must** have a registered account on each of the targets you want to spread the revolutionary date. And you must get credentials for `spread-revolutionary-date` to post on Twitter and Mastodon. Finally, you have to configure `spread-revolutionary-date` to use these credentials, see ["CONFIGURATION"](#configuration) and ["COMMAND LINE PARAMETERS"](#command-line-parameters) below.
+You **must** have a registered account on each of the targets you want to spread the revolutionary date. And you must get credentials for `spread-revolutionary-date` to post on Bluesky, Twitter and Mastodon. Finally, you have to configure `spread-revolutionary-date` to use these credentials, see ["CONFIGURATION"](#configuration) and ["COMMAND LINE PARAMETERS"](#command-line-parameters) below.
 
 The revolutionary date and time is computed thanks to the [DateTime::Calendar::FrenchRevolutionary](https://metacpan.org/pod/DateTime::Calendar::FrenchRevolutionary) Perl module, by Jean Forget.
 
@@ -22,7 +22,7 @@ The revolutionary date and time is computed thanks to the [DateTime::Calendar::F
 
     # Just execute the script in your shell
     # to spread current date to configured accounts
-    # to Twitter, Mastodon, Freenode and Liberachat:
+    # to Bluesky, Twitter, Mastodon, Freenode and Liberachat:
     $ spread-revolutionary-date
 
     # Or, since this script does nothing but calling
@@ -56,7 +56,7 @@ The revolutionary date and time is computed thanks to the [DateTime::Calendar::F
         --msgwriter UserPrompt
 
     # Spread message as command line parameter to
-    # Twitter, Mastodon, Freenode and Liberachat
+    # Bluesky, Twitter, Mastodon, Freenode and Liberachat
     $ spread-revolutionary-date \
         --msgwriter UserPrompt \
         --promptuser_default \
@@ -76,7 +76,7 @@ These options should appear outside of any section of the configuration file.
 
 ### targets
 
-This option can be specified multiple times, with values as strings. It explicitly defines targets where the revolutionary date should be spread to. Any value set for this option should be a valid target: any of the three default targets (`twitter`, `mastodon`, `freenode`, or `liberachat`) or some new target if you have extended this application (see ["EXTENDING TO NEW TARGETS"](#extending-to-new-targets)). If this option is not defined, the revolutionary date is spread on all three default targets: `twitter`, `mastodon`, `freenode` and `liberachat`.
+This option can be specified multiple times, with values as strings. It explicitly defines targets where the revolutionary date should be spread to. Any value set for this option should be a valid target: any of the five default targets (`Bluesky`, `twitter`, `mastodon`, `freenode`, or `liberachat`) or some new target if you have extended this application (see ["EXTENDING TO NEW TARGETS"](#extending-to-new-targets)). If this option is not defined, the revolutionary date is spread on all five default targets: `Bluesky`, `twitter`, `mastodon`, `freenode` and `liberachat`.
 
 ### msgmaker
 
@@ -88,27 +88,43 @@ This option can only be specified once, with a value as string. Spread with chos
 
 ### test
 
-This boolean option takes no value, either it is defined or not. If defined, do not actually spread the revolutionary date, just print it on standard output for Twitter and Mastodon, and send it on configured test channels for Freenode and Liberachat (see ["test\_channels"](#test_channels) below).
+This boolean option takes no value, either it is defined or not. If defined, do not actually spread the revolutionary date, just print it on standard output for Bluesky, Twitter and Mastodon, and send it on configured test channels for Freenode and Liberachat (see ["test\_channels"](#test_channels) below).
 
 ### _DEPRECATED_ acab
 
 This option is _deprecated_ starting from version 0.09 of this distribution and may be removed in future release. Please use ["acab"](#acab) option in `[revolutionarydate]` section, as described below.
 
+### _DEPRECATED_ bluesky
+
+This option is _deprecated_ starting from version 0.07 of this distribution and may be removed in future release. Please use ["targets"](#targets) option, as described above. Spread on Bluesky explicitly. If none of the `bluesky`, `twitter`, `mastodon`, `freenode`, `liberachat` option is set, the revolutionary date is spread on all of these five targets.
+
 ### _DEPRECATED_ twitter
 
-This option is _deprecated_ starting from version 0.07 of this distribution and may be removed in future release. Please use ["targets"](#targets) option, as described above. Spread on Twitter explicitly. If none of the `twitter`, `mastodon`, `freenode`, `liberachat` option is set, the revolutionary date is spread on all of these three targets.
+This option is _deprecated_ starting from version 0.07 of this distribution and may be removed in future release. Please use ["targets"](#targets) option, as described above. Spread on Twitter explicitly. If none of the `bluesky`, `twitter`, `mastodon`, `freenode`, `liberachat` option is set, the revolutionary date is spread on all of these five targets.
 
 ### _DEPRECATED_ mastodon
 
-This option is _deprecated_ starting from version 0.07 of this distribution and may be removed in future release. Please use ["targets"](#targets) option, as described above. Spread on Mastodon explicitly. If none of the `twitter`, `mastodon`, `freenode`, `liberachat` option is set, the revolutionary date is spread on all of these three targets.
+This option is _deprecated_ starting from version 0.07 of this distribution and may be removed in future release. Please use ["targets"](#targets) option, as described above. Spread on Mastodon explicitly. If none of the `bluesky`, `twitter`, `mastodon`, `freenode`, `liberachat` option is set, the revolutionary date is spread on all of these five targets.
 
 ### _DEPRECATED_ freenode
 
-This option is _deprecated_ starting from version 0.07 of this distribution and may be removed in future release. Please use ["targets"](#targets) option, as described above. Spread on Freenode explicitly. If none of the `twitter`, `mastodon`, `freenode`, `liberachat` option is set, the revolutionary date is spread on all of these three targets.
+This option is _deprecated_ starting from version 0.07 of this distribution and may be removed in future release. Please use ["targets"](#targets) option, as described above. Spread on Freenode explicitly. If none of the `twitter`, `mastodon`, `freenode`, `liberachat` option is set, the revolutionary date is spread on all of these five targets.
 
 ### _DEPRECATED_ liberachat
 
-This option is _deprecated_ starting from version 0.07 of this distribution and may be removed in future release. Please use ["targets"](#targets) option, as described above. Spread on Liberachat explicitly. If none of the `twitter`, `mastodon`, `freenode`, `liberachat` option is set, the revolutionary date is spread on all of these three targets.
+This option is _deprecated_ starting from version 0.07 of this distribution and may be removed in future release. Please use ["targets"](#targets) option, as described above. Spread on Liberachat explicitly. If none of the `bluesky`, `twitter`, `mastodon`, `freenode`, `liberachat` option is set, the revolutionary date is spread on all of these five targets.
+
+## Bluesky options
+
+These options are credentials for `spread-revolutionary-date` to spread on a Bluesky account. You have to get them from your [Bluesky account](https://bsky.app/). They should be defined in the `[bluesky]` section of the configuration file.
+
+### identifier
+
+This option can only be specified once, with a value as string: your Bluesky identifier.
+
+### password
+
+This option can only be specified once, with a value as string: your Bluesky password.
 
 ## Twitter options
 
@@ -152,7 +168,7 @@ This option can only be specified once, with a value as string: your Mastodon Ac
 
 ## Freenode options
 
-The first two options are credentials for `spread-revolutionary-date` to spread on a Freenode account. See [https://freenode.net/kb/answer/registration](https://freenode.net/kb/answer/registration) to find out how to register an account on Freenode. They should be defined in the `[twitter]` section of the configuration file.
+The first two options are credentials for `spread-revolutionary-date` to spread on a Freenode account. See [https://freenode.net/kb/answer/registration](https://freenode.net/kb/answer/registration) to find out how to register an account on Freenode. They should be defined in the `[freenode]` section of the configuration file.
 
 ### nickname
 
@@ -172,7 +188,7 @@ This option can be specified multiple times, with values as strings. `spread-rev
 
 ## Liberachat options
 
-The first two options are credentials for `spread-revolutionary-date` to spread on a Liberachat account. See [https://libera.chat/guides/registration](https://libera.chat/guides/registration) to find out how to register an account on Liberachat. They should be defined in the `[twitter]` section of the configuration file.
+The first two options are credentials for `spread-revolutionary-date` to spread on a Liberachat account. See [https://libera.chat/guides/registration](https://libera.chat/guides/registration) to find out how to register an account on Liberachat. They should be defined in the `[liberachat]` section of the configuration file.
 
 ### nickname
 
@@ -250,6 +266,10 @@ Same as ["test"](#test) configuration option above.
 
 Same as ["acab"](#acab) configuration option above.
 
+### _DEPRECATED_ --bluesky | -b
+
+Same as ["DEPRECATED bluesky"](#deprecated-bluesky) configuration option above.
+
 ### _DEPRECATED_ --twitter | -t
 
 Same as ["DEPRECATED twitter"](#deprecated-twitter) configuration option above.
@@ -265,6 +285,18 @@ Same as ["DEPRECATED freenode"](#deprecated-freenode) configuration option above
 ### _DEPRECATED_ --liberachat | -lt
 
 Same as ["DEPRECATED liberachat"](#deprecated-liberachat) configuration option above.
+
+## Bluesky parameters
+
+These parameters specify credentials for `spread-revolutionary-date` to spread on a Bluesky account. You have to get them from your [Bluesky account](https://bsky.app/).
+
+### --bluesky\_identifier | -bi &lt;identifier>
+
+Same as ["identifier"](#identifier) configuration option above.
+
+### --bluesky\_password | -bp &lt;password>
+
+Same as ["password"](#password) configuration option above.
 
 ## Twitter parameters
 
@@ -364,7 +396,7 @@ Same as ["default"](#default) configuration option above.
 
 # EXTENDING TO NEW TARGETS
 
-Starting from version 0.07, this distribution takes advantage of [Moose](https://metacpan.org/pod/Moose), the postmodern object system for Perl 5, allowing to easily extend `spread-revolutionary-date` to other targets than the default ones (`Twitter`, `Mastondon`, `Freenode` and `Liberachat`.
+Starting from version 0.07, this distribution takes advantage of [Moose](https://metacpan.org/pod/Moose), the postmodern object system for Perl 5, allowing to easily extend `spread-revolutionary-date` to other targets than the default ones (`Bluesky`, `Twitter`, `Mastondon`, `Freenode` and `Liberachat`.
 
 To add a new target, you should write a new class in the `App::SpreadRevolutionaryDate::Target::` namespace (that is: the class should be `App::SpreadRevolutionaryDate::Target::Mytarget` for a new `Mytarget` target), that consumes the [App::SpreadRevolutionaryDate::Target](https://metacpan.org/pod/App::SpreadRevolutionaryDate::Target) role. See ["DESCRIPTION" in App::SpreadRevolutionaryDate::Target](https://metacpan.org/pod/App::SpreadRevolutionaryDate::Target#DESCRIPTION) for a comprehensive description of this role.
 
@@ -374,7 +406,7 @@ Such a target class is actually just a wrapper. Usually a target has to use an e
 
 To perform authentication and to post a message, there is a strong likelihood that the new target requires specific parameters (e.g.: tokens, keys, account name, password, channels, etc.). These parameters should be defined as required attributes of the target class. Values for such attributes should be set in the [configuration file](#configuration), inside a section named after the target in lower case (`[mytarget]`), or as [command line parameters](#command-line-parameters) prefixed with the name of the target in lower case, followed by an underscore (`--mytarget_myparam`).
 
-Should you extend `spread-revolutionary-date` to a new target, we advise you to have a look on how default targets are implemented: [App::SpreadRevolutionaryDate::Target::Twitter](https://metacpan.org/pod/App::SpreadRevolutionaryDate::Target::Twitter) with [Twitter::API](https://metacpan.org/pod/Twitter::API) `worker`, [App::SpreadRevolutionaryDate::Target::Mastodon](https://metacpan.org/pod/App::SpreadRevolutionaryDate::Target::Mastodon) with [Mastodon::Client](https://metacpan.org/pod/Mastodon::Client) `worker`. Both are using [OAuth2 protocol](https://oauth.net/2/) to perform authentication. The third and fourth default targets, `App::SpreadRevolutionaryDate::Target::Freenode` <App::SpreadRevolutionaryDate::Target::Liberachat>, uses a [chatbot](https://en.wikipedia.org/wiki/Chatbot): [App::SpreadRevolutionaryDate::Target::Freenode::Bot](https://metacpan.org/pod/App::SpreadRevolutionaryDate::Target::Freenode::Bot) [App::SpreadRevolutionaryDate::Target::Liberachat::Bot](https://metacpan.org/pod/App::SpreadRevolutionaryDate::Target::Liberachat::Bot) subclassing [Bot::BasicBot](https://metacpan.org/pod/Bot::BasicBot). You can also see a very simple example with a test file provided in this distribution at `t/new_target.t`, which just prints out the revolutionary date on the standard output using core module [IO::Handle](https://metacpan.org/pod/IO::Handle).
+Should you extend `spread-revolutionary-date` to a new target, we advise you to have a look on how default targets are implemented: [App::SpreadRevolutionaryDate::Target::Bluesky](https://metacpan.org/pod/App::SpreadRevolutionaryDate::Target::Bluesky) with [Bluesky](https://metacpan.org/pod/Bluesky) `worker`, [App::SpreadRevolutionaryDate::Target::Twitter](https://metacpan.org/pod/App::SpreadRevolutionaryDate::Target::Twitter) with [Twitter::API](https://metacpan.org/pod/Twitter::API) `worker`, [App::SpreadRevolutionaryDate::Target::Mastodon](https://metacpan.org/pod/App::SpreadRevolutionaryDate::Target::Mastodon) with [Mastodon::Client](https://metacpan.org/pod/Mastodon::Client) `worker`. Both are using [OAuth2 protocol](https://oauth.net/2/) to perform authentication. The third and fourth default targets, `App::SpreadRevolutionaryDate::Target::Freenode` <App::SpreadRevolutionaryDate::Target::Liberachat>, uses a [chatbot](https://en.wikipedia.org/wiki/Chatbot): [App::SpreadRevolutionaryDate::Target::Freenode::Bot](https://metacpan.org/pod/App::SpreadRevolutionaryDate::Target::Freenode::Bot) [App::SpreadRevolutionaryDate::Target::Liberachat::Bot](https://metacpan.org/pod/App::SpreadRevolutionaryDate::Target::Liberachat::Bot) subclassing [Bot::BasicBot](https://metacpan.org/pod/Bot::BasicBot). You can also see a very simple example with a test file provided in this distribution at `t/new_target.t`, which just prints out the revolutionary date on the standard output using core module [IO::Handle](https://metacpan.org/pod/IO::Handle).
 
 # EXTENDING TO NEW MESSAGE MAKERS
 
@@ -461,6 +493,7 @@ Because of the trick on prefix and suffix for feasts and the needed mapping for 
 - [App::SpreadRevolutionaryDate](https://metacpan.org/pod/App::SpreadRevolutionaryDate)
 - [DateTime::Calendar::FrenchRevolutionary](https://metacpan.org/pod/DateTime::Calendar::FrenchRevolutionary)
 - [AppConfig](https://metacpan.org/pod/AppConfig)
+- [App::SpreadRevolutionaryDate::BlueskyLite](https://metacpan.org/pod/App::SpreadRevolutionaryDate::BlueskyLite)
 - [Twitter::API](https://metacpan.org/pod/Twitter::API)
 - [Mastodon::Client](https://metacpan.org/pod/Mastodon::Client)
 - [Bot::BasicBot](https://metacpan.org/pod/Bot::BasicBot)
@@ -471,7 +504,7 @@ Gérald Sédrati <gibus@cpan.org>
 
 # COPYRIGHT AND LICENSE
 
-This software is Copyright (c) 2019-2023 by Gérald Sédrati.
+This software is Copyright (c) 2019-2024 by Gérald Sédrati.
 
 This is free software, licensed under:
 

@@ -457,7 +457,11 @@ __PACKAGE__->meta->make_immutable;
 
 =item L<App::SpreadRevolutionaryDate::Config>
 
+=item L<App::SpreadRevolutionaryDate::BlueskyLite>
+
 =item L<App::SpreadRevolutionaryDate::Target>
+
+=item L<App::SpreadRevolutionaryDate::Target::BlueSky>
 
 =item L<App::SpreadRevolutionaryDate::Target::Twitter>
 
