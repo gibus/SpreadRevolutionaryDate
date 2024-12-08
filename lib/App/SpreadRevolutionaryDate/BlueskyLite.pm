@@ -108,7 +108,9 @@ sub _generate_facets {
       $attrib = 'uri';
       $val = $w;
 
-      $pos = index($text, $w, $pos) + 1;
+      use bytes;
+      $pos = index($text, $w, $pos);
+      no bytes;
       my $end = $pos + length($w);
       push @$output, {
         features => [{
