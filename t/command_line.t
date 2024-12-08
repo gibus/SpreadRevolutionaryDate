@@ -20,7 +20,7 @@ is($spread_revolutionary_date->config->conf, $conf_file, 'Conf option value');
 is($spread_revolutionary_date->config->test, 1, 'Test option set');
 is($spread_revolutionary_date->config->locale, 'fr', 'Locale option value');
 
-is_deeply($spread_revolutionary_date->config->targets, ['twitter', 'mastodon', 'freenode', 'liberachat'], 'Default targets options set by default');
+is_deeply($spread_revolutionary_date->config->targets, ['bluesky', 'twitter', 'mastodon', 'freenode', 'liberachat'], 'Default targets options set by default');
 
 ok($spread_revolutionary_date->config->twitter, 'Twitter option set by default');
 ok($spread_revolutionary_date->config->mastodon, 'Mastodon option set by default');

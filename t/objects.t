@@ -5,13 +5,15 @@ BEGIN {
 }
 binmode(DATA, ":encoding(UTF-8)");
 
-use Test::More tests => 11;
+use Test::More tests => 14;
 use Test::NoWarnings;
 
 use App::SpreadRevolutionaryDate;
 
 my $spread_revolutionary_date = App::SpreadRevolutionaryDate->new(\*DATA);
 
+isa_ok($spread_revolutionary_date->targets->{bluesky}, 'App::SpreadRevolutionaryDate::Target::Bluesky', 'Bluesky class constructor');
+isa_ok($spread_revolutionary_date->targets->{bluesky}->obj, 'App::SpreadRevolutionaryDate::BlueskyLite', 'Bluesky object');
 isa_ok($spread_revolutionary_date->targets->{twitter}, 'App::SpreadRevolutionaryDate::Target::Twitter', 'Twitter class constructor');
 isa_ok($spread_revolutionary_date->targets->{twitter}->obj, 'Twitter::API__WITH__Twitter::API::Trait::ApiMethods', 'Twitter object');
 isa_ok($spread_revolutionary_date->targets->{mastodon}, 'App::SpreadRevolutionaryDate::Target::Mastodon', 'Mastodon class constructor');
@@ -21,7 +23,8 @@ isa_ok($spread_revolutionary_date->targets->{freenode}->obj, 'App::SpreadRevolut
 isa_ok($spread_revolutionary_date->targets->{liberachat}, 'App::SpreadRevolutionaryDate::Target::Liberachat', 'Liberachat class constructor');
 isa_ok($spread_revolutionary_date->targets->{liberachat}->obj, 'App::SpreadRevolutionaryDate::Target::Liberachat::Bot', 'Liberachat object');
 
-my $client = $spread_revolutionary_date->targets->{twitter}->obj;
+ok(!$spread_revolutionary_date->targets->{bluesky}->obj->{did}, 'Bluesky no connection with fake credentials');
+
 eval { $spread_revolutionary_date->targets->{twitter}->obj->verify_credentials };
 like($@, qr/^Invalid or expired token./, 'Twitter no connection with fake credentials');
 
@@ -31,6 +34,11 @@ like($@, qr/^Could not complete request: (?:500 Can't connect to Instance|599 In
 __DATA__
 
 test
+
+[bluesky]
+# Get these values from https://bsky.app/
+identifier = 'Identifier'
+password   = 'Password'
 
 [twitter]
 # Get these values from https://apps.twitter.com/
