@@ -8,7 +8,6 @@ BEGIN {
 
 # PODNAME: spread-revolutionary-date
 # ABSTRACT: Spread date and time from Revolutionary (Republican) Calendar
-
 use App::SpreadRevolutionaryDate;
 App::SpreadRevolutionaryDate->new->spread;
 

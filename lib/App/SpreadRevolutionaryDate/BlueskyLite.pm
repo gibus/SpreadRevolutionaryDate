@@ -1,7 +1,16 @@
+#
+# This file is part of App-SpreadRevolutionaryDate
+#
+# This software is Copyright (c) 2019-2024 by Gérald Sédrati.
+#
+# This is free software, licensed under:
+#
+#   The GNU General Public License, Version 3, June 2007
+#
 use 5.014;
 use utf8;
 package App::SpreadRevolutionaryDate::BlueskyLite;
-
+$App::SpreadRevolutionaryDate::BlueskyLite::VERSION = '0.34';
 # ABSTRACT: .
 
 use LWP::UserAgent;
@@ -67,9 +76,7 @@ Creates a Bluesky post.
 sub create_post {
   my ($self, $text) = @_;
 
-  # parse text for URIs and mentions
   my $facets = $self->_generate_facets($text);
-  # build JSON and post to com.atproto.repo.createRecord endpoint
   my $json = encode_json({
     repo => $self->{did},
     collection => 'app.bsky.feed.post',
