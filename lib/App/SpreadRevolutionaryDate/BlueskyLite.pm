@@ -101,7 +101,8 @@ sub _generate_facets {
   my $pos = 0;
   foreach my $w (split /\s+/, $text) {
     my ($type, $attrib, $val);
-    $w =~ s/[\.,:;'"!\?]+$//;
+    $w =~ s/[.,:;'"!\?()]+$//;
+    $w =~ s/^[.,:;'"!\?()]+//g;
     if ($w =~ /^https?\:\/\//) {
       $type = 'app.bsky.richtext.facet#link';
       $attrib = 'uri';
