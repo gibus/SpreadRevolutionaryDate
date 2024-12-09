@@ -37,7 +37,7 @@ Any class consuming this role is required to implement a C<spread> method, which
 
 If the target needs authentication, it can be carried out in the constructor (with L<Moose> C<BUILDARGS> or C<BUILD>) or in the implementation of the C<spread> method, obviously before actually spreading the message.
 
-There is a L<Bluesky|https://metacpan.org/pod/Bluesky> Perl module on CPAN that would have been the best choice of C<worker> for L<Bluesky|https://bsky.app/>. But it needs at least Perl v5.40.0, which is a requirement that most Perl installations does not meet yet. So we've included a very simple C<worker> L<App::SpreadRevolutionaryDate::BlueskyLite> in this distribution. It does not intend to extensively cover Blusky nor At (the protocol Bluesky is based on), just a way to connect and post a message to Bluesky.
+There is a L<Bluesky|https://metacpan.org/pod/Bluesky> Perl module on CPAN that would have been the best choice of C<worker> for L<Bluesky|https://bsky.app/>. But it needs at least Perl v5.40.0, which is a requirement that most Perl installations does not meet yet. So we've included a very simple C<worker> L<App::SpreadRevolutionaryDate::BlueskyLite> in this distribution, based on L<post|https://betterprogramming.pub/building-a-perl-module-for-posting-to-bluesky-social-92fc732fc297> by William Shunn. It does not intend to extensively cover Blusky nor At (the protocol Bluesky is based on), just a way to connect and post a message to Bluesky.
 
 =head1 SEE ALSO
 
