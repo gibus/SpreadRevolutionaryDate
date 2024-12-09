@@ -1,6 +1,11 @@
 Changelog for App-SpreadRevolutionaryDate
 
-0.35 2024-12-08T22:30:42
+0.36 2024-12-09T12:58:34
+ - Fix some docs
+ - Better use utf8::encode for detection of the position of an url for
+   Bluesky in bytes, bytes pragama is only for debugging
+
+0.35 2024-12-08T22:30:42Z
  - Fix detection of the position of an url for Bluesky in bytes
  - Fix detection of url starting with punctuation
 
