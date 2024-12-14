@@ -40,19 +40,19 @@ sub _fetch_embed_url_card {
   my $content = $response->content;
   return unless $content;
 
-  if ($content =~ /<meta property="og:title" content="([^"]+)"/) {
+  if ($content =~ /<meta\s+property="og:title"\s+content="([^"]+)"/) {
     my $title = $1;
     ($card->{title}) = decode_utf8($title);
   } else {
     $card->{title} = '';
   }
-  if ($content =~ /<meta property="og:description" content="([^"]+)"/) {
+  if ($content =~ /<meta\s+property="og:description"\s+content="([^"]+)"/) {
     my $description = $1;
     ($card->{description}) = decode_utf8($description);
   } else {
     $card->{description} = '';
   }
-  if ($content =~ /<meta property="og:image" content="([^"]+)"/) {
+  if ($content =~ /<meta\s+property="og:image"\s+content="([^"]+)"/) {
     my $img_url = $1;
     unless ($img_url =~ m!://!) {
       $url = "$url/" unless $url =~ m!/$!;
