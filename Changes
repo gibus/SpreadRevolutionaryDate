@@ -1,6 +1,10 @@
 Changelog for App-SpreadRevolutionaryDate
 
-0.36 2024-12-09T12:58:34
+0.37 2024-12-14T14:45:52
+ - Process mentions in posts to bluesky
+ - Post website card embed to bluesky if url is posted
+
+0.36 2024-12-09T12:58:34Z
  - Fix some docs
  - Better use utf8::encode for detection of the position of an url for
    Bluesky in bytes, bytes pragama is only for debugging
