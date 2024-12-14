@@ -1,6 +1,9 @@
 Changelog for App-SpreadRevolutionaryDate
 
-0.37 2024-12-14T14:45:52
+0.38 2024-12-14T15:09:51
+ - Fix og:* detection for website cards
+
+0.37 2024-12-14T14:45:52Z
  - Process mentions in posts to bluesky
  - Post website card embed to bluesky if url is posted
 
