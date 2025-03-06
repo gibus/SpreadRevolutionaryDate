@@ -35,7 +35,7 @@ requires 'compute';
 
 This role defines the interface for any class that makes a message to be spread by L<App::SpreadRevolutionaryDate>.
 
-Any class consuming this role is required to implement a C<compute> method, which is called with no parameters, and should return the message to be spread as a string.
+Any class consuming this role is required to implement a C<compute> method, which is called with no parameters, and should return an array with the message to be spread as a string, and optionally a hash with C<path> key valued by the path to an image file, and C<alt> key valued by alternative text for this image. If there is no image to be spread, return only the message and C<undef>.
 
 This role provides a C<locale> required attribute (defaults to C<'fr'>), which holds the language, defined in language code of L<ISO 639-1 alpha-2|https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes>. Consuming classes are then free to use this C<locale> attribute to localize the message they compute.
 

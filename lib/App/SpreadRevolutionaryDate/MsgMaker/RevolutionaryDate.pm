@@ -71,7 +71,7 @@ sub compute {
     $msg .= ' https://' . $self->locale . '.wikipedia.org/wiki/' . uri_escape_utf8($entry);
   }
 
-  return $msg
+  return ($msg, undef);
 }
 
 =head1 SEE ALSO

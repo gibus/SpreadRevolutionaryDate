@@ -84,9 +84,9 @@ Spreads calendar date to configured targets. Takes no argument.
 sub spread {
   my $self = shift;
 
-  my $msg = $self->msgmaker->compute();
+  my ($msg, $img) = $self->msgmaker->compute();
   foreach my $target (@{$self->config->targets}) {
-    $self->targets->{$target}->spread($msg, $self->config->test);
+    $self->targets->{$target}->spread($msg, $self->config->test, $img);
   }
 }
 

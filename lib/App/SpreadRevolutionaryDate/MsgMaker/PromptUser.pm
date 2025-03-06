@@ -73,7 +73,7 @@ sub compute {
     );
   }
   die "$abort\n" unless defined $confirm && $confirm =~ qr($confirm_ok);
-  return $msg;
+  return ($msg, undef);
 }
 
 =head1 SEE ALSO
