@@ -41,6 +41,7 @@ lib/LocaleData/en/LC_MESSAGES/App-SpreadRevolutionaryDate.mo
 lib/LocaleData/es/LC_MESSAGES/App-SpreadRevolutionaryDate.mo
 lib/LocaleData/fr/LC_MESSAGES/App-SpreadRevolutionaryDate.mo
 lib/LocaleData/it/LC_MESSAGES/App-SpreadRevolutionaryDate.mo
+share/images/groucha.png
 t/00-compile.t
 t/bluesky.t
 t/command_line.t

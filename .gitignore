@@ -38,3 +38,6 @@ inc/
 
 # Locale::TextDomain
 /LocaleData/
+
+# Images
+lib/auto
