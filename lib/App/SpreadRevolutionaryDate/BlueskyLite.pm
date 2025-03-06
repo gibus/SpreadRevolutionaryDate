@@ -9,6 +9,8 @@ use DateTime;
 use JSON qw(encode_json decode_json);
 use URI;
 use Encode qw(decode_utf8);
+use File::Type;
+use File::Basename;
 
 use namespace::autoclean;
 
@@ -179,7 +181,7 @@ Creates a Bluesky post.
 =cut
 
 sub create_post {
-  my ($self, $text) = @_;
+  my ($self, $text, $img) = @_;
 
   my ($facets, $embed) = $self->_generate_facets($text);
   my $json = encode_json({
@@ -195,6 +197,48 @@ sub create_post {
       createdAt => DateTime->now->iso8601 . 'Z',
     },
   });
+
+  if ($img) {
+    $img = {path => $img} unless ref($img) && ref($img) eq 'HASH' && $img->{path};
+    my $ft = File::Type->new();
+    my $mime_type = $ft->mime_type($img->{path});
+
+    my $img_alt = $img->{alt} // ucfirst(fileparse($img->{path}, qr/\.[^.]*/));
+
+    my $img_bytes;
+    open my $fh, '<', $img->{path} or die "Cannot read $img->{path}: $!\n";
+    {
+        local $/;
+        $img_bytes = <$fh>;
+    }
+    close $fh;
+
+    my $blob_req = HTTP::Request->new('POST', 'https://bsky.social/xrpc/com.atproto.repo.uploadBlob');
+    $blob_req->header('Content-Type' => $mime_type);
+    $blob_req->content($img_bytes);
+    my $blob_response = $self->{ua}->request($blob_req);
+    return unless $blob_response->is_success;
+
+    my $blob_content = decode_json($blob_response->decoded_content);
+    $json = encode_json({
+      repo => $self->{did},
+      collection => 'app.bsky.feed.post',
+      record => {
+        text => $text,
+        embed => {
+          '$type'    => 'app.bsky.embed.images',
+          images => [
+            {
+              alt => $img_alt,
+              image => $blob_content->{blob},
+            },
+          ],
+        },
+        createdAt => DateTime->now->iso8601 . 'Z',
+      },
+    });
+  }
+
   my $req = HTTP::Request->new('POST', 'https://bsky.social/xrpc/com.atproto.repo.createRecord');
   $req->header('Content-Type' => 'application/json');
   $req->content($json);

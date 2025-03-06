@@ -50,7 +50,7 @@ Spreads a message to Bluesky. Takes one mandatory argument: C<$msg> which should
 =cut
 
 sub spread {
-  my ($self, $msg, $test) = @_;
+  my ($self, $msg, $test, $img) = @_;
   $test //= 0;
 
   # Multiline message
@@ -58,6 +58,10 @@ sub spread {
 
   if ($test) {
     $msg = __("Spread on Bluesky: ") . $msg;
+
+    if ($img) {
+      $msg .= " with image path: " . $img->{path} . " , alt: " . $img->{alt};
+    }
 
     use open qw(:std :encoding(UTF-8));
     use IO::Handle;
@@ -69,7 +73,7 @@ sub spread {
 
     $io->say($msg);
   } else {
-    $self->obj->create_post($msg);
+    $self->obj->create_post($msg, $img);
   }
 }
 
