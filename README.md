@@ -90,30 +90,6 @@ This option can only be specified once, with a value as string. Spreads with cho
 
 This boolean option takes no value, either it is defined or not. If defined, do not actually spread the revolutionary date, just print it on standard output for Bluesky, Twitter and Mastodon, and send it on configured test channels for Freenode and Liberachat (see ["test\_channels"](#test_channels) below).
 
-### _DEPRECATED_ acab
-
-This option is _deprecated_ starting from version 0.09 of this distribution and may be removed in future release. Please use ["acab"](#acab) option in `[revolutionarydate]` section, as described below.
-
-### _DEPRECATED_ bluesky
-
-This option is _deprecated_ starting from version 0.07 of this distribution and may be removed in future release. Please use ["targets"](#targets) option, as described above. Spreads on Bluesky explicitly. If none of the `bluesky`, `twitter`, `mastodon`, `freenode`, `liberachat` option is set, the revolutionary date is spread on all of these five targets.
-
-### _DEPRECATED_ twitter
-
-This option is _deprecated_ starting from version 0.07 of this distribution and may be removed in future release. Please use ["targets"](#targets) option, as described above. Spreads on Twitter explicitly. If none of the `bluesky`, `twitter`, `mastodon`, `freenode`, `liberachat` option is set, the revolutionary date is spread on all of these five targets.
-
-### _DEPRECATED_ mastodon
-
-This option is _deprecated_ starting from version 0.07 of this distribution and may be removed in future release. Please use ["targets"](#targets) option, as described above. Spreads on Mastodon explicitly. If none of the `bluesky`, `twitter`, `mastodon`, `freenode`, `liberachat` option is set, the revolutionary date is spread on all of these five targets.
-
-### _DEPRECATED_ freenode
-
-This option is _deprecated_ starting from version 0.07 of this distribution and may be removed in future release. Please use ["targets"](#targets) option, as described above. Spreads on Freenode explicitly. If none of the `twitter`, `mastodon`, `freenode`, `liberachat` option is set, the revolutionary date is spread on all of these five targets.
-
-### _DEPRECATED_ liberachat
-
-This option is _deprecated_ starting from version 0.07 of this distribution and may be removed in future release. Please use ["targets"](#targets) option, as described above. Spreads on Liberachat explicitly. If none of the `bluesky`, `twitter`, `mastodon`, `freenode`, `liberachat` option is set, the revolutionary date is spread on all of these five targets.
-
 ## Bluesky options
 
 These options are credentials for `spread-revolutionary-date` to spread on a Bluesky account. You have to get them from your [Bluesky account](https://bsky.app/). They should be defined in the `[bluesky]` section of the configuration file.
@@ -261,30 +237,6 @@ Same as ["locale"](#locale) configuration option above.
 ### --test | --no | -n
 
 Same as ["test"](#test) configuration option above.
-
-### _DEPRECATED_ --acab | -a
-
-Same as ["acab"](#acab) configuration option above.
-
-### _DEPRECATED_ --bluesky | -b
-
-Same as ["DEPRECATED bluesky"](#deprecated-bluesky) configuration option above.
-
-### _DEPRECATED_ --twitter | -t
-
-Same as ["DEPRECATED twitter"](#deprecated-twitter) configuration option above.
-
-### _DEPRECATED_ --mastodon | -m
-
-Same as ["DEPRECATED mastodon"](#deprecated-mastodon) configuration option above.
-
-### _DEPRECATED_ --freenode | -f
-
-Same as ["DEPRECATED freenode"](#deprecated-freenode) configuration option above.
-
-### _DEPRECATED_ --liberachat | -lt
-
-Same as ["DEPRECATED liberachat"](#deprecated-liberachat) configuration option above.
 
 ## Bluesky parameters
 

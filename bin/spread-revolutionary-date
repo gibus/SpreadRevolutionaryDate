@@ -99,30 +99,6 @@ This option can only be specified once, with a value as string. Spreads with cho
 
 This boolean option takes no value, either it is defined or not. If defined, do not actually spread the revolutionary date, just print it on standard output for Bluesky, Twitter and Mastodon, and send it on configured test channels for Freenode and Liberachat (see L</"test_channels"> below).
 
-=head3 I<DEPRECATED> acab
-
-This option is I<deprecated> starting from version 0.09 of this distribution and may be removed in future release. Please use L</acab> option in C<[revolutionarydate]> section, as described below.
-
-=head3 I<DEPRECATED> bluesky
-
-This option is I<deprecated> starting from version 0.07 of this distribution and may be removed in future release. Please use L</targets> option, as described above. Spreads on Bluesky explicitly. If none of the C<bluesky>, C<twitter>, C<mastodon>, C<freenode>, C<liberachat> option is set, the revolutionary date is spread on all of these five targets.
-
-=head3 I<DEPRECATED> twitter
-
-This option is I<deprecated> starting from version 0.07 of this distribution and may be removed in future release. Please use L</targets> option, as described above. Spreads on Twitter explicitly. If none of the C<bluesky>, C<twitter>, C<mastodon>, C<freenode>, C<liberachat> option is set, the revolutionary date is spread on all of these five targets.
-
-=head3 I<DEPRECATED> mastodon
-
-This option is I<deprecated> starting from version 0.07 of this distribution and may be removed in future release. Please use L</targets> option, as described above. Spreads on Mastodon explicitly. If none of the C<bluesky>, C<twitter>, C<mastodon>, C<freenode>, C<liberachat> option is set, the revolutionary date is spread on all of these five targets.
-
-=head3 I<DEPRECATED> freenode
-
-This option is I<deprecated> starting from version 0.07 of this distribution and may be removed in future release. Please use L</targets> option, as described above. Spreads on Freenode explicitly. If none of the C<twitter>, C<mastodon>, C<freenode>, C<liberachat> option is set, the revolutionary date is spread on all of these five targets.
-
-=head3 I<DEPRECATED> liberachat
-
-This option is I<deprecated> starting from version 0.07 of this distribution and may be removed in future release. Please use L</targets> option, as described above. Spreads on Liberachat explicitly. If none of the C<bluesky>, C<twitter>, C<mastodon>, C<freenode>, C<liberachat> option is set, the revolutionary date is spread on all of these five targets.
-
 =head2 Bluesky options
 
 These options are credentials for C<spread-revolutionary-date> to spread on a Bluesky account. You have to get them from your L<Bluesky account|https://bsky.app/>. They should be defined in the C<[bluesky]> section of the configuration file.
@@ -270,30 +246,6 @@ Same as L</locale> configuration option above.
 =head3 --test | --no | -n
 
 Same as L</test> configuration option above.
-
-=head3 I<DEPRECATED> --acab | -a
-
-Same as L</acab> configuration option above.
-
-=head3 I<DEPRECATED> --bluesky | -b
-
-Same as L</"DEPRECATED bluesky"> configuration option above.
-
-=head3 I<DEPRECATED> --twitter | -t
-
-Same as L</"DEPRECATED twitter"> configuration option above.
-
-=head3 I<DEPRECATED> --mastodon | -m
-
-Same as L</"DEPRECATED mastodon"> configuration option above.
-
-=head3 I<DEPRECATED> --freenode | -f
-
-Same as L</"DEPRECATED freenode"> configuration option above.
-
-=head3 I<DEPRECATED> --liberachat | -lt
-
-Same as L</"DEPRECATED liberachat"> configuration option above.
 
 =head2 Bluesky parameters
 
