@@ -53,12 +53,12 @@ The revolutionary date and time is computed thanks to the [DateTime::Calendar::F
     # Prompt user for a message to spread to mastodon
     $ spread-revolutionary-date \
         --targets mastodon \
-        --msgwriter UserPrompt
+        --msgmaker UserPrompt
 
     # Spread message as command line parameter to
     # Bluesky, Twitter, Mastodon, Freenode and Liberachat
     $ spread-revolutionary-date \
-        --msgwriter UserPrompt \
+        --msgmaker UserPrompt \
         --promptuser_default \
           'This is my message to the world'
 
