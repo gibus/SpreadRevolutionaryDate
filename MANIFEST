@@ -51,6 +51,7 @@ t/mastodon.t
 t/new_target.t
 t/objects.t
 t/promptuser.t
+t/telechat.t
 t/twitter.t
 t/wikipedia.t
 xt/authentication.t
