@@ -83,6 +83,8 @@ This role provides a C<locale> required attribute (defaults to C<'fr'>), which h
 
 =item L<App::SpreadRevolutionaryDate::MsgMaker::PromptUser>
 
+=item L<App::SpreadRevolutionaryDate::MsgMaker::Telechat>
+
 =back
 
 =cut

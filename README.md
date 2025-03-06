@@ -62,6 +62,12 @@ The revolutionary date and time is computed thanks to the [DateTime::Calendar::F
         --promptuser_default \
           'This is my message to the world'
 
+    # Spread Téléchat date of the day on Mastodon and BlueSky
+    $ spread-revolutionary-date \
+        --msgmaker Telechat \
+        --targets mastodon \
+        --targets bluesky \
+
 # CONFIGURATION
 
 Once again: you **have to** configure `spread-revolutionary-date` with credentials for registered account on each of the desired targets, so it can spread the revolutionary date on behalf of these accounts.
@@ -80,7 +86,7 @@ This option can be specified multiple times, with values as strings. It explicit
 
 ### msgmaker
 
-This option can only be specified once, with a value as string. Spreads a message computed by the class defined by the value of this option, defaults to `RevolutionaryDate`. The `Value` (case sensitive) of this option should correspond to an existing `App::SpreadRevolutionaryDate::MsgMaker::Value` class consuming [App::SpreadRevolutionaryDate::MsgMaker](https://metacpan.org/pod/App::SpreadRevolutionaryDate::MsgMaker) role. Message makers values pre-defined in this distribution are `RevolutionaryDate`, which spreads the revolutionary date, and `PromptUser`, which prompts the user for the message to be spread (with confirmation). See ["EXTENDING TO NEW MESSAGE MAKERS"](#extending-to-new-message-makers) for details on using a new value for this option.
+This option can only be specified once, with a value as string. Spreads a message computed by the class defined by the value of this option, defaults to `RevolutionaryDate`. The `Value` (case sensitive) of this option should correspond to an existing `App::SpreadRevolutionaryDate::MsgMaker::Value` class consuming [App::SpreadRevolutionaryDate::MsgMaker](https://metacpan.org/pod/App::SpreadRevolutionaryDate::MsgMaker) role. Message makers values pre-defined in this distribution are `RevolutionaryDate`, which spreads the revolutionary date, `PromptUser`, which prompts the user for the message to be spread (with confirmation), and `Telechat`, which spreads the date of the day similar to the Belgian-French TV show 'Téléchat" on the 1980's. See ["EXTENDING TO NEW MESSAGE MAKERS"](#extending-to-new-message-makers) for details on using a new value for this option.
 
 ### locale
 
@@ -370,7 +376,7 @@ Such a message maker class is actually just a wrapper. Usually a message maker h
 
 If your new message maker class needs specific parameters (other than `locale`, which comes with  [App::SpreadRevolutionaryDate::MsgMaker](https://metacpan.org/pod/App::SpreadRevolutionaryDate::MsgMaker) role), they should be defined as attributes of this class. Values for such attributes should be set in the [configuration file](#configuration), inside a section named after the message maker in lower case (`[mymsgmaker]`), or as [command line parameters](#command-line-parameters) prefixed with the name of the message maker in lower case, followed by an underscore (`--mytarget_myparam`).
 
-Have a look to the [App::SpreadRevolutionaryDate::MsgMaker::PromptUser](https://metacpan.org/pod/App::SpreadRevolutionaryDate::MsgMaker::PromptUser) class, it shows a simple example on how to extend `spread-revolutionary-date` to a new message maker.
+Have a look to [App::SpreadRevolutionaryDate::MsgMaker::PromptUser](https://metacpan.org/pod/App::SpreadRevolutionaryDate::MsgMaker::PromptUser) or [App::SpreadRevolutionaryDate::MsgMaker::Telechat](https://metacpan.org/pod/App::SpreadRevolutionaryDate::MsgMaker::Telechat) classes, it shows simple examples on how to extend `spread-revolutionary-date` to a new message maker.
 
 # INTERNATIONALIZATION AND LOCALIZATION
 

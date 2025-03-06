@@ -120,6 +120,8 @@ sub compute {
 
 =item L<App::SpreadRevolutionaryDate::MsgMaker::RevolutionaryDate::Locale::es>
 
+=item L<App::SpreadRevolutionaryDate::MsgMaker::Telechat>
+
 =back
 
 =cut

@@ -59,6 +59,12 @@ __END__
       --promptuser_default \
         'This is my message to the world'
 
+  # Spread Téléchat date of the day on Mastodon and BlueSky
+  $ spread-revolutionary-date \
+      --msgmaker Telechat \
+      --targets mastodon \
+      --targets bluesky \
+
 =head1 DESCRIPTION
 
 C<spread-revolutionary-date> is a L<Free Software|https://www.gnu.org/philosophy/free-sw.html> that spreads the current date, expressed in the L<French Revolutionary calendar|https://en.wikipedia.org/wiki/French_Republican_calendar>, to various social networks: L<Bluesky|https://bsky.app/>, L<Twitter|https://twitter.com/>, L<Mastodon|https://mastodon.social/>, the L<Freenode|https://freenode.net/> and L<Liberachat|https://libera.chat/> Internet Relay Chat networks.
@@ -89,7 +95,7 @@ This option can be specified multiple times, with values as strings. It explicit
 
 =head3 msgmaker
 
-This option can only be specified once, with a value as string. Spreads a message computed by the class defined by the value of this option, defaults to C<RevolutionaryDate>. The C<Value> (case sensitive) of this option should correspond to an existing C<App::SpreadRevolutionaryDate::MsgMaker::Value> class consuming L<App::SpreadRevolutionaryDate::MsgMaker> role. Message makers values pre-defined in this distribution are C<RevolutionaryDate>, which spreads the revolutionary date, and C<PromptUser>, which prompts the user for the message to be spread (with confirmation). See L</"EXTENDING TO NEW MESSAGE MAKERS"> for details on using a new value for this option.
+This option can only be specified once, with a value as string. Spreads a message computed by the class defined by the value of this option, defaults to C<RevolutionaryDate>. The C<Value> (case sensitive) of this option should correspond to an existing C<App::SpreadRevolutionaryDate::MsgMaker::Value> class consuming L<App::SpreadRevolutionaryDate::MsgMaker> role. Message makers values pre-defined in this distribution are C<RevolutionaryDate>, which spreads the revolutionary date, C<PromptUser>, which prompts the user for the message to be spread (with confirmation), and C<Telechat>, which spreads the date of the day similar to the Belgian-French TV show 'Téléchat" on the 1980's. See L</"EXTENDING TO NEW MESSAGE MAKERS"> for details on using a new value for this option.
 
 =head3 locale
 
@@ -379,7 +385,7 @@ Such a message maker class is actually just a wrapper. Usually a message maker h
 
 If your new message maker class needs specific parameters (other than C<locale>, which comes with  L<App::SpreadRevolutionaryDate::MsgMaker> role), they should be defined as attributes of this class. Values for such attributes should be set in the L<configuration file|/CONFIGURATION>, inside a section named after the message maker in lower case (C<[mymsgmaker]>), or as L<command line parameters|/"COMMAND LINE PARAMETERS"> prefixed with the name of the message maker in lower case, followed by an underscore (C<--mytarget_myparam>).
 
-Have a look to the L<App::SpreadRevolutionaryDate::MsgMaker::PromptUser> class, it shows a simple example on how to extend C<spread-revolutionary-date> to a new message maker.
+Have a look to L<App::SpreadRevolutionaryDate::MsgMaker::PromptUser> or L<App::SpreadRevolutionaryDate::MsgMaker::Telechat> classes, it shows simple examples on how to extend C<spread-revolutionary-date> to a new message maker.
 
 =head1 INTERNATIONALIZATION AND LOCALIZATION
 

@@ -251,6 +251,8 @@ Default for this attribute should be a hash reference, keyed by numbers of month
 
 =item L<App::SpreadRevolutionaryDate::MsgMaker::PromptUser>
 
+=item L<App::SpreadRevolutionaryDate::MsgMaker::Telechat>
+
 =back
 
 =cut
