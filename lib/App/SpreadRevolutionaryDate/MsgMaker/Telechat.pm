@@ -406,7 +406,7 @@ sub compute {
   );
   my @telechat_days = ('Lourdi', 'Pardi', 'Morquidi', 'Jourdi', 'Dendrevi', 'Sordi', 'Mitanche');
 
-  my $today = DateTime->now;
+  my $today = DateTime->now(time_zone => 'Europe/Paris');
   my $day_name = $telechat_days[$today->day_of_week_0];
   my $feast = $telechat_calendar{sprintf("%02d", $today->day).sprintf("%02d", $today->month)};
   my $feast_gender = $feast->[2] eq 'm' ? 'Saint' : 'Sainte';
