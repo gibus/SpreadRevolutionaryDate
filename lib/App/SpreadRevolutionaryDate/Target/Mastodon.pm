@@ -86,7 +86,7 @@ sub spread {
     $msg = encode('UTF-8', $msg) if is_utf8($msg);
     $io->say($msg);
   } else {
-    my $params;
+    my $params = {};
     if ($img) {
       $img = {path => $img} unless ref($img) && ref($img) eq 'HASH' && $img->{path};
       my $img_alt = $img->{alt} // ucfirst(fileparse($img->{path}, qr/\.[^.]*/));
