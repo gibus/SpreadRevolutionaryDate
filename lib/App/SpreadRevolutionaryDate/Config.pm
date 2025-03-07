@@ -69,9 +69,13 @@ sub new {
                                       'mastodon' => {ARGCOUNT => ARGCOUNT_NONE, ALIAS => 'm'},
                                       'freenode' => {ARGCOUNT => ARGCOUNT_NONE, ALIAS => 'f'},
                                       'liberachat' => {ARGCOUNT => ARGCOUNT_NONE, ALIAS => 'lt'});
-  $config_targets->parse_file($filename);
   # Rewind command line arguments and process them
   @ARGV = @orig_argv;
+  $config_targets->parse_file($filename);
+
+  # Record targets in configuration file to be bypassed if defined in command line arguments
+  my @config_file_targets =  @{$config_targets->targets};
+
   $config_targets->parse_command_line;
 
   # Add targets defined with targets option
@@ -96,6 +100,9 @@ sub new {
     $config_targets->mastodon(1);
     $config_targets->freenode(1);
     $config_targets->liberachat(1);
+  }
+  if (scalar @targets > scalar @config_file_targets) {
+    @targets = splice @targets, scalar @config_file_targets - scalar @targets, scalar @targets;
   }
 
   # Guess attributes for each target associated class

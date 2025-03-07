@@ -9,6 +9,7 @@ with 'App::SpreadRevolutionaryDate::Target'
   => {worker => 'App::SpreadRevolutionaryDate::BlueskyLite'};
 
 use App::SpreadRevolutionaryDate::BlueskyLite;
+use Encode qw(encode decode is_utf8);
 
 use Locale::TextDomain 'App-SpreadRevolutionaryDate';
 use namespace::autoclean;
@@ -68,7 +69,6 @@ sub spread {
     my $io = IO::Handle->new;
     $io->fdopen(fileno(STDOUT), "w");
 
-    use Encode qw(encode decode is_utf8);
     $msg = encode('UTF-8', $msg) if is_utf8($msg);
 
     $io->say($msg);
