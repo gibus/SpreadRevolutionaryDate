@@ -184,6 +184,9 @@ sub new {
     'liberachat_channels' => {ARGCOUNT => ARGCOUNT_LIST, ALIAS => 'lc'},
     'revolutionarydate_acab' => {ARGCOUNT => ARGCOUNT_NONE, ALIAS => 'ra'},
     'promptuser_default' => {ARGCOUNT => ARGCOUNT_ONE, ALIAS => 'pud'},
+    'promptuser_img_path' => {ARGCOUNT => ARGCOUNT_ONE, ALIAS => 'pui'},
+    'promptuser_img_alt' => {ARGCOUNT => ARGCOUNT_ONE, ALIAS => 'pua'},
+    'promptuser_img_url' => {ARGCOUNT => ARGCOUNT_ONE, ALIAS => 'puu'},
   );
 
   # Rewind configuration file if needed and read it
@@ -385,6 +388,9 @@ Usage: $0 <OPTIONS>
     --liberachat_channels|-lc <channel_1>  [--liberachat_channels|-lc <channel_2> […--liberachat_channels|-lc <channel_n>]]: define Liberachat test channels
     --revolutionarydate_acab | -ra: pretend it is 01:31:20 (default: false)
     --promptuser_default|-pud <msg>: define default message when --msgmaker=PromptUser (default: 'Goodbye old world, hello revolutionary worlds')
+    --promptuser_img_path|-pui <path/to/image/file>: define image file path when --msgmaker=PromptUser
+    --promptuser_img_alt|-pui <alternative text>: define image alternative text when --msgmaker=PromptUser
+    --promptuser_img_url|-pui <img_url>: define image external url when --msgmaker=PromptUser
 USAGE
  exit 0;
 }
