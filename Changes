@@ -1,6 +1,11 @@
 Changelog for App-SpreadRevolutionaryDate
 
-0.39 2025-03-06T21:59:36
+0.40 2025-03-07T09:23:46
+ - Update copyright year
+ - Fix error when param is undef for Mastodon::Client::post_status()
+ - Set timezone when computing Telechat date
+
+0.39 2025-03-06T21:59:36Z
  - Add documentaion for targets that can spread an image
  - Add test for Telechat message maker
  - Add image for Telechat message maker
