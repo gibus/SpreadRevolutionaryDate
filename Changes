@@ -1,6 +1,11 @@
 Changelog for App-SpreadRevolutionaryDate
 
-0.41 2025-03-07T13:47:56
+0.42 2025-03-07T16:02:59
+ - Command line arguments for targets should override configuration
+   parameters for targets
+ - Remove encoding block raising errors ith UTF8 command line arguments
+
+0.41 2025-03-07T13:47:56Z
  - Document options to PromptUser msgmaker to send image on local disk or
    from the web
  - Setup options to PromptUser msgmaker to send image on local disk or from
