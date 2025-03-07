@@ -33,40 +33,64 @@ The revolutionary date and time is computed thanks to the [DateTime::Calendar::F
 
     # Test spreading to Mastodon only:
     $ spread-revolutionary-date \
-        --targets mastodon --test
+        --targets=mastodon --test
 
     # Test spreading to Twitter only in English:
     $ spread-revolutionary-date \
-        --targets twitter \
+        --targets=twitter \
         --test \
         --locale en
 
     # Spread acab time to Twitter and Liberachat
     # explicit channels
     $ spread-revolutionary-date \
-        --targets twitter \
-        --targets liberachat \
-        --liberachat_channels '#revolution' \
-        --liberachat_channels '#acab' \
+        --targets=twitter \
+        --targets=liberachat \
+        --liberachat_channels='#revolution' \
+        --liberachat_channels='#acab' \
         --revolutionarydate_acab
 
     # Prompt user for a message to spread to mastodon
     $ spread-revolutionary-date \
-        --targets mastodon \
-        --msgmaker UserPrompt
+        --targets=mastodon \
+        --msgmaker=UserPrompt
 
     # Spread message as command line parameter to
     # Bluesky, Twitter, Mastodon, Freenode and Liberachat
     $ spread-revolutionary-date \
-        --msgmaker UserPrompt \
+        --msgmaker=UserPrompt \
+        --promptuser_default \
+
+    # Spread message and image as command line parameter to
+    # Mastodon and Bluesky
+    $ spread-revolutionary-date \
+        --msgmaker=UserPrompt \
+        --targets=mastodon \
+        --targets=bluesky \
         --promptuser_default \
           'This is my message to the world'
+        --promptuser_img_path= \
+          /my/path/to/image.png
+        --promptuser_img_alt= \
+          'Alternative text for image'
+
+    # Spread message and image form web as command line parameter to
+    # Mastodon and Bluesky
+    $ spread-revolutionary-date \
+        --msgmaker=UserPrompt \
+        --targets=mastodon \
+        --targets=bluesky \
+        --promptuser_default \
+          'This is my message to the world'
+        --promptuser_img_url= \
+          'https://example.com/imgs/my_image.jgp'
+        --promptuser_img_alt \
 
     # Spread Téléchat date of the day on Mastodon and BlueSky
     $ spread-revolutionary-date \
-        --msgmaker Telechat \
-        --targets mastodon \
-        --targets bluesky \
+        --msgmaker=Telechat \
+        --targets=mastodon \
+        --targets=bluesky \
 
 # CONFIGURATION
 
@@ -207,6 +231,18 @@ If ["msgmaker"](#msgmaker) option is `PromptUser`, instead of spreading the revo
 ### default
 
 This option can only be specified once, with a value as string. If `default` option is set, the user is not prompted and this default message is spread. If `default` option is not defined, the default message is `'Goodbye old world, hello revolutionary worlds'` if the user enters nothing when prompted. The `default` option should be defined in the `[promptuser]` section of the configuration file. It is only used if ["msgmaker"](#msgmaker) option is `PromptUser`.
+
+### img\_path
+
+This option can only be specified once, with a value as string valued by a path to an image file on local disk. The `img_path` option should be defined in the `[promptuser]` section of the configuration file. It is only used if ["msgmaker"](#msgmaker) option is `PromptUser`.
+
+### img\_alt
+
+This option can only be specified once, with a value as string valued by an alternative text to an image file specified by `img_path` or `img_url` options. The `img_alt` option should be defined in the `[promptuser]` section of the configuration file. It is only used if ["msgmaker"](#msgmaker) option is `PromptUser`.
+
+### img\_url
+
+This option can only be specified once, with a value as string valued by an external url to an image specified. The `img_url` option should be defined in the `[promptuser]` section of the configuration file. It is only used if ["msgmaker"](#msgmaker) option is `PromptUser`.
 
 # COMMAND LINE PARAMETERS
 
@@ -352,6 +388,18 @@ Same as ["wikipedia\_link"](#wikipedia_link) configuration option above.
 
 Same as ["default"](#default) configuration option above.
 
+### --promptuser\_img\_path &lt;path/to/image/file> | -pui &lt;/path/to/image/file>
+
+Same as ["img\_path"](#img_path) configuration option above.
+
+### --promptuser\_img\_alt &lt;alternative text> | -pud &lt;alternative text>
+
+Same as ["img\_alt"](#img_alt) configuration option above.
+
+### --promptuser\_default &lt;img\_url> | -pud &lt;img\_url>
+
+Same as ["img\_url"](#img_url) configuration option above.
+
 # EXTENDING TO NEW TARGETS
 
 Starting from version 0.07, this distribution takes advantage of [Moose](https://metacpan.org/pod/Moose), the postmodern object system for Perl 5, allowing to easily extend `spread-revolutionary-date` to other targets than the default ones (`Bluesky`, `Twitter`, `Mastondon`, `Freenode` and `Liberachat`.
@@ -366,7 +414,7 @@ To perform authentication and to post a message, there is a strong likelihood th
 
 Should you extend `spread-revolutionary-date` to a new target, we advise you to have a look on how default targets are implemented: [App::SpreadRevolutionaryDate::Target::Bluesky](https://metacpan.org/pod/App::SpreadRevolutionaryDate::Target::Bluesky) with [App::SpreadRevolutionaryDate::BlueskyLite](https://metacpan.org/pod/App::SpreadRevolutionaryDate::BlueskyLite) `worker`, [App::SpreadRevolutionaryDate::Target::Twitter](https://metacpan.org/pod/App::SpreadRevolutionaryDate::Target::Twitter) with [Twitter::API](https://metacpan.org/pod/Twitter::API) `worker`, [App::SpreadRevolutionaryDate::Target::Mastodon](https://metacpan.org/pod/App::SpreadRevolutionaryDate::Target::Mastodon) with [Mastodon::Client](https://metacpan.org/pod/Mastodon::Client) `worker`. The last two are using [OAuth2 protocol](https://oauth.net/2/) to perform authentication. The third and fourth default targets, `App::SpreadRevolutionaryDate::Target::Freenode` <App::SpreadRevolutionaryDate::Target::Liberachat>, uses a [chatbot](https://en.wikipedia.org/wiki/Chatbot): [App::SpreadRevolutionaryDate::Target::Freenode::Bot](https://metacpan.org/pod/App::SpreadRevolutionaryDate::Target::Freenode::Bot) [App::SpreadRevolutionaryDate::Target::Liberachat::Bot](https://metacpan.org/pod/App::SpreadRevolutionaryDate::Target::Liberachat::Bot) subclassing [Bot::BasicBot](https://metacpan.org/pod/Bot::BasicBot). You can also see a very simple example with a test file provided in this distribution at `t/new_target.t`, which just prints out the revolutionary date on the standard output using core module [IO::Handle](https://metacpan.org/pod/IO::Handle).
 
-Starting from version 0.39, you may have noticed that `Mastodon` and `Bluesky` targets can no spread not only a text message, but also an image (with alternative text). This is only used for now by `Telechat` message maker, to post an image of Groucha, the presenter of Téléchat. But it can be used by other message makers in the future, including `PromptUser`.
+Starting from version 0.39, you may have noticed that `Mastodon` and `Bluesky` targets can no spread not only a text message, but also an image (with alternative text). This is used by `Telechat` message maker, to post an image of Groucha, the presenter of Téléchat, and by `PromptUser` to send either an image file on local disk or an external image on the web.
 
 This feature is not available now for _IRC_ targets, `Liberachat` and `Freenode`, since theses targets are mostly for text messages.
 
