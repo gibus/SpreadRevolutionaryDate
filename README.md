@@ -214,7 +214,7 @@ Any command line parameter, other than the first three ones below, takes precede
 
 ## Command line only parameters
 
-### --conf | -c &lt;file>
+### --conf=&lt;file> | -c &lt;file>
 
 Use `<file>` path as configuration file, instead of the default ones, see ["CONFIGURATION"](#configuration) above.
 
@@ -228,15 +228,15 @@ Prints out help with command line parameters.
 
 ## General parameters
 
-### --targets | -tg &lt;target>
+### --targets=&lt;target> | -tg &lt;target>
 
 Same as ["targets"](#targets) configuration option above.
 
-### --msgmaker | -mm <MsgMakerClass>
+### --msgmaker=<MsgMakerClass> | -mm <MsgMakerClass>
 
 Same as ["msgmaker"](#msgmaker) configuration option above.
 
-### --locale | -l &lt;fr|en|it|es>
+### --locale=&lt;fr|en|it|es> | -l &lt;fr|en|it|es>
 
 Same as ["locale"](#locale) configuration option above.
 
@@ -248,11 +248,11 @@ Same as ["test"](#test) configuration option above.
 
 These parameters specify credentials for `spread-revolutionary-date` to spread on a Bluesky account. You have to get them from your [Bluesky account](https://bsky.app/).
 
-### --bluesky\_identifier | -bi &lt;identifier>
+### --bluesky\_identifier=&lt;identifier> | -bi &lt;identifier>
 
 Same as ["identifier"](#identifier) configuration option above.
 
-### --bluesky\_password | -bp &lt;password>
+### --bluesky\_password=&lt;password> | -bp &lt;password>
 
 Same as ["password"](#password) configuration option above.
 
@@ -260,19 +260,19 @@ Same as ["password"](#password) configuration option above.
 
 These parameters specify credentials for `spread-revolutionary-date` to spread on a Twitter account. You have to get them from your [Twitter API account](https://apps.twitter.com/) with `write` access level.
 
-### --twitter\_consumer\_key | -tck &lt;key>
+### --twitter\_consumer\_key=&lt;key> | -tck &lt;key>
 
 Same as ["consumer\_key"](#consumer_key) configuration option above.
 
-### --twitter\_consumer\_secret | -tcs &lt;secret>
+### --twitter\_consumer\_secret=&lt;secret> | -tcs &lt;secret>
 
 Same as ["consumer\_secret"](#consumer_secret) configuration option above.
 
-### --twitter\_access\_token | -tat &lt;token>
+### --twitter\_access\_token=&lt;token> | -tat &lt;token>
 
 Same as ["access\_token"](#access_token) configuration option above.
 
-### --twitter\_access\_token\_secret | -tats &lt;token secret>
+### --twitter\_access\_token\_secret=&lt;token secret> | -tats &lt;token secret>
 
 Same as ["access\_token\_secret"](#access_token_secret) configuration option above.
 
@@ -280,19 +280,19 @@ Same as ["access\_token\_secret"](#access_token_secret) configuration option abo
 
 These parameters specify credentials for `spread-revolutionary-date` to spread on a Mastodon account. You have to get them from your [Mastodon instance API account](https://mstdn.fr/settings/applications) with `write` scope. Note that Mastodon is a decentralized network with multiple instances, the previous link is for [mstdn.fr](https://mstdn.fr) instance, please replace url with your preferred instance.
 
-### --mastodon\_instance | -mi &lt;instance>
+### --mastodon\_instance=&lt;instance> | -mi &lt;instance>
 
 Same as ["instance"](#instance) configuration option above.
 
-### --mastodon\_client\_id | -mci &lt;id>
+### --mastodon\_client\_id=&lt;id> | -mci &lt;id>
 
 Same as ["client\_id"](#client_id) configuration option above.
 
-### --mastodon\_client\_secret | -mcs &lt;secret>
+### --mastodon\_client\_secret)&lt;secret> | -mcs &lt;secret>
 
 Same as ["client\_secret"](#client_secret) configuration option above.
 
-### --mastodon\_access\_token | -mat &lt;token>
+### --mastodon\_access\_token=&lt;token> | -mat &lt;token>
 
 Same as ["access\_token"](#access_token) configuration option above.
 
@@ -300,19 +300,19 @@ Same as ["access\_token"](#access_token) configuration option above.
 
 The first two parameters are credentials for `spread-revolutionary-date` to spread on a Freenode account. See [https://freenode.net/kb/answer/registration](https://freenode.net/kb/answer/registration) to find out how to register an account on Freenode.
 
-### --freenode\_nickname | -fn &lt;nick>
+### --freenode\_nickname=&lt;nick> | -fn &lt;nick>
 
 Same as ["nickname"](#nickname) configuration option above.
 
-### --freenode\_password | -fp &lt;passwd>
+### --freenode\_password=&lt;passwd> | -fp &lt;passwd>
 
 Same as ["password"](#password) configuration option above.
 
-### --freenode\_channels | -fc &lt;channel>
+### --freenode\_channels=&lt;channel> | -fc &lt;channel>
 
 Same as ["channels"](#channels) configuration option above.
 
-### --freenode\_test\_channels | -ftc &lt;channel>
+### --freenode\_test\_channels=&lt;channel> | -ftc &lt;channel>
 
 Same as ["test\_channels"](#test_channels) configuration option above.
 
@@ -320,19 +320,19 @@ Same as ["test\_channels"](#test_channels) configuration option above.
 
 The first two parameters are credentials for `spread-revolutionary-date` to spread on a Liberachat account. See [https://libera.chat/guides/registration](https://libera.chat/guides/registration) to find out how to register an account on Liberachat.
 
-### --liberachat\_nickname | -ln &lt;nick>
+### --liberachat\_nickname=&lt;nick> | -ln &lt;nick>
 
 Same as ["nickname"](#nickname) configuration option above.
 
-### --liberachat\_password | -lp &lt;passwd>
+### --liberachat\_password=&lt;passwd> | -lp &lt;passwd>
 
 Same as ["password"](#password) configuration option above.
 
-### --liberachat\_channels | -lc &lt;channel>
+### --liberachat\_channels=&lt;channel> | -lc &lt;channel>
 
 Same as ["channels"](#channels) configuration option above.
 
-### --liberachat\_test\_channels | -ltc &lt;channel>
+### --liberachat\_test\_channels=&lt;channel> | -ltc &lt;channel>
 
 Same as ["test\_channels"](#test_channels) configuration option above.
 
@@ -368,7 +368,7 @@ Should you extend `spread-revolutionary-date` to a new target, we advise you to 
 
 Starting from version 0.39, you may have noticed that `Mastodon` and `Bluesky` targets can no spread not only a text message, but also an image (with alternative text). This is only used for now by `Telechat` message maker, to post an image of Groucha, the presenter of Téléchat. But it can be used by other message makers in the future, including `PromptUser`.
 
-This feature is not available now for _IRC_ targets, `Liberachat` and `Freenode`, since this targets are mostly for text messages.
+This feature is not available now for _IRC_ targets, `Liberachat` and `Freenode`, since theses targets are mostly for text messages.
 
 Also, we do not plan to extend this feature to `Twitter` target, since we recommand to not use this social network for political reasons.
 
