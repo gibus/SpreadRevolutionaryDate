@@ -14,13 +14,6 @@ use File::Basename;
 
 use namespace::autoclean;
 
-BEGIN {
-  unless ($ENV{PERL_UNICODE} && $ENV{PERL_UNICODE} =~ /A/) {
-    use Encode qw(decode_utf8);
-    @ARGV = map { decode_utf8($_, 1) } @ARGV;
-  }
-}
-
 sub _fetch_embed_url_card {
   my $self = shift;
   my $url = shift || return;
