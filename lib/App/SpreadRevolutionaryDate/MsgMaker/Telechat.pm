@@ -31,6 +31,10 @@ Computes date of the day similar to the Belgian-French TV show 'Téléchat" on t
 
 This message maker is greatly based on I<SaintObjetBot> a bot spreading, in "Téléchat style", the date and the feast of the day, see L<https://github.com/tobozo/SaintObjetBot>.
 
+There is no really offical Téléchat calendar (named calendar of hlly objetcs, calendrier des objet sains in French), the principle is use new inventions of objects instead of outdated objects.
+
+We have found three sources for calendar names: what has actually been broadcasted on tv show, see L<https://www.tvtime.com/fr/show/257185>, and two versions computed by I<SaintObjetBot>, see L<https://github.com/tobozo/SaintObjetBot/blob/main/data/saint-objet-bot-2023-11-09.csv>. We pickup randomly among theses three calendars, and when there is nothing for the current day in the first calendar (because, nothing was broadcasted this day), only amon the two last ones.
+
 =cut
 
 sub compute {
