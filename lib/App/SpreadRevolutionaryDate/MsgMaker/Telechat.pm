@@ -976,11 +976,17 @@ sub compute {
       '1231' => ['connotation de proximité temporelle', 'connotations de proximité temporelle', 'f'],
     },
   );
+
   my @telechat_days = ('Lourdi', 'Pardi', 'Morquidi', 'Jourdi', 'Dendrevi', 'Sordi', 'Mitanche');
 
   my $today = DateTime->now(time_zone => 'Europe/Paris');
   my $day_name = $telechat_days[$today->day_of_week_0];
-  my $feast = $telechat_calendar{sprintf("%02d", $today->month).sprintf("%02d", $today->day)};
+
+  my @calendars = sort keys %telechat_calendars;
+  my $calendar_key = sprintf("%02d", $today->month).sprintf("%02d", $today->day);
+  shift @calendars unless $telechat_calendars{'0tvtime'}->{$calendar_key};
+  my $chosen_calendar = @calendars[rand @calendars];
+  my $feast = $telechat_calendars{$chosen_calendar}->{$calendar_key};
   my $feast_gender = $feast->[2] eq 'm' ? 'Saint' : 'Sainte';
   my $feast_singular = $feast->[0];
   $feast_singular =~ s/\b(\w)/\U$1/g;
