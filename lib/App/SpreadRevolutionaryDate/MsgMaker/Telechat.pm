@@ -408,7 +408,7 @@ sub compute {
 
   my $today = DateTime->now(time_zone => 'Europe/Paris');
   my $day_name = $telechat_days[$today->day_of_week_0];
-  my $feast = $telechat_calendar{sprintf("%02d", $today->day).sprintf("%02d", $today->month)};
+  my $feast = $telechat_calendar{sprintf("%02d", $today->month).sprintf("%02d", $today->day)};
   my $feast_gender = $feast->[2] eq 'm' ? 'Saint' : 'Sainte';
   my $feast_singular = $feast->[0];
   $feast_singular =~ s/\b(\w)/\U$1/g;
