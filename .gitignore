@@ -41,3 +41,7 @@ inc/
 
 # Images
 lib/auto
+
+# Temporary fles
+tmp/
+lib/auto
