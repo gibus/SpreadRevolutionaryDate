@@ -26,6 +26,13 @@ has 'password' => (
   required => 1,
 );
 
+has 'max_lenght' => (
+  is  => 'ro',
+  isa => 'Int',
+  required => 1,
+  default => 250,
+);
+
 =method new
 
 Constructor class method. Takes a hash argument with the following mandatory keys: C<identifier> and C<password>, with all values being strings. Authentifies to Bluesky and returns an C<App::SpreadRevolutionaryDate::Target::Bluesky> object.
@@ -69,11 +76,44 @@ sub spread {
     my $io = IO::Handle->new;
     $io->fdopen(fileno(STDOUT), "w");
 
-    $msg = encode('UTF-8', $msg) if is_utf8($msg);
+    my @msgs = map substr( $_, 0, $self->{max_lenght} ), $msg =~ /(.{1,$self->{max_lenght}})(?:\s+|$)/g;
 
-    $io->say($msg);
+    for (my $i = 0; $i < scalar @msgs; $i++) {
+        my $msg = "Message " . ($i+1) . ": " . $msgs[$i];
+        $msg = encode('UTF-8', $msg) if is_utf8($msg);
+        $io->say($msg);
+    }
   } else {
-    $self->obj->create_post($msg, $img);
+    my @msgs = map substr( $_, 0, $self->{max_lenght} ), $msg =~ /(.{1,$self->{max_lenght}})(?:\s+|$)/g;
+
+    my $last_status;
+    foreach my $msg (@msgs) {
+        if (!$last_status) {
+            # First post
+            my $status = $self->obj->create_post($msg, $img);
+            if ($status && ref($status) eq 'HASH' && $status->{uri} && $status->{cid}) {
+                $last_status = {
+                    root => {
+                        uri => $status->{uri},
+                        cid => $status->{cid},
+                    },
+                    parent => {
+                        uri => $status->{uri},
+                        cid => $status->{cid},
+                    }
+                };
+            }
+        } else {
+            # Next posts with reply_to
+            my $status = $self->obj->create_post($msg, undef, $last_status);
+            if ($status && ref($status) eq 'HASH' && $status->{uri} && $status->{cid}) {
+                $last_status->{parent} = {
+                    uri => $status->{uri},
+                    cid => $status->{cid},
+                };
+            }
+        }
+    }
   }
 }
 
