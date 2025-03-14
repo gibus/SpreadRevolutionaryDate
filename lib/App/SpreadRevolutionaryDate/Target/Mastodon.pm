@@ -38,6 +38,14 @@ has 'access_token' => (
   required => 1,
 );
 
+has 'max_lenght' => (
+  is  => 'ro',
+  isa => 'Int',
+  required => 1,
+  default => 300,
+);
+
+
 =method new
 
 Constructor class method. Takes a hash argument with the following mandatory keys: C<instance>, C<client_id>, C<client_secret>, and C<access_token>, with all values being strings. Authentifies to Mastodon and returns an C<App::SpreadRevolutionaryDate::Target::Mastodon> object.
@@ -83,18 +91,39 @@ sub spread {
     my $io = IO::Handle->new;
     $io->fdopen(fileno(STDOUT), "w");
 
-    $msg = encode('UTF-8', $msg) if is_utf8($msg);
-    $io->say($msg);
-  } else {
-    my $params = {};
-    if ($img) {
-      $img = {path => $img} unless ref($img) && ref($img) eq 'HASH' && $img->{path};
-      my $img_alt = $img->{alt} // ucfirst(fileparse($img->{path}, qr/\.[^.]*/));
-      $img_alt = encode('UTF-8', $img_alt) if is_utf8($img_alt);
-      my $resp_img = $self->obj->upload_media($img->{path}, {description => $img_alt});
-      $params->{media_ids} = [$resp_img->{id}] if $resp_img->{id};
+    my @msgs = map substr( $_, 0, $self->{max_lenght} ), $msg =~ /(.{1,$self->{max_lenght}})(?:\s+|$)/g;
+
+    for (my $i = 0; $i < scalar @msgs; $i++) {
+        my $msg = "Message " . ($i+1) . ": " . $msgs[$i];
+        $msg = encode('UTF-8', $msg) if is_utf8($msg);
+        $io->say($msg);
     }
-    $self->obj->post_status($msg, $params);
+  } else {
+    my @msgs = map substr( $_, 0, $self->{max_lenght} ), $msg =~ /(.{1,$self->{max_lenght}})(?:\s+|$)/g;
+
+    my $last_status_id;
+    foreach my $msg (@msgs) {
+        my $params = {};
+
+        if (!$last_status_id) {
+            # First post
+            if ($img) {
+                $img = {path => $img} unless ref($img) && ref($img) eq 'HASH' && $img->{path};
+                my $img_alt = $img->{alt} // ucfirst(fileparse($img->{path}, qr/\.[^.]*/));
+                $img_alt = encode('UTF-8', $img_alt) if is_utf8($img_alt);
+                my $resp_img = $self->obj->upload_media($img->{path}, {description => $img_alt});
+                $params->{media_ids} = [$resp_img->{id}] if $resp_img->{id};
+            }
+
+            my $status = $self->obj->post_status($msg, $params);
+            $last_status_id = $status->{id} if ($status && ref($status) eq 'HASH' && $status->{id});
+        } else {
+            # Next posts with reply_to
+            $params->{in_reply_to_id} = $last_status_id;
+            my $status = $self->obj->post_status($msg, $params);
+            $last_status_id = $status->{id} if ($status && ref($status) eq 'HASH' && $status->{id});
+        }
+    }
   }
 }
 
