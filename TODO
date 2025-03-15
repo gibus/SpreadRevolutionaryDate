@@ -10,5 +10,3 @@
 * Add message maker from Gemini
 
 * Allow to configure hash variable to select which prompt to use for Gemini message maker
-
-* Define a max_length variables for Mastodon/Bluesky targets and split messages if their lenght is over.
