@@ -22,7 +22,7 @@ is($spread_revolutionary_date->config->locale, 'fr', 'Locale option value');
 
 is_deeply($spread_revolutionary_date->config->targets, ['bluesky', 'twitter', 'mastodon', 'freenode', 'liberachat'], 'Default targets options set by default');
 
-ok($spread_revolutionary_date->config->twitter, 'Bluesky option set by default');
+ok($spread_revolutionary_date->config->bluesky, 'Bluesky option set by default');
 ok($spread_revolutionary_date->config->twitter, 'Twitter option set by default');
 ok($spread_revolutionary_date->config->mastodon, 'Mastodon option set by default');
 ok($spread_revolutionary_date->config->freenode, 'Freenode option set by default');
@@ -49,7 +49,7 @@ is($spread_revolutionary_date->config->msgmaker, 'RevolutionaryDate', 'MsgMaker 
 is($spread_revolutionary_date->config->locale, 'fr', 'MsgMaker locale option value');
 ok(!$spread_revolutionary_date->config->acab, 'MsgMaker acab option value');
 
-push @ARGV, '--twitter', '--test';
+@ARGV = ('--twitter', '--test');
 seek DATA, $data_start, 0;
 my $spread_only_to_twitter = App::SpreadRevolutionaryDate->new(\*DATA);
 is_deeply($spread_only_to_twitter->config->targets, ['twitter'], 'Targets options set');
@@ -57,7 +57,7 @@ ok($spread_only_to_twitter->config->twitter, 'Twitter option explicitely set');
 ok(!$spread_only_to_twitter->config->mastodon, 'Mastodon option not explicitely set');
 ok(!$spread_only_to_twitter->config->freenode, 'Freenode option not explicitely set');
 
-push @ARGV, '--targets=freenode', '--test', '-ftc', '#TestOnlyMe';
+@ARGV  = ('--targets=freenode', '--test', '-ftc', '#TestOnlyMe');
 seek DATA, $data_start, 0;
 my $spread_freenode = App::SpreadRevolutionaryDate->new(\*DATA);
 is_deeply($spread_freenode->config->freenode_test_channels, ['#TestOnlyMe'], 'Freenode multivalued test_channels option overridden by command line argument');
