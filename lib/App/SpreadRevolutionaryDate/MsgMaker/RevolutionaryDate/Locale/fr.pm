@@ -291,6 +291,7 @@ has '+wikipedia_entries' => (
       'épinards'    => 'Épinard',
       'mouron'      => 'Mouron_(flore)',
       'cochléaria'  => 'Cochlearia',
+      'sylvie'      => 'Anémone_sylvie',
       'capillaire'  => 'Capillaire_de_montpellier',
     },
     7 => {
