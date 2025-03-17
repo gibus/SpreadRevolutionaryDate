@@ -194,6 +194,14 @@ sub new {
     'promptuser_img_path' => {ARGCOUNT => ARGCOUNT_ONE, ALIAS => 'pui'},
     'promptuser_img_alt' => {ARGCOUNT => ARGCOUNT_ONE, ALIAS => 'pua'},
     'promptuser_img_url' => {ARGCOUNT => ARGCOUNT_ONE, ALIAS => 'puu'},
+    'gemini_api_key' => {ARGCOUNT => ARGCOUNT_ONE, ALIAS => 'ga'},
+    'gemini_process' => {ARGCOUNT => ARGCOUNT_ONE, ALIAS => 'g'},
+    'gemini_prompt' => {ARGCOUNT => ARGCOUNT_HASH, ALIAS => 'gp'},
+    'gemini_search' => {ARGCOUNT => ARGCOUNT_HASH, ALIAS => 'gs'},
+    'gemini_img_path' => {ARGCOUNT => ARGCOUNT_HASH, ALIAS => 'gip'},
+    'gemini_img_alt' => {ARGCOUNT => ARGCOUNT_HASH, ALIAS => 'gia'},
+    'gemini_img_url' => {ARGCOUNT => ARGCOUNT_HASH, ALIAS => 'giu'},
+    'gemini_intro' => {ARGCOUNT => ARGCOUNT_HASH, ALIAS => 'gi'},
   );
 
   # Rewind configuration file if needed and read it
