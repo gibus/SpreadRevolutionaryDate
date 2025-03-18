@@ -129,7 +129,7 @@ channels      = '#Channel1'
 channels      = '#Channel2'
 channels      = '#Channel3'
 
-[gemini]
+[Gemini]
 api_key                    = APIKEY
 prompt AnniversairePeople  = "Quelles sont les personalités ayant leurs anniversaire le $day $month ? Donne une liste d'au maximum 6 personnes, puis après la liste donne l'URL sans formattage de la fiche wikipédia d'une seule d'entre elles, ne commente pas et pas besoin d'introduction."
 prompt MacronJokeColuche   = "Je veux envoyer chaque jour une blague différente sur les réseaux sociaux Mastodon et Bluesky. La blague doit être chaque fois suffisamment différente, toujours dans le style de Coluche et toujours sur Emmanuel Macron. Invente moi une et une seule blague pour cette fois. Pas besoin de dire \"D'accord, voici une blague ou Bien sûr, voici une blague dans le style de Coluche sur Emmanuel Macron\" avant la blague."
