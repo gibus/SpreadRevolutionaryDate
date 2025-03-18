@@ -309,6 +309,7 @@ sub check_target_mandatory_options {
   foreach my $target_meta_attribute ($target_meta->get_all_attributes) {
     next if $target_meta_attribute->name eq 'obj';
     next unless $target_meta_attribute->is_required;
+    next if $target_meta_attribute->{default};
     my $target_mandatory_option = $target . '_' . $target_meta_attribute->name;
     die "Cannot spread to $target, mandatory configuraton parameter "
         . $target_meta_attribute->name . " missing\n"
