@@ -69,7 +69,6 @@ around BUILDARGS => sub {
       die "Process $args{process} has no prompt\n" unless $args{prompt}->{$args{process}};
   }
 
-  $args{locale} = 'fr';
   return $class->$orig(%args);
 };
 
@@ -84,7 +83,7 @@ sub compute {
 
   my $url = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key= ' . $self->api_key;
 
-  my $today = DateTime->now(time_zone => 'Europe/Paris', locale => 'fr-FR');
+  my $today = DateTime->now(locale => $self->locale);
   my $prompt = $self->prompt->{$self->process};
   my @vars = $self->prompt->{$self->process} =~ /\$(\w+)/g;
   foreach my $var (@vars) {
