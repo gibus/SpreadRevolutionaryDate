@@ -407,6 +407,14 @@ Usage: $0 <OPTIONS>
     --promptuser_img_path|-pui <path/to/image/file>: define image file path when --msgmaker=PromptUser
     --promptuser_img_alt|-pua <alternative text>: define image alternative text when --msgmaker=PromptUser
     --promptuser_img_url|-puu <https://example.com/imgs/my_image.jgp>: define image external url when --msgmaker=PromptUser
+    --gemini_api_key|-ga <msg>: define default message when --msgmaker=PromptUser (default: 'Goodbye old world, hello revolutionary worlds')
+    --gemini_process|-g <SomePrompt>: tell which prompt to process --msgmaker=Gemini
+    --gemini_prompt|-gp "<SomePrompt>=<my prompt string>": define prompt to request for when --msgmaker=Gemini
+    --gemini_intro|-gi "<SomePrompt>=<intro msg>": define introduction message to preprend to response when --msgmaker=Gemini
+    --gemini_search|-gs "<SomePrompt>=1": use grounding search results when --msgmaker=Gemini
+    --gemini_img_path|-gip "<SomePrompt>=<path/to/image/file>": define image file path when --msgmaker=Gemini
+    --gemini_img_alt|-gia "<SomePrompt>=<alternative text>": define image alternative text when --msgmaker=Gemini
+    --gemini_img_url|-giu "<SomePrompt>=<https://example.com/imgs/my_image.jgp>": define image external url when --msgmaker=Gemini
 USAGE
  exit 0;
 }
