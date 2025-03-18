@@ -405,8 +405,8 @@ Usage: $0 <OPTIONS>
     --revolutionarydate_acab | -ra: pretend it is 01:31:20 (default: false)
     --promptuser_default|-pud <msg>: define default message when --msgmaker=PromptUser (default: 'Goodbye old world, hello revolutionary worlds')
     --promptuser_img_path|-pui <path/to/image/file>: define image file path when --msgmaker=PromptUser
-    --promptuser_img_alt|-pui <alternative text>: define image alternative text when --msgmaker=PromptUser
-    --promptuser_img_url|-pui <img_url>: define image external url when --msgmaker=PromptUser
+    --promptuser_img_alt|-pua <alternative text>: define image alternative text when --msgmaker=PromptUser
+    --promptuser_img_url|-puu <https://example.com/imgs/my_image.jgp>: define image external url when --msgmaker=PromptUser
 USAGE
  exit 0;
 }
