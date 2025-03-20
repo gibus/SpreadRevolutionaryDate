@@ -10,6 +10,7 @@ with 'App::SpreadRevolutionaryDate::Target'
 
 use Mastodon::Client;
 use Encode qw(encode decode is_utf8);
+use File::Basename;
 
 use Locale::TextDomain 'App-SpreadRevolutionaryDate';
 use namespace::autoclean;
