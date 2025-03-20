@@ -1,6 +1,11 @@
 Changelog for App-SpreadRevolutionaryDate
 
-0.45 2025-03-20T21:08:22
+0.46 2025-03-20T23:48:51
+ - Improve splitting of messages according to max_length
+ - Fix missing used module
+ - Add some images to use with Gemini
+
+0.45 2025-03-20T21:08:22Z
  - Add documentation for Gemini
  - Use locale attribute to build DateTime
  - Add Gemini options in help message
