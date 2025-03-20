@@ -92,38 +92,38 @@ sub spread {
     my $io = IO::Handle->new;
     $io->fdopen(fileno(STDOUT), "w");
 
-    my @msgs = map substr( $_, 0, $self->{max_lenght} ), $msg =~ /(.{1,$self->{max_lenght}})(?:\s+|$)/g;
+    my @msgs = $self->_split_msg($msg, $self->max_lenght);
 
     for (my $i = 0; $i < scalar @msgs; $i++) {
-        my $msg = "Message " . ($i+1) . ": " . $msgs[$i];
-        $msg = encode('UTF-8', $msg) if is_utf8($msg);
-        $io->say($msg);
+      my $msg = "Message " . ($i+1) . ": " . $msgs[$i];
+      $msg = encode('UTF-8', $msg) if is_utf8($msg);
+      $io->say($msg);
     }
   } else {
-    my @msgs = map substr( $_, 0, $self->{max_lenght} ), $msg =~ /(.{1,$self->{max_lenght}})(?:\s+|$)/g;
-
+    my @msgs = $self->_split_msg($msg, $self->max_lenght);
     my $last_status_id;
+
     foreach my $msg (@msgs) {
-        my $params = {};
+      my $params = {};
 
-        if (!$last_status_id) {
-            # First post
-            if ($img) {
-                $img = {path => $img} unless ref($img) && ref($img) eq 'HASH' && $img->{path};
-                my $img_alt = $img->{alt} // ucfirst(fileparse($img->{path}, qr/\.[^.]*/));
-                $img_alt = encode('UTF-8', $img_alt) if is_utf8($img_alt);
-                my $resp_img = $self->obj->upload_media($img->{path}, {description => $img_alt});
-                $params->{media_ids} = [$resp_img->{id}] if $resp_img->{id};
-            }
-
-            my $status = $self->obj->post_status($msg, $params);
-            $last_status_id = $status->{id} if ($status && ref($status) eq 'HASH' && $status->{id});
-        } else {
-            # Next posts with reply_to
-            $params->{in_reply_to_id} = $last_status_id;
-            my $status = $self->obj->post_status($msg, $params);
-            $last_status_id = $status->{id} if ($status && ref($status) eq 'HASH' && $status->{id});
+      if (!$last_status_id) {
+        # First post
+        if ($img) {
+          $img = {path => $img} unless ref($img) && ref($img) eq 'HASH' && $img->{path};
+          my $img_alt = $img->{alt} // ucfirst(fileparse($img->{path}, qr/\.[^.]*/));
+          $img_alt = encode('UTF-8', $img_alt) if is_utf8($img_alt);
+          my $resp_img = $self->obj->upload_media($img->{path}, {description => $img_alt});
+          $params->{media_ids} = [$resp_img->{id}] if $resp_img->{id};
         }
+
+        my $status = $self->obj->post_status($msg, $params);
+        $last_status_id = $status->{id} if ($status && ref($status) eq 'HASH' && $status->{id});
+      } else {
+        # Next posts with reply_to
+        $params->{in_reply_to_id} = $last_status_id;
+        my $status = $self->obj->post_status($msg, $params);
+        $last_status_id = $status->{id} if ($status && ref($status) eq 'HASH' && $status->{id});
+      }
     }
   }
 }

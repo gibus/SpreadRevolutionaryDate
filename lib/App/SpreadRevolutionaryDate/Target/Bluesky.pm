@@ -76,43 +76,43 @@ sub spread {
     my $io = IO::Handle->new;
     $io->fdopen(fileno(STDOUT), "w");
 
-    my @msgs = map substr( $_, 0, $self->{max_lenght} ), $msg =~ /(.{1,$self->{max_lenght}})(?:\s+|$)/g;
+    my @msgs = $self->_split_msg($msg, $self->max_lenght);
 
     for (my $i = 0; $i < scalar @msgs; $i++) {
-        my $msg = "Message " . ($i+1) . ": " . $msgs[$i];
-        $msg = encode('UTF-8', $msg) if is_utf8($msg);
-        $io->say($msg);
+      my $msg = "Message " . ($i+1) . ": " . $msgs[$i];
+      $msg = encode('UTF-8', $msg) if is_utf8($msg);
+      $io->say($msg);
     }
   } else {
-    my @msgs = map substr( $_, 0, $self->{max_lenght} ), $msg =~ /(.{1,$self->{max_lenght}})(?:\s+|$)/g;
-
+    my @msgs = $self->_split_msg($msg, $self->max_lenght);
     my $last_status;
+
     foreach my $msg (@msgs) {
-        if (!$last_status) {
-            # First post
-            my $status = $self->obj->create_post($msg, $img);
-            if ($status && ref($status) eq 'HASH' && $status->{uri} && $status->{cid}) {
-                $last_status = {
-                    root => {
-                        uri => $status->{uri},
-                        cid => $status->{cid},
-                    },
-                    parent => {
-                        uri => $status->{uri},
-                        cid => $status->{cid},
-                    }
-                };
+      if (!$last_status) {
+        # First post
+        my $status = $self->obj->create_post($msg, $img);
+        if ($status && ref($status) eq 'HASH' && $status->{uri} && $status->{cid}) {
+          $last_status = {
+            root => {
+              uri => $status->{uri},
+              cid => $status->{cid},
+            },
+            parent => {
+              uri => $status->{uri},
+              cid => $status->{cid},
             }
-        } else {
-            # Next posts with reply_to
-            my $status = $self->obj->create_post($msg, undef, $last_status);
-            if ($status && ref($status) eq 'HASH' && $status->{uri} && $status->{cid}) {
-                $last_status->{parent} = {
-                    uri => $status->{uri},
-                    cid => $status->{cid},
-                };
-            }
+          };
         }
+      } else {
+        # Next posts with reply_to
+        my $status = $self->obj->create_post($msg, undef, $last_status);
+        if ($status && ref($status) eq 'HASH' && $status->{uri} && $status->{cid}) {
+          $last_status->{parent} = {
+            uri => $status->{uri},
+            cid => $status->{cid},
+          };
+        }
+      }
     }
   }
 }

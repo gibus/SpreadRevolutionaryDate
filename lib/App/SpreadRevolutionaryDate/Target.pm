@@ -27,6 +27,27 @@ role {
   requires 'spread';
 };
 
+sub _split_msg {
+  my ($self, $text, $max_len) = @_;
+  my @msgs;
+  while ($text) {
+    if (length $text <= $max_len) {
+      push @msgs, $text;
+      last;
+    }
+    my $prefix = substr $text, 0, $max_len;
+    my $loc = rindex $prefix, ' ';
+
+    if ($loc == -1) {
+      die "We found a word which is longer than $max_len\n";
+    }
+    my $str = substr $text, 0, $loc, '';
+    push @msgs, $str;
+    substr $text, 0, 1, '';
+  }
+  return @msgs;
+}
+
 =head1 DESCRIPTION
 
 This role defines the interface for any target which L<App::SpreadRevolutionaryDate> should spread the revolutionary date to.
