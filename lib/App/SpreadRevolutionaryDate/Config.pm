@@ -380,28 +380,28 @@ Usage: $0 <OPTIONS>
     --conf|-c <file>: path to configuration file (default: ~/.config/spread-revolutionary-date/spread-revolutionary-date.conf or ~/.spread-revolutionary-date.conf)'
     --version|-v': print out version
     --help|-h|-?': print out this help
-    --targets|-tg <target_1> [--targets|-tg <target_2> […--targets|-tg <target_n>]]': define targets (default: bluesky, twitter, mastodon, freenode, liberachat)
+    --targets|-tg <target_1> [--targets|-tg <target_2> […--targets|-tg <target_n>]]': define targets (default: mastodon, bluesky, twitter, liberachat, freenode)
     --msgmaker|-mm <MsgMakerClass>: define message maker (default: RevolutionaryDate)
     --locale|-l <fr|en|it|es>: define locale (default: fr for msgmaker=RevolutionaryDate, en otherwise)
     --test|--no|-n: do not spread, just print out message or spread to test channels for Freenode or Liberachat
+    --mastodon_instance|-mi <instance>: define Mastodon instance
+    --mastodon_client_id|-mci <id>: define Mastodon client id
+    --mastodon_client_secret|-mcs <secret>: define Mastodon client secret
+    --mastodon_access_token|-mat <token>: define Mastodon access token
     --bluesky_identifier|-bi <key>: define Bluesky identifier
     --bluesky_password|-bp <key>: define Bluesky password
     --twitter_consumer_key|-tck <key>: define Twitter consumer key
     --twitter_consumer_secret|-tcs <secret>: define Twitter consumer secret
     --twitter_access_token|-tat <token>: define Twitter access token
     --twitter_access_token_secret|tats <token_secret>: define Twitter access token secret
-    --mastodon_instance|-mi <instance>: define Mastodon instance
-    --mastodon_client_id|-mci <id>: define Mastodon client id
-    --mastodon_client_secret|-mcs <secret>: define Mastodon client secret
-    --mastodon_access_token|-mat <token>: define Mastodon access token
-    --freenode_nickname|-fn <nick>: define Freenode nickname
-    --freenode_password|-fp <passwd>: define Freenode password
-    --freenode_test_channels|-ftc <channel_1>  [--freenode_test_channels|-ftc <channel_2> […--freenode_test_channels|-ftc <channel_n>]]: define Freenode channels
-    --freenode_channels|-fc <channel_1>  [--freenode_channels|-fc <channel_2> […--freenode_channels|-fc <channel_n>]]: define Freenode test channels
     --liberachat_nickname|-ln <nick>: define Liberachat nickname
     --liberachat_password|-lp <passwd>: define Liberachat password
     --liberachat_test_channels|-ltc <channel_1>  [--liberachat_test_channels|-ltc <channel_2> […--liberachat_test_channels|-ltc <channel_n>]]: define Liberachat channels
     --liberachat_channels|-lc <channel_1>  [--liberachat_channels|-lc <channel_2> […--liberachat_channels|-lc <channel_n>]]: define Liberachat test channels
+    --freenode_nickname|-fn <nick>: define Freenode nickname
+    --freenode_password|-fp <passwd>: define Freenode password
+    --freenode_test_channels|-ftc <channel_1>  [--freenode_test_channels|-ftc <channel_2> […--freenode_test_channels|-ftc <channel_n>]]: define Freenode channels
+    --freenode_channels|-fc <channel_1>  [--freenode_channels|-fc <channel_2> […--freenode_channels|-fc <channel_n>]]: define Freenode test channels
     --revolutionarydate_acab | -ra: pretend it is 01:31:20 (default: false)
     --promptuser_default|-pud <msg>: define default message when --msgmaker=PromptUser (default: 'Goodbye old world, hello revolutionary worlds')
     --promptuser_img_path|-pui <path/to/image/file>: define image file path when --msgmaker=PromptUser
@@ -464,6 +464,8 @@ USAGE
 =item L<App::SpreadRevolutionaryDate::MsgMaker::PromptUser>
 
 =item L<App::SpreadRevolutionaryDate::MsgMaker::Telechat>
+
+=item L<App::SpreadRevolutionaryDate::MsgMaker::Gemini>
 
 =back
 

@@ -1052,6 +1052,8 @@ sub compute {
 
 =item L<App::SpreadRevolutionaryDate::MsgMaker::PromptUser>
 
+=item L<App::SpreadRevolutionaryDate::MsgMaker::Gemini>
+
 =back
 
 =cut

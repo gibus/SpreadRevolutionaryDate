@@ -529,6 +529,8 @@ __PACKAGE__->meta->make_immutable;
 
 =item L<App::SpreadRevolutionaryDate::MsgMaker::Telechat>
 
+=item L<App::SpreadRevolutionaryDate::MsgMaker::Gemini>
+
 =back
 
 =cut

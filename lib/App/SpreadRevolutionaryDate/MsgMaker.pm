@@ -85,6 +85,8 @@ This role provides a C<locale> required attribute (defaults to C<'fr'>), which h
 
 =item L<App::SpreadRevolutionaryDate::MsgMaker::Telechat>
 
+=item L<App::SpreadRevolutionaryDate::MsgMaker::Gemini>
+
 =back
 
 =cut

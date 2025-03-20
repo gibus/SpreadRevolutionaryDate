@@ -163,6 +163,8 @@ sub spread {
 
 =item L<App::SpreadRevolutionaryDate::MsgMaker::Telechat>
 
+=item L<App::SpreadRevolutionaryDate::MsgMaker::Gemini>
+
 =back
 
 =cut

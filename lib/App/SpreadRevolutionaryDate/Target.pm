@@ -85,6 +85,8 @@ There is a L<Bluesky|https://metacpan.org/pod/Bluesky> Perl module on CPAN that 
 
 =item L<App::SpreadRevolutionaryDate::MsgMaker::Telechat>
 
+=item L<App::SpreadRevolutionaryDate::MsgMaker::Gemini>
+
 =back
 
 =cut
