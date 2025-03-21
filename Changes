@@ -1,6 +1,11 @@
 Changelog for App-SpreadRevolutionaryDate
 
-0.46 2025-03-20T23:48:51
+0.47 2025-03-21T08:29:17
+ - Do not bother with accent in text new target
+ - Configuration file should be opened in UTF-8, pass filehandle to
+   AppConfig
+
+0.46 2025-03-20T23:48:51Z
  - Improve splitting of messages according to max_length
  - Fix missing used module
  - Add some images to use with Gemini
