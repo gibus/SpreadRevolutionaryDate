@@ -275,7 +275,13 @@ sub parse_file {
                 File::HomeDir->my_home . '/.spread-revolutionary-date.conf') {
     $filename = $default_path if (!$filename && -f $default_path)
   }
-  $self->file($filename);
+  if ($filename && !ref($filename)) {
+      my $fh;
+      open($fh, '<:encoding(UTF-8)', $filename);
+      $self->file($fh);
+  } else {
+      $self->file($filename);
+  }
 }
 
 =method parse_command_line
