@@ -535,6 +535,21 @@ To perform authentication and to post a message, there is a strong likelihood th
 
 Should you extend `spread-revolutionary-date` to a new target, we advise you to have a look on how default targets are implemented: [App::SpreadRevolutionaryDate::Target::Bluesky](https://metacpan.org/pod/App%3A%3ASpreadRevolutionaryDate%3A%3ATarget%3A%3ABluesky) with [App::SpreadRevolutionaryDate::Target::Mastodon](https://metacpan.org/pod/App%3A%3ASpreadRevolutionaryDate%3A%3ATarget%3A%3AMastodon) with [Mastodon::Client](https://metacpan.org/pod/Mastodon%3A%3AClient) `worker`, [App::SpreadRevolutionaryDate::BlueskyLite](https://metacpan.org/pod/App%3A%3ASpreadRevolutionaryDate%3A%3ABlueskyLite) `worker`, and [App::SpreadRevolutionaryDate::Target::Twitter](https://metacpan.org/pod/App%3A%3ASpreadRevolutionaryDate%3A%3ATarget%3A%3ATwitter) with [Twitter::API](https://metacpan.org/pod/Twitter%3A%3AAPI) `worker`. `Mastodon` and `Twitter` are using [OAuth2 protocol](https://oauth.net/2/) to perform authentication. The other default targets, <App::SpreadRevolutionaryDate::Target::Liberachat> and `App::SpreadRevolutionaryDate::Target::Freenode`, use a [chatbot](https://en.wikipedia.org/wiki/Chatbot): [App::SpreadRevolutionaryDate::Target::Liberachat::Bot](https://metacpan.org/pod/App%3A%3ASpreadRevolutionaryDate%3A%3ATarget%3A%3ALiberachat%3A%3ABot) and [App::SpreadRevolutionaryDate::Target::Freenode::Bot](https://metacpan.org/pod/App%3A%3ASpreadRevolutionaryDate%3A%3ATarget%3A%3AFreenode%3A%3ABot), subclassing [Bot::BasicBot](https://metacpan.org/pod/Bot%3A%3ABasicBot) `worker`. You can also see a very simple example with a test file provided in this distribution at `t/new_target.t`, which just prints out the revolutionary date on the standard output using core module [IO::Handle](https://metacpan.org/pod/IO%3A%3AHandle).
 
+Your new `App::SpreadRevolutionaryDate::Target::Mytarget` target class should consumes the [App::SpreadRevolutionaryDate::Target](https://metacpan.org/pod/App%3A%3ASpreadRevolutionaryDate%3A%3ATarget) role, by specifying the `worker` class:
+
+    use Moose;
+    with 'App::SpreadRevolutionaryDate::Target'
+      => {worker => 'My::Worker::Class'};
+
+Then, you have to add a hook, being called before `Moose` constructor, so to pass as an additional argument to `Moose` constructor, an instance of your `worker` class as `obj` attribute of your new target class. You may need some configuration parameters, like `worker_param` in the example below, to create an instance of your `worker` class:
+
+    around BUILDARGS => sub {
+      my ($orig, $class) = @_;
+      my $args = $class->$orig(@_);
+      my $args->{obj} = My::Worker::Class->new(worker_param => $args->{worker_param});
+      return $args;
+    }
+
 Starting from version 0.39, you may have noticed that `Mastodon` and `Bluesky` targets can now spread not only a text message, but also an image, with an alternative text for accessibily purpose. If the alternative text is not provided, it is set with the name of the image file. This is used by `Telechat` message maker, to post an image of Groucha, the presenter of Téléchat, and by `PromptUser` and `Gemini` to send either an image file on local disk or an external image on the web.
 
 This feature is not available now for _IRC_ targets, `Liberachat` and `Freenode`, since theses targets are mostly for text messages.
