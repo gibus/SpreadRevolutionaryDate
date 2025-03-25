@@ -93,6 +93,12 @@ sub _generate_facets {
         $type = 'app.bsky.richtext.facet#mention';
         $attrib = 'did';
       }
+    } elsif ($w =~ /^#/) {
+      $val = substr($w, 1);
+      if (defined $val) {
+        $type = 'app.bsky.richtext.facet#tag';
+        $attrib = 'tag';
+      }
     }
 
     if (defined $type) {
