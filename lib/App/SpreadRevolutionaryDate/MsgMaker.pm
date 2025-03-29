@@ -29,6 +29,54 @@ has locale => (
   },
 );
 
+has special_birthday_name => (
+  is => 'ro',
+  isa => 'Str',
+  default => '',
+);
+
+has special_birthday_day => (
+  is => 'ro',
+  isa => 'Int',
+  default => 0,
+);
+
+has special_birthday_month => (
+  is => 'ro',
+  isa => 'Int',
+  default => 0,
+);
+
+has special_birthday_url => (
+  is => 'ro',
+  isa => 'Str',
+  default => '',
+);
+
+has special_birthday_gemini => (
+  is => 'ro',
+  isa => 'Str',
+  default => '',
+);
+
+has special_birthday_prefix => (
+  is => 'ro',
+  isa => 'Int',
+  default => 0,
+);
+
+has special_birthday_plural => (
+  is => 'ro',
+  isa => 'Str',
+  default => '',
+);
+
+has special_birthday_gender => (
+  is => 'ro',
+  isa => 'Str',
+  default => 'f',
+);
+
 requires 'compute';
 
 =head1 DESCRIPTION

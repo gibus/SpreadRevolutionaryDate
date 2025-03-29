@@ -983,7 +983,7 @@ sub compute {
 
   my @telechat_days = ('Lourdi', 'Pardi', 'Morquidi', 'Jourdi', 'Dendrevi', 'Sordi', 'Mitanche');
 
-  my $today = DateTime->now(time_zone => 'Europe/Paris');
+  my $today = DateTime->now(locale => $self->locale);
   my $day_name = $telechat_days[$today->day_of_week_0];
 
   my @calendars = sort keys %telechat_calendars;
@@ -996,6 +996,14 @@ sub compute {
   $feast_singular =~ s/\b(\w)/\U$1/g;
   my $feast_plural = $feast->[1];
   my $every_gender = $feast->[2] eq 'm' ? 'tous' : 'toutes';
+
+  if ($self->special_birthday_day && $self->special_birthday_month && $self->special_birthday_name && $today->day == $self->special_birthday_day && $today->month == $self->special_birthday_month) {
+      $feast_gender = $self->special_birthday_gender eq 'm' ? 'Saint' : 'Sainte';
+      $feast_singular = $self->special_birthday_name;
+      $feast_plural = $self->special_birthday_plural;
+      $every_gender = $self->special_birthday_gender eq 'm' ? 'tous' : 'toutes';
+  }
+
   my $msg = sprintf("Chalut ! Aujourd'hui, %s %d, c'est la %s-%s.\nBonne fête à %s les %s !", $day_name, $today->day, $feast_gender, $feast_singular, $every_gender, $feast_plural);
 
   my $img_path = dist_file('App-SpreadRevolutionaryDate', 'images/groucha.png');

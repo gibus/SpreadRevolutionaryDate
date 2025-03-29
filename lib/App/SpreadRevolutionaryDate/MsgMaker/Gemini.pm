@@ -142,6 +142,11 @@ sub compute {
     $msg = $intro . "\n" . $msg;
   }
 
+  if ($self->special_birthday_gemini && $self->special_birthday_gemini eq $self->process && $self->special_birthday_day && $self->special_birthday_month && $self->special_birthday_name && $today->day == $self->special_birthday_day && $today->month == $self->special_birthday_month) {
+      my $name= $self->special_birthday_name;
+      $msg =~ s/^((?:\*|\d\.)\s+)(.+)$/$1$name/m;
+  }
+
   my $img;
   $img->{path} = $self->img_path->{$self->process} if $self->img_path && $self->img_path->{$self->process};
   $img->{url} = $self->img_url->{$self->process} if $self->img_url && $self->img_url->{$self->process};

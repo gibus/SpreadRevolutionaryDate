@@ -51,7 +51,18 @@ around BUILDARGS => sub {
     or die "Cannot import msgmaker class $msgmaker_class\n";
   load_class($msgmaker_class);
   my %msgmaker_args = $config->get_msgmaker_arguments($config->msgmaker);
-  my $msgmaker = $msgmaker_class->new(locale => $config->locale, %msgmaker_args);
+  my %special_birthday_args = ();
+  if ($config->special_birthday_name && $config->special_birthday_day && $config->special_birthday_month) {
+      $special_birthday_args{special_birthday_name} = $config->special_birthday_name;
+      $special_birthday_args{special_birthday_day} = $config->special_birthday_day;
+      $special_birthday_args{special_birthday_month} = $config->special_birthday_month;
+      $special_birthday_args{special_birthday_url} = $config->special_birthday_url if $config->special_birthday_url;
+      $special_birthday_args{special_birthday_gemini} = $config->special_birthday_gemini if $config->special_birthday_gemini;
+      $special_birthday_args{special_birthday_prefix} = $config->special_birthday_prefix if $config->special_birthday_prefix;
+      $special_birthday_args{special_birthday_plural} = $config->special_birthday_plural if $config->special_birthday_plural;
+      $special_birthday_args{special_birthday_gender} = $config->special_birthday_gender if $config->special_birthday_gender;
+  }
+  my $msgmaker = $msgmaker_class->new(locale => $config->locale, %msgmaker_args, %special_birthday_args);
 
   return $class->$orig(config => $config, targets => {}, msgmaker => $msgmaker);
 };
