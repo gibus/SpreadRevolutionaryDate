@@ -71,7 +71,9 @@ sub compute {
       time       => $revolutionary->hms,
   );
 
-  if ($self->wikipedia_link) {
+  if ($self->special_birthday_url) {
+      $msg .= ' ' . $self->special_birthday_url;
+  } elsif ($self->wikipedia_link) {
     use URI::Escape;
     my $entry = $revolutionary->locale->wikipedia_redirect($revolutionary->month, $revolutionary->feast_short);
     $msg .= ' https://' . $self->locale . '.wikipedia.org/wiki/' . uri_escape_utf8($entry);

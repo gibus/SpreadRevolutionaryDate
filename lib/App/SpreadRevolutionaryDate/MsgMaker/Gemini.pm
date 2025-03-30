@@ -145,6 +145,9 @@ sub compute {
   if ($self->special_birthday_gemini && $self->special_birthday_gemini eq $self->process && $self->special_birthday_day && $self->special_birthday_month && $self->special_birthday_name && $today->day == $self->special_birthday_day && $today->month == $self->special_birthday_month) {
       my $name= $self->special_birthday_name;
       $msg =~ s/^((?:\*|\d\.)\s+)(.+)$/$1$name/m;
+      if ($self->special_birthday_url) {
+          $msg =~ s/https?:\/\/(?:\S+|$)/$self->special_birthday_url/e;
+      }
   }
 
   my $img;
