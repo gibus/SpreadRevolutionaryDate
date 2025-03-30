@@ -57,7 +57,6 @@ sub compute {
 
   my $feast_long = $revolutionary->feast_long;
   my $today = DateTime->today;
-  $today = DateTime->new(locale => $self->locale, day => 21, month => 6, year => $today->year);
   if ($self->special_birthday_day && $self->special_birthday_month && $self->special_birthday_name && $today->day == $self->special_birthday_day && $today->month == $self->special_birthday_month) {
       $feast_long = $revolutionary->locale->prefixes->[$self->special_birthday_prefix] . $self->special_birthday_name . $revolutionary->locale->suffix;
   }
