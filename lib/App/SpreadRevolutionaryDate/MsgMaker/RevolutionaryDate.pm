@@ -71,7 +71,7 @@ sub compute {
       time       => $revolutionary->hms,
   );
 
-  if ($self->special_birthday_url) {
+  if ($self->special_birthday_day && $self->special_birthday_month && $self->special_birthday_name && $today->day == $self->special_birthday_day && $today->month == $self->special_birthday_month && $self->special_birthday_url) {
       $msg .= ' ' . $self->special_birthday_url;
   } elsif ($self->wikipedia_link) {
     use URI::Escape;
