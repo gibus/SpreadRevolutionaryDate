@@ -26,19 +26,19 @@ has 'default' => (
 
 has 'img_path' => (
   is => 'rw',
-  isa => 'Str',
+  isa => 'Maybe[Str]',
   default => '',
 );
 
 has 'img_alt' => (
   is => 'rw',
-  isa => 'Str',
+  isa => 'Maybe[Str]',
   default => '',
 );
 
 has 'img_url' => (
   is => 'rw',
-  isa => 'Str',
+  isa => 'Maybe[Str]',
   default => '',
 );
 
