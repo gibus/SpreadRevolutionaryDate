@@ -81,7 +81,7 @@ Computes replies by Gemini AI given a prompt.
 sub compute {
   my $self = shift;
 
-  my $url = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key= ' . $self->api_key;
+  my $url = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key= ' . $self->api_key;
 
   my $today = DateTime->now(locale => $self->locale);
   my $prompt = $self->prompt->{$self->process};
