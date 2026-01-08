@@ -131,6 +131,13 @@ sub compute {
         $msg .= "\n#IAGenerated #" . $self->process;
       }
     }
+  } else {
+    my $error = $resp->content ? $json->decode($resp->content) : $resp->msg;
+    if (ref($error) eq 'HASH' && $error->{error} && $error->{error}->{message}) {
+      die $error->{error}->{message} . "\n";
+    } else {
+      die $error . "\n";
+    }
   }
 
   if ($self->intro && $self->intro->{$self->process}) {
