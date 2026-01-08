@@ -754,7 +754,7 @@ Gérald Sédrati <gibus@cpan.org>
 
 # COPYRIGHT AND LICENSE
 
-This software is Copyright (c) 2019-2025 by Gérald Sédrati.
+This software is Copyright (c) 2019-2026 by Gérald Sédrati.
 
 This is free software, licensed under:
 
